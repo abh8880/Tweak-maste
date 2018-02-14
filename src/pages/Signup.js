@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 import {
   StyleSheet,
   Text,
@@ -8,11 +8,13 @@ import {
 } from 'react-native';
 
 import Logo from '../components/Logo';
-import Form from '../components/Form';
+import Form from '../components/Form1';
 
 import {Actions} from 'react-native-router-flux';
 
 export default class Signup extends Component<{}> {
+
+
 
   goBack() {
       Actions.pop();
