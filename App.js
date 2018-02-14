@@ -1,30 +1,44 @@
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  StatusBar 
-} from 'react-native';
+import {View, StyleSheet, KeyboardAvoidingView,ImageBackground, Button} from 'react-native';
+import { CheckBox } from 'react-native-elements';
 
-import Routes from './src/Routes';
+// You can import from local files
+import Login from './src/pages/Login';
+import Signup from './src/pages/Signup';
+import StartPage from './src/pages/StartPage';
+import { StackNavigator } from 'react-navigation';
 
-export default class App extends Component<{}> {
+
+export default class Home extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <StatusBar
-           backgroundColor="#1c313a"
-           barStyle="light-content"
-         />
-        <Routes/>
-      </View>
+          
+            <KeyboardAvoidingView behavior = "padding" style={styles.KeyboardContainer}>
+     		<Screens/>
+            </KeyboardAvoidingView>
+      
     );
   }
 }
 
+
+
+
 const styles = StyleSheet.create({
-  container : {
+  KeyboardContainer: {
     flex: 1,
-  }
+    justifyContent: 'center'
+  },
+   
 });
 
 
+const Screens = StackNavigator({
+   Login:{screen:Login
+   		},    
+  Signup:{ screen: Signup,
+         },
+  StartPage:{ screen: StartPage,
+         },
+},
+);
