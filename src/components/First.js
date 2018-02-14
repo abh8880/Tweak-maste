@@ -8,7 +8,7 @@ import {
   Image,
   ScrollView
 } from 'react-native';
-
+import * as Progress from 'react-native-progress';
 import { Card } from 'react-native-elements'; // 0.18.5
 
 import {Actions} from 'react-native-router-flux';
@@ -16,11 +16,15 @@ import {Actions} from 'react-native-router-flux';
 const width = Dimensions.get('window').width;
 
 const height = Dimensions.get('window').height;
+import axios from 'axios';
 
+var box_count = 3;
+var box_height = height / box_count;
+var progress_val = [0,0,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
 export default class First extends Component {
   
  static navigationOptions = {
-    title: '⌘  Home',
+    title: '⌘  Chapters',
     headerStyle: {
       backgroundColor: '#00232d',
     },
@@ -32,123 +36,104 @@ export default class First extends Component {
   };
 
   constructor(props) {
-        super(props);  
+        super(props);
+        this.state = {
+          status: 0,
+          progress_val: progress_val 
+      };
+      
   };
 
 
   render() {
     console.log("rendered");
-
     
+    axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
+            params: {
+              name: 'akash'
+            },
+            dataType: 'json'
+          })
+          .then(function (response) {
+            console.log("\n\n SUCCESS \n\n");
+            var index;
+            var sum = 0;
+            var sum1 = 0;
+            for (var i = 0; i < 12; i++) {
+              sum = sum + progress_val[i];
+            }
+            console.log("Response length: " + response.data.length);
+            for (var i = 0; i < response.data.length; i++) {
+              index = response.data[i].chapter-1;
+              console.log("index:" + index);
+              console.log(response.data[i].topic.length/4);
+              progress_val[index] = response.data[i].topic.length/4;
+              sum1 = sum1 + progress_val[index];
+            }
+            console.log(progress_val);
+            console.log("sum "+sum);
+            console.log("sum1 "+sum1);
+            if (sum!=sum1) 
+            {
+              this.setState({progress_val:progress_val});
+            }
+          }.bind(this))
+          .catch(function (error) {
+            console.log(error);
+        });
+   
+
+
+    var chapters = [];
+
+    for(let i=1;i<=12;i++){
+      chapters.push(
+        <View style={styles.card}>
+      
+        <Card>
+         <View style={[styles.box,styles.box1]}>
+             <View style={styles.innerContainer}>
+            <View style={[styles.innerBox, styles.innerBox1]}>
+             <Image
+                  source={require('../../assets/1_resized.png')}
+                />
+            </View>
+            <View style={[styles.innerBox, styles.innerBox2]}>
+            <View>
+            <Text style={styles.welcome}>
+              {"Chapter "+i}
+            </Text>
+           </View>
+           <View style={{margin:15}}>
+             <Progress.Bar progress={progress_val[i-1]} width={110} height={8} color={'rgba(65,203,199,1)'}/>
+           </View>
+           
+            </View>
+            
+            
+        </View>
+        
+             <View style={styles.start}>
+             <TouchableOpacity  onPress={() => Actions.lesson({Chapter:i})}>
+             
+                <Text style={{color:'#800000',fontWeight:'bold',fontSize:15}}>START</Text>
+
+            </TouchableOpacity>
+            </View>
+   
+            </View>
+            
+        </Card>
+      </View>
+      );
+    }
+    
+    var x = 0.5;
     return (
         
         <View style={styles.Layout}>
           <ScrollView showsVerticalScrollIndicator={false}>
-            
-          <View style={styles.card}>
-      
-        <Card>
-         <View style={[styles.box,styles.box1]}>
-             <View style={styles.innerContainer}>
-            <View style={[styles.innerBox, styles.innerBox1]}>
-             <Image
-                  source={require('../../assets/1_resized.png')}
-                />
-            </View>
-            <View style={[styles.innerBox, styles.innerBox2]}>
-            <View>
-            <Text style={styles.welcome}>
-              Grammar
-            </Text>
-           </View>
-           
-            </View>
-              
-        </View>
-        
-             <View style={styles.start}>
-             <TouchableOpacity  onPress={() => Actions.first()}>
-             
-                <Text style={{color:'#800000',fontWeight:'bold',fontSize:15}}>START</Text>
-
-            </TouchableOpacity>
-            </View>
-   
-            </View>
-            
-        </Card>
-      </View>
-
-      <View style={styles.card}>
-      
-        <Card>
-         <View style={[styles.box,styles.box1]}>
-             <View style={styles.innerContainer}>
-            <View style={[styles.innerBox, styles.innerBox1]}>
-             <Image
-                  source={require('../../assets/1_resized.png')}
-                />
-            </View>
-            <View style={[styles.innerBox, styles.innerBox2]}>
-            <View>
-            <Text style={styles.welcome}>
-              Vocabulary
-            </Text>
-           </View>
-           
-            </View>
-              
-        </View>
-        
-             <View style={styles.start}>
-             <TouchableOpacity  onPress={() => alert("Coming soon !")}>
-             
-                <Text style={{color:'#800000',fontWeight:'bold',fontSize:15}}>START</Text>
-
-            </TouchableOpacity>
-            </View>
-   
-            </View>
-            
-        </Card>
-      </View>
-
-
-      <View style={styles.card}>
-      
-        <Card>
-         <View style={[styles.box,styles.box1]}>
-             <View style={styles.innerContainer}>
-            <View style={[styles.innerBox, styles.innerBox1]}>
-             <Image
-                  source={require('../../assets/1_resized.png')}
-                />
-            </View>
-            <View style={[styles.innerBox, styles.innerBox2]}>
-            <View>
-            <Text style={styles.welcome}>
-              Pronunciation
-            </Text>
-           </View>
-           
-            </View>
-              
-        </View>
-        
-             <View style={styles.start}>
-             <TouchableOpacity  onPress={() => alert("Coming soon !")}>
-
-                <Text style={{color:'#800000',fontWeight:'bold',fontSize:15}}>START</Text>
-
-            </TouchableOpacity>
-            </View>
-   
-            </View>
-            
-        </Card>
-      </View>
-
-
+            {chapters}
           </ScrollView>
         </View>
    
@@ -167,7 +152,10 @@ const styles = StyleSheet.create({
   
     
   },
-  
+  box: {
+   
+    height: box_height
+  },
   box1: {
   
     borderRadius:10,
@@ -222,6 +210,9 @@ const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
     flexDirection: 'row'
+  },
+ innerBox: {
+    height: box_height
   },
   innerBox1: {
     margin:5

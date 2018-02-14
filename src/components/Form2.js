@@ -9,6 +9,8 @@ import {
 
 import axios from 'axios';
 import StartPage from '../pages/StartPage';
+import {Actions} from 'react-native-router-flux';
+
 export default class Logo extends Component<{}> {
 
    onPress = () => {
@@ -34,13 +36,13 @@ export default class Logo extends Component<{}> {
 
              if(response.data=='success')
              {
-             console.log('Login successful');
-
+             alert('Login successful');
+             Actions.home()
              }
             
           
             else
-            console.log('Login failed');
+            alert('Login failed');
 
           })
           

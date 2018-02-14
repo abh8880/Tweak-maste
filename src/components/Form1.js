@@ -4,11 +4,11 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity 
+  TouchableOpacity
 } from 'react-native';
 
 import axios from 'axios';
-
+import {Actions} from 'react-native-router-flux';
 
 export default class Logo extends Component<{}> {
 
@@ -34,13 +34,15 @@ export default class Logo extends Component<{}> {
             console.log(response.data);
 
             if(response.data=='exists')
-           console.log('Email already registered');
+           alert('Email already registered');
 
-            else if(response.data=='success')
-            console.log('Registeration successful');
+            else if(response.data=='success'){
+                alert('Registeration successful');
+                Actions.home();
+            }
           
             else
-            console.log('Registeration failed');
+            alert('Registeration failed');
           })
 
           .catch(function (error) {
