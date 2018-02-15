@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import axios from 'axios';
-import StartPage from '../pages/StartPage';
+import Courses from '../pages/Courses';
 import {Actions} from 'react-native-router-flux';
 
 export default class Logo extends Component<{}> {
@@ -37,7 +37,7 @@ export default class Logo extends Component<{}> {
              if(response.data=='success')
              {
              alert('Login successful');
-             Actions.home()
+             Actions.home();
              }
             
           
