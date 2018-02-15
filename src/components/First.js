@@ -6,7 +6,8 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  ScrollView
+  ScrollView,
+  AsyncStorage
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { Card } from 'react-native-elements'; // 0.18.5
@@ -22,6 +23,17 @@ var box_count = 3;
 var box_height = height / box_count;
 var progress_val = [0,0,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
 export default class First extends Component {
+
+  // async local_store(){
+  //   try {
+  //     const value = await AsyncStorage.getItem('username');
+  //     if (value !== null){
+  //       console.log(value);
+  //     }
+  //   } catch (error) {
+  //     console.log("Error getting data");
+  //   }
+  // }
   
  static navigationOptions = {
     title: '⌘  Chapters',
@@ -39,23 +51,22 @@ export default class First extends Component {
         super(props);
         this.state = {
           status: 0,
-          progress_val: progress_val 
+          progress_val: progress_val,
+          prev_chap:''
       };
-      
-  };
 
-
-  render() {
-    console.log("rendered");
-    
-    axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
+      axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
             params: {
-              name: 'akash'
+              name: 'anto'
             },
             dataType: 'json'
           })
           .then(function (response) {
             console.log("\n\n SUCCESS \n\n");
+            console.log(response.data);
+            console.log(response.data[0].chapter);
+            this.setState({prev_chap:response.data[0].chapter});
+            console.log(this.state.prev_chap);
             var index;
             var sum = 0;
             var sum1 = 0;
@@ -81,8 +92,25 @@ export default class First extends Component {
           .catch(function (error) {
             console.log(error);
         });
-   
+  };
 
+  open_chapter = (i) =>{
+
+    console.log(this.state.prev_chap);
+    console.log(i);
+
+    if(i<=this.state.prev_chap){
+      Actions.lesson({Chapter:i});
+    }
+
+    else{
+      alert("Please complete previous chapter(s)");
+    }
+  }
+
+
+  render() {
+    console.log("rendered");
 
     var chapters = [];
 
@@ -114,7 +142,7 @@ export default class First extends Component {
         </View>
         
              <View style={styles.start}>
-             <TouchableOpacity  onPress={() => Actions.lesson({Chapter:i})}>
+             <TouchableOpacity  onPress={() => this.open_chapter(i) }>
              
                 <Text style={{color:'#800000',fontWeight:'bold',fontSize:15}}>START</Text>
 

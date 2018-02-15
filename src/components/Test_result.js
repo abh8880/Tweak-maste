@@ -13,7 +13,7 @@ export default class Activity8 extends Component {
         console.log("Test Result of chapter:" + chapter);
 
         axios.post('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/insert_score.php', {
-            name: 'akash',
+            name: 'anto',
             score: correct,
             chapter: chapter
           })
