@@ -22,6 +22,8 @@ import axios from 'axios';
 var box_count = 3;
 var box_height = height / box_count;
 var progress_val = [0,0,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
+var chap_info = [];
+
 export default class First extends Component {
 
   // async local_store(){
@@ -65,8 +67,16 @@ export default class First extends Component {
             console.log("\n\n SUCCESS \n\n");
             console.log(response.data);
             console.log(response.data[0].chapter);
-            this.setState({prev_chap:response.data[0].chapter});
-            console.log(this.state.prev_chap);
+            
+            for(var i=0;i<response.data.length;i++){
+              obj = {
+                chapter:response.data[i].chapter,
+                test:response.data[i].test
+              }
+
+              chap_info.push(obj);
+            }
+
             var index;
             var sum = 0;
             var sum1 = 0;
@@ -99,13 +109,40 @@ export default class First extends Component {
     console.log(this.state.prev_chap);
     console.log(i);
 
-    if(i<=this.state.prev_chap){
+    //if(i<=this.state.prev_chap){
       Actions.lesson({Chapter:i});
-    }
+    //}
 
-    else{
-      alert("Please complete previous chapter(s)");
-    }
+    //else{
+      //alert("Please complete previous chapter(s)");
+    //}
+
+    // var found = 0;
+
+    // if(i==1){
+    //   Actions.lesson({Chapter:i});
+    // }
+
+    // else{
+    //   for(var j in chap_info){
+      
+    //     if(chap_info[j].chapter == i-1){
+    //       found = 1;
+    //       if(chap_info[j].test == 0 || chap_info[j].test == 2){
+    //         alert("Please complete previous chapter(s)");
+    //       }
+  
+    //       else{
+    //         Actions.lesson({Chapter:i});
+    //       }
+    //     }
+  
+    //   }
+
+    //   if(found==0){
+    //     alert("Please complete previous chapter(s)");
+    //   }
+    // }
   }
 
 

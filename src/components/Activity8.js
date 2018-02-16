@@ -212,7 +212,7 @@ if (topic == -1)
     return (
 
       <View style={styles.container}>
-      	{timer}
+      	{topic==-1 && timer}
 
         <View style={styles.compBox}>
           <View style={styles.grid}>
@@ -251,6 +251,7 @@ if (topic == -1)
     );
     }
       else if(this.state.status == 1){
+        clearTimeout(timeout);
         console.log("rep_state="+this.state.repeat);
           console.log("rem_rep_state="+this.state.rem_rep);
           return(

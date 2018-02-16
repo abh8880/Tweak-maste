@@ -9,7 +9,7 @@ export default class Activity8 extends Component {
         var topic = this.props.topic;
 
         axios.post('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/update_progress.php', {
-            name: 'akash',
+            name: 'anto',
             chapter: chapter,
             topic: topic
           })
