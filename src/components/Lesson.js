@@ -6,6 +6,7 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 
 import EZSwiper from 'react-native-ezswiper';
@@ -20,11 +21,13 @@ let currentDeck = 0;
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 var chapter;
+var test_status = 0;
+
 export default class Lesson extends Component {
 
   constructor(props) {
     super(props)
-    this.state = { noOfCards: ['', '', '', ''],topic:1,status:0,isDisabled: false }
+    this.state = { noOfCards: ['', '', '', ''],topic:1,status:0 }
     chapter = this.props.navigation.state.params.Chapter;
     console.log(chapter);
 
@@ -55,6 +58,13 @@ export default class Lesson extends Component {
               <Text style={styles.deckButtonText}>Start 📝</Text>
             </TouchableOpacity>
           </View>
+
+          <View style={styles.deckButtonView}>
+
+              <TouchableOpacity style={styles.deckButton} onPress={() => this._handleButtonPress()}>
+                    <Text style={styles.deckButtonText}>Test 📝</Text>
+              </TouchableOpacity>
+          </View>
         </View>
 
       return (finalcomp)
@@ -74,6 +84,24 @@ export default class Lesson extends Component {
   }
 
   _handleButtonPress = () =>{
+
+    if(test_status == 0){
+      Alert.alert(
+        'Hey There !',
+        'If you score below the cutoff, the test will be disabled and will only be enabled after you complete all the lessons.',
+        [
+          {text: 'Continue', onPress: () => this.setState({status:-1})},
+          {text: 'Go Back', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        ],
+        { cancelable: true }
+      )
+    }
+
+    else if(test_status == 2){
+      alert("Test Disabled. Please complete all the lessons first !");
+    }
+
+    else
     this.setState({status:-1});
   }
 
@@ -144,7 +172,7 @@ export default class Lesson extends Component {
     console.log("topic="+this.state.topic);
     axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_test_status.php', {
             params: {
-              name: 'akash',
+              name: 'anto',
               chapter: chapter
             },
             dataType: 'json'
@@ -152,22 +180,7 @@ export default class Lesson extends Component {
           .then(function (response) {
             console.log("\n\n SUCCESS \n\n");
             console.log("response.data[0].test: "+ response.data[0].test);
-            if (response.data[0].test==0||response.data[0].test==1) 
-            {
-              if (this.state.isDisabled==true) 
-              {
-                console.log("buton enabled");
-                this.setState({isDisabled:false});
-              }
-            }
-            else if (response.data[0].test==2)
-            {
-              if (this.state.isDisabled==false) 
-              {
-                console.log("buton disabled");
-                this.setState({isDisabled:true});
-              }
-            }
+            test_status = response.data[0].test;
           }.bind(this))
           .catch(function (error) {
             console.log(error);
@@ -186,13 +199,6 @@ export default class Lesson extends Component {
               index={0}
               horizontal={true}
               loop={false} />
-
-              <TouchableOpacity style={styles.button} onPress={() => this._handleButtonPress()} disabled={this.state.isDisabled}>
-                  <View>
-                      <Text style={{ fontSize: 15 }} >Attempt Test</Text>
-                  </View>
-              </TouchableOpacity>
-
           </View>
         );
     }
