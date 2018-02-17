@@ -10,7 +10,7 @@ import {
 import Result from './Result';
 import Time_up from './Time_up';
 import Select from './Select';
-
+import { Card } from 'react-native-elements';
 import * as Progress from 'react-native-progress';
 
 
@@ -217,73 +217,71 @@ if (topic == -1)
       <View style={styles.container}>
        
         {topic==-1 && timer}
-          <View style={styles.compBox}>
-            <Text style={styles.text}>
-              {message1}
-            </Text>
-            <View style={styles.grid}>
-              {buttons1}
-            </View>
-          </View>
-          <View style={styles.supBox}>
-            <Text style={styles.text}>
-              Your answer..
-            </Text>
+        <Text style={styles.titleQuestion}>
+         Chose compulsary words from above and put your own supplementary words to make a meaningful sentence!
+          </Text>
+          
+                <View style={styles.supBox}>
+          
+                    <Text style={styles.title}>
+                      Your answer..
+                    </Text>
 
-            <View style={styles.grid}>
-              <Text style={styles.input}>{answer}</Text>
-            </View>
+                    <View style={styles.grid}>
+                      <Text style={styles.input}>{answer}</Text>
+                    </View>
+                  
+                    <View style={styles.compBox}>
+                                 <Card title="Compulsory Words">
 
-            <Text style={styles.text}>
-              Type here
-            </Text>
+                                <View style={styles.grid}>
+                                  {buttons1}
+                                </View>
+                              </Card>
+                      </View>
+                      </View>
+                    <View style={styles.typeAnsBox}>
+                    <Text style={styles.title}>
+                      Type here
+                    </Text>
 
-            <View style={styles.grid}>
-              <TextInput
-                ref={input => {
-                  this.textInput = input;
-                }}
-                style={styles.input}
-                placeholder="Answer"
-                onChangeText={text => {
-                  word = text;
-                }}
-              />
-              <TouchableOpacity onPress={() => this._addWord()}>
-                <View style={styles.add}>
-                  <Text style={styles.buttonText}>Go</Text>
+                    <View style={styles.grid}>
+                              <TextInput
+                                ref={input => {
+                                  this.textInput = input;
+                                }}
+                                style={styles.input}
+                                placeholder="Answer"
+                                onChangeText={text => {
+                                  word = text;
+                                }}
+                              />
+                              <TouchableOpacity onPress={() => this._addWord()}>
+                                <View style={styles.add}>
+                                  <Text style={styles.buttonText}>Go</Text>
+                                </View>
+                            </TouchableOpacity>
+                    </View>
                 </View>
+        
+         
+          <View style={{flex: 3, flexDirection: 'row'}}>
+              <View style={styles.subBox1}>
+              <TouchableOpacity onPress={() => this._clear()}>
+             
+                <Text style={{fontSize:15, fontWeight:'bold', color:'#ffffff'}}>CLEAR</Text>
+             
               </TouchableOpacity>
-            </View>
-
-          </View>
-          <View style={styles.hint}>
-            <View style={styles.hintt}>
-              <Text style={{ color: 'white' }}>
-                HINT!
-              </Text>
-              <Text style={{ color: 'white' }}>
-                Chose compulsary words from above and put your own supplementary words to make a meaningful sentence!
-              </Text>
-            </View>
-          </View>
-          <View style={styles.subBox}>
-            <TouchableOpacity onPress={() => this._clear()}>
-              <View style={styles.button}>
-                <Text
-                  style={{ fontSize: 20, fontWeight: 'bold', color: '#BB0000' }}>
-                  CLEAR
-                </Text>
               </View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.subBox}>
-              <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                <View style={styles.button}>
-                  <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
-                </View>
-              </TouchableOpacity>
-          </View>
+
+
+              <View style={styles.subBox2}>
+                    <TouchableOpacity onPress={() => this._handleSubmitPress()}>
+                        <Text style={{fontSize:15,fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+                
+                    </TouchableOpacity>
+            </View>
+            </View>
         </View>
       );
       }
@@ -302,8 +300,9 @@ if (topic == -1)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
     // paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#34495e',
+    backgroundColor: '#e5e5e5',
   },
   timer: {
     flexDirection: 'row',
@@ -343,21 +342,39 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   supBox: {
-    flex: 4,
+    flex:5,
     alignSelf: 'stretch',
-    backgroundColor: '#7986CB',
+    backgroundColor: '#ffffff',
   },
-  compBox: {
-    flex: 2,
+   compBox: {
+    
     alignSelf: 'stretch',
-    backgroundColor: '#9FA8DA',
+    backgroundColor: '#ffffff',
   },
-  subBox: {
-    flex: 1,
+  subBox1: {
+    flex:2,
+     width:Dimensions.get('window').width/2,
+    height:Dimensions.get('window').height/10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+     borderWidth:5,
+     backgroundColor: '#1c3370',
+    justifyContent:'center',
+     borderColor: '#ffffff',
+  },
+  subBox2: {
+    flex:2,
+    width:Dimensions.get('window').width/2,
+    height:Dimensions.get('window').height/10,
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#ffffff',
+    borderWidth:5,
+     backgroundColor: '#1c3370',
+    justifyContent:'center',
+    borderColor: '#ffffff',
   },
   text: {
     padding: 10,
@@ -365,6 +382,29 @@ const styles = StyleSheet.create({
   },
   grid: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    alignSelf:'stretch'
   },
+    titleQuestion:{
+     justifyContent:'center',
+     fontSize:15,
+     fontWeight:'bold',
+     padding:10,
+     marginLeft:9,
+     color:'#000000'
+ },
+    button1: {
+   
+    alignItems: 'center',
+    backgroundColor: '#1c3370',
+    justifyContent:'center'
+  },
+ title:{
+     margin:10,
+     fontWeight:'bold',
+     fontSize:15
+ },
+typeAnsBox:{
+    alignSelf:'stretch',
+    backgroundColor:'#ffffff'
+}
 });

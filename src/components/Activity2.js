@@ -4,7 +4,7 @@ import { View, StyleSheet, TouchableOpacity, Text, Dimensions } from 'react-nati
 import Result from './Result';
 import Time_up from './Time_up';
 import Select from './Select';
-
+import { Card } from 'react-native-elements';
 import * as Progress from 'react-native-progress';
 
 var question = 'How are you ?';
@@ -178,7 +178,7 @@ if (topic == -1)
             </View>
             
             <View style={styles.opsBox}>
-              
+              <Card>
                 <TouchableOpacity onPress={() => this._handleButtonPress(ops[0])}>
                   <View style={styles.button}>
                     <Text style={styles.buttonText}>{ops[0]}</Text>
@@ -202,12 +202,12 @@ if (topic == -1)
                     <Text style={styles.buttonText}>{ops[3]}</Text>
                   </View>
                 </TouchableOpacity>
-                            
+               </Card>             
             </View>
   
             <View style={styles.subBox}>
                       <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                        <View style={styles.button}>
+                        <View style={styles.button1}>
                           <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
                         </View>
                       </TouchableOpacity>
@@ -292,14 +292,13 @@ container: {
     fontWeight: 'bold',
   },
   
-   button1: {
-    width: 250,
-    margin:5,
-    height:40,
+    button1: {
+    width:Dimensions.get('window').width,
+    height:Dimensions.get('window').height/10,
     alignItems: 'center',
-    justifyContent:'center',
     backgroundColor: '#1c3370',
-    borderRadius:5
+    justifyContent:'center',
+    margin:5
   },
 titleQuestion:{
      justifyContent:'center',

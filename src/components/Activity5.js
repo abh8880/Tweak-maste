@@ -239,10 +239,8 @@ if (topic == -1)
             </Text>
           </View>
           <View style={styles.compBox}>
-          <Card>
-            <Text style={styles.text}>
-              {message1}
-            </Text>
+          <Card title="Compulsory Words">
+            
             <View style={styles.grid}>
         			{ buttons1 }
         		</View>
@@ -250,10 +248,8 @@ if (topic == -1)
           </View>
           
           <View style={styles.supBox}>
-          <Card>
-            <Text style={styles.text}>
-              {message2}
-            </Text>
+          <Card title="Supplementary Words">
+           
             <View style={styles.grid}>
         			{ buttons2 }
         		</View>
@@ -263,18 +259,17 @@ if (topic == -1)
          <View style={{flex: 3, flexDirection: 'row'}}>
               <View style={styles.subBox1}>
               <TouchableOpacity onPress={() => this._clear()}>
-              <View style={styles.button1}>
+             
                 <Text style={{fontSize:15, fontWeight:'bold', color:'#ffffff'}}>CLEAR</Text>
-              </View>
+             
               </TouchableOpacity>
               </View>
 
 
               <View style={styles.subBox2}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                      <View style={styles.button1}>
-                        <Text style={{fontSize:15, color:'#ffffff'}}>SUBMIT</Text>
-                      </View>
+                        <Text style={{fontSize:15,fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+                
                     </TouchableOpacity>
             </View>
             </View>
@@ -340,19 +335,28 @@ const styles = StyleSheet.create({
   },
   subBox1: {
     flex:2,
+     width:Dimensions.get('window').width/2,
+    height:Dimensions.get('window').height/10,
     alignItems: 'center',
-    alignSelf: 'stretch',
     justifyContent: 'center',
     backgroundColor: '#ffffff',
-     borderWidth:5
+     borderWidth:5,
+      backgroundColor: '#1c3370',
+    justifyContent:'center',
+     borderColor: '#ffffff',
   },
   subBox2: {
     flex:2,
+    width:Dimensions.get('window').width/2,
+    height:Dimensions.get('window').height/10,
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center',
     backgroundColor: '#ffffff',
-    borderWidth:5
+    borderWidth:5,
+     backgroundColor: '#1c3370',
+    justifyContent:'center',
+     borderColor: '#ffffff',
   },
   text: {
     padding: 10,
@@ -372,8 +376,7 @@ titleQuestion:{
      color:'#000000'
  },
     button1: {
-    width:Dimensions.get('window').width/2,
-    height:Dimensions.get('window').height/10,
+   
     alignItems: 'center',
     backgroundColor: '#1c3370',
     justifyContent:'center'

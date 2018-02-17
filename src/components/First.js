@@ -161,7 +161,8 @@ export default class First extends Component {
              <View style={styles.innerContainer}>
             <View style={[styles.innerBox, styles.innerBox1]}>
              <Image
-                  source={require('../../assets/1_resized.png')}
+                  source={require('../../assets/2.png')}  
+                  style={{width: 70, height: 70}}
                 />
             </View>
             <View style={[styles.innerBox, styles.innerBox2]}>
@@ -173,13 +174,14 @@ export default class First extends Component {
            <View style={{margin:15}}>
              <Progress.Bar progress={this.state.progress_val[i-1]} width={110} height={8} color={'rgba(65,203,199,1)'}/>
            </View>
+            
            
             </View>
             
             
         </View>
         
-           
+            <Text style={{fontWeight:'bold',fontSize:15}}>TAP TO START</Text>
    
             </View>
              </TouchableOpacity>
@@ -279,7 +281,7 @@ const styles = StyleSheet.create({
     
   },
  innerBox2: {
-    margin:30,
+    margin:20,
     flexDirection:'column'
   },
   button: {

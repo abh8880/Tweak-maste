@@ -4,7 +4,8 @@ import {
   Dimensions,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 import { StatusBar} from 'react-native';
@@ -32,11 +33,14 @@ export default class VerticalStackLayout extends Component {
         
          <View style={[styles.box, styles.box1]}>
             
-                  
+            
       
            <View style={styles.innerContainer}>
             <View style={[styles.innerBox, styles.innerBox1]}>
-             <Progress.Circle size={60} indeterminate={false} progress={0.4} />
+              <Image
+                  source={require('../../icons/24.png')}  
+                  style={{width: 80, height: 80}}
+                />
            
             </View>
             <View style={[styles.innerBox, styles.innerBox2]}>
@@ -46,7 +50,8 @@ export default class VerticalStackLayout extends Component {
             </Text>
             </View>
             <View  style={{margin:20}}>
-             <Progress.Bar progress={0.6} height={8} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
+             <Progress.Bar progress={0.6} height={8} unfilledColor={'rgba(154,154,154,1)'} 
+            color={'rgba(28, 49, 58, 1)'} width={150} borderWidth={0} borderRadius={0} />
             </View>
             </View>
             
@@ -59,7 +64,7 @@ export default class VerticalStackLayout extends Component {
               </View>
             </TouchableOpacity>
             </View>
-
+            
             </View>
             
         
@@ -71,7 +76,10 @@ export default class VerticalStackLayout extends Component {
            
            <View style={styles.innerContainer}>
             <View style={[styles.innerBox, styles.innerBox1]}>
-             <Progress.Circle size={60} indeterminate={false} progress={0.8} />
+              <Image
+                  source={require('../../icons/12.png')}  
+                  style={{width: 80, height: 80}}
+                />
 
             </View>
             <View style={[styles.innerBox, styles.innerBox2]}>
@@ -81,7 +89,7 @@ export default class VerticalStackLayout extends Component {
             </Text>
             </View>
             <View  style={{margin:20}}>
-             <Progress.Bar progress={0.6} height={8} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
+             <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
             </View>
             </View>
             
@@ -94,6 +102,7 @@ export default class VerticalStackLayout extends Component {
               </View>
             </TouchableOpacity>
               </View>
+            
             </View>
             
        
@@ -122,21 +131,23 @@ const styles = StyleSheet.create({
     flex:1,
     borderRadius:10,
     margin:10,
-    backgroundColor:'#e9e9e9',
+    backgroundColor:'#f3c981',
      alignItems: 'center',
     justifyContent: 'center',
-     height: 128,
-    width:width
+    height: 128,
+    width:width,
+     borderRadius: 10 
   },
   box2: {
      flex:1,
     borderRadius:10,
     margin:10,
-    backgroundColor:'#e9e9e9',
+     backgroundColor:'#f3c981',
      alignItems: 'center',
     justifyContent: 'center',
      height: 128,
-    width:width
+    width:width,
+     borderRadius: 10
   },
   
   welcome: {
@@ -145,30 +156,26 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     margin: 10,
     fontWeight: 'bold',
-    color:'#002266',
+    color:'#ffffff',
    
   },
-   card: {
-    flex: 3,
-     padding:50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
-  },
+   
   innerContainer: {
-    flex: 3,
+    flex: 1,
     flexDirection: 'row'
   },
  innerBox: {
     height: box_height
   },
   innerBox1: {
-    marginTop:70,
+   
+    justifyContent:'center',
+    alignItems:'center',
+    marginBottom:30,
     marginLeft:20
-    
   },
  innerBox2: {
-    margin:20,
+    
     justifyContent:'center',
     alignItems:'center'
   },
@@ -178,7 +185,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius:10,
     backgroundColor:'#1c313a',
-    margin:2,
     justifyContent:'center',
     alignItems:'center'
   },
