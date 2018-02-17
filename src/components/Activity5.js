@@ -5,7 +5,7 @@ import Time_up from './Time_up';
 import Select from './Select';
 
 import * as Progress from 'react-native-progress';
-
+import { Card } from 'react-native-elements';
 var comp_words = new Array();
 var supp_words = new Array();
 var answer = '';
@@ -229,47 +229,55 @@ if (topic == -1)
        
 
         {topic==-1 && timer}
-
+        <Text style={styles.titleQuestion}>
+         Pick the words from the list to form your answer
+          </Text>
+          
+          <View style={styles.opsBox} >
+            <Text style={{fontSize:20}}>
+              {answer}
+            </Text>
+          </View>
           <View style={styles.compBox}>
+          <Card>
             <Text style={styles.text}>
               {message1}
             </Text>
             <View style={styles.grid}>
         			{ buttons1 }
         		</View>
+          </Card>
           </View>
+          
           <View style={styles.supBox}>
+          <Card>
             <Text style={styles.text}>
               {message2}
             </Text>
             <View style={styles.grid}>
         			{ buttons2 }
         		</View>
+           </Card>
           </View>
-          <View style={styles.hint}>
-            <Text style={{ color: 'white' }}>
-              Your answer...
-            </Text>
-          </View>
-          <View style={styles.opsBox} >
-            <Text style={{fontSize:20}}>
-              {answer}
-            </Text>
-          </View>
-          <View style={styles.subBox}>
+          
+         <View style={{flex: 3, flexDirection: 'row'}}>
+              <View style={styles.subBox1}>
               <TouchableOpacity onPress={() => this._clear()}>
-                <View style={styles.button}>
-                  <Text style={{fontSize:20, fontWeight:'bold', color:'#BB0000'}}>CLEAR</Text>
-                </View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.subBox}>
-                      <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                        <View style={styles.button}>
-                          <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
-                        </View>
-                      </TouchableOpacity>
-          </View>
+              <View style={styles.button1}>
+                <Text style={{fontSize:15, fontWeight:'bold', color:'#ffffff'}}>CLEAR</Text>
+              </View>
+              </TouchableOpacity>
+              </View>
+
+
+              <View style={styles.subBox2}>
+                    <TouchableOpacity onPress={() => this._handleSubmitPress()}>
+                      <View style={styles.button1}>
+                        <Text style={{fontSize:15, color:'#ffffff'}}>SUBMIT</Text>
+                      </View>
+                    </TouchableOpacity>
+            </View>
+            </View>
         
         </View>
       );
@@ -287,10 +295,11 @@ if (topic == -1)
 }
 
 const styles = StyleSheet.create({
-  container: {
+   container: {
     flex: 1,
+    alignItems: 'center',
     // paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#34495e',
+    backgroundColor: '#e5e5e5',
   },
   timer: {
     flexDirection: 'row',
@@ -308,34 +317,42 @@ const styles = StyleSheet.create({
     padding: 5,
   },
     opsBox: {
-    flexDirection: 'row',
-    flex: 1,
+   flexDirection: 'row',
+    flex:2,
     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#5C6BC0',
+    backgroundColor: '#ffffff',
   },
   hint: {
-    padding: 15,
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    backgroundColor: '#5C6BC0',
+    flex:1,
+    justifyContent:'center',
+    backgroundColor: '#ffffff',
   },
   supBox: {
-    flex: 4,
+    flex:10,
     alignSelf: 'stretch',
-    backgroundColor: '#7986CB',
+    backgroundColor: '#ffffff',
   },
   compBox: {
-    flex: 4,
+    flex:8,
     alignSelf: 'stretch',
-    backgroundColor: '#9FA8DA',
+    backgroundColor: '#ffffff',
   },
-  subBox: {
-    flex: 1,
+  subBox1: {
+    flex:2,
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#ffffff',
+     borderWidth:5
+  },
+  subBox2: {
+    flex:2,
+    alignItems: 'center',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+    borderWidth:5
   },
   text: {
     padding: 10,
@@ -345,5 +362,20 @@ const styles = StyleSheet.create({
 
     flexDirection: 'row',
     flexWrap: 'wrap'
+  },
+titleQuestion:{
+     justifyContent:'center',
+     fontSize:15,
+     fontWeight:'bold',
+     padding:10,
+     marginLeft:9,
+     color:'#000000'
+ },
+    button1: {
+    width:Dimensions.get('window').width/2,
+    height:Dimensions.get('window').height/10,
+    alignItems: 'center',
+    backgroundColor: '#1c3370',
+    justifyContent:'center'
   },
 });

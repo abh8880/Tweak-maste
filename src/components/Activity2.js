@@ -170,7 +170,7 @@ if (topic == -1)
         <View style={styles.container}>
             {topic==-1 && timer}
             <View style={styles.questBox}>
-              <Text style={{fontSize:20}}>{this.state.question}</Text>
+              <Text style={{fontSize:20,justifyContent: 'center'}}>{this.state.question}</Text>
             </View>
             
             <View style={styles.ansBox}>
@@ -230,9 +230,9 @@ if (topic == -1)
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#34495e',
+container: {
+     flex: 1,
+    backgroundColor: '#e5e5e5',
   },
   timer: {
     flexDirection: 'row',
@@ -242,45 +242,41 @@ const styles = StyleSheet.create({
 
   },
   questBox: {
-    flex: 1,
-    alignItems: 'center',
-    alignSelf: 'stretch',
+    marginLeft:20,
+    backgroundColor: '#e5e5e5',
     justifyContent: 'center',
-    backgroundColor: '#9FA8DA',
   },
   
   ansBox: {
-    flex: 1,
+    flex: 2,
     alignSelf: 'stretch',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#7986CB',
+    margin:20,
+    backgroundColor: '#e5e5e5',
   },
   
   opsBox: {
-    flex: 3,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    backgroundColor: '#5C6BC0',
+    alignItems:'center',
+    flex:6,
+    borderRadius:5,
+    marginLeft:15
   },
   
   subBox: {
-    flex: 1,
+    flex: 2,
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#e5e5e5',
   },
   
   button: {
+    width: 250,
+    margin:5,
     alignItems: 'center',
-    backgroundColor: '#3F51B5',
-    alignSelf: 'stretch',
-    borderWidth: 1,
-    borderColor: '#5C6BC0',
-    marginRight: 10,
-    marginLeft: 10,
-    borderRadius:20
+    backgroundColor: 'rgba(9, 22, 200, 0.6)',
+    borderRadius: 10,
+    height:40,
+    justifyContent:'center'
   },
   
   subButton: {
@@ -293,5 +289,24 @@ const styles = StyleSheet.create({
     padding: 20,
     color: 'white',
     fontSize: 20,
-  }
+    fontWeight: 'bold',
+  },
+  
+   button1: {
+    width: 250,
+    margin:5,
+    height:40,
+    alignItems: 'center',
+    justifyContent:'center',
+    backgroundColor: '#1c3370',
+    borderRadius:5
+  },
+titleQuestion:{
+     justifyContent:'center',
+     fontSize:22,
+     fontWeight:'bold',
+     padding:10,
+     marginLeft:9,
+     color:'#000000'
+ }
 });

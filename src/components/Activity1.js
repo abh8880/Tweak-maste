@@ -5,7 +5,7 @@ import Result from './Result';
 import Time_up from './Time_up';
 import Select from './Select';
 import * as Progress from 'react-native-progress';
-
+import { Card } from 'react-native-elements';
 var current_ans = '_____';
 var ops = [];
 var anspart = [];
@@ -174,17 +174,17 @@ update2 = () =>{
         <View style={styles.container}>
             {topic==-1 && timer}
             <View style={styles.questBox}>
-              <Text style={{fontSize:20}}>{this.state.question}</Text>
+              <Text style={{fontSize:20,fontWeight:'bold'}}>{this.state.question}</Text>
             </View>
             
             <View style={styles.ansBox}>
               <View style={styles.ansLine}>
-                <Text style={{fontSize:20}}>{anspart[0]}</Text>
+                <Text style={{fontSize:20,fontWeight:'bold'}}>{anspart[0]}</Text>
                 <Text style={{fontSize:20, fontWeight:'bold'}}>{this.state.current_ans}</Text>
-                <Text style={{fontSize:20}}>{anspart[1]}</Text>
+                <Text style={{fontSize:20,fontWeight:'bold'}}>{anspart[1]}</Text>
               </View>
             </View>
-            
+            <Card>
             <View style={styles.opsBox}>
               
               <View style={styles.buttonLine}>
@@ -216,10 +216,10 @@ update2 = () =>{
               </View>
                             
             </View>
-  
+            </Card>
             <View style={styles.subBox}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                      <View style={styles.button}>
+                      <View style={styles.button1}>
                         <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
                       </View>
                     </TouchableOpacity>
@@ -244,7 +244,7 @@ update2 = () =>{
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#34495e',
+    backgroundColor: '#e5e5e5',
   },
   timer: {
     flexDirection: 'row',
@@ -254,19 +254,17 @@ const styles = StyleSheet.create({
 
   },
   questBox: {
-    flex: 1,
     alignItems: 'center',
-    alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#9FA8DA',
+    backgroundColor: '#e5e5e5',
   },
   
+  
   ansBox: {
-    flex: 2,
+   flex: 2,
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#7986CB',
   },
   
   ansLine: {
@@ -276,18 +274,18 @@ const styles = StyleSheet.create({
   },
   
   opsBox: {
-    flex: 3,
-    alignSelf: 'stretch',
+    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#5C6BC0',
+    alignSelf:'stretch',
+    borderRadius:5
   },
   
   subBox: {
-    flex: 1,
+  flex: 1,
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#3F51B5',
+  
   },
   
   buttonLine: {
@@ -297,11 +295,11 @@ const styles = StyleSheet.create({
   },
   
   button: {
-    margin: 30,
-    width: 100,
+    margin: 20,
+    width:100,
     alignItems: 'center',
-    backgroundColor: '#3F51B5',
-    borderRadius: 50
+    backgroundColor: 'rgba(9, 22, 200, 0.6)',
+    borderRadius: 10
   },
   
   buttonText: {
@@ -309,5 +307,24 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 20,
     fontWeight: 'bold'
-  }
+  },
+     button1: {
+    margin: 25,
+    width: 320,
+    height:50,
+    alignSelf:'center',
+    alignItems: 'center',
+    justifyContent:'center',
+    backgroundColor: '#1c3370',
+    borderRadius:5
+  },
+  titleQuestion:{
+     justifyContent:'center',
+     fontSize:22,
+     fontWeight:'bold',
+     padding:10,
+     marginLeft:9,
+     color:'#000000'
+ },
+  
 });

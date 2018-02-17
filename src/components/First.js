@@ -156,6 +156,7 @@ export default class First extends Component {
         <View style={styles.card}>
       
         <Card>
+          <TouchableOpacity  onPress={() => this.open_chapter(i) }>
          <View style={[styles.box,styles.box1]}>
              <View style={styles.innerContainer}>
             <View style={[styles.innerBox, styles.innerBox1]}>
@@ -178,16 +179,10 @@ export default class First extends Component {
             
         </View>
         
-             <View style={styles.start}>
-             <TouchableOpacity  onPress={() => this.open_chapter(i) }>
-             
-                <Text style={{color:'#800000',fontWeight:'bold',fontSize:15}}>START</Text>
-
-            </TouchableOpacity>
-            </View>
+           
    
             </View>
-            
+             </TouchableOpacity>
         </Card>
       </View>
       );

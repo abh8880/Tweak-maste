@@ -208,6 +208,12 @@ export default class Activity3 extends Component {
 
       <View style={styles.container}>
             {topic==-1 && timer}
+         <View style={styles.hint}>
+          <Text  style={styles.titleQuestion}>
+            Pick words from the list below to form your answer
+          </Text>
+        </View>
+        
             <View style={styles.questBox}>
           <Text style={{ fontSize: 20 }}>
             Q: {this.state.question}
@@ -218,12 +224,7 @@ export default class Activity3 extends Component {
             A: {this.state.answer}
           </Text>
         </View>
-        <View style={styles.hint}>
-          <Text style={{ color: 'white' }}>
-            Pick words from the list below to form your answer
-          </Text>
-        </View>
-  
+       
         <View style={styles.opsBox} >
           
           <View >
@@ -231,21 +232,25 @@ export default class Activity3 extends Component {
           </View>
 
         </View>
-        <View style={styles.subBox}>
-            <TouchableOpacity onPress={() => this._clear()}>
-              <View style={styles.button}>
+        <View style={{flex: 1, flexDirection: 'row', marginBottom:10}}>
+
+              <View style={styles.clearBox}>
+              <TouchableOpacity onPress={() => this._clear()}>
+              <View style={styles.button1}>
                 <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>CLEAR</Text>
               </View>
-          </TouchableOpacity>
-        </View>
+              </TouchableOpacity>
+              </View>
 
-        <View style={styles.subBox}>
+
+              <View style={styles.subBox}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                      <View style={styles.button}>
-                        <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
-                      </View>
+                      <View style={styles.button1}>
+                        <Text style={{fontSize:20, fontWeight:'bold',color:'#ffffff'}}>SUBMIT</Text>
+                        </View>
                     </TouchableOpacity>
-            </View>
+             </View>
+      </View>
               
       </View>
     );
@@ -264,9 +269,9 @@ export default class Activity3 extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+container: {
     flex: 1,
-    backgroundColor: '#34495e',
+    backgroundColor: '#e5e5e5',
   },
   timer: {
     flexDirection: 'row',
@@ -275,48 +280,84 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start'
 
   },
-  button: {
-    margin: 10,
-    width: 100,
-    alignItems: 'center',
-    backgroundColor: '#3F51B5',
+  questBox: {
+    marginLeft:20,
+    backgroundColor: '#e5e5e5',
   },
-  buttonText: {
-    padding: 5,
-  },
-    opsBox: {
-    flexDirection: 'row',
-    flex: 5,
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    backgroundColor: '#5C6BC0',
-  },
-  hint: {
-    paddingTop: 15,
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    backgroundColor: '#5C6BC0',
+  answer:{
+    fontSize:20
   },
   ansBox: {
-    flex: 2,
-    alignSelf: 'stretch',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#7986CB',
-    flexDirection: 'row',
-  },
-  questBox: {
-    flex: 2,
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    backgroundColor: '#9FA8DA',
-  },
-  subBox: {
     flex: 1,
+    alignSelf: 'stretch',
+    margin:10,
+    backgroundColor: '#e5e5e5',
+  },
+
+  
+  ansLine: {
+    flexDirection:'row', 
+    alignSelf: 'stretch',
+    justifyContent: 'center'
+  },
+  
+  opsBox: {
+    flex:6,
+    borderRadius:5,
+    marginLeft:15,
+    paddingBottom:25,
+  },
+  
+  clearBox: {
+    width:window.width/2,
     alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#e5e5e5',
+  },
+     subBox: {
+   
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#e5e5e5',
+  },
+  
+  buttonLine: {
+    flexDirection:'row', 
     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#3F51B5',
   },
+  
+  button: {
+    width: 250,
+    margin:5,
+    alignItems: 'center',
+    backgroundColor: 'rgba(9, 22, 200, 0.6)',
+    borderRadius: 10,
+    height:40,
+    justifyContent:'center'
+  },
+    
+   button1: {
+   width:Dimensions.get('window').width/2,
+    height:Dimensions.get('window').height/10,
+    alignItems: 'center',
+    backgroundColor: '#1c3370',
+    justifyContent:'center'
+  },
+  
+  buttonText: {
+    padding: 20,
+    color: 'white',
+    fontSize: 20,
+    fontWeight: 'bold',
+   
+  },
+ titleQuestion:{
+     justifyContent:'center',
+     fontSize:22,
+     fontWeight:'bold',
+     padding:10,
+     marginLeft:9,
+     color:'#000000'
+ }
 });
