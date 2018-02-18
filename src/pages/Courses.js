@@ -27,17 +27,13 @@ export default class VerticalStackLayout extends Component {
     return (
     
         <View style={styles.Layout}>
-     
-   
-      
-        
-         <View style={[styles.box, styles.box1]}>
+     <View style={[styles.box, styles.box1]}>
             
             
-         <TouchableOpacity  onPress={() => Actions.first()} >
+         <TouchableOpacity onPress={() => Actions.first()} >
         
         
-           <View  style={{alignItems:'center',}}>
+           <View  style={{alignItems:'center',padding:10}}>
              <Text style={styles.cardTitle}>Grammar</Text>
              </View>
             <View
@@ -59,9 +55,8 @@ export default class VerticalStackLayout extends Component {
             </View>
             <View style={[styles.innerBox, styles.innerBox2]}>
               <View  style={styles.caption}>
-                <Text style={{ padding: 3, color:'#af0c56',fontSize:13,fontWeight:'bold'}}>Master the art of perfect Sentence</Text>               
-                <Text style={{ padding:3,color:'#af0c56',fontSize:13,
-                  fontWeight:'bold'}}> Formation</Text>
+                <Text style={styles.captionText}>Master the art of perfect</Text>               
+                <Text style={styles.captionText}> Sentence Formation</Text>
               </View>
             <View style={{ margin:10}}>
              <Progress.Bar progress={0.6} height={8} unfilledColor={'rgba(154,154,154,1)'} 
@@ -75,11 +70,10 @@ export default class VerticalStackLayout extends Component {
               <View style={styles.startButton}>
              
              
-            <View style={styles.button2}>
-                <Text style={{ padding: 3, color:'#FFFFFF',fontWeight:'bold',fontSize:15,}}>Let's Go!</Text>
-              </View>
-
-            </View>
+                   <View style={styles.button2}>
+                    <Text style={{ padding: 3, color:'#FFFFFF', fontFamily:'Museo 700',fontSize:15,}}>Let's Go!</Text>
+                  </View>
+             </View>
             </TouchableOpacity>
             </View>
             
@@ -89,9 +83,12 @@ export default class VerticalStackLayout extends Component {
       
      
          <View style={[styles.box, styles.box2]}>
-            <TouchableOpacity  onPress={() => alert("Coming soon !")}>
-             <View  style={{ alignItems:'center'}}>
-             <Text style={styles.cardTitle}>Vocabulary</Text>
+                
+         <TouchableOpacity  onPress={() => alert("Coming soon !")}>
+        
+        
+           <View  style={{alignItems:'center',padding:10}}>
+              <Text style={styles.cardTitle}>Vocabulary</Text>
              </View>
             <View
               style={{
@@ -100,34 +97,38 @@ export default class VerticalStackLayout extends Component {
               }}
             />
           
+             
            <View style={styles.innerContainer}>
-            
+              
             <View style={[styles.innerBox, styles.innerBox1]}>
               <Image
                   source={require('../../icons/12.png')}  
                   style={{width: 80, height: 80}}
                 />
-
+           
             </View>
             <View style={[styles.innerBox, styles.innerBox2]}>
-             <View style={styles.caption}>
-                <Text style={{padding: 3, color:'#af0c56',fontSize:13,fontWeight:'bold'}}>Improve your Vocabulary knowing </Text>
-                 <Text style={{padding: 3, color:'#af0c56',fontSize:13,fontWeight:'bold'}}>the origin of words</Text>
+              <View  style={styles.caption}>
+               <Text style={styles.captionText}>Improve your Vocabulary </Text>
+                 <Text style={styles.captionText}> knowing the origin of words</Text>
               </View>
             <View style={{ margin:10}}>
-             <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
+              <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
             </View>
             </View>
-             
+            
             
         </View>
-                 
+          
               <View style={styles.startButton}>
-                 <View style={styles.button2}>
-                <Text style={{ padding: 3, color:'#FFFFFF',fontWeight:'bold',fontSize:15}}>Let's Go!</Text>
+             
+             
+            <View style={styles.button2}>
+                <Text style={{ padding: 3, color:'#FFFFFF', fontFamily:'Museo 700',fontSize:15,}}>Let's Go!</Text>
               </View>
-              </View>
-             </TouchableOpacity>
+
+            </View>
+            </TouchableOpacity>
             </View>
             
        
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
   
   
   Layout: {
-    flex:3,
+    flex:1,
     flexDirection: 'column',
     margin:10
      },
@@ -153,26 +154,24 @@ const styles = StyleSheet.create({
   },
   box1: {
     
-    flex:10,
-    borderRadius:10,
+    flex:5,
     margin:10,
     backgroundColor:'#ffffff',
-     alignItems: 'center',
+   alignItems: 'center',
     justifyContent: 'center',
-    height: 128,
+    height: 80,
     width:width,
-     borderRadius: 10 
+    
   },
-  box2: {
-     flex:10,
-    borderRadius:10,
+     box2: {
+     flex:5,
     margin:10,
-     backgroundColor:'#ffffff',
-     alignItems: 'center',
+    backgroundColor:'#ffffff',
+   alignItems: 'center',
     justifyContent: 'center',
-     height: 128,
+    height: 80,
     width:width,
-     borderRadius: 10
+    
   },
   
   welcome: {
@@ -191,29 +190,29 @@ const styles = StyleSheet.create({
     marginBottom:10
   },
  innerBox: {
-    height: box_height
+    height: box_height-50
   },
   innerBox1: {
    
     justifyContent:'center',
     alignItems:'center',
-    marginBottom:30,
     marginLeft:20
   },
  innerBox2: {
     
     justifyContent:'center',
     alignItems:'center',
-     marginBottom:30,
+
   },
   caption: {
     margin:10,
     alignItems: 'center',
     justifyContent:'center',
+  
   },
   button2: {
     height: Dimensions.get('window').height / 15,
-    width: 320,
+    width: Dimensions.get('window').height-250,
     alignItems: 'center',
     backgroundColor:'#1c313a',
     justifyContent:'center',
@@ -229,8 +228,14 @@ cardTitle:{
     
     color:'black',
     fontSize:18,
-    fontWeight:'bold',
+     fontFamily: 'Museo 700',
     marginBottom:5,
    justifyContent:'center'
+},
+captionText:{
+    padding: 3,
+    color:'#af0c56',
+    fontSize:15, 
+    fontFamily: 'Museo 700'
 }
 });
