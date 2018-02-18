@@ -269,7 +269,7 @@ if (topic == -1)
               <View style={styles.subBox1}>
               <TouchableOpacity onPress={() => this._clear()}>
                 <View style={styles.button1}>
-                <Text style={{fontSize:15, fontWeight:'bold', color:'#1c313a'}}>CLEAR</Text>
+                <Text style={{fontSize:20,color:'#1c313a', fontFamily: 'Museo 500',}}>CLEAR</Text>
               </View>
               </TouchableOpacity>
               </View>
@@ -278,7 +278,7 @@ if (topic == -1)
               <View style={styles.subBox2}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
                          <View style={styles.button2}>
-                        <Text style={{fontSize:15,fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+                        <Text style={{fontSize:20, color:'#ffffff', fontFamily: 'Museo 500',}}>SUBMIT</Text>
                         </View>
                     </TouchableOpacity>
             </View>
@@ -316,6 +316,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     height: 40,
     flex: 0.9,
+     fontFamily: 'Museo 500',
   },
   button: {
    borderRadius:10,
@@ -332,7 +333,8 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     padding: 5,
-    color:'#ffffff'
+    color:'#ffffff',
+     fontFamily: 'Museo 500',
   },
   hint: {
     padding: 15,
@@ -372,6 +374,7 @@ const styles = StyleSheet.create({
   text: {
     padding: 10,
     fontSize: 18,
+   fontFamily: 'Museo 500',
   },
   grid: {
     flexDirection: 'row',
@@ -380,10 +383,10 @@ const styles = StyleSheet.create({
     titleQuestion:{
      justifyContent:'center',
      fontSize:15,
-     fontWeight:'bold',
      padding:10,
      marginLeft:9,
-     color:'#000000'
+     color:'#000000',
+     fontFamily: 'Museo 500',
  },
     button1: {
     padding:10,
@@ -411,8 +414,8 @@ const styles = StyleSheet.create({
   },
  title:{
      margin:10,
-     fontWeight:'bold',
-     fontSize:15
+     fontSize:15,
+     fontFamily: 'Museo 500',
  },
 typeAnsBox:{
     alignSelf:'stretch',

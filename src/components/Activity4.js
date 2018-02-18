@@ -159,14 +159,14 @@ if (topic == -1)
         if(words[i]=='_'){
             element.push(
               <TextInput
-                style={{ width: 100, height: 44, padding: 8, textAlign: 'center', fontSize:20}}
+                style={{ width: 100, height: 44, padding: 8, textAlign: 'center', fontSize:20, fontFamily: 'Museo Sans Rounded_500',}}
               />
             );
         }
         
         else{
           element.push(
-              <Text style={{fontSize:20}}>{words[i]+" "}</Text>
+              <Text style={{fontSize:20, fontFamily: 'Museo Sans Rounded_500',}}>{words[i]+" "}</Text>
           );
         }
 
@@ -187,7 +187,7 @@ if (topic == -1)
             <View style={styles.subBox}>
                       <TouchableOpacity onPress={() => this._handleSubmitPress()}>
                         <View style={styles.button}>
-                          <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+                     <Text style={{fontSize:20, fontFamily: 'Museo 500',color:'#ffffff'}}>SUBMIT</Text>
                         </View>
                       </TouchableOpacity>
               </View>

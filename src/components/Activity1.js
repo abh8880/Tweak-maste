@@ -174,14 +174,14 @@ update2 = () =>{
         <View style={styles.container}>
             {topic==-1 && timer}
             <View style={styles.questBox}>
-              <Text style={{fontSize:20,fontWeight:'bold'}}>{this.state.question}</Text>
+              <Text style={{fontSize:20,fontFamily: 'Museo 500',}}>{this.state.question}</Text>
             </View>
             
             <View style={styles.ansBox}>
               <View style={styles.ansLine}>
-                <Text style={{fontSize:20,fontWeight:'bold'}}>{anspart[0]}</Text>
-                <Text style={{fontSize:20, fontWeight:'bold'}}>{this.state.current_ans}</Text>
-                <Text style={{fontSize:20,fontWeight:'bold'}}>{anspart[1]}</Text>
+                <Text style={{fontSize:20, fontFamily: 'Museo 500',}}>{anspart[0]}</Text>
+                <Text style={{fontSize:20,  fontFamily: 'Museo 500',}}>{this.state.current_ans}</Text>
+                <Text style={{fontSize:20, fontFamily: 'Museo 500',}}>{anspart[1]}</Text>
               </View>
             </View>
            
@@ -220,7 +220,7 @@ update2 = () =>{
            <View style={styles.subBox2}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
                           <View style={styles.button2}>
-                        <Text style={{fontSize:15,fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+                    <Text style={{fontSize:20,fontFamily: 'Museo 500',color:'#ffffff'}}>SUBMIT</Text>
                         </View>
                     </TouchableOpacity>
             </View>
@@ -312,7 +312,7 @@ const styles = StyleSheet.create({
     padding: 20,
     color: 'white',
     fontSize: 15,
-    fontWeight: 'bold'
+    fontFamily: 'Museo 500',
   },
     button2:{
      padding:10,
@@ -332,7 +332,8 @@ const styles = StyleSheet.create({
      fontWeight:'bold',
      padding:10,
      marginLeft:9,
-     color:'#000000'
+     color:'#000000',
+     fontFamily: 'Museo 500',
  },
   
 });
