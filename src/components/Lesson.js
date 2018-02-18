@@ -45,24 +45,24 @@ export default class Lesson extends Component {
       originWordsList = this.renderOriginw();
 
       finalcomp =
-        <View style={[styles.deckCard, { backgroundColor: "#ffffff", borderRadius: 15, position: 'relative' }]}>
+        <View style={[styles.deckCard, { backgroundColor: "#85063f", borderRadius: 15, position: 'relative' }]}>
           <Text style={styles.deckTitle}>Lesson {index+1}</Text>
           <Text style={styles.deckSubTitle}>Content:</Text>
           <View>
-            <Text>
+            <Text style={styles.deckInfo}>
               Something here...
             </Text>
           </View>
           <View style={styles.deckButtonView}>
             <TouchableOpacity style={styles.deckButton} onPress={() => this._onPressDeckButton()}>
-              <Text style={styles.deckButtonText}>Start 📝</Text>
+              <Text style={styles.deckButtonText}>Start </Text>
             </TouchableOpacity>
           </View>
 
           <View style={styles.deckButtonView}>
 
               <TouchableOpacity style={styles.deckButton} onPress={() => this._handleButtonPress()}>
-                    <Text style={styles.deckButtonText}>Test 📝</Text>
+                    <Text style={styles.deckButtonText}>Test</Text>
               </TouchableOpacity>
           </View>
         </View>
@@ -105,19 +105,7 @@ export default class Lesson extends Component {
     this.setState({status:-1});
   }
 
-  static navigationOptions = {
-    title: 'Lessons',
-    headerStyle: {
-      backgroundColor: '#00232d',
-    },
-    headerTitleStyle: {
-      color: '#88bfff',
-      fontSize: 20,
-      fontWeight: '200',
-    },
-    headerTintColor: '#88bfff',
-  };
-
+  
   reset_db = (chapter,topic) =>{
 		db.transaction((tx) => {
 			tx.executeSql('UPDATE act1 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
@@ -189,7 +177,7 @@ export default class Lesson extends Component {
     {
         return (
           <View style={styles.container}>
-            <EZSwiper style={[styles.swiper, { width: width, height: height/2 }]}
+            <EZSwiper style={[styles.swiper, { width: width, height: height/2,}]}
               dataSource={this.state.noOfCards}
               width={width}
               height={height/2.3}
@@ -225,29 +213,28 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2a8fe7'
+    backgroundColor: '#e5e5e5'
   },
   swiper: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2a8fe7',
+    backgroundColor: '#e5e5e5',
   },
   deckCard: {
     flex: 1,
     alignItems: 'center',
-    borderBottomColor: '#003665',
-    borderBottomWidth: 3,
+   
   },
   deckTitle:{
     fontFamily: 'Museo 700',
     fontSize: 35,
     margin: 25,
-    color: '#00336c'
+    color: '#ffffff'
   },
   deckSubTitle:{
     fontFamily: 'Museo Sans_500',
     fontSize: 25,
-    color: '#00336c'
+    color: '#ffffff'
   },
   originList:{
     fontFamily: 'Museo Sans Rounded_500',
@@ -265,12 +252,12 @@ const styles = StyleSheet.create({
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
-    marginTop: 20,
+    marginTop: 10,
     marginBottom: 10,
-    backgroundColor: '#2a8fe7',
+    backgroundColor: '#1c313a',
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 20,
+    borderRadius: 10,
     elevation: 3,
 
   },
@@ -278,5 +265,8 @@ const styles = StyleSheet.create({
     fontFamily: 'Museo Sans Rounded_500',
     fontSize: 18,
     color: '#ffffff',
-  }
+  },
+ deckInfo:{
+color:'#e5e5e5'
+}
 });

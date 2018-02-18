@@ -228,24 +228,24 @@ if (topic == -1)
         <View style={styles.container}>
        
 
-        {topic==-1 && timer}
-        <Text style={styles.titleQuestion}>
-         Pick the words from the list to form your answer
-          </Text>
+                {topic==-1 && timer}
+                <Text style={styles.titleQuestion}>
+                 Pick the words from the list to form your answer
+                  </Text>
           
-          <View style={styles.opsBox} >
-            <Text style={{fontSize:20}}>
-              {answer}
-            </Text>
-          </View>
-          <View style={styles.compBox}>
-          <Card title="Compulsory Words">
-            
-            <View style={styles.grid}>
-        			{ buttons1 }
-        		</View>
-          </Card>
-          </View>
+                  <View style={styles.opsBox} >
+                    <Text style={{fontSize:20}}>
+                      {answer}
+                    </Text>
+                  </View>
+                  <View style={styles.compBox}>
+                  <Card title="Compulsory Words">
+
+                    <View style={styles.grid}>
+                            { buttons1 }
+                        </View>
+                  </Card>
+                  </View>
           
           <View style={styles.supBox}>
           <Card title="Supplementary Words">
@@ -254,26 +254,26 @@ if (topic == -1)
         			{ buttons2 }
         		</View>
            </Card>
-          </View>
-          
+    
+            </View>
          <View style={{flex: 3, flexDirection: 'row'}}>
               <View style={styles.subBox1}>
               <TouchableOpacity onPress={() => this._clear()}>
-             
-                <Text style={{fontSize:15, fontWeight:'bold', color:'#ffffff'}}>CLEAR</Text>
-             
+                  <View style={styles.button1}>
+                <Text style={{fontSize:15, fontWeight:'bold', color:'#1c313a'}}>CLEAR</Text>
+                </View>
               </TouchableOpacity>
               </View>
 
 
               <View style={styles.subBox2}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
+                          <View style={styles.button2}>
                         <Text style={{fontSize:15,fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
-                
+                        </View>
                     </TouchableOpacity>
             </View>
             </View>
-        
         </View>
       );
       }
@@ -303,17 +303,19 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start'
   },
   button: {
+    borderRadius:10,
     margin: 5,
     width: Dimensions.get('window').width/3 - 20,
     alignItems: 'center',
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#1c313a',
   },
   buttonText: {
     padding: 5,
+    color:'#ffffff'
   },
     opsBox: {
    flexDirection: 'row',
-    flex:2,
+    flex:1,
     alignSelf: 'stretch',
     justifyContent: 'center',
     backgroundColor: '#ffffff',
@@ -324,39 +326,29 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   supBox: {
-    flex:10,
+    flex:6,
     alignSelf: 'stretch',
     backgroundColor: '#ffffff',
   },
   compBox: {
-    flex:8,
+    flex:4,
     alignSelf: 'stretch',
     backgroundColor: '#ffffff',
   },
   subBox1: {
-    flex:2,
-     width:Dimensions.get('window').width/2,
-    height:Dimensions.get('window').height/10,
+     flex:1,
+     alignSelf: 'stretch',
     alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ffffff',
-     borderWidth:5,
-      backgroundColor: '#1c3370',
     justifyContent:'center',
-     borderColor: '#ffffff',
+    
   },
   subBox2: {
-    flex:2,
-    width:Dimensions.get('window').width/2,
-    height:Dimensions.get('window').height/10,
+   
+     flex:1,
+     alignSelf: 'stretch',
     alignItems: 'center',
-    alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#ffffff',
-    borderWidth:5,
-     backgroundColor: '#1c3370',
-    justifyContent:'center',
-     borderColor: '#ffffff',
+   
   },
   text: {
     padding: 10,
@@ -371,14 +363,31 @@ titleQuestion:{
      justifyContent:'center',
      fontSize:15,
      fontWeight:'bold',
-     padding:10,
-     marginLeft:9,
+     margin:10,
      color:'#000000'
  },
     button1: {
-   
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,
     alignItems: 'center',
-    backgroundColor: '#1c3370',
-    justifyContent:'center'
+    backgroundColor: '#ffffff',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+    
   },
+   button2:{
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,  
+    alignItems: 'center',
+    backgroundColor: '#1c313a',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+   
+   }
 });

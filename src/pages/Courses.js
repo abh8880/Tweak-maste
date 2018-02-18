@@ -34,8 +34,22 @@ export default class VerticalStackLayout extends Component {
          <View style={[styles.box, styles.box1]}>
             
             
-      
+         <TouchableOpacity  onPress={() => Actions.first()} >
+        
+        
+           <View  style={{alignItems:'center',}}>
+             <Text style={styles.cardTitle}>Grammar</Text>
+             </View>
+            <View
+              style={{
+                borderBottomColor: '#D3D3D3',
+                borderBottomWidth: 1,
+              }}
+            />
+          
+             
            <View style={styles.innerContainer}>
+              
             <View style={[styles.innerBox, styles.innerBox1]}>
               <Image
                   source={require('../../icons/24.png')}  
@@ -44,12 +58,12 @@ export default class VerticalStackLayout extends Component {
            
             </View>
             <View style={[styles.innerBox, styles.innerBox2]}>
-            <View>
-             <Text style={styles.welcome}>
-            Course 1
-            </Text>
-            </View>
-            <View  style={{margin:20}}>
+              <View  style={styles.caption}>
+                <Text style={{ padding: 3, color:'#af0c56',fontSize:13,fontWeight:'bold'}}>Master the art of perfect Sentence</Text>               
+                <Text style={{ padding:3,color:'#af0c56',fontSize:13,
+                  fontWeight:'bold'}}> Formation</Text>
+              </View>
+            <View style={{ margin:10}}>
              <Progress.Bar progress={0.6} height={8} unfilledColor={'rgba(154,154,154,1)'} 
             color={'rgba(28, 49, 58, 1)'} width={150} borderWidth={0} borderRadius={0} />
             </View>
@@ -57,14 +71,16 @@ export default class VerticalStackLayout extends Component {
             
             
         </View>
+          
               <View style={styles.startButton}>
-             <TouchableOpacity  onPress={() => Actions.first()} >
-              <View style={styles.button}>
-                <Text style={{ padding: 3, color:'#FFFFFF',fontWeight:'bold',fontSize:15}}>START</Text>
+             
+             
+            <View style={styles.button2}>
+                <Text style={{ padding: 3, color:'#FFFFFF',fontWeight:'bold',fontSize:15,}}>Let's Go!</Text>
               </View>
-            </TouchableOpacity>
+
             </View>
-            
+            </TouchableOpacity>
             </View>
             
         
@@ -73,8 +89,19 @@ export default class VerticalStackLayout extends Component {
       
      
          <View style={[styles.box, styles.box2]}>
-           
+            <TouchableOpacity  onPress={() => alert("Coming soon !")}>
+             <View  style={{ alignItems:'center'}}>
+             <Text style={styles.cardTitle}>Vocabulary</Text>
+             </View>
+            <View
+              style={{
+                borderBottomColor: '#D3D3D3',
+                borderBottomWidth: 1,
+              }}
+            />
+          
            <View style={styles.innerContainer}>
+            
             <View style={[styles.innerBox, styles.innerBox1]}>
               <Image
                   source={require('../../icons/12.png')}  
@@ -83,33 +110,31 @@ export default class VerticalStackLayout extends Component {
 
             </View>
             <View style={[styles.innerBox, styles.innerBox2]}>
-            <View>
-             <Text style={styles.welcome}>
-            Course 2
-            </Text>
-            </View>
-            <View  style={{margin:20}}>
+             <View style={styles.caption}>
+                <Text style={{padding: 3, color:'#af0c56',fontSize:13,fontWeight:'bold'}}>Improve your Vocabulary knowing </Text>
+                 <Text style={{padding: 3, color:'#af0c56',fontSize:13,fontWeight:'bold'}}>the origin of words</Text>
+              </View>
+            <View style={{ margin:10}}>
              <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
             </View>
             </View>
-            
+             
             
         </View>
+                 
               <View style={styles.startButton}>
-              <TouchableOpacity  onPress={() => alert("Coming soon !")}>
-              <View style={styles.button}>
-                <Text style={{padding: 3, color:'#FFFFFF',fontWeight:'bold',fontSize:15 }}>START</Text>
+                 <View style={styles.button2}>
+                <Text style={{ padding: 3, color:'#FFFFFF',fontWeight:'bold',fontSize:15}}>Let's Go!</Text>
               </View>
-            </TouchableOpacity>
               </View>
-            
+             </TouchableOpacity>
             </View>
             
        
       
       
-           
         </View>
+        
       
     );
   }
@@ -128,10 +153,10 @@ const styles = StyleSheet.create({
   },
   box1: {
     
-    flex:1,
+    flex:10,
     borderRadius:10,
     margin:10,
-    backgroundColor:'#f3c981',
+    backgroundColor:'#ffffff',
      alignItems: 'center',
     justifyContent: 'center',
     height: 128,
@@ -139,10 +164,10 @@ const styles = StyleSheet.create({
      borderRadius: 10 
   },
   box2: {
-     flex:1,
+     flex:10,
     borderRadius:10,
     margin:10,
-     backgroundColor:'#f3c981',
+     backgroundColor:'#ffffff',
      alignItems: 'center',
     justifyContent: 'center',
      height: 128,
@@ -151,18 +176,19 @@ const styles = StyleSheet.create({
   },
   
   welcome: {
-    fontSize: 22,
+    fontSize: 20,
     textAlign: 'center',
     justifyContent:'center',
     margin: 10,
     fontWeight: 'bold',
-    color:'#ffffff',
+    color:'#1c313a',
    
   },
    
   innerContainer: {
-    flex: 1,
-    flexDirection: 'row'
+    flex: 4,
+    flexDirection: 'row',
+    marginBottom:10
   },
  innerBox: {
     height: box_height
@@ -177,19 +203,34 @@ const styles = StyleSheet.create({
  innerBox2: {
     
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+     marginBottom:30,
   },
-  button: {
+  caption: {
+    margin:10,
+    alignItems: 'center',
+    justifyContent:'center',
+  },
+  button2: {
     height: Dimensions.get('window').height / 15,
     width: 320,
     alignItems: 'center',
-    borderRadius:10,
     backgroundColor:'#1c313a',
     justifyContent:'center',
     alignItems:'center'
+
   },
   startButton: {
     width:width,
+    flex:1
 
-  }
+  },
+cardTitle:{
+    
+    color:'black',
+    fontSize:18,
+    fontWeight:'bold',
+    marginBottom:5,
+   justifyContent:'center'
+}
 });

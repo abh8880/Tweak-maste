@@ -184,9 +184,9 @@ update2 = () =>{
                 <Text style={{fontSize:20,fontWeight:'bold'}}>{anspart[1]}</Text>
               </View>
             </View>
-            <Card>
+           
             <View style={styles.opsBox}>
-              
+             <Card> 
               <View style={styles.buttonLine}>
                 <TouchableOpacity onPress={() => this._handleButtonPress(ops[0])}>
                   <View style={styles.button}>
@@ -214,14 +214,14 @@ update2 = () =>{
                   </View>
                 </TouchableOpacity>
               </View>
-                            
+              </Card>               
             </View>
-            </Card>
-            <View style={styles.subBox}>
+           
+           <View style={styles.subBox2}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                      <View style={styles.button1}>
-                        <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
-                      </View>
+                          <View style={styles.button2}>
+                        <Text style={{fontSize:15,fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+                        </View>
                     </TouchableOpacity>
             </View>
           
@@ -256,7 +256,8 @@ const styles = StyleSheet.create({
   questBox: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e5e5e5',
+    backgroundColor: '#ffffff',
+    marginTop:20
   },
   
   
@@ -265,6 +266,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ffffff',
   },
   
   ansLine: {
@@ -273,24 +275,28 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   
-  opsBox: {
+   opsBox: {
+    flex:4,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf:'stretch',
-    borderRadius:5
+    borderRadius:5,
+    backgroundColor: '#ffffff',
   },
   
-  subBox: {
-  flex: 1,
+  subBox2: {
+   
+     flex:1,
+     alignSelf: 'stretch',
     alignItems: 'center',
-    alignSelf: 'stretch',
     justifyContent: 'center',
-  
+   
   },
   
   buttonLine: {
     flexDirection:'row', 
     alignSelf: 'stretch',
+     backgroundColor: '#ffffff',
     justifyContent: 'center',
   },
   
@@ -298,26 +304,28 @@ const styles = StyleSheet.create({
     margin: 20,
     width:100,
     alignItems: 'center',
-    backgroundColor: 'rgba(9, 22, 200, 0.6)',
-    borderRadius: 10
+    backgroundColor: '#1c313a',
+    borderRadius: 5
   },
   
   buttonText: {
     padding: 20,
     color: 'white',
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'bold'
   },
-     button1: {
-    margin: 25,
-    width: 320,
-    height:50,
-    alignSelf:'center',
+    button2:{
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,  
     alignItems: 'center',
+    backgroundColor: '#1c313a',
     justifyContent:'center',
-    backgroundColor: '#1c3370',
-    borderRadius:5
-  },
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+   
+   },
   titleQuestion:{
      justifyContent:'center',
      fontSize:22,

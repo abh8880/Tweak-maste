@@ -169,8 +169,13 @@ if (topic == -1)
 
         <View style={styles.container}>
             {topic==-1 && timer}
+          <View style={{flex:2}}>
+          <Text style={styles.titleQuestion}>
+        Choose the correct sentence for the given question
+          </Text>
+          </View>
             <View style={styles.questBox}>
-              <Text style={{fontSize:20,justifyContent: 'center'}}>{this.state.question}</Text>
+              <Text style={{fontSize:20,justifyContent: 'center',fontWeight:'bold'}}>{this.state.question}</Text>
             </View>
             
             <View style={styles.ansBox}>
@@ -205,14 +210,13 @@ if (topic == -1)
                </Card>             
             </View>
   
-            <View style={styles.subBox}>
-                      <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                        <View style={styles.button1}>
-                          <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+            <View style={styles.subBox2}>
+                    <TouchableOpacity onPress={() => this._handleSubmitPress()}>
+                         <View style={styles.button2}>
+                        <Text style={{fontSize:15,fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
                         </View>
-                      </TouchableOpacity>
-              </View>
-          
+                    </TouchableOpacity>
+            </View>
         </View>
       );
     }
@@ -232,7 +236,7 @@ if (topic == -1)
 const styles = StyleSheet.create({
 container: {
      flex: 1,
-    backgroundColor: '#e5e5e5',
+    backgroundColor: '#ffffff',
   },
   timer: {
     flexDirection: 'row',
@@ -242,39 +246,40 @@ container: {
 
   },
   questBox: {
-    marginLeft:20,
-    backgroundColor: '#e5e5e5',
+    flex:1,
+    backgroundColor: '#ffffff',
     justifyContent: 'center',
+    alignItems:'center'
   },
   
   ansBox: {
-    flex: 2,
     alignSelf: 'stretch',
-    margin:20,
-    backgroundColor: '#e5e5e5',
+    backgroundColor: '#ffffff',
+    alignItems:'center'
   },
   
   opsBox: {
     alignItems:'center',
-    flex:6,
+    flex:4,
     borderRadius:5,
     marginLeft:15
   },
   
-  subBox: {
-    flex: 2,
+  subBox2: {
+     flex:1,
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#e5e5e5',
+    marginBottom:20
+   
   },
   
   button: {
     width: 250,
     margin:5,
     alignItems: 'center',
-    backgroundColor: 'rgba(9, 22, 200, 0.6)',
-    borderRadius: 10,
+    backgroundColor: '#1c313a',
+    borderRadius: 5,
     height:40,
     justifyContent:'center'
   },
@@ -283,29 +288,34 @@ container: {
     alignItems: 'center',
     backgroundColor: '#3F51B5',
     alignSelf: 'stretch',
+    
   },
   
   buttonText: {
     padding: 20,
     color: 'white',
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'bold',
   },
   
-    button1: {
-    width:Dimensions.get('window').width,
-    height:Dimensions.get('window').height/10,
+    button2: {
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,  
     alignItems: 'center',
-    backgroundColor: '#1c3370',
+    backgroundColor: '#1c313a',
     justifyContent:'center',
-    margin:5
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
   },
 titleQuestion:{
      justifyContent:'center',
-     fontSize:22,
+     fontSize:18,
      fontWeight:'bold',
      padding:10,
      marginLeft:9,
-     color:'#000000'
+     color:'#000000',
+     margin:20
  }
 });

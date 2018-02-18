@@ -268,17 +268,18 @@ if (topic == -1)
           <View style={{flex: 3, flexDirection: 'row'}}>
               <View style={styles.subBox1}>
               <TouchableOpacity onPress={() => this._clear()}>
-             
-                <Text style={{fontSize:15, fontWeight:'bold', color:'#ffffff'}}>CLEAR</Text>
-             
+                <View style={styles.button1}>
+                <Text style={{fontSize:15, fontWeight:'bold', color:'#1c313a'}}>CLEAR</Text>
+              </View>
               </TouchableOpacity>
               </View>
 
 
               <View style={styles.subBox2}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
+                         <View style={styles.button2}>
                         <Text style={{fontSize:15,fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
-                
+                        </View>
                     </TouchableOpacity>
             </View>
             </View>
@@ -317,19 +318,21 @@ const styles = StyleSheet.create({
     flex: 0.9,
   },
   button: {
+   borderRadius:10,
     margin: 5,
-    width: Dimensions.get('window').width / 3 - 20,
+    width: Dimensions.get('window').width/3 - 20,
     alignItems: 'center',
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#1c313a',
   },
   add: {
     margin: 5,
     width: 50,
     alignItems: 'center',
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#1c313a',
   },
   buttonText: {
     padding: 5,
+    color:'#ffffff'
   },
   hint: {
     padding: 15,
@@ -352,29 +355,19 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   subBox1: {
-    flex:2,
-     width:Dimensions.get('window').width/2,
-    height:Dimensions.get('window').height/10,
+    flex:1,
     alignItems: 'center',
+     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#ffffff',
-     borderWidth:5,
-     backgroundColor: '#1c3370',
-    justifyContent:'center',
-     borderColor: '#ffffff',
+   
+    
   },
   subBox2: {
-    flex:2,
-    width:Dimensions.get('window').width/2,
-    height:Dimensions.get('window').height/10,
+    flex:1,
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#ffffff',
-    borderWidth:5,
-     backgroundColor: '#1c3370',
-    justifyContent:'center',
-    borderColor: '#ffffff',
+   
   },
   text: {
     padding: 10,
@@ -393,10 +386,28 @@ const styles = StyleSheet.create({
      color:'#000000'
  },
     button1: {
-   
+    padding:10,
+   width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,
     alignItems: 'center',
-    backgroundColor: '#1c3370',
-    justifyContent:'center'
+    backgroundColor: '#ffffff',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+    
+  },
+   button2: {
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,  
+    alignItems: 'center',
+    backgroundColor: '#1c313a',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+   
   },
  title:{
      margin:10,

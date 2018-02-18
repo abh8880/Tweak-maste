@@ -172,7 +172,7 @@ export default class First extends Component {
             </Text>
            </View>
            <View style={{margin:15}}>
-             <Progress.Bar progress={this.state.progress_val[i-1]} width={110} height={8} color={'rgba(65,203,199,1)'}/>
+             <Progress.Bar progress={this.state.progress_val[i-1]} width={110} height={8} color={'rgba(133,6,63,0.8)'}/>
            </View>
             
            
