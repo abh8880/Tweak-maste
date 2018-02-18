@@ -175,11 +175,11 @@ if (topic == -1)
           </Text>
           </View>
             <View style={styles.questBox}>
-              <Text style={{fontSize:20,justifyContent: 'center',fontWeight:'bold'}}>{this.state.question}</Text>
+              <Text style={{fontSize:20,justifyContent: 'center',  fontFamily: 'Museo 500',}}>{this.state.question}</Text>
             </View>
             
             <View style={styles.ansBox}>
-                <Text style={{fontSize:20, fontWeight:'bold'}}>{this.state.current_ans}</Text>
+                <Text style={{fontSize:20, fontFamily: 'Museo 500',}}>{this.state.current_ans}</Text>
             </View>
             
             <View style={styles.opsBox}>
@@ -213,7 +213,7 @@ if (topic == -1)
             <View style={styles.subBox2}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
                          <View style={styles.button2}>
-                        <Text style={{fontSize:15,fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+                        <Text style={{fontSize:20, fontFamily: 'Museo 500', color:'#ffffff'}}>SUBMIT</Text>
                         </View>
                     </TouchableOpacity>
             </View>
@@ -295,12 +295,12 @@ container: {
     padding: 20,
     color: 'white',
     fontSize: 15,
-    fontWeight: 'bold',
+    fontFamily: 'Museo 500',
   },
   
     button2: {
      padding:10,
-     width:Dimensions.get('window').width/2.5,
+    width:Dimensions.get('window').width/2.5,
     height:Dimensions.get('window').height/10,  
     alignItems: 'center',
     backgroundColor: '#1c313a',
@@ -312,10 +312,10 @@ container: {
 titleQuestion:{
      justifyContent:'center',
      fontSize:18,
-     fontWeight:'bold',
      padding:10,
      marginLeft:9,
      color:'#000000',
-     margin:20
+     margin:20,
+     fontFamily: 'Museo 500',
  }
 });
