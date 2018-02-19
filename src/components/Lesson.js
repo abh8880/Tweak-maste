@@ -24,7 +24,17 @@ var chapter;
 var test_status = 0;
 
 export default class Lesson extends Component {
-
+static navigationOptions = {
+    title: '⌘  Lessons',
+    headerStyle: {
+      backgroundColor: '#00232d',
+    },
+    headerTitleStyle: {
+      color: '#88bfff',
+      fontSize: 20,
+      fontWeight: '300'
+    }
+  };
   constructor(props) {
     super(props)
     this.state = { noOfCards: ['', '', '', ''],topic:1,status:0 }
