@@ -1,19 +1,30 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, AsyncStorage } from 'react-native';
 
 import axios from 'axios';
 
+var name = null;
+var correct = 0;
+var chapter = 1;
+
 export default class Activity8 extends Component {
+
+    async get(){
+        name = await AsyncStorage.getItem('username'); 
+        alert(name);
+    }
+
     constructor(props) {
     super(props);
-    };
-    render(){
-        var correct = this.props.correct;
-        var chapter = this.props.chapter;
+
+    this.get();
+
+        correct = this.props.correct;
+        chapter = this.props.chapter;
         console.log("Test Result of chapter:" + chapter);
 
         axios.post('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/insert_score.php', {
-            name: 'anto',
+            name: name,
             score: correct,
             chapter: chapter
           })
@@ -23,7 +34,8 @@ export default class Activity8 extends Component {
           .catch(function (error) {
             console.log(error);
         });
-
+    };
+    render(){
         if (correct>=9) 
         {
             var remark = "You Passed !!";

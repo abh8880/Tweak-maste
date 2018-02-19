@@ -1,15 +1,28 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet,AsyncStorage } from 'react-native';
 import axios from 'axios';
+
+var name = null;
 
 export default class Activity8 extends Component {
 
-    render(){
+    async get(){
+        name = await AsyncStorage.getItem('username'); 
+        alert(name);
+    }
+
+    constructor(props){
+        super(props);
+
+        this.get();
+
         var chapter = this.props.chapter;
         var topic = this.props.topic;
 
+        console.log(name);
+
         axios.post('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/update_progress.php', {
-            name: 'anto',
+            name: name,
             chapter: chapter,
             topic: topic
           })
@@ -19,6 +32,9 @@ export default class Activity8 extends Component {
           .catch(function (error) {
             console.log(error);
         });
+    }
+
+    render(){
         return(
             <View style={styles.container}>
                 <View style={styles.compBox}>

@@ -185,6 +185,8 @@ export default class Activity3 extends Component {
           </View>;
     }
 
+   
+
     console.log(length);
     
   var buttons = [];
@@ -208,6 +210,11 @@ export default class Activity3 extends Component {
 
       <View style={styles.container}>
             {topic==-1 && timer}
+
+            <View >
+        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+    </View>
+    
          <View style={styles.hint}>
           <Text  style={styles.titleQuestion}>
             Pick words from the list below to form your answer

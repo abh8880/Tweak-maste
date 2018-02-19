@@ -80,10 +80,10 @@ export default class Activity8 extends Component {
         this.setState({correct_ans:correct_ans});
         this.setState({id:row.id});
         if(len==1 && this.props.wrong == 0)
-          this.setState({last:9});
+          this.setState({last:8});
 
         else if(len==1 && this.props.wrong == 2)
-          this.setState({rem_rep:9})
+          this.setState({rem_rep:8})
 
        }
           
@@ -128,7 +128,7 @@ export default class Activity8 extends Component {
 
     else{
       this.setState({check_ans: 0});
-      this.setState({repeat: 9});
+      this.setState({repeat: 8});
 
       db.transaction((tx) => {
         tx.executeSql('UPDATE act8 SET status=2 WHERE id=?', [this.state.id], (tx, results) => {
@@ -191,6 +191,7 @@ if (topic == -1)
           </View>;
     }
 
+
   // words = sentence.split(" ");
   
   var buttons1 = [];
@@ -212,7 +213,12 @@ if (topic == -1)
     return (
 
       <View style={styles.container}>
-      	{topic==-1 && timer}
+        {topic==-1 && timer}
+        
+        <View >
+        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+    </View>
+
 
         <View style={styles.compBox}>
           <View style={styles.grid}>

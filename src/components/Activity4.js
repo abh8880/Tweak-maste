@@ -17,6 +17,7 @@ var status;
 var time;
 var timeout;
 var timer = null;
+var element = [];
 
 var SQLite = require('react-native-sqlite-storage');
 var db = SQLite.openDatabase({name:'activity.db', createFromLocation:'~activity.db'})
@@ -37,7 +38,11 @@ export default class Activity4 extends Component {
     repeat:0,
     rem_rep:0,
     time:time,
-    progress:1
+    progress:1,
+    blank1:'',
+    blank2:'',
+    current_ans:'',
+    correct_ans:''
   };
 
   var rand = Math.floor(Math.random()*3)+1;
@@ -63,6 +68,7 @@ export default class Activity4 extends Component {
         this.setState({words:words});
         len = words.length;
         this.setState({len:len});
+        console.log("in con 4="+len);
 
         if(len==1 && this.props.wrong == 0)
           this.setState({last:4});
@@ -76,9 +82,38 @@ export default class Activity4 extends Component {
 }
 
 
-_handleSubmitPress = () => {
-  console.log(this.state.current_ans);
-  console.log(this.state.correct_ans);
+_handleSubmitPress = (len) => {
+  //console.log(this.state.current_ans);
+  console.log("submit len"+len);
+  console.log("blank1="+this.state.blank1);
+  console.log("blank2="+this.state.blank2);
+
+  var answer = '';
+  var k = 0;
+
+  for(i=0;i<len;i++){
+    if(words[i] == '_'){
+      k++;
+
+      if(k==1){
+        answer = answer +' '+ this.state.blank1;
+      }
+
+      if(k==2){
+        answer = answer +' '+ this.state.blank2;
+      }
+    }
+
+    else{
+      answer = answer +' '+words[i];
+    }
+  }
+
+  console.log("answer="+answer);
+
+  this.setState({current_ans:answer});
+
+  console.log("curr ans="+this.state.current_ans);
 
   if(this.state.current_ans === this.state.correct_ans){
     console.log("entered");        
@@ -118,7 +153,8 @@ update2 = () =>{
     });
   
   });
-  };
+};
+
   render() {
 
     if(topic == -1){
@@ -150,18 +186,33 @@ if (topic == -1)
     }
 
     console.log(this.state.words);
-
-    var element = [];
-
+    element = [];
+    var k = 0;
+    console.log("render len="+len);
     for( i=0 ; i<len; i++){
 
-  console.log(i);      
+        console.log(i);      
         if(words[i]=='_'){
-            element.push(
-              <TextInput
-                style={{ width: 100, height: 44, padding: 8, textAlign: 'center', fontSize:20}}
-              />
-            );
+
+            k++;
+
+            if(k==1){
+              element.push(
+                <TextInput
+                  style={{ width: 100, height: 44, padding: 8, textAlign: 'center', fontSize:20}}
+                  onChangeText={(text) => this.setState({blank1:text})}
+                />
+              );
+            }
+
+            if(k==2){
+              element.push(
+                <TextInput
+                  style={{ width: 100, height: 44, padding: 8, textAlign: 'center', fontSize:20}}
+                  onChangeText={(text) => this.setState({blank2:text})}
+                />
+              );
+            }
         }
         
         else{
@@ -171,8 +222,6 @@ if (topic == -1)
         }
 
     }
-
-    len = 0;
     
     if(this.state.status == 0){
       return (
@@ -185,12 +234,12 @@ if (topic == -1)
             </View>
   
             <View style={styles.subBox}>
-                      <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                        <View style={styles.button}>
-                          <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
-                        </View>
-                      </TouchableOpacity>
-              </View>
+              <TouchableOpacity onPress={() => this._handleSubmitPress(len)}>
+                <View style={styles.button}>
+                  <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+                </View>
+              </TouchableOpacity>
+            </View>
           
         </View>
       );
@@ -204,6 +253,8 @@ if (topic == -1)
           <Result score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
         );
     }
+
+    len = 0;
   }
 }
 

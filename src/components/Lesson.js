@@ -6,24 +6,32 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
-  Alert
+  Alert,
+  AsyncStorage
 } from 'react-native';
 
 import EZSwiper from 'react-native-ezswiper';
 import Select from './Select';
 import axios from 'axios';
+import {Actions} from 'react-native-router-flux';
 
 var SQLite = require('react-native-sqlite-storage');
 var db = SQLite.openDatabase({name:'activity.db', createFromLocation:'~activity.db'});
 
-let origindata = [{ key: '1', word: 'Prepositions' }]
-let currentDeck = 0;
+//let origindata = [{ key: '1', word: 'Prepositions' }]
+let currentDeck = 1;
 const width = Dimensions.get('window').width;
 const height = Dimensions.get('window').height;
 var chapter;
 var test_status = 0;
+var name = null;
 
 export default class Lesson extends Component {
+
+  async get(){
+    name = await AsyncStorage.getItem('username'); 
+    alert(name);
+  }
 
   constructor(props) {
     super(props)
@@ -32,17 +40,35 @@ export default class Lesson extends Component {
     console.log(chapter);
 
     //this.setState({topic:1});
+
+    this.get();
+
+    axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_test_status.php', {
+            params: {
+              name: name,
+              chapter: chapter
+            },
+            dataType: 'json'
+          })
+          .then(function (response) {
+            console.log("\n\n SUCCESS \n\n");
+            console.log("response.data[0].test: "+ response.data[0].test);
+            test_status = response.data[0].test;
+          }.bind(this))
+          .catch(function (error) {
+            console.log(error);
+        });
   }
         
-  renderOriginw() {
-    return origindata.map(ogdata => (<Text key={ogdata.key} style={styles.originList}>{ogdata.word}</Text>));
-  }
+  // renderOriginw() {
+  //   return origindata.map(ogdata => (<Text key={ogdata.key} style={styles.originList}>{ogdata.word}</Text>));
+  // }
 
     renderRow = (obj, index) => {
 
       let comp;
       let finalcomp;
-      originWordsList = this.renderOriginw();
+      //originWordsList = this.renderOriginw();
 
       finalcomp =
         <View style={[styles.deckCard, { backgroundColor: "#ffffff", borderRadius: 15, position: 'relative' }]}>
@@ -72,15 +98,16 @@ export default class Lesson extends Component {
   }
 
   _onPressDeckButton = () => {
-    console.log("deck no ="+currentDeck);
-    this.setState({topic:currentDeck+1});
+    console.log("current deck ="+currentDeck);
+    this.setState({topic:currentDeck});
     this.setState({status:1});
   }
 
   onDidChange = (obj, index) => {
     console.log('onDidChange=>obj:' + obj + ' ,index:' + index);
-    this.setState({topic:index+1});
-    currentDeck = index;
+
+    currentDeck = index+1;
+    console.log("current deck ="+currentDeck);
   }
 
   _handleButtonPress = () =>{
@@ -105,18 +132,18 @@ export default class Lesson extends Component {
     this.setState({status:-1});
   }
 
-  static navigationOptions = {
-    title: 'Lessons',
-    headerStyle: {
-      backgroundColor: '#00232d',
-    },
-    headerTitleStyle: {
-      color: '#88bfff',
-      fontSize: 20,
-      fontWeight: '200',
-    },
-    headerTintColor: '#88bfff',
-  };
+  // static navigationOptions = {
+  //   title: 'Lessons',
+  //   headerStyle: {
+  //     backgroundColor: '#00232d',
+  //   },
+  //   headerTitleStyle: {
+  //     color: '#88bfff',
+  //     fontSize: 20,
+  //     fontWeight: '200',
+  //   },
+  //   headerTintColor: '#88bfff',
+  // };
 
   reset_db = (chapter,topic) =>{
 		db.transaction((tx) => {
@@ -170,21 +197,7 @@ export default class Lesson extends Component {
 
   render() {
     console.log("topic="+this.state.topic);
-    axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_test_status.php', {
-            params: {
-              name: 'anto',
-              chapter: chapter
-            },
-            dataType: 'json'
-          })
-          .then(function (response) {
-            console.log("\n\n SUCCESS \n\n");
-            console.log("response.data[0].test: "+ response.data[0].test);
-            test_status = response.data[0].test;
-          }.bind(this))
-          .catch(function (error) {
-            console.log(error);
-        });
+    
     if (this.state.status==0) 
     {
         return (

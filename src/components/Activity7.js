@@ -248,6 +248,11 @@ if (topic == -1)
    
 
        {topic==-1 && timer}
+
+       <View >
+        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+    </View>
+    
           <View style={styles.questBox}>
           <Text>
             {element}

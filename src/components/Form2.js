@@ -4,7 +4,8 @@ import {
   Text,
   View,
   TextInput,
-  TouchableOpacity 
+  TouchableOpacity,
+  AsyncStorage
 } from 'react-native';
 
 import axios from 'axios';
@@ -12,6 +13,10 @@ import Courses from '../pages/Courses';
 import {Actions} from 'react-native-router-flux';
 
 export default class Logo extends Component<{}> {
+
+  async set(username){
+    await AsyncStorage.setItem('username', username); 
+  }
 
    onPress = () => {
           alert('hello');
@@ -21,7 +26,7 @@ export default class Logo extends Component<{}> {
 
         console.log(username);
         
-        
+        this.set(username);
 
         axios.post('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/Login.php', 
         {

@@ -23,6 +23,7 @@ var box_count = 3;
 var box_height = height / box_count;
 var progress_val = [0,0,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
 var chap_info = [];
+var name = null;
 
 export default class First extends Component {
 
@@ -37,29 +38,36 @@ export default class First extends Component {
   //   }
   // }
   
- static navigationOptions = {
-    title: '⌘  Chapters',
-    headerStyle: {
-      backgroundColor: '#00232d',
-    },
-    headerTitleStyle: {
-      color: '#88bfff',
-      fontSize: 20,
-      fontWeight: '300'
-    }
-  };
+//  static navigationOptions = {
+//     title: '⌘  Chapters',
+//     headerStyle: {
+//       backgroundColor: '#00232d',
+//     },
+//     headerTitleStyle: {
+//       color: '#88bfff',
+//       fontSize: 20,
+//       fontWeight: '300'
+//     }
+//   };
+
+  async get(){
+    name = await AsyncStorage.getItem('username'); 
+    alert(name);
+  }
 
   constructor(props) {
         super(props);
         this.state = {
           status: 0,
           progress_val: progress_val,
-          prev_chap:''
+          prev_chap:'',
       };
+
+      this.get();
 
       axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
             params: {
-              name: 'anto'
+              name: name
             },
             dataType: 'json'
           })
@@ -144,7 +152,6 @@ export default class First extends Component {
     //   }
     // }
   }
-
 
   render() {
     console.log("rendered");

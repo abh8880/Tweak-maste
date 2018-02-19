@@ -28,9 +28,9 @@ const TabIcon =({selected, title})=> {
 export default class Routes extends Component<{}> {
   render() {
     return(
-      <Router>
-          <Stack key="root" hideNavBar={true}>
-            <Scene key="login" component={Login} title="Login" initial={true}/>
+      <Router navigationBarStyle={styles.navBar} titleStyle={styles.navBarTitle} barButtonTextStyle={styles.barButtonTextStyle} barButtonIconStyle={styles.barButtonIconStyle}>
+          <Stack key="root" >
+            <Scene key="login" component={Login} title="Login" initial={true} hideNavBar={true}/>
             <Scene key="signup" component={Signup} title="Register"/>
             <Scene key="first" component={First} title="Chapters"/>
             <Scene key="lesson" component={Lesson} title="Lessons"/>
@@ -50,3 +50,18 @@ export default class Routes extends Component<{}> {
       )
   }
 }
+
+const styles = StyleSheet.create({
+  navBar: {
+    backgroundColor:'#0D47A1',
+},
+navBarTitle:{
+    color:'#FFFFFF'
+},
+barButtonTextStyle:{
+    color:'#FFFFFF'
+},
+barButtonIconStyle:{
+    tintColor:'rgb(255,255,255)'
+},
+});

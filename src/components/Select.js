@@ -31,7 +31,7 @@ export default class Select extends Component {
 		if(i==1){
 			return(
 				<View style={styles.container}>
-					<Activity1 topic={topic} chapter={chapter} wrong={mode}/>
+					<Activity1 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
 				</View>
 			);
 		}
@@ -40,7 +40,7 @@ export default class Select extends Component {
 		else if(i==2){
 			return(
 				<View style={styles.container}>
-					<Activity2 topic={topic} chapter={chapter} wrong={mode}/>
+					<Activity2 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
 				</View>
 			);
 		}
@@ -49,7 +49,7 @@ export default class Select extends Component {
 		else if(i==3){
 			return(
 				<View style={styles.container}>
-					<Activity3 topic={topic} chapter={chapter} wrong={mode}/>
+					<Activity3 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
 				</View>
 			);
 		}
@@ -57,7 +57,7 @@ export default class Select extends Component {
 		else if(i==4){
 			return(
 				<View style={styles.container}>
-					<Activity4 topic={topic} chapter={chapter} wrong={mode}/>
+					<Activity4 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
 				</View>
 			);
 		}
@@ -66,7 +66,7 @@ export default class Select extends Component {
 		else if(i==5){
 			return(
 				<View style={styles.container}>
-					<Activity5 topic={topic} chapter={chapter} wrong={mode}/>
+					<Activity5 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
 				</View>
 			);
 		}
@@ -74,7 +74,7 @@ export default class Select extends Component {
 		else if(i==6){
 			return(
 				<View style={styles.container}>
-					<Activity6 topic={topic} chapter={chapter} wrong={mode}/>
+					<Activity6 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
 				</View>
 			);
 		}
@@ -82,7 +82,7 @@ export default class Select extends Component {
 		else if(i==7){
 			return(
 				<View style={styles.container}>
-					<Activity7 topic={topic} chapter={chapter} wrong={mode}/>
+					<Activity7 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
 				</View>
 			);
 		}
@@ -90,7 +90,7 @@ export default class Select extends Component {
 		else if(i==8){
 			return(
 				<View style={styles.container}>
-					<Activity8 topic={topic} chapter={chapter} wrong={mode}/>
+					<Activity8 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
 				</View>
 			);
 		}
@@ -158,13 +158,7 @@ export default class Select extends Component {
 		var l = repeat.length;
 		console.log("array_len="+l);
 		console.log("\n\ntopic"+topic+"\n\n");
-		if (count==10 && topic!=-1) 
-		{
-			count=0;
-			return(
-				<Complete topic={this.props.topic} chapter={this.props.chapter}/>
-			);
-		}
+		
 		if (count == 13 && topic == -1) 
 		{
 			count=0;
