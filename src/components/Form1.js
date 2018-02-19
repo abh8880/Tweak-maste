@@ -124,21 +124,21 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingHorizontal:16,
     fontSize:16,
-    fontFamily: 'Museo 300',
+    fontFamily: 'Museo 500',
     color:'#ffffff',
     marginVertical: 10
   },
   button: {
     width:300,
-    backgroundColor:'#1c313a',
+    backgroundColor:'rgba(255,255,255,0.6)',
      borderRadius: 25,
       marginVertical: 10,
       paddingVertical: 13
   },
   buttonText: {
     fontSize:20,
-    fontFamily:'Museo Sans_900',
-    color:'#ffffff',
+    fontFamily:'Museo 700',
+    color:'#1c313a',
     textAlign:'center'
   }
   

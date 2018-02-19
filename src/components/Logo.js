@@ -12,7 +12,7 @@ export default class Logo extends Component<{}> {
 			<View style={styles.container}>
 				<Image  style={{width:150, height: 150}}
           			source={require('../../assets/tweak3.png')}/>
-          		<Text style={styles.logoText}>Tweak!</Text>	
+          		<Text style={styles.logoText}>Tweak</Text>	
   			</View>
 			)
 	}
@@ -25,7 +25,8 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   logoText : {
-  	fontSize:18,
+    fontFamily: 'Museo 700',
+  	fontSize:25,
   	color:'#ffffff'
   }
 });

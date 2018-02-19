@@ -82,7 +82,7 @@ static navigationOptions = {
       //originWordsList = this.renderOriginw();
 
       finalcomp =
-        <View style={[styles.deckCard, { backgroundColor: "#85063f", borderRadius: 15, position: 'relative' }]}>
+        <View style={[styles.deckCard, { backgroundColor: "#ffffff", borderRadius: 15, position: 'relative' }]}>
           <Text style={styles.deckTitle}>Lesson {index+1}</Text>
           <Text style={styles.deckSubTitle}>Content:</Text>
           <View>
@@ -96,12 +96,7 @@ static navigationOptions = {
             </TouchableOpacity>
           </View>
 
-          <View style={styles.deckButtonView}>
-
-              <TouchableOpacity style={styles.deckButton} onPress={() => this._handleButtonPress()}>
-                    <Text style={styles.deckButtonText}>Test</Text>
-              </TouchableOpacity>
-          </View>
+             
         </View>
 
       return (finalcomp)
@@ -237,12 +232,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e5e5e5'
+    backgroundColor: '#034569'
   },
   swiper: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e5e5e5',
+    backgroundColor: '#034569',
   },
   deckCard: {
     flex: 1,
@@ -253,12 +248,12 @@ const styles = StyleSheet.create({
     fontFamily: 'Museo 700',
     fontSize: 35,
     margin: 25,
-    color: '#ffffff'
+    color: '#000000'
   },
   deckSubTitle:{
     fontFamily: 'Museo Sans_500',
     fontSize: 25,
-    color: '#ffffff'
+    color: '#1c313a'
   },
   originList:{
     fontFamily: 'Museo Sans Rounded_500',

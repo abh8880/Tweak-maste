@@ -1,0 +1,6 @@
+ <View style={styles.deckButtonView}>
+
+              <TouchableOpacity style={styles.deckButton} onPress={() => this._handleButtonPress()}>
+                    <Text style={styles.deckButtonText}>Test</Text>
+              </TouchableOpacity>
+          </View>

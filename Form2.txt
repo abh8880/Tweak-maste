@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import {
+  AppRegistry,
   StyleSheet,
   Text,
-  View,
   TextInput,
   TouchableOpacity,
-  AsyncStorage
+  AsyncStorage,
+  View
 } from 'react-native';
-
 import axios from 'axios';
 import Courses from '../pages/Courses';
 import {Actions} from 'react-native-router-flux';
 
-export default class Logo extends Component<{}> {
 
-   constructor(props){
+export default class Form2 extends Component {
+
+  constructor(props){
     super(props);
     this.state = { username: '', password: ''};
     this.onPress = this.onPress.bind(this);
@@ -26,7 +27,7 @@ export default class Logo extends Component<{}> {
     let password = this.state.password;
     AsyncStorage.setItem('username', username).done();
     AsyncStorage.setItem('password', password).done();
-    this.setState({username: username,password: password});
+    this.setState({username: username,password: password });
     
        axios.post('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/Login.php', 
         {
@@ -63,17 +64,13 @@ export default class Logo extends Component<{}> {
   check(){
 
     AsyncStorage.getItem('username').then((username) => {
-         if(username)
-        Actions.home();
-        this.setState({username: username});
-       
+        this.setState({username: username})
+    
     })
 
     AsyncStorage.getItem('password').then((password) => {
-       if(password)
-      Actions.home();
-      this.setState({password: password});
-      
+      this.setState({password: password})
+   
     })
   }
 
@@ -81,22 +78,22 @@ export default class Logo extends Component<{}> {
 
   componentWillMount(){
     this.check();
-  } 
-  render(){
-
-        
-       
-
-    return(
-      <View style={styles.container}>
+  }
+componentWDidMount(){
+    if (this.state.username && this.state.password)
+    Action.home();
+  }
+  render() {
+    return (
+     <View style={styles.container}>
           
               <TextInput style={styles.inputBox} 
               underlineColorAndroid='rgba(0,0,0,0)' 
               placeholder="Username"
-              placeholderTextColor = "rgba(255,255,255,0.8)"
+              placeholderTextColor = "#ffffff"
               selectionColor="#fff"
               keyboardType="default"
-               value={this.state.username}
+              value={this.state.username}
               onSubmitEditing={()=> this.password.focus()}
               onChangeText={(text) => this.setState({username:text})}
               />
@@ -105,15 +102,15 @@ export default class Logo extends Component<{}> {
               underlineColorAndroid='rgba(0,0,0,0)' 
               placeholder="Password"
               secureTextEntry={true}
-              placeholderTextColor = "rgba(255,255,255,0.8)"
-              value={this.state.password}
+              placeholderTextColor = "#ffffff"
+               value={this.state.password}
               onChangeText={(text) => this.setState({password:text})}
               />  
            <TouchableOpacity style={styles.button} onPress={this.onPress}>
              <Text style={styles.buttonText}>Login</Text>
            </TouchableOpacity>     
       </View>
-      )
+    );
   }
 }
 
@@ -131,21 +128,21 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingHorizontal:16,
     fontSize:16,
-    fontFamily: 'Museo 500',
+    fontFamily: 'Museo 300',
     color:'#ffffff',
     marginVertical: 10
   },
   button: {
     width:300,
-    backgroundColor:'rgba(255, 255,255,0.6)',
+    backgroundColor:'#1c313a',
      borderRadius: 25,
       marginVertical: 10,
       paddingVertical: 13
   },
   buttonText: {
     fontSize:20,
-    fontFamily: 'Museo 700',
-    color:'#1c313a',
+    fontFamily:'Museo Sans_900',
+    color:'#ffffff',
     textAlign:'center'
   }
   
