@@ -50,11 +50,12 @@ const styles = StyleSheet.create({
   },
   signupText: {
   	color:'rgba(255,255,255,0.6)',
-  	fontSize:16
+  	fontSize:16,
+    fontFamily: 'Museo 500',
   },
   signupButton: {
   	color:'#ffffff',
-  	fontSize:16,
-  	fontWeight:'500'
+  	fontSize:20,
+  	fontFamily: 'Museo 900',
   }
 });

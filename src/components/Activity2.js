@@ -4,7 +4,7 @@ import { View, StyleSheet, TouchableOpacity, Text, Dimensions } from 'react-nati
 import Result from './Result';
 import Time_up from './Time_up';
 import Select from './Select';
-
+import { Card } from 'react-native-elements';
 import * as Progress from 'react-native-progress';
 
 var question = 'How are you ?';
@@ -172,16 +172,21 @@ if (topic == -1)
             <View >
         <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
     </View>
+          <View style={{flex:2}}>
+          <Text style={styles.titleQuestion}>
+        Choose the correct sentence for the given question
+          </Text>
+          </View>
             <View style={styles.questBox}>
-              <Text style={{fontSize:20,justifyContent: 'center'}}>{this.state.question}</Text>
+              <Text style={{fontSize:20,justifyContent: 'center',  fontFamily: 'Museo 500',}}>{this.state.question}</Text>
             </View>
             
             <View style={styles.ansBox}>
-                <Text style={{fontSize:20, fontWeight:'bold'}}>{this.state.current_ans}</Text>
+                <Text style={{fontSize:20, fontFamily: 'Museo 500',}}>{this.state.current_ans}</Text>
             </View>
             
             <View style={styles.opsBox}>
-              
+              <Card>
                 <TouchableOpacity onPress={() => this._handleButtonPress(ops[0])}>
                   <View style={styles.button}>
                     <Text style={styles.buttonText}>{ops[0]}</Text>
@@ -205,17 +210,16 @@ if (topic == -1)
                     <Text style={styles.buttonText}>{ops[3]}</Text>
                   </View>
                 </TouchableOpacity>
-                            
+               </Card>             
             </View>
   
-            <View style={styles.subBox}>
-                      <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                        <View style={styles.button}>
-                          <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+            <View style={styles.subBox2}>
+                    <TouchableOpacity onPress={() => this._handleSubmitPress()}>
+                         <View style={styles.button2}>
+                        <Text style={{fontSize:20, fontFamily: 'Museo 500', color:'#ffffff'}}>SUBMIT</Text>
                         </View>
-                      </TouchableOpacity>
-              </View>
-          
+                    </TouchableOpacity>
+            </View>
         </View>
       );
     }
@@ -235,7 +239,7 @@ if (topic == -1)
 const styles = StyleSheet.create({
 container: {
      flex: 1,
-    backgroundColor: '#e5e5e5',
+    backgroundColor: '#ffffff',
   },
   timer: {
     flexDirection: 'row',
@@ -245,39 +249,40 @@ container: {
 
   },
   questBox: {
-    marginLeft:20,
-    backgroundColor: '#e5e5e5',
+    flex:1,
+    backgroundColor: '#ffffff',
     justifyContent: 'center',
+    alignItems:'center'
   },
   
   ansBox: {
-    flex: 2,
     alignSelf: 'stretch',
-    margin:20,
-    backgroundColor: '#e5e5e5',
+    backgroundColor: '#ffffff',
+    alignItems:'center'
   },
   
   opsBox: {
     alignItems:'center',
-    flex:6,
+    flex:4,
     borderRadius:5,
     marginLeft:15
   },
   
-  subBox: {
-    flex: 2,
+  subBox2: {
+     flex:1,
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#e5e5e5',
+    marginBottom:20
+   
   },
   
   button: {
     width: 250,
     margin:5,
     alignItems: 'center',
-    backgroundColor: 'rgba(9, 22, 200, 0.6)',
-    borderRadius: 10,
+    backgroundColor: '#1c313a',
+    borderRadius: 5,
     height:40,
     justifyContent:'center'
   },
@@ -286,30 +291,34 @@ container: {
     alignItems: 'center',
     backgroundColor: '#3F51B5',
     alignSelf: 'stretch',
+    
   },
   
   buttonText: {
     padding: 20,
     color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 15,
+    fontFamily: 'Museo 500',
   },
   
-   button1: {
-    width: 250,
-    margin:5,
-    height:40,
+    button2: {
+     padding:10,
+    width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,  
     alignItems: 'center',
+    backgroundColor: '#1c313a',
     justifyContent:'center',
-    backgroundColor: '#1c3370',
-    borderRadius:5
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
   },
 titleQuestion:{
      justifyContent:'center',
-     fontSize:22,
-     fontWeight:'bold',
+     fontSize:18,
      padding:10,
      marginLeft:9,
-     color:'#000000'
+     color:'#000000',
+     margin:20,
+     fontFamily: 'Museo 500',
  }
 });

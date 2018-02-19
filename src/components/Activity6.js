@@ -10,7 +10,7 @@ import {
 import Result from './Result';
 import Time_up from './Time_up';
 import Select from './Select';
-
+import { Card } from 'react-native-elements';
 import * as Progress from 'react-native-progress';
 
 
@@ -220,79 +220,76 @@ if (topic == -1)
        
         {topic==-1 && timer}
 
-
         <View >
         <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
     </View>
 
-    
-          <View style={styles.compBox}>
-            <Text style={styles.text}>
-              {message1}
-            </Text>
-            <View style={styles.grid}>
-              {buttons1}
-            </View>
-          </View>
-          <View style={styles.supBox}>
-            <Text style={styles.text}>
-              Your answer..
-            </Text>
+        <Text style={styles.titleQuestion}>
+         Chose compulsary words from above and put your own supplementary words to make a meaningful sentence!
+          </Text>
+          
+                <View style={styles.supBox}>
+          
+                    <Text style={styles.title}>
+                      Your answer..
+                    </Text>
 
-            <View style={styles.grid}>
-              <Text style={styles.input}>{answer}</Text>
-            </View>
+                    <View style={styles.grid}>
+                      <Text style={styles.input}>{answer}</Text>
+                    </View>
+                  
+                    <View style={styles.compBox}>
+                                 <Card title="Compulsory Words">
 
-            <Text style={styles.text}>
-              Type here
-            </Text>
+                                <View style={styles.grid}>
+                                  {buttons1}
+                                </View>
+                              </Card>
+                      </View>
+                      </View>
+                    <View style={styles.typeAnsBox}>
+                    <Text style={styles.title}>
+                      Type here
+                    </Text>
 
-            <View style={styles.grid}>
-              <TextInput
-                ref={input => {
-                  this.textInput = input;
-                }}
-                style={styles.input}
-                placeholder="Answer"
-                onChangeText={text => {
-                  word = text;
-                }}
-              />
-              <TouchableOpacity onPress={() => this._addWord()}>
-                <View style={styles.add}>
-                  <Text style={styles.buttonText}>Go</Text>
+                    <View style={styles.grid}>
+                              <TextInput
+                                ref={input => {
+                                  this.textInput = input;
+                                }}
+                                style={styles.input}
+                                placeholder="Answer"
+                                onChangeText={text => {
+                                  word = text;
+                                }}
+                              />
+                              <TouchableOpacity onPress={() => this._addWord()}>
+                                <View style={styles.add}>
+                                  <Text style={styles.buttonText}>Go</Text>
+                                </View>
+                            </TouchableOpacity>
+                    </View>
                 </View>
-              </TouchableOpacity>
-            </View>
-
-          </View>
-          <View style={styles.hint}>
-            <View style={styles.hintt}>
-              <Text style={{ color: 'white' }}>
-                HINT!
-              </Text>
-              <Text style={{ color: 'white' }}>
-                Chose compulsary words from above and put your own supplementary words to make a meaningful sentence!
-              </Text>
-            </View>
-          </View>
-          <View style={styles.subBox}>
-            <TouchableOpacity onPress={() => this._clear()}>
-              <View style={styles.button}>
-                <Text
-                  style={{ fontSize: 20, fontWeight: 'bold', color: '#BB0000' }}>
-                  CLEAR
-                </Text>
+        
+         
+          <View style={{flex: 3, flexDirection: 'row'}}>
+              <View style={styles.subBox1}>
+              <TouchableOpacity onPress={() => this._clear()}>
+                <View style={styles.button1}>
+                <Text style={{fontSize:20,color:'#1c313a', fontFamily: 'Museo 500',}}>CLEAR</Text>
               </View>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.subBox}>
-              <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                <View style={styles.button}>
-                  <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
-                </View>
               </TouchableOpacity>
-          </View>
+              </View>
+
+
+              <View style={styles.subBox2}>
+                    <TouchableOpacity onPress={() => this._handleSubmitPress()}>
+                         <View style={styles.button2}>
+                        <Text style={{fontSize:20, color:'#ffffff', fontFamily: 'Museo 500',}}>SUBMIT</Text>
+                        </View>
+                    </TouchableOpacity>
+            </View>
+            </View>
         </View>
       );
       }
@@ -311,8 +308,9 @@ if (topic == -1)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: 'center',
     // paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#34495e',
+    backgroundColor: '#e5e5e5',
   },
   timer: {
     flexDirection: 'row',
@@ -325,21 +323,25 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     height: 40,
     flex: 0.9,
+     fontFamily: 'Museo 500',
   },
   button: {
+   borderRadius:10,
     margin: 5,
-    width: Dimensions.get('window').width / 3 - 20,
+    width: Dimensions.get('window').width/3 - 20,
     alignItems: 'center',
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#1c313a',
   },
   add: {
     margin: 5,
     width: 50,
     alignItems: 'center',
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#1c313a',
   },
   buttonText: {
     padding: 5,
+    color:'#ffffff',
+     fontFamily: 'Museo 500',
   },
   hint: {
     padding: 15,
@@ -352,28 +354,78 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   supBox: {
-    flex: 4,
+    flex:5,
     alignSelf: 'stretch',
-    backgroundColor: '#7986CB',
+    backgroundColor: '#ffffff',
   },
-  compBox: {
-    flex: 2,
+   compBox: {
+    
     alignSelf: 'stretch',
-    backgroundColor: '#9FA8DA',
+    backgroundColor: '#ffffff',
   },
-  subBox: {
-    flex: 1,
+  subBox1: {
+    flex:1,
+    alignItems: 'center',
+     alignSelf: 'stretch',
+    justifyContent: 'center',
+   
+    
+  },
+  subBox2: {
+    flex:1,
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#3F51B5',
+   
   },
   text: {
     padding: 10,
     fontSize: 18,
+   fontFamily: 'Museo 500',
   },
   grid: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
+    alignSelf:'stretch'
   },
+    titleQuestion:{
+     justifyContent:'center',
+     fontSize:15,
+     padding:10,
+     marginLeft:9,
+     color:'#000000',
+     fontFamily: 'Museo 500',
+ },
+    button1: {
+    padding:10,
+   width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+    
+  },
+   button2: {
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,  
+    alignItems: 'center',
+    backgroundColor: '#1c313a',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+   
+  },
+ title:{
+     margin:10,
+     fontSize:15,
+     fontFamily: 'Museo 500',
+ },
+typeAnsBox:{
+    alignSelf:'stretch',
+    backgroundColor:'#ffffff'
+}
 });

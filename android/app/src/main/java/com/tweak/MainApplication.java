@@ -3,6 +3,7 @@ package com.tweak;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactlibrary.RNBluemixPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -26,7 +27,8 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new VectorIconsPackage(),
           new SQLitePluginPackage(),
-          new MainReactPackage()
+          new MainReactPackage(),
+          new RNBluemixPackage()
       );
     }
 

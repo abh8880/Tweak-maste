@@ -218,41 +218,44 @@ if (topic == -1)
         <View >
         <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
     </View>
-
-
-        <View style={styles.compBox}>
-          <View style={styles.grid}>
-      			{ buttons1 }
-      		</View>
-        </View>
-
-        <View style={styles.hint}>
-          <Text style={{ color: 'white' }}>
+          
+        <View style={{flex:2}}>
+          <Text style={styles.titleQuestion}>
             Click the word that makes the sentence sound wrong.
           </Text>
-        </View>
+        </View>        
+       <View style={styles.compBox}>
+      			<Text style={{fontSize:15,color:'black', fontFamily: 'Museo 500',}}>Wrong Sentence:</Text>
+                           <View style={{flexDirection:'row'}}>
+                        { buttons1 }
+                        </View>
+      		</View>
+    
+        
         <View style={styles.opsBox} >
-          <Text style={{fontSize:20}}>
+        <Text style={{fontSize:15,color:'black', fontFamily: 'Museo 500',}}>Wrong Word:</Text>
+       <Text style={{fontSize:20}}>
             {answer}
           </Text>
         </View>
-        <View style={styles.subBox}>
-            <TouchableOpacity onPress={() => this._clear()}>
-              <View style={styles.button}>
-                <Text style={{fontSize:20, fontWeight:'bold', color:'#BB0000'}}>CLEAR</Text>
-              </View>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.subBox}>
-              <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                <View style={styles.button}>
-                  <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+        <View style={{flex: 3, flexDirection: 'row'}}>
+              <View style={styles.subBox1}>
+              <TouchableOpacity onPress={() => this._clear()}>
+                  <View style={styles.button1}>
+                <Text style={{fontSize:20, fontFamily: 'Museo 500',color:'#1c313a'}}>CLEAR</Text>
                 </View>
               </TouchableOpacity>
-        </View>
+              </View>
 
 
-      
+              <View style={styles.subBox2}>
+                    <TouchableOpacity onPress={() => this._handleSubmitPress()}>
+                          <View style={styles.button2}>
+                        <Text style={{fontSize:20, fontFamily: 'Museo 500', color:'#ffffff'}}>SUBMIT</Text>
+                        </View>
+                    </TouchableOpacity>
+            </View>
+            </View>
       </View>
     );
     }
@@ -279,7 +282,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: 'center',
     // paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#34495e',
+    backgroundColor: '#e5e5e5',
   },
   timer: {
     flexDirection: 'row',
@@ -290,42 +293,53 @@ const styles = StyleSheet.create({
   button: {
     margin: 5,
     width: Dimensions.get('window').width/3 - 20,
-    alignItems: 'center',
-    backgroundColor: '#3F51B5',
+    backgroundColor: '#1c313a',
   },
   buttonText: {
     padding: 5,
-    fontSize: 25,
+    color:'black',
+    fontSize: 20,
+     fontFamily: 'Museo 500',
   },
     opsBox: {
-    flexDirection: 'row',
-    flex: 1,
+    flex: 2,
+    alignItems:'center',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    backgroundColor: '#5C6BC0',
+    backgroundColor: '#ffffff',
   },
   hint: {
     padding: 15,
     alignItems: 'center',
     alignSelf: 'stretch',
-    backgroundColor: '#5C6BC0',
+    alignSelf: 'stretch',
+    backgroundColor: '#ffffff',
   },
   supBox: {
     flex: 4,
     alignSelf: 'stretch',
-    backgroundColor: '#7986CB',
+    backgroundColor: '#ffffff',
   },
   compBox: {
-    flex: 4,
+    flex: 2,
     alignSelf: 'stretch',
-    backgroundColor: '#9FA8DA',
+    alignItems:'center',
+    backgroundColor: '#ffffff',
   },
-  subBox: {
-    flex: 1,
+   subBox1: {
+     flex:1,
+     alignSelf: 'stretch',
     alignItems: 'center',
-    alignSelf: 'stretch',
+    justifyContent:'center',
+    
+  },
+  subBox2: {
+   
+     flex:1,
+     alignSelf: 'stretch',
+    alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#3F51B5',
+   
   },
   text: {
     padding: 10,
@@ -333,8 +347,38 @@ const styles = StyleSheet.create({
   },
   grid: {
   	padding: 10,
-    flexDirection: 'row',
     flexWrap: 'wrap',
-    marginTop: 50
+     backgroundColor:'#ffffff'
   },
+ button1: {
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+    
+  },
+   button2:{
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,  
+    alignItems: 'center',
+    backgroundColor: '#1c313a',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+   
+   },
+   titleQuestion:{
+     justifyContent:'center',
+     fontSize:15,
+     fontFamily: 'Museo 500',
+     margin:20,
+     color:'#000000'
+ },
 });

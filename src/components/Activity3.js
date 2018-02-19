@@ -4,7 +4,7 @@ import { Text, View, TouchableOpacity, StyleSheet,Dimensions } from 'react-nativ
 import Result from './Result';
 import Time_up from './Time_up';
 import Select from './Select';
-
+import { Card } from 'react-native-elements';
 import * as Progress from 'react-native-progress';
 
 var answer;
@@ -216,9 +216,11 @@ export default class Activity3 extends Component {
     </View>
     
          <View style={styles.hint}>
+         <View>
           <Text  style={styles.titleQuestion}>
             Pick words from the list below to form your answer
           </Text>
+        </View>
         </View>
         
             <View style={styles.questBox}>
@@ -232,32 +234,32 @@ export default class Activity3 extends Component {
           </Text>
         </View>
        
-        <View style={styles.opsBox} >
-          
-          <View >
-            { buttons }
-          </View>
-
-        </View>
-        <View style={{flex: 1, flexDirection: 'row', marginBottom:10}}>
-
-              <View style={styles.clearBox}>
-              <TouchableOpacity onPress={() => this._clear()}>
-              <View style={styles.button1}>
-                <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>CLEAR</Text>
+            <View style={styles.opsBox}>
+            <Card containerStyle={{width:Dimensions.get('window').width-20,
+              alignItems:'center'}}>
+              <View>
+                { buttons }
               </View>
+             </Card>
+            </View>
+      <View style={{flex: 3, flexDirection: 'row'}}>
+              <View style={styles.subBox1}>
+              <TouchableOpacity onPress={() => this._clear()}>
+                  <View style={styles.button1}>
+                <Text style={{fontSize:20,  fontFamily: 'Museo 500', color:'#1c313a'}}>CLEAR</Text>
+                </View>
               </TouchableOpacity>
               </View>
 
 
-              <View style={styles.subBox}>
+              <View style={styles.subBox2}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                      <View style={styles.button1}>
-                        <Text style={{fontSize:20, fontWeight:'bold',color:'#ffffff'}}>SUBMIT</Text>
+                          <View style={styles.button2}>
+                        <Text style={{fontSize:20, fontFamily: 'Museo 500', color:'#ffffff'}}>SUBMIT</Text>
                         </View>
                     </TouchableOpacity>
-             </View>
-      </View>
+            </View>
+            </View>
               
       </View>
     );
@@ -288,17 +290,20 @@ container: {
 
   },
   questBox: {
-    marginLeft:20,
-    backgroundColor: '#e5e5e5',
+    flex: 1,
+    alignItems:'center',
+    alignSelf:'stretch',
+    backgroundColor: '#ffffff'
   },
   answer:{
-    fontSize:20
+    fontSize:20,
+     fontFamily: 'Museo 500', color:'#1c313a'
   },
   ansBox: {
     flex: 1,
+    alignItems:'center',
     alignSelf: 'stretch',
-    margin:10,
-    backgroundColor: '#e5e5e5',
+    backgroundColor: '#ffffff'
   },
 
   
@@ -310,9 +315,10 @@ container: {
   
   opsBox: {
     flex:6,
-    borderRadius:5,
-    marginLeft:15,
+    width:Dimensions.get('window').width,
     paddingBottom:25,
+    backgroundColor: '#ffffff',
+    alignItems:'center'
   },
   
   clearBox: {
@@ -321,11 +327,20 @@ container: {
     justifyContent: 'center',
     backgroundColor: '#e5e5e5',
   },
-     subBox: {
+   subBox1: {
+     flex:1,
+     alignSelf: 'stretch',
+    alignItems: 'center',
+    justifyContent:'center',
+    
+  },
+  subBox2: {
    
+     flex:1,
+     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#e5e5e5',
+   
   },
   
   buttonLine: {
@@ -335,36 +350,53 @@ container: {
   },
   
   button: {
-    width: 250,
-    margin:5,
+     width: Dimensions.get('window').width/1.5,
     alignItems: 'center',
-    backgroundColor: 'rgba(9, 22, 200, 0.6)',
+    margin:5,
+    backgroundColor: '#1c313a',
     borderRadius: 10,
     height:40,
     justifyContent:'center'
   },
     
-   button1: {
-   width:Dimensions.get('window').width/2,
-    height:Dimensions.get('window').height/10,
-    alignItems: 'center',
-    backgroundColor: '#1c3370',
-    justifyContent:'center'
-  },
-  
   buttonText: {
     padding: 20,
     color: 'white',
-    fontSize: 20,
-    fontWeight: 'bold',
+    fontSize: 15,
+     fontFamily: 'Museo 500',
    
   },
  titleQuestion:{
      justifyContent:'center',
-     fontSize:22,
-     fontWeight:'bold',
+     fontSize:15,
+     fontFamily: 'Museo 500',
      padding:10,
      marginLeft:9,
-     color:'#000000'
- }
+     color:'#000000',
+     margin:20
+ },
+ button1: {
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+    
+  },
+   button2:{
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,  
+    alignItems: 'center',
+    backgroundColor: '#1c313a',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+   
+   }
 });

@@ -199,8 +199,7 @@ if (topic == -1)
             if(k==1){
               element.push(
                 <TextInput
-                  style={{ width: 100, height: 44, padding: 8, textAlign: 'center', fontSize:20}}
-                  onChangeText={(text) => this.setState({blank1:text})}
+                style={{ width: 100, height: 44, padding: 8, textAlign: 'center', fontSize:20, fontFamily: 'Museo Sans Rounded_500',}}                  onChangeText={(text) => this.setState({blank1:text})}
                 />
               );
             }
@@ -208,8 +207,7 @@ if (topic == -1)
             if(k==2){
               element.push(
                 <TextInput
-                  style={{ width: 100, height: 44, padding: 8, textAlign: 'center', fontSize:20}}
-                  onChangeText={(text) => this.setState({blank2:text})}
+                style={{ width: 100, height: 44, padding: 8, textAlign: 'center', fontSize:20, fontFamily: 'Museo Sans Rounded_500',}}                  onChangeText={(text) => this.setState({blank2:text})}
                 />
               );
             }
@@ -217,7 +215,7 @@ if (topic == -1)
         
         else{
           element.push(
-              <Text style={{fontSize:20}}>{words[i]+" "}</Text>
+              <Text style={{fontSize:20, fontFamily: 'Museo Sans Rounded_500',}}>{words[i]+" "}</Text>
           );
         }
 
@@ -234,12 +232,12 @@ if (topic == -1)
             </View>
   
             <View style={styles.subBox}>
-              <TouchableOpacity onPress={() => this._handleSubmitPress(len)}>
-                <View style={styles.button}>
-                  <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
-                </View>
-              </TouchableOpacity>
-            </View>
+                      <TouchableOpacity onPress={() => this._handleSubmitPress(len)}>
+                        <View style={styles.button}>
+                     <Text style={{fontSize:20, fontFamily: 'Museo 500',color:'#ffffff'}}>SUBMIT</Text>
+                        </View>
+                      </TouchableOpacity>
+              </View>
           
         </View>
       );

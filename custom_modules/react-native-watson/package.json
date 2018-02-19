@@ -1,0 +1,64 @@
+{
+  "_from": "react-native-watson@^1.6.2",
+  "_id": "react-native-watson@1.6.2",
+  "_inBundle": false,
+  "_integrity": "sha1-A2oj5y4UcJ2GEgn/OMapyjRGIGE=",
+  "_location": "/react-native-watson",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "react-native-watson@^1.6.2",
+    "name": "react-native-watson",
+    "escapedName": "react-native-watson",
+    "rawSpec": "^1.6.2",
+    "saveSpec": null,
+    "fetchSpec": "^1.6.2"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-watson/-/react-native-watson-1.6.2.tgz",
+  "_shasum": "036a23e72e14709d861209ff38c6a9ca34462061",
+  "_spec": "react-native-watson@^1.6.2",
+  "_where": "C:\\Users\\mendo\\Downloads\\Tweak_module2",
+  "author": {
+    "name": "Patrick Cremin"
+  },
+  "bugs": {
+    "url": "https://github.com/pwcremin/react-native-watson/issues"
+  },
+  "bundleDependencies": false,
+  "dependencies": {},
+  "deprecated": false,
+  "description": "React Native module for IBM Watson services",
+  "devDependencies": {},
+  "homepage": "https://github.com/pwcremin/react-native-watson#readme",
+  "keywords": [
+    "react-native",
+    "react-component",
+    "watson",
+    "ios",
+    "android",
+    "voice",
+    "speech",
+    "text-to-speech",
+    "speech-to-text",
+    "tone-analyzer"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "react-native-watson",
+  "peerDependencies": {
+    "react-native": "^0.41.2",
+    "react-native-windows": "0.41.0-rc.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pwcremin/react-native-watson.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "1.6.2"
+}

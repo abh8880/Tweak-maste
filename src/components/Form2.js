@@ -114,6 +114,7 @@ const styles = StyleSheet.create({
     borderRadius: 25,
     paddingHorizontal:16,
     fontSize:16,
+    fontFamily: 'Museo 300',
     color:'#ffffff',
     marginVertical: 10
   },
@@ -125,8 +126,8 @@ const styles = StyleSheet.create({
       paddingVertical: 13
   },
   buttonText: {
-    fontSize:16,
-    fontWeight:'500',
+    fontSize:20,
+    fontFamily:'Museo Sans_900',
     color:'#ffffff',
     textAlign:'center'
   }

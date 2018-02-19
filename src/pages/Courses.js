@@ -4,7 +4,8 @@ import {
   Dimensions,
   View,
   Text,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 import { StatusBar} from 'react-native';
@@ -26,40 +27,54 @@ export default class VerticalStackLayout extends Component {
     return (
     
         <View style={styles.Layout}>
-     
-   
-      
-        
-         <View style={[styles.box, styles.box1]}>
+     <View style={[styles.box, styles.box1]}>
             
-                  
-      
+            
+         <TouchableOpacity onPress={() => Actions.first()} >
+        
+        
+           <View  style={{alignItems:'center',padding:10}}>
+             <Text style={styles.cardTitle}>Grammar</Text>
+             </View>
+            <View
+              style={{
+                borderBottomColor: '#D3D3D3',
+                borderBottomWidth: 1,
+              }}
+            />
+          
+             
            <View style={styles.innerContainer}>
+              
             <View style={[styles.innerBox, styles.innerBox1]}>
-             <Progress.Circle size={60} indeterminate={false} progress={0.4} />
+              <Image
+                  source={require('../../icons/24.png')}  
+                  style={{width: 80, height: 80}}
+                />
            
             </View>
             <View style={[styles.innerBox, styles.innerBox2]}>
-            <View>
-             <Text style={styles.welcome}>
-            Course 1
-            </Text>
-            </View>
-            <View  style={{margin:20}}>
-             <Progress.Bar progress={0.6} height={8} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
+              <View  style={styles.caption}>
+                <Text style={styles.captionText}>Master the art of perfect</Text>               
+                <Text style={styles.captionText}> Sentence Formation</Text>
+              </View>
+            <View style={{ margin:10}}>
+             <Progress.Bar progress={0.6} height={8} unfilledColor={'rgba(154,154,154,1)'} 
+            color={'rgba(28, 49, 58, 1)'} width={150} borderWidth={0} borderRadius={0} />
             </View>
             </View>
             
             
         </View>
+          
               <View style={styles.startButton}>
-             <TouchableOpacity  onPress={() => Actions.first()} >
-              <View style={styles.button}>
-                <Text style={{ padding: 3, color:'#FFFFFF',fontWeight:'bold',fontSize:15}}>START</Text>
-              </View>
+             
+             
+                   <View style={styles.button2}>
+                    <Text style={{ padding: 3, color:'#FFFFFF', fontFamily:'Museo 700',fontSize:15,}}>Let's Go!</Text>
+                  </View>
+             </View>
             </TouchableOpacity>
-            </View>
-
             </View>
             
         
@@ -68,39 +83,59 @@ export default class VerticalStackLayout extends Component {
       
      
          <View style={[styles.box, styles.box2]}>
-           
+                
+         <TouchableOpacity  onPress={() => alert("Coming soon !")}>
+        
+        
+           <View  style={{alignItems:'center',padding:10}}>
+              <Text style={styles.cardTitle}>Vocabulary</Text>
+             </View>
+            <View
+              style={{
+                borderBottomColor: '#D3D3D3',
+                borderBottomWidth: 1,
+              }}
+            />
+          
+             
            <View style={styles.innerContainer}>
+              
             <View style={[styles.innerBox, styles.innerBox1]}>
-             <Progress.Circle size={60} indeterminate={false} progress={0.8} />
-
+              <Image
+                  source={require('../../icons/12.png')}  
+                  style={{width: 80, height: 80}}
+                />
+           
             </View>
             <View style={[styles.innerBox, styles.innerBox2]}>
-            <View>
-             <Text style={styles.welcome}>
-            Course 2
-            </Text>
-            </View>
-            <View  style={{margin:20}}>
-             <Progress.Bar progress={0.6} height={8} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
+              <View  style={styles.caption}>
+               <Text style={styles.captionText}>Improve your Vocabulary </Text>
+                 <Text style={styles.captionText}> knowing the origin of words</Text>
+              </View>
+            <View style={{ margin:10}}>
+              <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
             </View>
             </View>
             
             
         </View>
+          
               <View style={styles.startButton}>
-              <TouchableOpacity  onPress={() => alert("Coming soon !")}>
-              <View style={styles.button}>
-                <Text style={{padding: 3, color:'#FFFFFF',fontWeight:'bold',fontSize:15 }}>START</Text>
+             
+             
+            <View style={styles.button2}>
+                <Text style={{ padding: 3, color:'#FFFFFF', fontFamily:'Museo 700',fontSize:15,}}>Let's Go!</Text>
               </View>
+
+            </View>
             </TouchableOpacity>
-              </View>
             </View>
             
        
       
       
-           
         </View>
+        
       
     );
   }
@@ -109,7 +144,7 @@ const styles = StyleSheet.create({
   
   
   Layout: {
-    flex:3,
+    flex:1,
     flexDirection: 'column',
     margin:10
      },
@@ -119,71 +154,88 @@ const styles = StyleSheet.create({
   },
   box1: {
     
-    flex:1,
-    borderRadius:10,
+    flex:5,
     margin:10,
-    backgroundColor:'#e9e9e9',
-     alignItems: 'center',
+    backgroundColor:'#ffffff',
+   alignItems: 'center',
     justifyContent: 'center',
-     height: 128,
-    width:width
+    height: 80,
+    width:width,
+    
   },
-  box2: {
-     flex:1,
-    borderRadius:10,
+     box2: {
+     flex:5,
     margin:10,
-    backgroundColor:'#e9e9e9',
-     alignItems: 'center',
+    backgroundColor:'#ffffff',
+   alignItems: 'center',
     justifyContent: 'center',
-     height: 128,
-    width:width
+    height: 80,
+    width:width,
+    
   },
   
   welcome: {
-    fontSize: 22,
+    fontSize: 20,
     textAlign: 'center',
     justifyContent:'center',
     margin: 10,
     fontWeight: 'bold',
-    color:'#002266',
+    color:'#1c313a',
    
   },
-   card: {
-    flex: 3,
-     padding:50,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#ecf0f1',
-  },
+   
   innerContainer: {
-    flex: 3,
-    flexDirection: 'row'
+    flex: 4,
+    flexDirection: 'row',
+    marginBottom:10
   },
  innerBox: {
-    height: box_height
+    height: box_height-50
   },
   innerBox1: {
-    marginTop:70,
+   
+    justifyContent:'center',
+    alignItems:'center',
     marginLeft:20
-    
   },
  innerBox2: {
-    margin:20,
+    
     justifyContent:'center',
-    alignItems:'center'
+    alignItems:'center',
+
   },
-  button: {
-    height: Dimensions.get('window').height / 15,
-    width: 320,
+  caption: {
+    margin:10,
     alignItems: 'center',
-    borderRadius:10,
+    justifyContent:'center',
+  
+  },
+  button2: {
+    height: Dimensions.get('window').height / 15,
+    width: Dimensions.get('window').height-250,
+    alignItems: 'center',
     backgroundColor:'#1c313a',
-    margin:2,
     justifyContent:'center',
     alignItems:'center'
+
   },
   startButton: {
     width:width,
+    flex:1
 
-  }
+  },
+cardTitle:{
+    
+    color:'black',
+    fontSize:18,
+     fontFamily: 'Museo 700',
+    marginBottom:5,
+   justifyContent:'center'
+},
+captionText:{
+    padding: 3,
+    color:'#af0c56',
+    fontSize:15, 
+    fontFamily: 'Museo 700'
+}
 });
