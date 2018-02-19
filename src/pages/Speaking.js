@@ -269,8 +269,8 @@ export default class Speaking extends Component<{}> {
 
     <TouchableOpacity onPressIn={this.onMicPress} onPressOut={this.onMicRelease}>
     <Image 
-       style={{width: 140, height: 140}}
-       source={require('../images/mic1.png')}
+       style={{width: 120, height: 120}}
+       source={require('../images/mic2.png')}
      />
 
     </TouchableOpacity>
