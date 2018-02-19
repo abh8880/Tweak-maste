@@ -43,15 +43,18 @@ const styles = StyleSheet.create({
     alignItems:'flex-end',
     justifyContent :'center',
     paddingVertical:16,
-    flexDirection:'row'
+    flexDirection:'row',
+    
   },
   signupText: {
   	color:'rgba(255,255,255,0.6)',
-  	fontSize:16
+  	fontSize:16,
+    fontFamily: 'Museo 500',
   },
   signupButton: {
   	color:'#ffffff',
-  	fontSize:16,
-  	fontWeight:'500'
+  	fontSize:20,
+  	fontFamily: 'Museo 900',
+    
   }
 });
