@@ -1,0 +1,103 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "react-native-ezswiper",
+        "scope": null,
+        "escapedName": "react-native-ezswiper",
+        "name": "react-native-ezswiper",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\TweakNative"
+    ]
+  ],
+  "_from": "react-native-ezswiper@latest",
+  "_id": "react-native-ezswiper@1.2.1",
+  "_inCache": true,
+  "_location": "/react-native-ezswiper",
+  "_nodeVersion": "8.2.1",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/react-native-ezswiper-1.2.1.tgz_1513914739478_0.12616253085434437"
+  },
+  "_npmUser": {
+    "name": "zhuyangjun",
+    "email": "gzhuyangjun@gmail.com"
+  },
+  "_npmVersion": "5.3.0",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-native-ezswiper",
+    "scope": null,
+    "escapedName": "react-native-ezswiper",
+    "name": "react-native-ezswiper",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER",
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-ezswiper/-/react-native-ezswiper-1.2.1.tgz",
+  "_shasum": "30da6ae91035206c7b5b2d53b1cf68173ea40c78",
+  "_shrinkwrap": null,
+  "_spec": "react-native-ezswiper",
+  "_where": "D:\\TweakNative",
+  "author": {
+    "name": "Zhu Yangjun",
+    "url": "gzhuyangjun@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/easyui/react-native-ezswiper/issues"
+  },
+  "dependencies": {},
+  "description": "Swiper component for React Native.",
+  "devDependencies": {},
+  "directories": {
+    "example": "examples"
+  },
+  "dist": {
+    "integrity": "sha512-QWaY5CjqC5fSCtJ4qiNqb2coeoSvsiYHWUd64P+l3f9tdFTE/EQqrrnPEVRKT4B8OCTdJrFWARfBhrnE4h3peQ==",
+    "shasum": "30da6ae91035206c7b5b2d53b1cf68173ea40c78",
+    "tarball": "https://registry.npmjs.org/react-native-ezswiper/-/react-native-ezswiper-1.2.1.tgz"
+  },
+  "gitHead": "4582c0f15ee331d44a3d442ee00a7fbfbe8b4354",
+  "homepage": "https://github.com/easyui/react-native-ezswiper#readme",
+  "keywords": [
+    "react",
+    "react-native",
+    "react-native-component",
+    "react-native-ezswiper",
+    "native",
+    "ios",
+    "android",
+    "js",
+    "javascript",
+    "slider",
+    "swiper",
+    "scrollview",
+    "scroll",
+    "card",
+    "pageview",
+    "page"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "zhuyangjun",
+      "email": "gzhuyangjun@gmail.com"
+    }
+  ],
+  "name": "react-native-ezswiper",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/easyui/react-native-ezswiper.git"
+  },
+  "version": "1.2.1"
+}

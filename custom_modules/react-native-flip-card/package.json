@@ -1,0 +1,103 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "react-native-flip-card",
+        "scope": null,
+        "escapedName": "react-native-flip-card",
+        "name": "react-native-flip-card",
+        "rawSpec": "",
+        "spec": "latest",
+        "type": "tag"
+      },
+      "D:\\TweakNative"
+    ]
+  ],
+  "_from": "react-native-flip-card@latest",
+  "_id": "react-native-flip-card@3.5.2",
+  "_inCache": true,
+  "_location": "/react-native-flip-card",
+  "_nodeVersion": "8.7.0",
+  "_npmOperationalInternal": {
+    "host": "s3://npm-registry-packages",
+    "tmp": "tmp/react-native-flip-card-3.5.2.tgz_1508045044965_0.46223000157624483"
+  },
+  "_npmUser": {
+    "name": "moschan",
+    "email": "kaityo02@gmail.com"
+  },
+  "_npmVersion": "5.4.2",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "react-native-flip-card",
+    "scope": null,
+    "escapedName": "react-native-flip-card",
+    "name": "react-native-flip-card",
+    "rawSpec": "",
+    "spec": "latest",
+    "type": "tag"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/react-native-flip-card/-/react-native-flip-card-3.5.2.tgz",
+  "_shasum": "6563f4a6d95b999c21e82deec9b2f502175847d6",
+  "_shrinkwrap": null,
+  "_spec": "react-native-flip-card",
+  "_where": "D:\\TweakNative",
+  "author": {
+    "name": "moschan",
+    "email": "kota.frsw＠gmail.com",
+    "url": "http://moschan.com/blog"
+  },
+  "bugs": {
+    "url": "https://github.com/moschan/react-native-flip-card/issues"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10"
+  },
+  "description": "The card component which has a motion of flip for React Native(iOS/Android)",
+  "devDependencies": {},
+  "directories": {},
+  "dist": {
+    "integrity": "sha512-ftmm9xNbLJb40bmTc9buGbrKlfMiojJJfV4iZZgb68rFM3IPnmUvihGqlvBgjw4CWuLXMkTyz/LhdDlZu5hG1A==",
+    "shasum": "6563f4a6d95b999c21e82deec9b2f502175847d6",
+    "tarball": "https://registry.npmjs.org/react-native-flip-card/-/react-native-flip-card-3.5.2.tgz"
+  },
+  "files": [
+    "README.md",
+    "index.js",
+    "package.json",
+    "lib",
+    "test"
+  ],
+  "gitHead": "227d8be023d5e046a2c5fb8ecebc634eb6276e1c",
+  "homepage": "https://github.com/moschan/react-native-flip-card#readme",
+  "keywords": [
+    "react-component",
+    "react-native",
+    "ios",
+    "android",
+    "card",
+    "flip"
+  ],
+  "license": "MIT",
+  "main": "index.js",
+  "maintainers": [
+    {
+      "name": "moschan",
+      "email": "kaityo02@gmail.com"
+    }
+  ],
+  "name": "react-native-flip-card",
+  "optionalDependencies": {},
+  "readme": "ERROR: No README data found!",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/moschan/react-native-flip-card.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "version": "3.5.2"
+}
