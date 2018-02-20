@@ -24,9 +24,7 @@ export default class Logo extends Component<{}> {
   onPress(){
     let username = this.state.username;
     let password = this.state.password;
-    AsyncStorage.setItem('username', username).done();
-    AsyncStorage.setItem('password', password).done();
-    this.setState({username: username,password: password});
+   
     
        axios.post('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/Login.php', 
         {
@@ -41,8 +39,12 @@ export default class Logo extends Component<{}> {
 
              if(response.data=='success')
              {
-             alert('Login successful');
-             Actions.home();
+             
+              Actions.home();
+              AsyncStorage.setItem('username', username).done();
+              AsyncStorage.setItem('password', password).done();
+              this.setState({username: username,password: password});
+            
              }
             
           

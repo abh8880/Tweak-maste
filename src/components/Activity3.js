@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet,Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet,Dimensions,ScrollView } from 'react-native';
 
 import Result from './Result';
 import Time_up from './Time_up';
@@ -194,11 +194,13 @@ export default class Activity3 extends Component {
   for(let i = 0; i < this.state.length; i++){
 
           buttons.push(
+         
           <TouchableOpacity onPress={() => this._handleButtonPress(i)}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>{ans[i]}</Text>
               </View>
           </TouchableOpacity>
+        
         )
 
   }
@@ -238,7 +240,9 @@ export default class Activity3 extends Component {
             <Card containerStyle={{width:Dimensions.get('window').width-20,
               alignItems:'center'}}>
               <View>
+                <ScrollView showsVerticalScrollIndicator={false}>
                 { buttons }
+                </ScrollView>
               </View>
              </Card>
             </View>
@@ -316,7 +320,7 @@ container: {
   opsBox: {
     flex:6,
     width:Dimensions.get('window').width,
-    paddingBottom:25,
+    paddingBottom:30,
     backgroundColor: '#ffffff',
     alignItems:'center'
   },
@@ -355,7 +359,7 @@ container: {
     margin:5,
     backgroundColor: '#1c313a',
     borderRadius: 10,
-    height:40,
+    height:Dimensions.get('window').height/15,
     justifyContent:'center'
   },
     

@@ -31,7 +31,7 @@ export default class Result extends Component {
             return(
                 <View style={styles.container}>
     
-                    <View style={styles.resultBox}><Text style={{color:'white', fontSize: 30}}>{ temp ?  'Correct Answer !' : 'Wrong Answer :(' }</Text></View>
+                    <View style={styles.resultBox}><Text style={{color:'#1c313a', fontSize: 30}}>{ temp ?  'Correct Answer !' : 'Wrong Answer :(' }</Text></View>
     
                     <View style={styles.subBox}>
                         <TouchableOpacity onPress={() => this._handleNextPress()}>
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     container: {
       flex: 1,
       alignItems: 'center',
-      backgroundColor: '#34495e',
+      backgroundColor: '#e5e5e5',
     },
 
     resultBox: {
@@ -64,7 +64,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'stretch',
         justifyContent: 'center',
-        backgroundColor: '#9FA8DA',
+        backgroundColor: '#ffffff',
       },
 
     subBox: {
@@ -72,14 +72,14 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'stretch',
         justifyContent: 'center',
-        backgroundColor: '#3F51B5',
+        backgroundColor: '#1c313a',
       },
 
       button: {
         margin: 30,
         width: 100,
         alignItems: 'center',
-        backgroundColor: '#3F51B5',
+        backgroundColor: '#1c313a',
         borderRadius: 50
       }
 });

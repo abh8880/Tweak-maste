@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet,ScrollView } from 'react-native';
 
 const styles = StyleSheet.create({
     pronunciationView: {
@@ -81,9 +81,11 @@ export default class PronunciationView extends Component {
 			wordListRendered = renderDiv;
 		}
 		return (
+            <ScrollView>
 			<View style={styles.pronunciationView}>
 				{wordListRendered}
 			</View>
+            </ScrollView>
 		);
 	}
 }

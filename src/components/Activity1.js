@@ -181,14 +181,15 @@ update2 = () =>{
         <View style={styles.container}>
             {topic==-1 && timer}
             <View style={styles.questBox}>
-              <Text style={{fontSize:20,fontWeight:'bold'}}>{this.state.question}</Text>
+             <Text style={{fontSize:20,fontFamily: 'Museo 500',}}>{this.state.question}</Text>
             </View>
             
             <View style={styles.ansBox}>
               <View style={styles.ansLine}>
-                <Text style={{fontSize:20,fontWeight:'bold'}}>{anspart[0]}</Text>
+                 <Text style={{fontSize:20,fontWeight:'bold'}}>{anspart[0]}</Text>
                 <Text style={{fontSize:20, fontWeight:'bold'}}>{this.state.current_ans}</Text>
                 <Text style={{fontSize:20,fontWeight:'bold'}}>{anspart[1]}</Text>
+
               </View>
             </View>
             <Card>
@@ -227,7 +228,7 @@ update2 = () =>{
             <View style={styles.subBox}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
                       <View style={styles.button1}>
-                        <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
+                        <Text style={{fontSize:20,fontFamily: 'Museo 500',color:'#ffffff'}}>SUBMIT</Text>
                       </View>
                     </TouchableOpacity>
             </View>
@@ -309,6 +310,7 @@ const styles = StyleSheet.create({
     flexDirection:'row', 
     alignSelf: 'stretch',
     justifyContent: 'center',
+    
   },
   
   button: {
@@ -323,7 +325,7 @@ const styles = StyleSheet.create({
     padding: 20,
     color: 'white',
     fontSize: 20,
-    fontWeight: 'bold'
+    fontFamily: 'Museo 500',
   },
      button1: {
     margin: 25,
@@ -338,7 +340,7 @@ const styles = StyleSheet.create({
   titleQuestion:{
      justifyContent:'center',
      fontSize:22,
-     fontWeight:'bold',
+     fontFamily: 'Museo 500',
      padding:10,
      marginLeft:9,
      color:'#000000'
