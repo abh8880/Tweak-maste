@@ -29,7 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
           new VectorIconsPackage(),
           new SQLitePluginPackage(),
           new MainReactPackage(),
-            new TextToSpeechPackage(),
+          new TextToSpeechPackage(),
           new RNBluemixPackage()
       );
     }
