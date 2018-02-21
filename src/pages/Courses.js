@@ -17,7 +17,7 @@ import { Card } from 'react-native-elements'; // 0.18.5
 
 import { TabNavigator,StackNavigator,DrawerNavigator } from 'react-navigation'; //
 
-var { height } = Dimensions.get('window');
+var { height } = Dimensions.get('window').height;
 var {width}=Dimensions.get('window').width;
 var box_count = 3;
 var box_height = height / box_count;
@@ -46,24 +46,22 @@ export default class VerticalStackLayout extends Component {
 
            <View style={styles.innerContainer}>
 
-            <View style={[styles.innerBox, styles.innerBox1]}>
+           <View style={styles.innerBox1}>
               <Image
-                  source={require('../../icons/24.png')}
+                  source={require('../../icons/12.png')}
                   style={{width: 80, height: 80}}
                 />
 
             </View>
-            <View style={[styles.innerBox, styles.innerBox2]}>
+            <View style={styles.innerBox2}>
               <View  style={styles.caption}>
-                <Text style={styles.captionText}>Master the art of perfect</Text>
-                <Text style={styles.captionText}> Sentence Formation</Text>
+               <Text style={styles.captionText}>Improve your Vocabulary </Text>
+                 <Text style={styles.captionText}> knowing the origin of words</Text>
               </View>
-            <View style={{ margin:10}}>
-             <Progress.Bar progress={0.6} height={8} unfilledColor={'rgba(154,154,154,1)'}
-            color={'rgba(28, 49, 58, 1)'} width={150} borderWidth={0} borderRadius={0} />
+            <View>
+              <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
             </View>
             </View>
-
 
         </View>
 
@@ -185,24 +183,21 @@ const styles = StyleSheet.create({
   },
 
   innerContainer: {
-    flex: 4,
+    flex: 1,
     flexDirection: 'row',
-    marginBottom:10
+    marginBottom:10,
+    backgroundColor:'black'
   },
  innerBox: {
     height: box_height-50
   },
   innerBox1: {
 
-    justifyContent:'center',
-    alignItems:'center',
-    marginLeft:20
+   flex: 3
   },
  innerBox2: {
-
-    justifyContent:'center',
-    alignItems:'center',
-
+     flex:10
+     
   },
   caption: {
     margin:10,

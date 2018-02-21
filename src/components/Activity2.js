@@ -178,7 +178,8 @@ if (topic == -1)
             {topic==-1 && timer}
             {topic!=-1 && bar}
 
-          <View style={{flex:2}}>
+            
+          <View style={{flex:1}}>
           <Text style={styles.titleQuestion}>
         Choose the correct sentence for the given question
           </Text>
@@ -255,7 +256,7 @@ container: {
 
   },
   questBox: {
-    flex:1,
+   
     backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems:'center'
@@ -269,13 +270,12 @@ container: {
   
   opsBox: {
     alignItems:'center',
-    flex:4,
     borderRadius:5,
-    marginLeft:15
+    alignSelf:'center'
   },
   
   subBox2: {
-     flex:1,
+    marginTop:'20%',
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center',

@@ -244,11 +244,12 @@
 
            render() {
             console.log("render")
-              SpeechToText.initialize("1f340809-9ea9-4eaa-9404-83042e08f853", "IwxHoB67AAJE")
+              SpeechToText.initialize("1b912ed6-a9a5-431e-8805-8ec6d9bcd8e6", "3QVmOMyFUp5d")
 
             return (
+                
                     StatusBar.setHidden(true),
-        <ScrollView>
+        
         <View style={styles.outerContainer}> 
 
 
@@ -256,24 +257,23 @@
 
           <View style={styles.grammarContainer}>
 
-                <View style={{flex: 1,flexDirection:'column'}}>
-                       <View style={{
-                                    flex:1,
-                                    width:Dimensions.get('window').width}}>
+              
+                       <View>
                 
                         <TouchableOpacity onPress={this._onPressButton}>
                           <Text style={styles.moduleTitle}> Grammar Check </Text>
                         </TouchableOpacity>
                       </View> 
-
+                
+                       <TouchableOpacity onPress={this._toggleModal}>
                      <View style={styles.instructionButton}>
-                    <TouchableOpacity onPress={this._toggleModal}>
+                  
                       <Text style={{
                           fontSize:15,
                           fontFamily:'Museo 500',
                           color:'#ffffff'}}>Instructions
                      </Text>
-                    </TouchableOpacity>
+                   
 
                     <Modal isVisible={this.state.isModalVisible}
                       animationIn="slideInLeft"
@@ -315,8 +315,9 @@
                     </Modal>
 
                     </View>
+ </TouchableOpacity>
                 </View>
-          </View>
+         
 
 
 
@@ -333,16 +334,7 @@
 
           </View>
 
-           <View style={styles.startrecordContainer}> 
-          <TouchableOpacity onPress={this.onSpeechButtonPress.bind(this)}>    
-
-            <Text style={{alignSelf:'center',justifyContent:'center',alignItems:'center'}}>
-            {this.state.instruction}
-            </Text>
-
-            </TouchableOpacity>
-            </View>
-
+                
           <View style={styles.reportView}>
 
             <Text style={styles.ReportText}>Report:{this.state.answer}</Text>   
@@ -360,7 +352,7 @@
               />
 
         </View>
-        </ScrollView>
+                
             );
           }
         }
@@ -398,14 +390,15 @@
          },
         grammarContainer:{
             width:Dimensions.get('window').width, 
-            flex:3,
+            flex:0.5,
 
         },
         micContainer:{
             width:Dimensions.get('window').width, 
             height:Dimensions.get('window').height/3,
             alignItems:'center',
-            justifyContent:'center'
+            justifyContent:'center',
+            
         },
         startrecordContainer:{
             width: '80%', 

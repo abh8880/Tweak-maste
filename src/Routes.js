@@ -30,8 +30,8 @@ import { StackNavigator } from 'react-navigation';
 
 const TabIcon =({selected, title})=> {
   return(
-    <Text style= {{fontSize:100}}
-    >{title}</Text>
+    <Text style={{fontSize:100}}
+    >{title}aaaaaaa</Text>
     );
 };
 
@@ -90,19 +90,23 @@ export default class Routes extends Component {
       <Router navigationBarStyle={styles.navBar} titleStyle={styles.navBarTitle} barButtonTextStyle={styles.barButtonTextStyle} barButtonIconStyle={styles.barButtonIconStyle}>
           <Stack key="root" >
             <Scene key="login" component={Login} title="Login" initial={true} hideNavBar={true}/>
-            <Scene key="signup" component={Signup} title="Register"/>
+            <Scene key="signup" component={Signup} title="Register" hideNavBar={true}/>
 
-
+            <Scene key="courses" component={Courses} hideNavBar icon={TabIcon}/>
+              <Scene key="speaking" component={Speaking} hideNavBar icon={TabIcon} />
+        
+        
             <Scene key="home"
+             icon={TabIcon}
               tabs
               tabBarStyle={{
                 backgroundColor: '#1c313a',
                 alignContent: 'center'
               }}
             >
-              <Scene key="courses" component={Courses} hideNavBar icon={TabIcon} />
+              <Scene key="courses" component={Courses} hideNavBar icon={TabIcon}/>
               <Scene key="speaking" component={Speaking} hideNavBar icon={TabIcon} />
-            </Scene>
+            </Scene>    
 
             <Scene key="first" component={First} title="Chapters" navBar={() => this.createNavBar('Chapters', 'courses')} //params => (sourcePage,destinationPage/nope)
 />
