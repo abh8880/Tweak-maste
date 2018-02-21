@@ -70,7 +70,7 @@ export default class Activity6 extends Component {
         console.log("rand="+rand)
         var row = results.rows.item(rand);
         this.setState({comp_words: row.words});
-        comp_words = row.words.split(',');
+        comp_words = row.words.split(' ');
         correct_ans = row.correct;
         console.log("correct ans " + correct_ans);
         this.setState({id:row.id});
@@ -221,7 +221,7 @@ if (topic == -1)
         {topic==-1 && timer}
 
         <View >
-        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
     </View>
 
         <Text style={styles.titleQuestion}>

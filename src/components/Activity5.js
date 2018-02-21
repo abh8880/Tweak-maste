@@ -12,7 +12,7 @@ var answer = '';
 var message1 = 'Compulsary words';
 var message2 = 'Supplementary words';
 var SQLite = require('react-native-sqlite-storage');
-var db = SQLite.openDatabase({name:'activity.db', createFromLocation:'~activity.db'})
+var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'})
 var timer = null;
 
 var correct_ans = new Array();
@@ -62,8 +62,8 @@ export default class Activity5 extends Component {
         var rand = Math.floor(Math.random()*(len-1))+0;
         console.log("rand="+rand)
         var row = results.rows.item(rand);
-        comp_words = row.comp_words.split(',');
-        supp_words = row.supp_words.split(',');
+        comp_words = row.comp_words.split(' ');
+        supp_words = row.supp_words.split(' ');
         correct_ans = row.correct;
         console.log("correct ans " + correct_ans);
         this.setState({id:row.id});
@@ -232,7 +232,7 @@ if (topic == -1)
                 {topic==-1 && timer}
 
                 <View >
-        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
     </View>
 
                 <Text style={styles.titleQuestion}>

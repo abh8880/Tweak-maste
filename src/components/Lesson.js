@@ -16,7 +16,7 @@ import axios from 'axios';
 import {Actions} from 'react-native-router-flux';
 
 var SQLite = require('react-native-sqlite-storage');
-var db = SQLite.openDatabase({name:'activity.db', createFromLocation:'~activity.db'});
+var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'});
 
 //let origindata = [{ key: '1', word: 'Prepositions' }]
 let currentDeck = 1;
@@ -71,18 +71,14 @@ static navigationOptions = {
         });
   }
         
-  // renderOriginw() {
-  //   return origindata.map(ogdata => (<Text key={ogdata.key} style={styles.originList}>{ogdata.word}</Text>));
-  // }
 
     renderRow = (obj, index) => {
 
       let comp;
       let finalcomp;
-      //originWordsList = this.renderOriginw();
 
       finalcomp =
-        <View style={[styles.deckCard, { backgroundColor: "#ffffff", borderRadius: 15, position: 'relative' }]}>
+        <View key={index} style={[styles.deckCard, { backgroundColor: "#ffffff", borderRadius: 15, position: 'relative' }]}>
           <Text style={styles.deckTitle}>Lesson {index+1}</Text>
           <Text style={styles.deckSubTitle}>Content:</Text>
           <View>
@@ -106,7 +102,9 @@ static navigationOptions = {
   _onPressDeckButton = () => {
     console.log("current deck ="+currentDeck);
     this.setState({topic:currentDeck});
+    this.reset_db(chapter,this.state.topic);
     this.setState({status:1});
+    Actions.select({topic:this.state.topic, chapter:chapter});
   }
 
   onDidChange = (obj, index) => {
@@ -192,8 +190,8 @@ static navigationOptions = {
   render() {
     console.log("topic="+this.state.topic);
     
-    if (this.state.status==0) 
-    {
+    // if (this.state.status==0) 
+    // {
         return (
           <View style={styles.container}>
             <EZSwiper style={[styles.swiper, { width: width, height: height/2,}]}
@@ -208,21 +206,23 @@ static navigationOptions = {
               loop={false} />
           </View>
         );
-    }
+    //}
 
-    else if(this.state.status == -1){
-      return(
-        <Select topic={this.state.status} chapter={chapter} />
-      );
-    }
-    else
-    {
-      console.log("passing: "+this.state.topic+chapter)
-      this.reset_db(chapter,this.state.topic);
-        return(
-            <Select topic={this.state.topic} chapter={chapter} />
-        );
-    }
+    // else if(this.state.status == -1){
+    //   Actions.select({topic:this.state.status, chapter:chapter})
+    //   // return(
+    //   //   <Select topic={this.state.status} chapter={chapter} />
+    //   // );
+    // }
+    // else
+    // {
+    //   console.log("passing: "+this.state.topic+chapter)
+    //   this.reset_db(chapter,this.state.topic);
+    //   Actions.select({topic:this.state.status, chapter:chapter})
+    //     // return(
+    //     //     <Select topic={this.state.topic} chapter={chapter} />
+    //     // );
+    // }
     
   }
 }

@@ -160,7 +160,7 @@ export default class First extends Component {
 
     for(let i=1;i<=12;i++){
       chapters.push(
-        <View style={styles.card}>
+        <View key={i} style={styles.card}>
       
         <Card>
           <TouchableOpacity  onPress={() => this.open_chapter(i) }>

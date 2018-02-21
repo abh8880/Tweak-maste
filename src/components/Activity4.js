@@ -17,10 +17,11 @@ var status;
 var time;
 var timeout;
 var timer = null;
+var bar = null;
 var element = [];
 
 var SQLite = require('react-native-sqlite-storage');
-var db = SQLite.openDatabase({name:'activity.db', createFromLocation:'~activity.db'})
+var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'})
 export default class Activity4 extends Component {
 
   constructor(props) {
@@ -185,6 +186,12 @@ if (topic == -1)
           </View>;
     }
 
+    else{
+      bar = <View >
+        <Progress.Bar progress={0.5} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+    </View>
+    }
+
     console.log(this.state.words);
     element = [];
     var k = 0;
@@ -227,6 +234,9 @@ if (topic == -1)
       <View style={styles.container}>
        
        {topic==-1 && timer}
+       {topic!=-1 && bar}
+
+
             <View style={styles.questBox}>
               {element}
             </View>

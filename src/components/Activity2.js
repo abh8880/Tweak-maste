@@ -17,9 +17,10 @@ var status;
 var time;
 var timeout;
 var timer = null;
+var bar = null;
 
 var SQLite = require('react-native-sqlite-storage');
-var db = SQLite.openDatabase({name:'activity.db', createFromLocation:'~activity.db'})
+var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'})
 export default class Activity2 extends Component {
   
   constructor(props) {
@@ -163,15 +164,20 @@ if (topic == -1)
           </View>;
     }
 
+    else{
+      bar = <View >
+        <Progress.Bar progress={0.5} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+    </View>
+    }
+
 
     if(this.state.status == 0){
       return (
 
         <View style={styles.container}>
             {topic==-1 && timer}
-            <View >
-        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
-    </View>
+            {topic!=-1 && bar}
+
           <View style={{flex:2}}>
           <Text style={styles.titleQuestion}>
         Choose the correct sentence for the given question

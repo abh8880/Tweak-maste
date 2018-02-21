@@ -12,7 +12,7 @@ var ans;
 var length=0;
 var pressed = new Array();
 var SQLite = require('react-native-sqlite-storage');
-var db = SQLite.openDatabase({name:'activity.db', createFromLocation:'~activity.db'})
+var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'})
 var topic;
 var status;
 var chapter;
@@ -66,7 +66,7 @@ export default class Activity3 extends Component {
         var row = results.rows.item(rand);
         this.setState({question: row.question});
         this.setState({correct_ans: row.correct});
-        ans = row.words.split(',');
+        ans = row.words.split(' ');
         this.setState({ans:ans});
         length = ans.length;
         this.setState({length:length});
@@ -185,7 +185,11 @@ export default class Activity3 extends Component {
           </View>;
     }
 
-   
+    else{
+      bar = <View >
+        <Progress.Bar progress={0.5} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+    </View>
+    }
 
     console.log(length);
     
@@ -210,10 +214,8 @@ export default class Activity3 extends Component {
 
       <View style={styles.container}>
             {topic==-1 && timer}
+            {topic!=-1 && bar}
 
-            <View >
-        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
-    </View>
     
          <View style={styles.hint}>
          <View>

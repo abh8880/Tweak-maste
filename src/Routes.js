@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import First from './components/First';
 import Lesson from './components/Lesson';
+import Select from './components/Select';
 import Courses from './pages/Courses';
 import Speaking from './pages/Speaking';
 
@@ -103,8 +104,10 @@ export default class Routes extends Component {
               <Scene key="speaking" component={Speaking} hideNavBar icon={TabIcon} />
             </Scene>
 
-            <Scene key="first" component={First} title="Chapters"/>
-            <Scene key="lesson" component={Lesson} title="Lessons"/>
+            <Scene key="first" component={First} title="Chapters" navBar={() => this.createNavBar('Chapters', 'courses')} //params => (sourcePage,destinationPage/nope)
+/>
+            <Scene key="lesson" component={Lesson} title="Lessons" navBar={() => this.createNavBar('Lessons', 'first')}/>
+            <Scene key="select" component={Select} title="Activities"/>
 
           {/*  VocabModule pages start  */}
             <Scene key="vocabHome"

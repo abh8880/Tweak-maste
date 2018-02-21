@@ -77,7 +77,7 @@ export default class Activity7 extends Component {
         console.log("words : " + words);
 
         this.setState({options: row.options});
-        supp_words = row.options.split(',');
+        supp_words = row.options.split(' ');
         console.log("supp_words : " + supp_words);
 
         correct_ans = row.correct;
@@ -250,7 +250,7 @@ if (topic == -1)
        {topic==-1 && timer}
 
        <View >
-        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
     </View>
     
           <View style={styles.questBox}>

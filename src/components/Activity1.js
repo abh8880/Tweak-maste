@@ -18,9 +18,10 @@ var time;
 var status;
 var timeout;
 var timer = null;
+var bar = null;
 
 var SQLite = require('react-native-sqlite-storage');
-var db = SQLite.openDatabase({name:'activity.db', createFromLocation:'~activity.db'})
+var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'})
 export default class Activity1 extends Component {
   
   constructor(props) {
@@ -40,7 +41,6 @@ export default class Activity1 extends Component {
     rem_rep:0,
     time:time,
     progress:1,
-    isModalVisible: false
   };
 
   topic = this.props.topic;
@@ -88,21 +88,8 @@ export default class Activity1 extends Component {
     this.setState({ current_ans:ans });
   };
 
-  continue_press = () =>{
-    this.setState({ isModalVisible: !this.state.isModalVisible });
-    console.log(this.state.check_ans);
-    this.setState({status: 1});
-      
-    this.setState({question: ''});
-    this.setState({current_ans: '_____'});
-    this.setState({correct_ans: ''});
-    
-    ops = [];
-    anspart = [];
-  }
 
   _handleSubmitPress = () => {
-    this.setState({ isModalVisible: !this.state.isModalVisible });
     console.log(this.state.current_ans);
     console.log(this.state.correct_ans);
 
@@ -135,6 +122,16 @@ export default class Activity1 extends Component {
       
       });
     }
+
+    console.log(this.state.check_ans);
+    this.setState({status: 1});
+      
+    this.setState({question: ''});
+    this.setState({current_ans: '_____'});
+    this.setState({correct_ans: ''});
+    
+    ops = [];
+    anspart = [];
   };
 
 update2 = () =>{
@@ -172,6 +169,12 @@ update2 = () =>{
           </View>;
     }
 
+    else{
+      bar = <View >
+        <Progress.Bar progress={0.5} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+    </View>
+    }
+
     anspart = this.state.answer.split('_');
       
     if(this.state.status == 0){
@@ -180,6 +183,9 @@ update2 = () =>{
 
         <View style={styles.container}>
             {topic==-1 && timer}
+            {topic!=-1 && bar}
+
+
             <View style={styles.questBox}>
               <Text style={{fontSize:20,fontWeight:'bold'}}>{this.state.question}</Text>
             </View>
@@ -231,15 +237,6 @@ update2 = () =>{
                       </View>
                     </TouchableOpacity>
             </View>
-
-            <Modal isVisible={this.state.isModalVisible}>
-              <View style={{ flex: 1 }}>
-                <Text>{this.state.check_ans? 'Correct Answer !':'Wrong Answer'}</Text>
-                <TouchableOpacity onPress={this.continue_press()}>
-                  <Text>Continue</Text>
-                </TouchableOpacity>
-              </View>
-            </Modal>
           
         </View>
       );
@@ -250,8 +247,8 @@ update2 = () =>{
       console.log("rep_state="+this.state.repeat);
       console.log("rem_rep_state="+this.state.rem_rep);
       return(
-        //<Result score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
-        <Select score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
+        <Result score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
+        //<Select score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
       );
     }
 

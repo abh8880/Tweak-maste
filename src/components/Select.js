@@ -13,7 +13,7 @@ import Activity8 from './Activity8';
 import Test_result from './Test_result';
 
 var count=0;
-var over = [1,2,3,4,5,6,7,8];
+var over = [1,2,3,4];
 var repeat = [];
 var correct = 0;
 
@@ -145,7 +145,7 @@ export default class Select extends Component {
 
 		var len = over.length;
 		console.log("array_len="+len);
-		var i = Math.floor(Math.random()*(len))+0;
+		var i = Math.floor(Math.random()*(len));
 		console.log("i="+i);
 
 		console.log("over[i]="+over[i]);
@@ -176,7 +176,7 @@ export default class Select extends Component {
 		else if(repeat.length > 0){
 			console.log("\n\nthird\n\n")
 
-			var j = Math.floor(Math.random()*(l))+0;
+			var j = Math.floor(Math.random()*(l));
 
 			var el = this.load_activity(repeat[j], chapter, topic, 2);	
 			return el;			
