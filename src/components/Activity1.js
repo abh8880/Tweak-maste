@@ -41,11 +41,12 @@ export default class Activity1 extends Component {
     rem_rep:0,
     time:time,
     progress:1,
+    bar:0
   };
 
   topic = this.props.topic;
   chapter = this.props.chapter;
-  console.log("recieved "+topic+chapter);
+  
 
   db.transaction((tx) => {
       console.log("mode="+this.props.wrong);
@@ -142,6 +143,14 @@ update2 = () =>{
   
   });
   };
+
+  componentWillMount(){
+    console.log("prop count:"+this.props.count);
+  this.setState({bar:this.props.count});
+  console.log("recieved "+topic+chapter);
+  console.log("bar state "+this.state.bar);
+  }
+
   render() {
 
     if(topic == -1){
@@ -171,7 +180,7 @@ update2 = () =>{
 
     else{
       bar = <View >
-        <Progress.Bar progress={0.5} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
     </View>
     }
 

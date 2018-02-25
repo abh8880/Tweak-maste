@@ -45,12 +45,14 @@ export default class Activity3 extends Component {
       repeat:0,
       rem_rep:0,
       time:time,
-      progress:1
+      progress:1,
+      bar:0
     };
 
     topic = this.props.topic;
     chapter = this.props.chapter;
   console.log("recieved "+topic+chapter);
+  this.setState({bar:this.props.count/12});
     
 
     db.transaction((tx) => {
@@ -154,6 +156,13 @@ export default class Activity3 extends Component {
   
   });
   };
+
+  // componentWillMount(){
+  //   console.log("prop count:"+this.props.count);
+  // this.setState({bar:this.props.count});
+  // console.log("recieved "+topic+chapter);
+  // console.log("bar state "+this.state.bar);
+  // }
   
   render() {
 
@@ -187,7 +196,7 @@ export default class Activity3 extends Component {
 
     else{
       bar = <View >
-        <Progress.Bar progress={0.5} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+        <Progress.Bar progress={this.state.bar} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
     </View>
     }
 

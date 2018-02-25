@@ -104,7 +104,7 @@ static navigationOptions = {
     this.setState({topic:currentDeck});
     this.reset_db(chapter,this.state.topic);
     this.setState({status:1});
-    Actions.select({topic:this.state.topic, chapter:chapter});
+    Actions.select({topic:this.state.topic, chapter:chapter, count:0});
   }
 
   onDidChange = (obj, index) => {

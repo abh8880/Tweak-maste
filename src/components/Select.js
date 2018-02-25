@@ -12,19 +12,28 @@ import Complete from './Complete';
 import Activity8 from './Activity8';
 import Test_result from './Test_result';
 
-var count=0;
-var over = [1,2,3,4];
+var count;
+var over = [];
 var repeat = [];
-var correct = 0;
+var correct;
 
 export default class Select extends Component {
 
 	constructor(props) {
+
+	super(props);
+
+	if(this.props.count == 0){
+		count=0;
+		over = [1,2,3,4];
+		repeat = [];
+		correct = 0;
+	}
+
+
 	count++;
 	console.log("\n\ncount="+count+"\n\n");
 
-	super(props);
-	  
 	};
 	
 	load_activity = (i,chapter,topic,mode) =>{
@@ -106,6 +115,7 @@ export default class Select extends Component {
 		{
 			correct = correct + this.props.score;
 		}
+		
 		console.log("..............................correct: "+correct);
 
 		if(this.props.end != 0){
