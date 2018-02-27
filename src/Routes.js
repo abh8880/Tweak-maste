@@ -30,8 +30,8 @@ import { StackNavigator } from 'react-navigation';
 
 const TabIcon =({selected, title})=> {
   return(
-    <Text style={{fontSize:100}}
-    >{title}aaaaaaa</Text>
+    <Text style={{ fontSize: 15, color: '#88bfff'}}
+    >{title}</Text>
     );
 };
 
@@ -92,24 +92,24 @@ export default class Routes extends Component {
             <Scene key="login" component={Login} title="Login" initial={true} hideNavBar={true}/>
             <Scene key="signup" component={Signup} title="Register" hideNavBar={true}/>
 
-            <Scene key="courses" component={Courses} hideNavBar icon={TabIcon}/>
-              <Scene key="speaking" component={Speaking} hideNavBar icon={TabIcon} />
-        
-        
             <Scene key="home"
-             icon={TabIcon}
               tabs
+              activeBackgroundColor="#224351"
+              showLabel={false}
               tabBarStyle={{
                 backgroundColor: '#1c313a',
                 alignContent: 'center'
               }}
             >
-              <Scene key="courses" component={Courses} hideNavBar icon={TabIcon}/>
-              <Scene key="speaking" component={Speaking} hideNavBar icon={TabIcon} />
-            </Scene>    
+              <Scene key="coursestab" title="Courses" icon={TabIcon}>
+                <Scene key="courses" component={Courses} hideNavBar/>
+              </Scene>
+              <Scene key="speakingtab" title="Speaking" icon={TabIcon}>
+                <Scene key="speaking" component={Speaking} hideNavBar/>
+              </Scene>
+            </Scene>
 
-            <Scene key="first" component={First} title="Chapters" navBar={() => this.createNavBar('Chapters', 'courses')} //params => (sourcePage,destinationPage/nope)
-/>
+            <Scene key="first" component={First} title="Chapters" navBar={() => this.createNavBar('Chapters', 'courses')}/>
             <Scene key="lesson" component={Lesson} title="Lessons" navBar={() => this.createNavBar('Lessons', 'first')}/>
             <Scene key="select" component={Select} title="Activities"/>
 
