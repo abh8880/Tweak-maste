@@ -1,97 +1,90 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Dimensions } from 'react-native';
-
+import { Text, View, TouchableOpacity,TouchableHighlight, StyleSheet,Dimensions } from 'react-native';
 import Result from './Result';
-import Time_up from './Time_up';
 import Select from './Select';
+import Time_up from './Time_up';
 
 import * as Progress from 'react-native-progress';
 
+var sentence = new Array();
+
+sentence = 'We is students.';
 
 var words = new Array();
-var element =  new Array();
-var received_supp = new Array();
-received_supp = '';
-var supp_words = new Array();
-var ans = new Array();
-var i,j=0,k=0,l=0;
-ans[0]= '____ ';
-ans[1]= '____ ';
-ans[2]= '____ ';
-ans[3]= '____ ';
-ans[4]= '____ ';
+var pressed = new Array();
 
-var status;
 var topic;
 var chapter;
-var timer = null;
-
-var SQLite = require('react-native-sqlite-storage');
-var db = SQLite.openDatabase({name:'activity.db', createFromLocation:'~activity.db'})
+var status;
+var answer = '';
+var len = 0;
 var correct_ans = new Array();
 var time;
+var SQLite = require('react-native-sqlite-storage');
+var db = SQLite.openDatabase({name:'activity.db', createFromLocation:'~activity.db'})
+var timer = null;
 var timeout;
+
 export default class Activity7 extends Component {
+    
 
   constructor(props) {
-    time = new Array();
     super(props);
+    time = new Array();
+    for (var i = words.length - 1; i >= 0; i--) {
+    	pressed[i] = false;
+    }
 
     answer = '';
     this.state = {
       answer: answer,
+      len:len,
+      sentence: sentence,
       correct_ans: '',
       check_ans: 0,
       status: 0,
       id:0,
       last:0,
+      time:time,
       repeat:0,
       rem_rep:0,
-      time:time,
       progress:1
     };
 
-    for (var i = ans.length - 1; i >= 0; i--) {
-      ans[i] = '____ ';
-    }
-    l = 0;
 
     topic = this.props.topic;
-  chapter = this.props.chapter;
+    chapter = this.props.chapter;
   console.log("recieved "+topic+chapter);
-  
+    
     db.transaction((tx) => {
-      tx.executeSql('SELECT * FROM act7 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
+      tx.executeSql('SELECT * FROM act8 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
 
-       var len = results.rows.length;
+       var length = results.rows.length;
 
-       console.log("DB :"+len);
+       console.log("DB:"+length);
 
-       if(len > 0){
-        var rand = Math.floor(Math.random()*(len-1))+0;
+       if(length > 0){
+        var rand = Math.floor(Math.random()*(length-1))+0;
         console.log("rand="+rand)
         var row = results.rows.item(rand);
-
-        this.setState({question: row.question});
-        words = row.question.split(' ');
-        console.log("words : " + words);
-
-        this.setState({options: row.options});
-        supp_words = row.options.split(' ');
-        console.log("supp_words : " + supp_words);
+        this.setState({sentence: row.sentence});
+        console.log(this.state.sentence);
+        words = row.sentence.split(" ");
+        console.log(this.state.words);
+        this.setState({words:words});
+        len = words.length;
+        this.setState({len:len});
 
         correct_ans = row.correct;
-        console.log("correct_ans : " + correct_ans);
-        this.setState({id:row.id});
-
-        this.setState({words:words,supp_words:supp_words,correct_ans:correct_ans});
+        console.log("correct ans " + correct_ans);
+        this.setState({correct_ans:correct_ans});
         this.setState({id:row.id});
         if(len==1 && this.props.wrong == 0)
           this.setState({last:7});
 
         else if(len==1 && this.props.wrong == 2)
           this.setState({rem_rep:7})
-        
+
        }
           
         });
@@ -99,42 +92,34 @@ export default class Activity7 extends Component {
 
   }
 
-  _handleButtonPress = key => {
-    ans[l] = key+' ';
-    
-    l++;
 
-    this.setState({ element: element});
-    console.log("element: " + element );
-
+  _handleButtonPress = index => {
+  	if (!pressed[index]){
+  		pressed[index] = true;
+    	answer = words[index];
+    	this.setState({ answer: answer});
+	}
   };
 
+  
   _clear = () => {
-    for (var i = ans.length - 1; i >= 0; i--) {
-      ans[i] = '____ ';
-    }
-    l = 0;
-    this.setState({ element: element });
+    answer = " ";
+    this.setState({ answer: answer });
   };
+  
+   _handleSubmitPress = () => {
+    console.log("my answer "+this.state.answer);
+    console.log("correct answer "+this.state.correct_ans);
 
 
-  _handleSubmitPress = () => {
-
-    answer = Array.from(element);
-    answer = answer.join("");
-
-    this.setState({answer:answer });
-    console.log("my answer "+answer);
-    console.log("correct answer "+correct_ans);
-
-    if(answer === correct_ans){
-      console.log("entered");        
-
+    if(this.state.answer === this.state.correct_ans){
+      console.log("entered");
+        
       this.setState({check_ans: 1});
       this.setState({repeat: 0});
-
+ 
       db.transaction((tx) => {
-        tx.executeSql('UPDATE act7 SET status=1 WHERE id=?', [this.state.id], (tx, results) => {
+        tx.executeSql('UPDATE act8 SET status=1 WHERE id=?', [this.state.id], (tx, results) => {
           console.log("correct update");
         });
       
@@ -143,11 +128,10 @@ export default class Activity7 extends Component {
 
     else{
       this.setState({check_ans: 0});
-
       this.setState({repeat: 7});
 
       db.transaction((tx) => {
-        tx.executeSql('UPDATE act7 SET status=2 WHERE id=?', [this.state.id], (tx, results) => {
+        tx.executeSql('UPDATE act8 SET status=2 WHERE id=?', [this.state.id], (tx, results) => {
           console.log("wrong update");
         });
       
@@ -164,14 +148,18 @@ export default class Activity7 extends Component {
 
   };
   
+
   update2 = () =>{
     db.transaction((tx) => {
-    tx.executeSql('UPDATE act7 SET status=2 WHERE id=?', [this.state.id], (tx, results) => {
+    tx.executeSql('UPDATE act8 SET status=2 WHERE id=?', [this.state.id], (tx, results) => {
     
     });
   
   });
   };
+
+
+  
   render() {
 
     if(topic == -1){
@@ -194,6 +182,7 @@ export default class Activity7 extends Component {
   
     }
 
+
 if (topic == -1) 
     {
       timer = <View >
@@ -202,102 +191,88 @@ if (topic == -1)
           </View>;
     }
 
-    
-    if(k==0)
-    {
-        element = [];
-        j = 0;
-        for( i=0 ; i<words.length; i++){
-      
-          if(words[i]=='_'){
-              element.push(
-                  ans[j]
-              );
-             j++;
-          }
-          
-          else{
-            element.push(
-                  words[i]+" "
-            );
-          }
-      }
-      
-    }
-    
 
-    
-    var buttons2 = [];
-    var len2 = supp_words.length;
-    for(let i = 0; i < len2; i++){
+  // words = sentence.split(" ");
   
-            buttons2.push(
-            <TouchableOpacity onPress={() => this._handleButtonPress(supp_words[i])}>
-                <View style={styles.button}>
-                  <Text style={styles.buttonText}>{supp_words[i]}</Text>
-                </View>
-            </TouchableOpacity>
-          )
-  
-    }
-    
-    if(this.state.status == 0){
+  var buttons1 = [];
+  // var len1 = words.length;
+	for(let i = 0; i < len; i++){
+
+      		buttons1.push(
+	        <TouchableHighlight onPress={() => this._handleButtonPress(i)}>
+              <View >
+                <Text style={styles.buttonText}>{words[i]}</Text>
+              </View>
+          </TouchableHighlight>
+		    )
+
+	}
+	
+
+    if(this.state.status == 0){  
     return (
 
-    <View style={styles.container}>
-   
-
-       {topic==-1 && timer}
-
-       <View >
-        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
-    </View>
-    
-          <View style={styles.questBox}>
-          <Text>
-            {element}
-          </Text>
-          </View>
-          <View style={styles.hint}>
-          <View style={styles.hintt}>
-          
-            <Text style={{ color: 'white' }}>
-               Chose words to fill in the blanks.
-            </Text>
-            
-          </View>
-          <View style={styles.grid}>
-            { buttons2 }
-          </View>
-          
-        </View>
-        <View style={styles.subBox}>
-            <TouchableOpacity onPress={() => this._clear()}>
-              <View style={styles.button}>
-                <Text style={{fontSize:20, fontWeight:'bold', color:'#BB0000'}}>CLEAR</Text>
-              </View>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.subBox}>
-          <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-            <View style={styles.button}>
-              <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>SUBMIT</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
+      <View style={styles.container}>
+        {topic==-1 && timer}
         
+        <View >
+        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+    </View>
+          
+        <View style={{flex:2}}>
+          <Text style={styles.titleQuestion}>
+            Click the word that makes the sentence sound wrong.
+          </Text>
+        </View>        
+       <View style={styles.compBox}>
+      			<Text style={{fontSize:15,color:'black', fontFamily: 'Museo 500',}}>Wrong Sentence:</Text>
+                           <View style={{flexDirection:'row'}}>
+                        { buttons1 }
+                        </View>
+      		</View>
+    
+        
+        <View style={styles.opsBox} >
+        <Text style={{fontSize:15,color:'black', fontFamily: 'Museo 500',}}>Wrong Word:</Text>
+       <Text style={{fontSize:20}}>
+            {answer}
+          </Text>
+        </View>
+        <View style={{flex: 3, flexDirection: 'row'}}>
+              <View style={styles.subBox1}>
+              <TouchableOpacity onPress={() => this._clear()}>
+                  <View style={styles.button1}>
+                <Text style={{fontSize:20, fontFamily: 'Museo 500',color:'#1c313a'}}>CLEAR</Text>
+                </View>
+              </TouchableOpacity>
+              </View>
+
+
+              <View style={styles.subBox2}>
+                    <TouchableOpacity onPress={() => this._handleSubmitPress()}>
+                          <View style={styles.button2}>
+                        <Text style={{fontSize:20, fontFamily: 'Museo 500', color:'#ffffff'}}>SUBMIT</Text>
+                        </View>
+                    </TouchableOpacity>
+            </View>
+            </View>
       </View>
     );
     }
+      else if(this.state.status == 1){
+        clearTimeout(timeout);
+        console.log("rep_state="+this.state.repeat);
+          console.log("rem_rep_state="+this.state.rem_rep);
+          return(
+            <Result score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
+          );
+      }
+       else if(status == 3){        
 
-    else if(this.state.status == 1){
-      clearTimeout(timeout);
-      console.log("rep_state="+this.state.repeat);
-        console.log("rem_rep_state="+this.state.rem_rep);
         return(
-          <Result score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
+          <Time_up topic={topic} chapter={chapter} end={this.state.last}/> 
         );
-    }
+       }
 
   }
 }
@@ -305,51 +280,105 @@ if (topic == -1)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#34495e',
+    // alignItems: 'center',
+    // paddingTop: Constants.statusBarHeight,
+    backgroundColor: '#e5e5e5',
   },
   timer: {
     flexDirection: 'row',
-    backgroundColor: '#FFFFFF',
-    height: 20,
+  	backgroundColor: '#FFFFFF',
+  	height: 20,
     alignSelf: 'flex-start'
-  },
-  questBox: {
-    flex: 2,
-    padding: 5,
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    backgroundColor: '#9FA8DA',
-    flexDirection: 'row',
-    flexWrap: 'wrap'
-  },
-  
-  subBox: {
-    flex: 1,
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    backgroundColor: '#3F51B5',
-  },
-  buttonText: {
-    padding: 5,
-  },
-  hint: {
-    flex: 2,
-    padding: 15,
-    alignItems: 'center',
-    alignSelf: 'stretch',
-    backgroundColor: '#5C6BC0',
   },
   button: {
     margin: 5,
     width: Dimensions.get('window').width/3 - 20,
+    backgroundColor: '#1c313a',
+  },
+  buttonText: {
+    padding: 5,
+    color:'black',
+    fontSize: 20,
+     fontFamily: 'Museo 500',
+  },
+    opsBox: {
+    flex: 2,
+    alignItems:'center',
+    alignSelf: 'stretch',
+    justifyContent: 'center',
+    backgroundColor: '#ffffff',
+  },
+  hint: {
+    padding: 15,
     alignItems: 'center',
-    backgroundColor: '#3F51B5',
+    alignSelf: 'stretch',
+    alignSelf: 'stretch',
+    backgroundColor: '#ffffff',
+  },
+  supBox: {
+    flex: 4,
+    alignSelf: 'stretch',
+    backgroundColor: '#ffffff',
+  },
+  compBox: {
+    flex: 2,
+    alignSelf: 'stretch',
+    alignItems:'center',
+    backgroundColor: '#ffffff',
+  },
+   subBox1: {
+     flex:1,
+     alignSelf: 'stretch',
+    alignItems: 'center',
+    justifyContent:'center',
+    
+  },
+  subBox2: {
+   
+     flex:1,
+     alignSelf: 'stretch',
+    alignItems: 'center',
+    justifyContent: 'center',
+   
+  },
+  text: {
+    padding: 10,
+    fontSize: 18,
   },
   grid: {
-    flexDirection: 'row',
-    flexWrap: 'wrap'
+  	padding: 10,
+    flexWrap: 'wrap',
+     backgroundColor:'#ffffff'
   },
-
+ button1: {
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,
+    alignItems: 'center',
+    backgroundColor: '#ffffff',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+    
+  },
+   button2:{
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,  
+    alignItems: 'center',
+    backgroundColor: '#1c313a',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+   
+   },
+   titleQuestion:{
+     justifyContent:'center',
+     fontSize:15,
+     fontFamily: 'Museo 500',
+     margin:20,
+     color:'#000000'
+ },
 });

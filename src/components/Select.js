@@ -9,8 +9,8 @@ import Activity5 from './Activity5';
 import Activity6 from './Activity6';
 import Activity7 from './Activity7';
 import Complete from './Complete';
-import Activity8 from './Activity8';
-import Activity10 from './Activity10';
+//import Activity8 from './Activity8';
+//import Activity10 from './Activity10';
 import Test_result from './Test_result';
 
 var count;
@@ -26,7 +26,7 @@ export default class Select extends Component {
 
 	if(this.props.count == 0){
 		count=0;
-		over = [1,2,3,4];
+		over = [1,2,3,4,5,6,7];
 		repeat = [];
 		correct = 0;
 	}
@@ -96,20 +96,20 @@ export default class Select extends Component {
 			);
 		}
 
-		else if(i==8){
-			return(
-				<View style={styles.container}>
-					<Activity8 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
-				</View>
-			);
-		}
-		else if(i==9){
-			return(
-				<View style={styles.container}>
-					<Activity10 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
-				</View>
-			);
-		}
+		// else if(i==8){
+		// 	return(
+		// 		<View style={styles.container}>
+		// 			<Activity8 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
+		// 		</View>
+		// 	);
+		// }
+		// else if(i==9){
+		// 	return(
+		// 		<View style={styles.container}>
+		// 			<Activity10 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
+		// 		</View>
+		// 	);
+		// }
 	};
 
 	render(){

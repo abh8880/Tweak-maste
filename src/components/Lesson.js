@@ -179,18 +179,6 @@ static navigationOptions = {
 		   console.log("act7 updated");
 		 });  
 		 });
-   
-		 db.transaction((tx) => {
-		   tx.executeSql('UPDATE act8 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
-		   console.log("act8 updated");
-		 });  
-		 });
-
-     db.transaction((tx) => {
-       tx.executeSql('UPDATE act10 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
-       console.log("act10 updated");
-     });  
-     });
 
 	};
 
