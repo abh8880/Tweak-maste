@@ -227,7 +227,7 @@ export default class Activity3 extends Component {
             {topic!=-1 && bar}
 
     
-         <View style={styles.hint}>
+         <View>
          <View>
           <Text  style={styles.titleQuestion}>
             Pick words from the list below to form your answer
@@ -236,7 +236,7 @@ export default class Activity3 extends Component {
         </View>
         
             <View style={styles.questBox}>
-          <Text style={{ fontSize: 20 }}>
+          <Text style={{ fontSize: 20,fontFamily: 'Museo 500' }}>
             Q: {this.state.question}
           </Text>
         </View>
@@ -247,16 +247,18 @@ export default class Activity3 extends Component {
         </View>
        
             <View style={styles.opsBox}>
+             <ScrollView>
             <Card containerStyle={{width:Dimensions.get('window').width-20,
               alignItems:'center'}}>
-              <View>
-                <ScrollView showsVerticalScrollIndicator={false}>
+             
+               
                 { buttons }
-                </ScrollView>
-              </View>
+               
+            
              </Card>
+             </ScrollView>
             </View>
-      <View style={{flex: 3, flexDirection: 'row'}}>
+      <View style={{flex: 2, flexDirection: 'row'}}>
               <View style={styles.subBox1}>
               <TouchableOpacity onPress={() => this._clear()}>
                   <View style={styles.button1}>
@@ -314,7 +316,7 @@ container: {
      fontFamily: 'Museo 500', color:'#1c313a'
   },
   ansBox: {
-    flex: 1,
+    flex: 0.5,
     alignItems:'center',
     alignSelf: 'stretch',
     backgroundColor: '#ffffff'

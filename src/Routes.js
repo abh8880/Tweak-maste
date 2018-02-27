@@ -30,7 +30,7 @@ import { StackNavigator } from 'react-navigation';
 
 const TabIcon =({selected, title})=> {
   return(
-    <Text style={{ fontSize: 15, color: '#88bfff'}}
+    <Text style={{ fontSize: 18, color: '#88bfff'}}
     >{title}</Text>
     );
 };

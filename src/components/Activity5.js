@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet,Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet,Dimensions,ScrollView } from 'react-native';
 import Result from './Result';
 import Time_up from './Time_up';
 import Select from './Select';
@@ -249,12 +249,15 @@ export default class Activity5 extends Component {
                   </Text>
           
                   <View style={styles.opsBox} >
-                    <Text style={{fontSize:20}}>
+                    <Text style={{fontSize:18,fontFamily:'Museo 500'}}>
                       {answer}
                     </Text>
                   </View>
                   <View style={styles.compBox}>
-                  <Card title="Compulsory Words">
+                  <Text style={styles.text1}>
+                    Compulsory Words
+                      </Text>
+                  <Card>
 
                     <View style={styles.grid}>
                             { buttons1 }
@@ -263,15 +266,21 @@ export default class Activity5 extends Component {
                   </View>
           
           <View style={styles.supBox}>
-          <Card title="Supplementary Words">
-           
+             <Text style={styles.text1}>
+                    Supplementary Words
+                      </Text>
+          <Card>
+               <ScrollView> 
             <View style={styles.grid}>
+             
         			{ buttons2 }
+               
         		</View>
+               </ScrollView>
            </Card>
-    
+            
             </View>
-         <View style={{flex: 3, flexDirection: 'row'}}>
+         <View style={{flex: 2, flexDirection: 'row',margin:'5%'}}>
               <View style={styles.subBox1}>
               <TouchableOpacity onPress={() => this._clear()}>
                   <View style={styles.button1}>
@@ -310,6 +319,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // paddingTop: Constants.statusBarHeight,
     backgroundColor: '#e5e5e5',
+    margin:'2%'
   },
   timer: {
     flexDirection: 'row',
@@ -330,8 +340,8 @@ const styles = StyleSheet.create({
      fontFamily: 'Museo 500',
   },
     opsBox: {
+   flex:2,
    flexDirection: 'row',
-    flex:1,
     alignSelf: 'stretch',
     justifyContent: 'center',
     backgroundColor: '#ffffff',
@@ -342,14 +352,17 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffff',
   },
   supBox: {
-    flex:6,
-    alignSelf: 'stretch',
+     flex:6,
+     width:Dimensions.get('window').width,
+    height:Dimensions.get('window').height/10,
     backgroundColor: '#ffffff',
+
   },
   compBox: {
     flex:4,
-    alignSelf: 'stretch',
+    width:Dimensions.get('window').width,
     backgroundColor: '#ffffff',
+
   },
   subBox1: {
      flex:1,
@@ -371,10 +384,16 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'Museo 500',
   },
+   text1: {
+    alignSelf:'center',
+    fontSize: 18,
+    fontFamily: 'Museo 500',
+  },
   grid: {
-
+    alignItems:'center',
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    margin:'2%'
   },
 titleQuestion:{
      justifyContent:'center',
