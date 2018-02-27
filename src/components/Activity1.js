@@ -201,12 +201,17 @@ update2 = () =>{
             
             <View style={styles.ansBox}>
               <View style={styles.ansLine}>
-                 <Text style={{fontSize:20,fontWeight:'bold'}}>{anspart[0]}</Text>
-                <Text style={{fontSize:20, fontWeight:'bold'}}>{this.state.current_ans}</Text>
-                <Text style={{fontSize:20,fontWeight:'bold'}}>{anspart[1]}</Text>
+                 <Text style={{fontSize:20,fontFamily: 'Museo 500'}}>{anspart[0]}</Text>
+                <Text style={{fontSize:20, fontFamily: 'Museo 500'}}>{this.state.current_ans}</Text>
+               
 
               </View>
+            <View style={{flexDirection:'row'}}>
+              <Text style={{fontSize:20,fontFamily: 'Museo 500'}}>{anspart[1]}</Text>
             </View>
+            </View>
+          
+          
             <Card>
             <View style={styles.opsBox}>
               
@@ -240,14 +245,13 @@ update2 = () =>{
                             
             </View>
             </Card>
-            <View style={styles.subBox}>
+           <View style={styles.subBox2}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                      <View style={styles.button1}>
-                        <Text style={{fontSize:20,fontFamily: 'Museo 500',color:'#ffffff'}}>SUBMIT</Text>
-                      </View>
+                          <View style={styles.button2}>
+                        <Text style={{fontSize:20,fontFamily: 'Museo 500', color:'#ffffff'}}>SUBMIT</Text>
+                        </View>
                     </TouchableOpacity>
             </View>
-          
         </View>
       );
     }
@@ -269,6 +273,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#e5e5e5',
+      margin:'2%'
   },
   timer: {
     flexDirection: 'row',
@@ -285,7 +290,7 @@ const styles = StyleSheet.create({
   
   
   ansBox: {
-   flex: 2,
+   flex: 1,
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
@@ -304,14 +309,26 @@ const styles = StyleSheet.create({
     borderRadius:5
   },
   
-  subBox: {
-  flex: 1,
+  subBox2: {
+   
+     flex:2,
+     alignSelf: 'stretch',
     alignItems: 'center',
-    alignSelf: 'stretch',
     justifyContent: 'center',
-  
+   
   },
-  
+  button2:{
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,  
+    alignItems: 'center',
+    backgroundColor: '#1c313a',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+   
+   },
   buttonLine: {
     flexDirection:'row', 
     alignSelf: 'stretch',
@@ -323,25 +340,15 @@ const styles = StyleSheet.create({
     margin: 20,
     width:100,
     alignItems: 'center',
-    backgroundColor: 'rgba(9, 22, 200, 0.6)',
+    backgroundColor: '#1c313a',
     borderRadius: 10
   },
   
   buttonText: {
     padding: 20,
     color: 'white',
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'Museo 500',
-  },
-     button1: {
-    margin: 25,
-    width: 320,
-    height:50,
-    alignSelf:'center',
-    alignItems: 'center',
-    justifyContent:'center',
-    backgroundColor: '#1c3370',
-    borderRadius:5
   },
   titleQuestion:{
      justifyContent:'center',
