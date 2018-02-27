@@ -6,7 +6,8 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Dimensions
+  Dimensions,
+  AsyncStorage
 } from 'react-native';
 
 const height = Dimensions.get('window').height;
@@ -26,6 +27,8 @@ import Word from './components/VocabModule/WordCards/Word';
 import DeckComplete from './components/VocabModule/WordCards/DeckComplete';
 // VocabModule pages end
 
+var username = null;
+
 import { StackNavigator } from 'react-navigation';
 
 const TabIcon =({selected, title})=> {
@@ -36,6 +39,24 @@ const TabIcon =({selected, title})=> {
 };
 
 export default class Routes extends Component {
+
+
+  async get(){
+    username = await AsyncStorage.getItem('username');
+    console.log("in routes.js , name: "+username)
+    alert(username);
+    this.setState({username:username});
+    console.log("state: "+this.state.username)
+  }
+
+   constructor(props) {
+        super(props);
+        this.state = {
+          username: ''
+        };
+        this.get();
+
+      };
 
   showBackArrow(dest) {
     if (dest != 'nope')
@@ -86,6 +107,7 @@ export default class Routes extends Component {
   }
 
   render() {
+    console.log('inside render: '+this.state.username)
     return(
       <Router navigationBarStyle={styles.navBar} titleStyle={styles.navBarTitle} barButtonTextStyle={styles.barButtonTextStyle} barButtonIconStyle={styles.barButtonIconStyle}>
           <Stack key="root" >
@@ -109,8 +131,8 @@ export default class Routes extends Component {
               </Scene>
             </Scene>
 
-            <Scene key="first" component={First} title="Chapters" navBar={() => this.createNavBar('Chapters', 'courses')}/>
-            <Scene key="lesson" component={Lesson} title="Lessons" navBar={() => this.createNavBar('Lessons', 'first')}/>
+            <Scene username={this.state.username} key="first" component={First} title="Chapters" navBar={() => this.createNavBar('Chapters', 'courses')}/>
+            <Scene username={this.state.username} key="lesson" component={Lesson} title="Lessons" navBar={() => this.createNavBar('Lessons', 'first')}/>
             <Scene key="select" component={Select} title="Activities"/>
 
           {/*  VocabModule pages start  */}

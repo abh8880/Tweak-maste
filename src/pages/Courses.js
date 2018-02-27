@@ -5,7 +5,8 @@ import {
   View,
   Text,
   TouchableOpacity,
-  Image
+  Image,
+  AsyncStorage
 } from 'react-native';
 
 import { StatusBar} from 'react-native';
@@ -23,6 +24,26 @@ var box_count = 3;
 var box_height = height / box_count;
 
 export default class VerticalStackLayout extends Component {
+  
+  async get(){
+    username = await AsyncStorage.getItem('username');
+    console.log("in courses.js , name: "+username)
+    alert(username);
+    this.setState({username:username});
+    console.log("state: "+this.state.username)
+  }
+
+   constructor(props) {
+        super(props);
+        this.state = {
+          username: ''
+        };
+        this.get();
+
+      };
+
+
+
   render() {
     return (
 
@@ -30,7 +51,7 @@ export default class VerticalStackLayout extends Component {
      <View style={[styles.box, styles.box1]}>
 
 
-         <TouchableOpacity onPress={() => Actions.first()} >
+         <TouchableOpacity onPress={() => Actions.first({username:username})} >
 
 
            <View  style={{alignItems:'center',padding:10}}>

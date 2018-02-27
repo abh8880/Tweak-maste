@@ -23,7 +23,7 @@ var box_count = 3;
 var box_height = height / box_count;
 var progress_val = [0,0,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
 var chap_info = [];
-var name = null;
+// var username = null;
 
 export default class First extends Component {
 
@@ -50,10 +50,10 @@ export default class First extends Component {
 //     }
 //   };
 
-  async get(){
-    name = await AsyncStorage.getItem('username'); 
-    alert(name);
-  }
+  // async get(){
+  //   name = await AsyncStorage.getItem('username'); 
+  //   alert(name);
+  // }
 
   constructor(props) {
         super(props);
@@ -61,13 +61,17 @@ export default class First extends Component {
           status: 0,
           progress_val: progress_val,
           prev_chap:'',
+          username:this.props.username
+          // this.get();
       };
-
-      this.get();
-
+      // this.setState({username:})
+      // username = this.props.username;
+      console.log("in first.js , name: "+this.state.username)
+      alert(this.state.username)
+      
       axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
             params: {
-              name: name
+              name: this.state.username
             },
             dataType: 'json'
           })
