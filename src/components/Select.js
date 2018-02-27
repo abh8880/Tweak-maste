@@ -10,6 +10,7 @@ import Activity6 from './Activity6';
 import Activity7 from './Activity7';
 import Complete from './Complete';
 import Activity8 from './Activity8';
+import Activity10 from './Activity10';
 import Test_result from './Test_result';
 
 var count;
@@ -71,7 +72,6 @@ export default class Select extends Component {
 			);
 		}
 
-
 		else if(i==5){
 			return(
 				<View style={styles.container}>
@@ -100,6 +100,13 @@ export default class Select extends Component {
 			return(
 				<View style={styles.container}>
 					<Activity8 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
+				</View>
+			);
+		}
+		else if(i==9){
+			return(
+				<View style={styles.container}>
+					<Activity10 topic={topic} chapter={chapter} wrong={mode} count={correct}/>
 				</View>
 			);
 		}
