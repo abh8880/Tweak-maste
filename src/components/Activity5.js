@@ -14,6 +14,7 @@ var message2 = 'Supplementary words';
 var SQLite = require('react-native-sqlite-storage');
 var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'})
 var timer = null;
+var bar = null;
 
 var correct_ans = new Array();
 
@@ -44,12 +45,12 @@ export default class Activity5 extends Component {
       repeat:0,
       rem_rep:0,
       time:time,
-      progress:1
+      progress:1,
+      bar:0
     };
 
     topic = this.props.topic;
   chapter = this.props.chapter;
-  console.log("recieved "+topic+chapter);
   
     db.transaction((tx) => {
       tx.executeSql('SELECT * FROM act5 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
@@ -83,6 +84,12 @@ export default class Activity5 extends Component {
 
   }
 
+  componentWillMount(){
+    console.log("prop count:"+this.props.count);
+  this.setState({bar:this.props.count});
+  console.log("recieved "+topic+chapter);
+  console.log("bar state "+this.state.bar);
+  }
 
   _handleButtonPress = index => {
     if (!pressed[index]){
@@ -186,12 +193,18 @@ export default class Activity5 extends Component {
   
     }
 
-if (topic == -1) 
+    if (topic == -1) 
     {
       timer = <View >
               <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
 
           </View>;
+    }
+
+    else{
+      bar = <View >
+        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+    </View>
     }
 
 
@@ -228,12 +241,8 @@ if (topic == -1)
 
         <View style={styles.container}>
        
-
-                {topic==-1 && timer}
-
-                <View >
-        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
-    </View>
+       {topic==-1 && timer}
+       {topic!=-1 && bar}
 
                 <Text style={styles.titleQuestion}>
                  Pick the words from the list to form your answer

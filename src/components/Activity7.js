@@ -48,13 +48,13 @@ export default class Activity7 extends Component {
       time:time,
       repeat:0,
       rem_rep:0,
-      progress:1
+      progress:1,
+      bar:0
     };
 
 
     topic = this.props.topic;
     chapter = this.props.chapter;
-  console.log("recieved "+topic+chapter);
     
     db.transaction((tx) => {
       tx.executeSql('SELECT * FROM act8 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
@@ -90,6 +90,13 @@ export default class Activity7 extends Component {
         });
     });
 
+  }
+
+  componentWillMount(){
+    console.log("prop count:"+this.props.count);
+  this.setState({bar:this.props.count});
+  console.log("recieved "+topic+chapter);
+  console.log("bar state "+this.state.bar);
   }
 
 
@@ -183,12 +190,17 @@ export default class Activity7 extends Component {
     }
 
 
-if (topic == -1) 
+    if (topic == -1) 
     {
-      timer = <View >
-                <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
-
+          timer = <View >
+            <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
           </View>;
+    }
+
+    else{
+      bar = <View >
+        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+    </View>
     }
 
 
@@ -213,11 +225,8 @@ if (topic == -1)
     return (
 
       <View style={styles.container}>
-        {topic==-1 && timer}
-        
-        <View >
-        <Progress.Bar progress={this.props.count/10} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
-    </View>
+      {topic==-1 && timer}
+            {topic!=-1 && bar}        
           
         <View style={{flex:2}}>
           <Text style={styles.titleQuestion}>

@@ -11,7 +11,7 @@ var question = 'How are you ?';
 var current_ans = 'What would be your reply?';
 var ops = [];
 var topic;
-var chap
+var chapter;
 var id;
 var status;
 var time;
@@ -43,12 +43,8 @@ export default class Activity2 extends Component {
     bar:0
   };
 
-  var rand = Math.floor(Math.random()*3)+1;
-
   topic = this.props.topic;
   chapter = this.props.chapter;
-  console.log("recieved "+topic+chapter);
-  this.setState({bar:this.props.count/12});
 
   db.transaction((tx) => {
     tx.executeSql('SELECT * FROM act2 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
@@ -151,31 +147,31 @@ update2 = () =>{
     if(topic == -1){
       clearTimeout(timeout);
       timeout = setTimeout((function() {
-        this.setState({ progress: this.state.progress - 0.1});
-      }).bind(this), 1000);
-  
-      console.log("progress="+this.state.progress);
-  
-      if(this.state.progress<0){
-        console.log("less");
-        clearTimeout(timeout);
-        this.update2();
-        return(
-          <Time_up topic={topic} chapter={chapter} end={this.state.last}/> 
-        );
-      }
+      this.setState({ progress: this.state.progress - 0.1});
+    }).bind(this), 1000);
+
+    console.log("progress="+this.state.progress);
+
+    if(this.state.progress<0){
+      console.log("less");
+      clearTimeout(timeout);
+      this.update2();
+      return(
+        <Time_up topic={topic} chapter={chapter} end={this.state.last}/> 
+      );
+    }
     }
 
-if (topic == -1) 
+    if (topic == -1) 
     {
-      timer = <View >
+          timer = <View >
             <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
           </View>;
     }
 
     else{
       bar = <View >
-        <Progress.Bar progress={this.state.bar} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
     </View>
     }
 
@@ -184,11 +180,12 @@ if (topic == -1)
       return (
 
         <View style={styles.container}>
-            {topic==-1 && timer}
-            {topic!=-1 && bar}
-
             
           <View style={{flex:1}}>
+
+          {topic==-1 && timer}
+            {topic!=-1 && bar}
+            
           <Text style={styles.titleQuestion}>
         Choose the correct sentence for the given question
           </Text>
@@ -253,9 +250,9 @@ if (topic == -1)
 }
 
 const styles = StyleSheet.create({
-container: {
-     flex: 1,
-    backgroundColor: '#ffffff',
+  container: {
+    flex: 1,
+    backgroundColor: '#e5e5e5',
   },
   timer: {
     flexDirection: 'row',
