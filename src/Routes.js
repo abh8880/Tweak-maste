@@ -10,6 +10,13 @@ import {
   AsyncStorage
 } from 'react-native';
 
+import Menu, {
+  MenuProvider,
+  MenuOptions,
+  MenuOption,
+  MenuTrigger
+} from 'react-native-popup-menu';
+
 const height = Dimensions.get('window').height;
 
 import Login from './pages/Login';
@@ -38,6 +45,15 @@ const TabIcon =({selected, title})=> {
     );
 };
 
+const NavigatorMenu = () => (
+  <Menu>
+    <MenuTrigger text='...' customStyles={triggerStyles}/>
+    <MenuOptions>
+      <MenuOption customStyles={optionsStyles} onSelect={() => Actions.login()} text='Logout' />
+    </MenuOptions>
+  </Menu>
+);
+
 export default class Routes extends Component {
 
 
@@ -57,6 +73,23 @@ export default class Routes extends Component {
         this.get();
 
       };
+
+    logout_func = () =>{
+      AsyncStorage.removeItem('username').done();
+      AsyncStorage.removeItem('password').done();
+      Actions.login();
+    }
+
+    NavigatorMenu = () => {
+      return(
+        <Menu>
+          <MenuTrigger text='. . .' customStyles={triggerStyles}/>
+          <MenuOptions>
+            <MenuOption customStyles={optionsStyles} onSelect={() => this.logout_func()} text='Logout' />
+          </MenuOptions>
+        </Menu>
+      );
+    }
 
   showBackArrow(dest) {
     if (dest != 'nope')
@@ -83,7 +116,8 @@ export default class Routes extends Component {
         color: '#88bfff',                // title color
         fontSize: 20,
         fontWeight: '500',
-        padding: 20
+        paddingLeft: 20,
+        paddingRight: 150
       }}>
         {source}
       </Text>
@@ -102,6 +136,7 @@ export default class Routes extends Component {
       >
         {this.showBackArrow(dest)}
         {this.renderTitle(source)}
+        {this.NavigatorMenu()}
       </View>
     )
   }
@@ -109,7 +144,8 @@ export default class Routes extends Component {
   render() {
     console.log('inside render: '+this.state.username)
     return(
-      <Router navigationBarStyle={styles.navBar} titleStyle={styles.navBarTitle} barButtonTextStyle={styles.barButtonTextStyle} barButtonIconStyle={styles.barButtonIconStyle}>
+      <MenuProvider>
+      <Router>
           <Stack key="root" >
             <Scene key="login" component={Login} title="Login" initial={true} hideNavBar={true}/>
             <Scene key="signup" component={Signup} title="Register" hideNavBar={true}/>
@@ -126,7 +162,7 @@ export default class Routes extends Component {
               <Scene key="coursestab" title="Courses" icon={TabIcon}>
                 <Scene key="courses" component={Courses} hideNavBar/>
               </Scene>
-              <Scene key="speakingtab" title="Speaking" icon={TabIcon}>
+              <Scene key="speakingtab" title="Speaking" icon={TabIcon} >
                 <Scene key="speaking" component={Speaking} hideNavBar/>
               </Scene>
             </Scene>
@@ -175,21 +211,23 @@ export default class Routes extends Component {
 
           </Stack>
        </Router>
+       </MenuProvider>
       )
   }
 }
 
-const styles = StyleSheet.create({
-  navBar: {
-    backgroundColor:'#0D47A1',
-},
-navBarTitle:{
-    color:'#FFFFFF'
-},
-barButtonTextStyle:{
-    color:'#FFFFFF'
-},
-barButtonIconStyle:{
-    tintColor:'rgb(255,255,255)'
-},
-});
+const triggerStyles = {
+  triggerText: {
+    color: 'white',
+  },
+};
+
+const optionsStyles = {
+  optionWrapper: {
+    backgroundColor: 'white',
+    margin: 10,
+  },
+  optionText: {
+    color: 'brown',
+  },
+};
