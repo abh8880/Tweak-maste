@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Dimensions } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Dimensions,ScrollView} from 'react-native';
 
 import Result from './Result';
 import Time_up from './Time_up';
@@ -181,15 +181,21 @@ update2 = () =>{
 
         <View style={styles.container}>
             
-          <View style={{flex:1}}>
+         
 
           {topic==-1 && timer}
             {topic!=-1 && bar}
             
-          <Text style={styles.titleQuestion}>
+         
+         
+            <View>
+         <View>
+           <Text style={styles.titleQuestion}>
         Choose the correct sentence for the given question
           </Text>
-          </View>
+        </View>
+        </View>
+          
             <View style={styles.questBox}>
               <Text style={{fontSize:20,justifyContent: 'center',  fontFamily: 'Museo 500',}}>{this.state.question}</Text>
             </View>
@@ -199,6 +205,7 @@ update2 = () =>{
             </View>
             
             <View style={styles.opsBox}>
+             <ScrollView>
               <Card>
                 <TouchableOpacity onPress={() => this._handleButtonPress(ops[0])}>
                   <View style={styles.button}>
@@ -223,7 +230,8 @@ update2 = () =>{
                     <Text style={styles.buttonText}>{ops[3]}</Text>
                   </View>
                 </TouchableOpacity>
-               </Card>             
+               </Card> 
+            </ScrollView>
             </View>
   
             <View style={styles.subBox2}>
@@ -253,6 +261,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#e5e5e5',
+    margin:'2%'
   },
   timer: {
     flexDirection: 'row',
@@ -262,54 +271,53 @@ const styles = StyleSheet.create({
 
   },
   questBox: {
-   
     backgroundColor: '#ffffff',
-    justifyContent: 'center',
-    alignItems:'center'
+    flex:0.5,
+    alignItems:'center',
+     alignSelf:'stretch',
   },
   
   ansBox: {
-    alignSelf: 'stretch',
     backgroundColor: '#ffffff',
+    flex:1,
+    alignSelf: 'stretch',
     alignItems:'center'
   },
   
   opsBox: {
+    flex:6,
+    width:Dimensions.get('window').width,
+    paddingBottom:30,
+    backgroundColor: '#ffffff',
     alignItems:'center',
-    borderRadius:5,
-    alignSelf:'center'
+    
   },
   
   subBox2: {
-    marginTop:'20%',
+    marginTop:'5%',
     alignItems: 'center',
     alignSelf: 'stretch',
     justifyContent: 'center',
-    marginBottom:20
+    marginBottom:'5%'
    
   },
   
   button: {
-    width: 250,
+     width: Dimensions.get('window').width/1.5,
     margin:5,
     alignItems: 'center',
     backgroundColor: '#1c313a',
     borderRadius: 5,
-    height:40,
+     height:Dimensions.get('window').height/10,
     justifyContent:'center'
   },
   
-  subButton: {
-    alignItems: 'center',
-    backgroundColor: '#3F51B5',
-    alignSelf: 'stretch',
-    
-  },
+  
   
   buttonText: {
     padding: 20,
     color: 'white',
-    fontSize: 15,
+    fontSize: 18,
     fontFamily: 'Museo 500',
   },
   
