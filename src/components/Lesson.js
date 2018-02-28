@@ -34,7 +34,7 @@ export default class Lesson extends Component {
   }
 
 static navigationOptions = {
-    title: '⌘  Lessons',
+    title: '?  Lessons',
     headerStyle: {
       backgroundColor: '#00232d',
     },
@@ -138,49 +138,49 @@ static navigationOptions = {
 
   
   reset_db = (chapter,topic) =>{
-		db.transaction((tx) => {
-			tx.executeSql('UPDATE act1 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
-			 console.log("act1 updated");
-		   });  
-		 });
+    db.transaction((tx) => {
+      tx.executeSql('UPDATE act1 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
+       console.log("act1 updated");
+       });  
+     });
    
-		 db.transaction((tx) => {
-			tx.executeSql('UPDATE act2 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
-			 console.log("act2 updated");
-		   });  
-		 });
+     db.transaction((tx) => {
+      tx.executeSql('UPDATE act2 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
+       console.log("act2 updated");
+       });  
+     });
    
-		 db.transaction((tx) => {
-		   tx.executeSql('UPDATE act3 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
-			console.log("act3 updated");
-		  });  
-		 });
+     db.transaction((tx) => {
+       tx.executeSql('UPDATE act3 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
+      console.log("act3 updated");
+      });  
+     });
    
-		   db.transaction((tx) => {
-			 tx.executeSql('UPDATE act4 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
-			 console.log("act4 updated");
-		   });  
-		 });
+       db.transaction((tx) => {
+       tx.executeSql('UPDATE act4 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
+       console.log("act4 updated");
+       });  
+     });
    
-		   db.transaction((tx) => {
-			 tx.executeSql('UPDATE act5 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
-			 console.log("act5 updated");
-		   });  
-		 });
+       db.transaction((tx) => {
+       tx.executeSql('UPDATE act5 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
+       console.log("act5 updated");
+       });  
+     });
    
-		   db.transaction((tx) => {
-			 tx.executeSql('UPDATE act6 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
-			 console.log("act6 updated");
-		   });  
-		 });
+       db.transaction((tx) => {
+       tx.executeSql('UPDATE act6 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
+       console.log("act6 updated");
+       });  
+     });
    
-		 db.transaction((tx) => {
-		   tx.executeSql('UPDATE act7 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
-		   console.log("act7 updated");
-		 });  
-		 });
+     db.transaction((tx) => {
+       tx.executeSql('UPDATE act7 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
+       console.log("act7 updated");
+     });  
+     });
 
-	};
+  };
 
   render() {
     console.log("topic="+this.state.topic);
@@ -199,6 +199,11 @@ static navigationOptions = {
               index={0}
               horizontal={true}
               loop={false} />
+              <TouchableOpacity>
+              <View style={styles.testBtn}>
+              <Text style={styles.testTxt}>TEST</Text>
+              </View>
+              </TouchableOpacity>
           </View>
         );
     //}
@@ -282,5 +287,20 @@ const styles = StyleSheet.create({
   },
  deckInfo:{
 color:'#e5e5e5'
+},
+testBtn:{
+  margin:'10%',
+  width:Dimensions.get('window').width/3,
+  height:Dimensions.get('window').height/15,
+  backgroundColor:'#1c313a',
+  alignItems:'center',
+  borderRadius:10,
+   justifyContent:'center'
+},
+testTxt:{
+  color:'white',
+  fontFamily:'Museo 500',
+  fontSize:20,
+  justifyContent:'center'
 }
 });

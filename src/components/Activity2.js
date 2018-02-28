@@ -188,12 +188,12 @@ update2 = () =>{
             
          
          
-            <View>
+            
          <View>
            <Text style={styles.titleQuestion}>
         Choose the correct sentence for the given question
           </Text>
-        </View>
+       
         </View>
           
             <View style={styles.questBox}>
