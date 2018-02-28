@@ -117,40 +117,40 @@ export default class First extends Component {
     console.log(this.state.prev_chap);
     console.log(i);
 
-    //if(i<=this.state.prev_chap){
-      Actions.lesson({Chapter:i});
-    //}
-
-    //else{
-      //alert("Please complete previous chapter(s)");
-    //}
-
-    // var found = 0;
-
-    // if(i==1){
+    // if(i<=this.state.prev_chap){
     //   Actions.lesson({Chapter:i});
     // }
 
     // else{
-    //   for(var j in chap_info){
-      
-    //     if(chap_info[j].chapter == i-1){
-    //       found = 1;
-    //       if(chap_info[j].test == 0 || chap_info[j].test == 2){
-    //         alert("Please complete previous chapter(s)");
-    //       }
-  
-    //       else{
-    //         Actions.lesson({Chapter:i});
-    //       }
-    //     }
-  
-    //   }
-
-    //   if(found==0){
-    //     alert("Please complete previous chapter(s)");
-    //   }
+    //   alert("Please complete previous chapter(s)");
     // }
+
+    var found = 0;
+
+    if(i==1){
+      Actions.lesson({Chapter:i});
+    }
+
+    else{
+      for(var j in chap_info){
+      
+        if(chap_info[j].chapter == i-1){
+          found = 1;
+          if(chap_info[j].test == 0 || chap_info[j].test == 2){
+            alert("Please complete previous chapter(s)");
+          }
+  
+          else{
+            Actions.lesson({Chapter:i});
+          }
+        }
+  
+      }
+
+      if(found==0){
+        alert("Please complete previous chapter(s)");
+      }
+    }
   }
 
   render() {
