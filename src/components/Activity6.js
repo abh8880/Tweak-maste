@@ -194,17 +194,25 @@ update2 = () =>{
             {topic==-1 && timer}
             {topic!=-1 && bar}
             
+             <View>
+         
+          <Text  style={styles.titleQuestion}>
+            Pick words from the list below to form your answer
+          </Text>
+        
+        </View>
             <View style={styles.ansBox}>
               <View style={styles.ansLine}>
-                 <Text style={{fontSize:20,fontWeight:'bold'}}>{quespart[0]}</Text>
-                <Text style={{fontSize:20, fontWeight:'bold'}}>{this.state.current_ans}</Text>
-                <Text style={{fontSize:20,fontWeight:'bold'}}>{quespart[1]}</Text>
+                 <Text style={{fontSize:20,fontFamily:'Museo 500'}}>{quespart[0]}</Text>
+                <Text style={{fontSize:20, fontFamily:'Museo 500'}}>{this.state.current_ans}</Text>
+               
 
               </View>
+               <Text style={{fontSize:20,fontFamily:'Museo 500'}}>{quespart[1]}</Text>
             </View>
-            <Card>
+            
             <View style={styles.opsBox}>
-              
+            <Card>  
               <View style={styles.buttonLine}>
                 <TouchableOpacity onPress={() => this._handleButtonPress(ops[0])}>
                   <View style={styles.button}>
@@ -226,14 +234,14 @@ update2 = () =>{
                   </View>
                 </TouchableOpacity>
               </View>
-                            
-            </View>
             </Card>
-            <View style={styles.subBox}>
+            </View>
+           
+             <View style={styles.subBox2}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
-                      <View style={styles.button1}>
-                        <Text style={{fontSize:20,fontFamily: 'Museo 500',color:'#ffffff'}}>SUBMIT</Text>
-                      </View>
+                          <View style={styles.button2}>
+                        <Text style={{fontSize:20, fontFamily: 'Museo 500', color:'#ffffff'}}>SUBMIT</Text>
+                        </View>
                     </TouchableOpacity>
             </View>
           
@@ -274,32 +282,48 @@ const styles = StyleSheet.create({
   
   
   ansBox: {
-   flex: 2,
+
+     backgroundColor: '#ffffff',
     alignSelf: 'stretch',
     alignItems: 'center',
     justifyContent: 'center',
   },
   
   ansLine: {
+     marginTop:'5%',
     flexDirection:'row', 
     alignSelf: 'stretch',
     justifyContent: 'center'
   },
   
   opsBox: {
+    flex:3,
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf:'stretch',
-    borderRadius:5
+    borderRadius:5,
+     backgroundColor: '#ffffff',
   },
-  
-  subBox: {
-  flex: 1,
+   subBox2: {
+     margin:'5%',
+     flex:0.5,
+     alignSelf: 'stretch',
     alignItems: 'center',
-    alignSelf: 'stretch',
     justifyContent: 'center',
-  
+   
   },
+  button2:{
+     padding:10,
+     width:Dimensions.get('window').width/2.5,
+    height:Dimensions.get('window').height/10,  
+    alignItems: 'center',
+    backgroundColor: '#1c313a',
+    justifyContent:'center',
+    borderWidth:2,
+     borderRadius:10,
+     borderColor:'#1c313a',
+   
+   },
   
   buttonLine: {
     flexDirection:'row', 
@@ -309,10 +333,10 @@ const styles = StyleSheet.create({
   },
   
   button: {
-    margin: 20,
-    width:100,
+    margin: '5%',
+    alignSelf:'stretch',
     alignItems: 'center',
-    backgroundColor: 'rgba(9, 22, 200, 0.6)',
+    backgroundColor: '#1c313a',
     borderRadius: 10
   },
   
@@ -322,19 +346,10 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontFamily: 'Museo 500',
   },
-     button1: {
-    margin: 25,
-    width: 320,
-    height:50,
-    alignSelf:'center',
-    alignItems: 'center',
-    justifyContent:'center',
-    backgroundColor: '#1c3370',
-    borderRadius:5
-  },
+     
   titleQuestion:{
      justifyContent:'center',
-     fontSize:22,
+     fontSize:15,
      fontFamily: 'Museo 500',
      padding:10,
      marginLeft:9,
