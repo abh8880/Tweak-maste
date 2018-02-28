@@ -101,7 +101,12 @@ export default class Activity3 extends Component {
     console.log(this.state.answer);
     console.log(this.state.correct_ans);
 
-    if(this.state.answer.trim() == this.state.correct_ans){
+    var final_answer = this.state.answer.trim();
+    final_answer = final_answer+".";
+    final_answer = final_answer.charAt(0).toUpperCase() + final_answer.slice(1);
+    console.log("Final answer="+final_answer);
+
+    if(final_answer == this.state.correct_ans){
       console.log("entered");
 
       this.setState({check_ans: 1});
