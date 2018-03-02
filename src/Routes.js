@@ -25,7 +25,7 @@ import First from './components/First';
 import Lesson from './components/Lesson';
 import Select from './components/Select';
 import Courses from './pages/Courses';
-import Speaking from './pages/Speaking';
+import Speaking from './pages/SpeakingAlt';
 
 // VocabModule pages start
 import VocabHome from './components/VocabModule/VocabHome';

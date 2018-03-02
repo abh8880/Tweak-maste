@@ -3,6 +3,7 @@ package com.tweak;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.wenkesj.voice.VoicePackage;
 import net.no_mad.tts.TextToSpeechPackage;
 import com.reactlibrary.RNBluemixPackage;
 import com.facebook.react.ReactNativeHost;
@@ -29,6 +30,7 @@ public class MainApplication extends Application implements ReactApplication {
           new VectorIconsPackage(),
           new SQLitePluginPackage(),
           new MainReactPackage(),
+            new VoicePackage(),
           new TextToSpeechPackage(),
           new RNBluemixPackage()
       );
