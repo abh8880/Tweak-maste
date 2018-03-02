@@ -4,8 +4,10 @@ import { Text, View, TouchableOpacity, StyleSheet,Dimensions,ScrollView } from '
 import Result from './Result';
 import Time_up from './Time_up';
 import Select from './Select';
-import { Card } from 'react-native-elements';
+import ModalView from './ModalView';
+import Modal from "react-native-modal";
 import * as Progress from 'react-native-progress';
+import { Card } from 'react-native-elements';
 
 var answer;
 var ans;
@@ -47,7 +49,8 @@ export default class Activity3 extends Component {
       rem_rep:0,
       time:time,
       progress:1,
-      bar:0
+      bar:0,
+      isModalVisible:false
     };
 
     topic = this.props.topic;
@@ -133,7 +136,7 @@ export default class Activity3 extends Component {
     }
 
     console.log(this.state.check_ans);
-    this.setState({status: 1});
+    this.setState({isModalVisible: true});
 
     this.setState({question: ''});
     this.setState({length: 0});
@@ -166,6 +169,10 @@ export default class Activity3 extends Component {
   this.setState({bar:this.props.count});
   console.log("recieved "+topic+chapter);
   console.log("bar state "+this.state.bar);
+  }
+
+  _handleNextPress(){
+    this.setState({status:1});
   }
   
   render() {
@@ -281,6 +288,21 @@ export default class Activity3 extends Component {
                     </TouchableOpacity>
             </View>
             </View>
+
+            <Modal isVisible={this.state.isModalVisible}>
+            <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'center'}}>
+              <View style={{width: 300,height: 300}}>
+                <ModalView score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
+                <View style={{alignItems: 'center',alignSelf: 'stretch',justifyContent: 'center',backgroundColor: '#1c313a',}}>
+                    <TouchableOpacity onPress={() => this._handleNextPress()}>
+                      <View style={styles.button}>
+                        <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>NEXT</Text>
+                      </View>
+                    </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </Modal>
               
       </View>
     );
@@ -291,7 +313,7 @@ export default class Activity3 extends Component {
     console.log("rep_state="+this.state.repeat);
       console.log("rem_rep_state="+this.state.rem_rep);
       return(
-        <Result score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
+        <Select score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
       );
   }
 
