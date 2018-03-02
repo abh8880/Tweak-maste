@@ -9,13 +9,14 @@ import {
   Text,
   View,
   Dimensions,
-  TouchableOpacity
+  TouchableOpacity,
+  Image
 } from 'react-native';
 
 import { Actions } from 'react-native-router-flux';
 
 const width = Dimensions.get('window').width;
-
+const height = Dimensions.get('window').height;
 export default class ChapterCard extends Component {
   constructor(props){
     super(props);
@@ -31,24 +32,80 @@ export default class ChapterCard extends Component {
   render() {
     return (
       <View style={styles.cardBody}>
-        <View style={styles.cardHeader}>
-          <Text style={styles.cardHeaderText}>Chapters</Text>
+        <View style={styles.ChapterRow1}>
+         <TouchableOpacity  onPress={() => {this.navigateToDeckPage(1)}}>
+        <View style={styles.box1}>
+       
+            <View style={styles.insideBox}>
+               <Image
+                  source={require('../../../icons/9.png')}
+                  style={{width: 100, height: 100}}
+                />
+            </View>
+
+              <View style={styles.insideTextBox}>
+              <Text style={styles.Text}>Chapter 1</Text>
+            </View>
+           
         </View>
-        <View style={styles.cardContent}>
-          <TouchableOpacity style={styles.cardElements} onPress={() => {this.navigateToDeckPage(1)}}>
-            <Text style={styles.cardElementText}>Chapter</Text>
-            <Text style={styles.cardElementText}>1</Text>
-          </TouchableOpacity>
+        </TouchableOpacity>
+
+
+
+          <TouchableOpacity onPress={() => {this.navigateToDeckPage(2)}}>
+        <View style={styles.box2}>
+
+            <View style={styles.insideBox}>
+               <Image
+                  source={require('../../../icons/8.png')}
+                  style={{width: 100, height: 100}}
+                />
+            </View>
+
+            <View style={styles.insideTextBox}>
+              <Text style={styles.Text}>Chapter 2</Text>
+            </View>
+
         </View>
-        <View style={styles.cardElementsTwoParent}>
-            <TouchableOpacity style={styles.cardElementsTwo} onPress={() => {this.navigateToDeckPage(2)}}>
-              <Text style={styles.cardElementText}>Chapter</Text>
-              <Text style={styles.cardElementText}>2</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.cardElementsTwo} onPress={() => {this.navigateToDeckPage(3)}}>
-              <Text style={styles.cardElementText}>Chapter</Text>
-              <Text style={styles.cardElementText}>3</Text>
-            </TouchableOpacity>
+        </TouchableOpacity>
+        </View>
+           <View
+              style={{
+                borderBottomColor: '#ececec',
+                borderBottomWidth: 10
+              }}
+            />
+
+
+         <View style={styles.ChapterRow2}>
+        <TouchableOpacity  onPress={() => {this.navigateToDeckPage(3)}}>
+        <View style={styles.box1}>
+          <View style={styles.insideBox}>
+               <Image
+                  source={require('../../../icons/20.png')}
+                  style={{width: 100, height: 100}}
+                />
+          </View>
+
+           <View style={styles.insideTextBox}>
+             <Text style={styles.Text}>Chapter 3</Text>
+            </View>
+        </View>
+        </TouchableOpacity>
+
+          <TouchableOpacity  onPress={() => {this.navigateToDeckPage(3)}}>
+        <View style={styles.box2}>
+           <View style={styles.insideBox}>
+            <Image
+                  source={require('../../../icons/34.png')}
+                  style={{width: 105, height: 110}}
+                />
+          </View>
+           <View style={styles.insideTextBox}>
+              <Text style={styles.Text}>Chapter 4</Text>
+            </View>
+        </View>
+        </TouchableOpacity>
         </View>
       </View>
     );
@@ -57,74 +114,56 @@ export default class ChapterCard extends Component {
 
 const styles = StyleSheet.create({
   cardBody:{
-    alignItems: 'center',
-    width: width - width/8,
     flex: 1,
-    margin: 20,
+    margin:'15%',
     backgroundColor: '#ffffff',
-    borderRadius: 15,
-    borderBottomColor: '#003665',
-    borderBottomWidth: 3,
-    elevation: 13
+    borderRadius: 5,
+    alignSelf:'center',
+    elevation:15
   },
-  cardHeader:{
-    width: width - width/8,
-    padding:15,
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderBottomColor: '#003665',
-    borderBottomWidth: 1.5,
-    borderTopRightRadius: 15,
-    borderTopLeftRadius: 15,
-    elevation: 4
+ 
+  ChapterRow1:{
+    flexDirection:'row',
+     alignItems:'center',
+       backgroundColor:'#ececec'
   },
-  cardHeaderText:{
-    alignItems: 'center',
-    fontFamily: 'Museo 700',
-    fontSize: 25,
-    color: '#06337c',
+  ChapterRow2:{
+    flexDirection:'row',
+     alignItems:'center',
+     backgroundColor:'#ececec'
+      
   },
-  cardContent:{
-    flex: 1,
-    flexDirection: 'column',
-    justifyContent: 'space-around',
+  box1:{
+    width:width/2 - width/20,
+    backgroundColor:'white',
+    height:height/3,
+    marginRight:'2%',
+    borderRadius:5,
+     alignItems:'center',
+     
   },
-  cardElements:{
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 105,
-    height: 105,
+  box2:{
+   width:width/2 - width/20,
+    backgroundColor:'white',
+    height:height/3,
+    marginLeft:'2%',
+     borderRadius:5,
+      alignItems:'center',
+      
+  },
+  insideBox:{
+     width: 110,
+    height: 110,
     borderRadius: 100,
-    borderColor: '#002040',
-    backgroundColor: '#dee9ff',
-    borderWidth: 2,
-    marginTop: 30,
-    elevation: 15,
-
+    backgroundColor:'white',
+    marginTop:'10%',
+    alignItems:'center'
   },
-  cardElementText:{
-    alignItems: 'center',
-    fontFamily: 'Museo Sans_500',
-    fontSize: 18,
-    color: '#001b37',
-    padding: 5
+  insideTextBox:{
+    marginTop:'10%'
   },
-  cardElementsTwo:{
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: 105,
-    height: 105,
-    borderRadius: 100,
-    borderColor: '#002040',
-    backgroundColor: '#dee9ff',
-    borderWidth: 2,
-    margin: 20,
-    marginBottom: 40,
-    elevation: 15,
-  },
-  cardElementsTwoParent:{
-    flex:1,
-    flexDirection: 'row',
-    justifyContent: 'space-between'
+  Text:{
+    fontFamily:'Museo 700',
+    fontSize:20
   }
 });

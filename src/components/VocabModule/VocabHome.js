@@ -113,7 +113,7 @@ export default class VocabHome extends Component {
 const styles = StyleSheet.create({
   scrollContainer:{
     flex:1,
-    backgroundColor: '#2a8fe7',
+    backgroundColor: '#ffffff',
   },
   chapterContainer:{
     alignItems: 'center',
