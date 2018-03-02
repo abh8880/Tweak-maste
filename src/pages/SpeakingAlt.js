@@ -119,8 +119,7 @@ export default class Speaking extends Component {
       results: [],
       partialResults: [],
       end: '',
-	  grammar: '',
-	  sentences: []
+	  grammar: ''
     });
     try {
       await Voice.start('en-US');
