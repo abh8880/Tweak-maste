@@ -4,7 +4,9 @@ import { View, StyleSheet, TouchableOpacity, Text, TextInput, Dimensions } from 
 import Result from './Result';
 import Time_up from './Time_up';
 import Select from './Select';
-
+import ModalView from './ModalView';
+import Modal from "react-native-modal";
+import { Card } from 'react-native-elements';
 import * as Progress from 'react-native-progress';
 
 var words = [];
@@ -44,7 +46,8 @@ export default class Activity4 extends Component {
     blank2:'',
     current_ans:'',
     correct_ans:'',
-    bar:0
+    bar:0,
+    isModalVisible:false
   };
 
   topic = this.props.topic;
@@ -148,9 +151,13 @@ _handleSubmitPress = (len) => {
   }
 
   console.log(this.state.check_ans);
-  this.setState({status: 1});
+  this.setState({isModalVisible: true});
         
 };
+
+_handleNextPress(){
+  this.setState({status:1});
+}
 
 update2 = () =>{
     db.transaction((tx) => {
@@ -262,6 +269,21 @@ if (topic == -1)
                         </View>
                     </TouchableOpacity>
             </View>
+
+            <Modal isVisible={this.state.isModalVisible}>
+            <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'center'}}>
+              <View style={{width: 300,height: 300}}>
+                <ModalView score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
+                <View style={{alignItems: 'center',alignSelf: 'stretch',justifyContent: 'center',backgroundColor: '#1c313a',}}>
+                    <TouchableOpacity onPress={() => this._handleNextPress()}>
+                      <View style={styles.button}>
+                        <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>NEXT</Text>
+                      </View>
+                    </TouchableOpacity>
+                </View>
+              </View>
+            </View>
+          </Modal>
           
         </View>
       );
@@ -272,7 +294,7 @@ if (topic == -1)
       console.log("rep_state="+this.state.repeat);
         console.log("rem_rep_state="+this.state.rem_rep);
         return(
-          <Result score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
+          <Select score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
         );
     }
 
