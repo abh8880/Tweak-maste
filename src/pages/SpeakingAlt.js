@@ -6,6 +6,8 @@ import {
   Image,
   AppRegistry,
   TouchableHighlight,
+  Dimensions,
+  ScrollView
 } from 'react-native';
 
 import Voice from 'react-native-voice';
@@ -170,23 +172,22 @@ export default class Speaking extends Component {
         })
 
 
-		let renderDiv = <Text>Your grammar will be corrected here, if applicable, as you speak. Press the mic button to begin.</Text>;
+		let renderDiv = <Text style={styles.intro}>Your grammar will be corrected here, if applicable, as you speak. Press the mic button to begin.</Text>;
 		if(sentences.length < 1) {
 			sentenceListRendered = renderDiv;
 		}
     return (
       <View style={styles.container}>
 	  
-	  <View style={{position: 'absolute', left: 0, right: 0, top: 0, height: '10%', backgroundColor: '#6cba00', justifyContent: 'center'}}><Text style={styles.innerkek}>Tweak _module voice_recog_grammar</Text></View>
+	  <View style={{position: 'absolute', left: 0, right: 0, top: 0, height: '10%', backgroundColor: '#840f06', justifyContent: 'center'}}><Text style={styles.innerkek}>Tweak _module voice_recog_grammar</Text></View>
 
 	  
 	  
-        <Text style={styles.welcome}>
-          
-        </Text>
+       <View>
         <Text style={styles.instructions}>
           Press the button and start speaking.
         </Text>
+        </View>
 
         <Text
           style={styles.stat}>
@@ -219,19 +220,24 @@ export default class Speaking extends Component {
         <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
           <Image
             style={styles.button}
-            source={require('../images/mic.png')}
+            source={require('../images/mic3.png')}
           />
         </TouchableHighlight>
         
 		
 		
-		<View style={pstyles.grammarView}>
+		 <ScrollView style={pstyles.grammarView}
+     showsVerticalScrollIndicator={true}>
+    <View>
+   
 				{sentenceListRendered}
-		</View>
+       
+        </View>
+		 </ScrollView>
 		
 	
 		
-		<View style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '10%', backgroundColor: '#6cba00', justifyContent: 'center'}}><Text style={styles.innerkek}>{`Corrected Grammar: ${this.state.grammar}`}</Text></View>
+		<View style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '10%', backgroundColor: '#840f06', justifyContent: 'center'}}><Text style={styles.innerkek}>{`Corrected Grammar: ${this.state.grammar}`}</Text></View>
 
 
 		
@@ -245,21 +251,27 @@ export default class Speaking extends Component {
 const pstyles = StyleSheet.create({
     grammarView: {
 		margin: 20,
-        padding: 40
+    padding: 40,
+    backgroundColor:'#e5e5e5',
+    borderRadius:5,
+    flexGrow:0.5,
+    margin:'5%',
+   
     },
 	sentenceTextView: {
 		backgroundColor: '#72ccf9',
 		color: 'white',
 		margin: 2,
 		padding: 4,
-		borderRadius:5
+		borderRadius:5,
 	}
 });
 
 const styles = StyleSheet.create({
   button: {
-    width: 150,
-    height: 150,
+    width:Dimensions.get('window').width/3,
+    height:Dimensions.get('window').height/5,
+    backgroundColor:'#F5FCFF'
   },
   container: {
     flex: 1,
@@ -269,21 +281,28 @@ const styles = StyleSheet.create({
   },
   welcome: {
     fontSize: 20,
+    fontFamily:'Museo 500',
     textAlign: 'center',
     margin: 10,
+    backgroundColor:'red'
+
   },
   action: {
     textAlign: 'center',
     color: '#0000FF',
     marginVertical: 5,
-    fontWeight: 'bold',
+    fontFamily:'Museo 500',
   },
   instructions: {
+     fontSize: 18,
+    fontFamily:'Museo 500',
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
   },
   stat: {
+     fontSize: 18,
+    fontFamily:'Museo 500',
     textAlign: 'center',
     color: '#B0171F',
     marginBottom: 1,
@@ -299,8 +318,15 @@ const styles = StyleSheet.create({
   innerkek: {
     textAlign: 'center',
     color: 'white',
-    margin: 1
+    margin: 1,
+    fontFamily:'Museo 700',
+    fontSize:18
   },
+  intro:{
+    fontSize:15,
+    fontFamily:'Museo 500',
+    color:'black',
+  }
 });
 
 //AppRegistry.registerComponent('VoiceTest', () => VoiceTest);

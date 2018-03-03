@@ -327,7 +327,7 @@
             <TouchableOpacity onPressIn={this.onMicPress} onPressOut={this.onMicRelease}>
             <Image 
                style={{width: 120, height: 120}}
-               source={require('../images/mic2.png')}
+               source={require('../images/mic3.png')}
              />
 
             </TouchableOpacity>
