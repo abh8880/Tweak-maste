@@ -269,27 +269,27 @@ export default class Activity5 extends Component {
                   <Text style={styles.text1}>
                     Compulsory Words
                       </Text>
-                  <Card>
+                
 
                     <View style={styles.grid}>
                             { buttons1 }
                         </View>
-                  </Card>
+                  
                   </View>
           
           <View style={styles.supBox}>
              <Text style={styles.text1}>
                     Supplementary Words
                       </Text>
-          <Card>
-               <ScrollView> 
+        
+               <ScrollView  showsVerticalScrollIndicator> 
             <View style={styles.grid}>
              
         			{ buttons2 }
                
         		</View>
                </ScrollView>
-           </Card>
+           
             
             </View>
          <View style={{flex: 2, flexDirection: 'row',margin:'5%'}}>
@@ -383,13 +383,16 @@ const styles = StyleSheet.create({
      width:Dimensions.get('window').width,
     height:Dimensions.get('window').height/10,
     backgroundColor: '#ffffff',
-
+    elevation:5,
+    
   },
   compBox: {
-    flex:4,
+    flex:3,
+    alignItems:'center',
     width:Dimensions.get('window').width,
     backgroundColor: '#ffffff',
-
+    elevation:5,
+    marginBottom:'5%'
   },
   subBox1: {
      flex:1,

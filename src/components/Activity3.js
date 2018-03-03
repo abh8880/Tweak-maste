@@ -259,15 +259,10 @@ export default class Activity3 extends Component {
         </View>
        
             <View style={styles.opsBox}>
-             <ScrollView>
-            <Card containerStyle={{width:Dimensions.get('window').width-20,
-              alignItems:'center'}}>
-             
+             <ScrollView style={styles.scroll}  showsVerticalScrollIndicator={true}>     
                
                 { buttons }
-               
-            
-             </Card>
+                        
              </ScrollView>
             </View>
       <View style={{flex: 2, flexDirection: 'row'}}>
@@ -343,7 +338,7 @@ container: {
      fontFamily: 'Museo 500', color:'#1c313a'
   },
   ansBox: {
-    flex: 0.5,
+    flex: 1,
     alignItems:'center',
     alignSelf: 'stretch',
     backgroundColor: '#ffffff'
@@ -361,7 +356,8 @@ container: {
     width:Dimensions.get('window').width,
     paddingBottom:30,
     backgroundColor: '#ffffff',
-    alignItems:'center'
+    alignItems:'center',
+    alignSelf:'center'
   },
   
   clearBox: {
@@ -441,5 +437,9 @@ container: {
      borderRadius:10,
      borderColor:'#1c313a',
    
+   },
+   scroll:{
+    width:Dimensions.get('window').width-20,
+    
    }
 });

@@ -57,10 +57,12 @@ export default class VerticalStackLayout extends Component {
            <View  style={{alignItems:'center',padding:10}}>
              <Text style={styles.cardTitle}>Grammar</Text>
              </View>
+
             <View
               style={{
-                borderBottomColor: '#D3D3D3',
-                borderBottomWidth: 1,
+                borderTopColor: '#D3D3D3',
+                borderTopWidth: 1,
+                flex:0.5
               }}
             />
 
@@ -70,16 +72,16 @@ export default class VerticalStackLayout extends Component {
            <View style={styles.innerBox1}>
               <Image
                   source={require('../../icons/12.png')}
-                  style={{width: 80, height: 80}}
+                  style={{width: '70%', height: '70%', top:'5%'}}
                 />
 
             </View>
             <View style={styles.innerBox2}>
               <View  style={styles.caption}>
                <Text style={styles.captionText}>Improve your Vocabulary </Text>
-                 <Text style={styles.captionText}> knowing the origin of words</Text>
+                 <Text style={styles.captionText}>knowing the origin of words</Text>
               </View>
-            <View>
+            <View style={styles.progress}>
               <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
             </View>
             </View>
@@ -99,7 +101,7 @@ export default class VerticalStackLayout extends Component {
 
 
 
-
+              { /*box 1 ends here*/ }
 
          <View style={[styles.box, styles.box2]}>
 
@@ -111,27 +113,29 @@ export default class VerticalStackLayout extends Component {
              </View>
             <View
               style={{
-                borderBottomColor: '#D3D3D3',
-                borderBottomWidth: 1,
+                borderTopColor: '#D3D3D3',
+                borderTopWidth: 1,
+                flex:0.5
+                
               }}
             />
 
 
            <View style={styles.innerContainer}>
 
-            <View style={[styles.innerBox, styles.innerBox1]}>
+            <View style={styles.innerBox1}>
               <Image
-                  source={require('../../icons/12.png')}
-                  style={{width: 80, height: 80}}
+                  source={require('../../icons/24.png')}
+                  style={{width: '70%', height: '70%', top:'5%'}}
                 />
 
             </View>
-            <View style={[styles.innerBox, styles.innerBox2]}>
+            <View style={styles.innerBox2}>
               <View  style={styles.caption}>
-               <Text style={styles.captionText}>Improve your Vocabulary </Text>
-                 <Text style={styles.captionText}> knowing the origin of words</Text>
+               <Text style={styles.captionText}>Improve your Vocabulary</Text>
+                 <Text style={styles.captionText}>knowing the origin of words</Text>
               </View>
-            <View style={{ margin:10}}>
+            <View style={styles.progress}>
               <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
             </View>
             </View>
@@ -204,26 +208,28 @@ const styles = StyleSheet.create({
   },
 
   innerContainer: {
-    flex: 1,
+    flex: 3,
     flexDirection: 'row',
     marginBottom:10,
-    backgroundColor:'black'
+    backgroundColor:'white'
   },
- innerBox: {
-    height: box_height-50
-  },
+ 
   innerBox1: {
-
-   flex: 3
+   alignItems:'center',
+   left:'5%',
+    backgroundColor:'white',
+    flex:2
   },
  innerBox2: {
-     flex:10
-     
+       alignItems:'center',
+        backgroundColor:'white',
+       flex:4
   },
   caption: {
     margin:10,
-    alignItems: 'center',
-    justifyContent:'center',
+     right:'2%',
+     flexWrap: 'wrap',
+    backgroundColor:'white'
 
   },
   button2: {
@@ -249,9 +255,12 @@ cardTitle:{
    justifyContent:'center'
 },
 captionText:{
-    padding: 3,
+    paddingBottom: 3,
     color:'#af0c56',
     fontSize:15,
     fontFamily: 'Museo 700'
+},
+progress:{
+  right:'14%'
 }
 });

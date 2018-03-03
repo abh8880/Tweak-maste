@@ -204,16 +204,17 @@ update2 = () =>{
         </View>
           
             <View style={styles.questBox}>
-              <Text style={{fontSize:20,justifyContent: 'center',  fontFamily: 'Museo 500',}}>{this.state.question}</Text>
+              <Text style={{fontSize:20,justifyContent: 'center',  fontFamily: 'Museo 500'}}>{this.state.question}</Text>
             </View>
             
             <View style={styles.ansBox}>
                 <Text style={{fontSize:20, fontFamily: 'Museo 500',}}>{this.state.current_ans}</Text>
             </View>
             
-            <View style={styles.opsBox}>
-             <ScrollView>
-              <Card>
+            
+             <ScrollView showsVerticalScrollIndicator style={styles.opsBox}   >
+
+              <View style={{alignItems:'center',}}>
                 <TouchableOpacity onPress={() => this._handleButtonPress(ops[0])}>
                   <View style={styles.button}>
                     <Text style={styles.buttonText}>{ops[0]}</Text>
@@ -237,10 +238,10 @@ update2 = () =>{
                     <Text style={styles.buttonText}>{ops[3]}</Text>
                   </View>
                 </TouchableOpacity>
-               </Card> 
+               </View> 
             </ScrollView>
-            </View>
-  
+            
+             
             <View style={styles.subBox2}>
                     <TouchableOpacity onPress={() => this._handleSubmitPress()}>
                          <View style={styles.button2}>
@@ -293,24 +294,28 @@ const styles = StyleSheet.create({
   },
   questBox: {
     backgroundColor: '#ffffff',
-    flex:0.5,
+    flex:0.3,
+    flexWrap:'wrap',
     alignItems:'center',
-     alignSelf:'stretch',
+     
+     
   },
   
   ansBox: {
     backgroundColor: '#ffffff',
-    flex:1,
+    flex:0.2,
     alignSelf: 'stretch',
-    alignItems:'center'
+    alignItems:'center',
+    flexWrap: 'wrap'
   },
   
   opsBox: {
-    flex:6,
-    width:Dimensions.get('window').width,
+    flexGrow:1,
+    width:Dimensions.get('window').width-20,
     paddingBottom:30,
     backgroundColor: '#ffffff',
-    alignItems:'center',
+    alignSelf:'center',
+    elevation:10
     
   },
   
