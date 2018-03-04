@@ -249,18 +249,21 @@ update2 = () =>{
                         </View>
                     </TouchableOpacity>
             </View>
-            <Modal isVisible={this.state.isModalVisible}>
-            <View style={{flex: 1,flexDirection: 'column',justifyContent: 'center',alignItems: 'center'}}>
-              <View style={{width: 300,height: 300}}>
-                <ModalView score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
-                <View style={{alignItems: 'center',alignSelf: 'stretch',justifyContent: 'center',backgroundColor: '#1c313a',}}>
-                    <TouchableOpacity onPress={() => this._handleNextPress()}>
-                      <View style={styles.button}>
-                        <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>NEXT</Text>
+           <Modal isVisible={this.state.isModalVisible}
+              animationIn="slideInLeft"
+               animationOut="slideOutRight">
+             <View style={styles.modalContent}>
+              <ModalView score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
+              <TouchableOpacity style={{width:'100%'}} onPress={() => this._handleNextPress()}>
+              <View style={{alignItems: 'center',justifyContent: 'center',backgroundColor: '#1c313a',borderBottomLeftRadius:10,borderBottomRightRadius:10}}>
+                   
+                      <View style={styles.buttonM}>
+                        <Text style={{fontSize:20, color:'#ffffff',fontFamily:'Museo 500'}}>NEXT</Text>
                       </View>
-                    </TouchableOpacity>
+
                 </View>
-              </View>
+               </TouchableOpacity>
+             
             </View>
           </Modal>
         </View>
@@ -366,5 +369,18 @@ titleQuestion:{
      color:'#000000',
      margin:20,
      fontFamily: 'Museo 500',
- }
+ },
+    buttonM:{
+    margin: 20,
+    alignItems: 'center',
+    borderRadius: 10
+  },
+  modalContent:{
+     backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+   
+
+  }
 });

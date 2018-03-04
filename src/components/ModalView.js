@@ -31,7 +31,9 @@ export default class ModalView extends Component {
             return(
                 <View style={styles.container}>
     
-                    <View style={styles.resultBox}><Text style={{color:'#1c313a', fontSize: 30}}>{ temp ?  'Correct Answer !' : 'Wrong Answer :(' }</Text></View>
+                    <View style={styles.resultBox}>
+                    { temp ? <View style={styles.correctContainer}><Text style={{color:'#1c313a', fontSize: 20}}>Correct Answer</Text></View> :
+                    <View style={styles.incorrectContainer}><Text style={{color:'red', fontSize: 20}}>  Incorrect Answer</Text></View> }</View>
 
                 </View>
             );
@@ -42,17 +44,38 @@ export default class ModalView extends Component {
 const styles = StyleSheet.create({
     container: {
       width:300,
-      height:300,
+      height:200,
       alignItems: 'center',
-      backgroundColor: '#e5e5e5',
+      backgroundColor: 'white',
     },
 
     resultBox: {
-        flex: 6,
-        alignItems: 'center',
+        
         alignSelf: 'stretch',
         justifyContent: 'center',
-        backgroundColor: '#ffffff',
+        backgroundColor: 'white',
       },
+      correctContainer:{
+        width:300,
+         borderRadius:5,
+        marginTop:'10%',
+        backgroundColor:'#dff0d8',
+        alignItems:'center'
+      },
+      incorrectContainer:{
+        width:300,
+        borderRadius:5,
+        marginTop:'10%',
+        backgroundColor:'#f2dede',
+        alignItems:'center'
+      },
+      correctText:{
+        color:'#6e936c',
+         fontSize: 20
+      },
+      incorrectText:{
+        color:'#a83a38', 
+        fontSize: 20
+      }
 });
 
