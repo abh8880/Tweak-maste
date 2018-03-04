@@ -155,7 +155,7 @@ export default class Activity7 extends Component {
 
     this.setState({question: ''});
     this.setState({current_ans: '_____'});
-    this.setState({correct_ans: ''});
+    
 
   };
   
@@ -277,8 +277,8 @@ export default class Activity7 extends Component {
               animationIn="slideInLeft"
               animationOut="slideOutRight">
              <View style={styles.modalContent}>
-             <ModalView score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
-              <TouchableOpacity style={{width:'100%'}} onPress={() => this._handleNextPress()}>
+             <ModalView correct={this.state.correct_ans} score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
+             <TouchableOpacity style={{width:'100%'}} onPress={() => this._handleNextPress()}>
               <View style={{alignItems: 'center',justifyContent: 'center',backgroundColor: '#1c313a',borderBottomLeftRadius:10,borderBottomRightRadius:10}}>
                    
                       <View style={styles.buttonM}>

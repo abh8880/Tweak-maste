@@ -18,6 +18,7 @@ export default class ModalView extends Component {
     render(){
 
         console.log(this.props.score);
+        console.log("Modal correct="+this.props.correct);
         var temp = this.props.score; //1
         var repeat = this.props.repeat; //0
         // if (this.props.topic!=-1) // for testing. everything correct while learning
@@ -33,7 +34,9 @@ export default class ModalView extends Component {
     
                     <View style={styles.resultBox}>
                     { temp ? <View style={styles.correctContainer}><Text style={{color:'#1c313a', fontSize: 20}}>Correct Answer</Text></View> :
-                    <View style={styles.incorrectContainer}><Text style={{color:'red', fontSize: 20}}>  Incorrect Answer</Text></View> }</View>
+                    <View style={styles.incorrectContainer}><Text style={{color:'red', fontSize: 20}}>  Incorrect Answer</Text></View> }
+                    <Text style={{color:'#1c313a', fontSize: 20}}>Correct answer:{"\n"+this.props.correct}</Text>
+                    </View>
 
                 </View>
             );

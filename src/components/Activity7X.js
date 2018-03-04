@@ -160,7 +160,7 @@ export default class Activity7 extends Component {
 
     this.setState({question: ''});
     this.setState({current_ans: '_____'});
-    this.setState({correct_ans: ''});
+    
 
   };
   

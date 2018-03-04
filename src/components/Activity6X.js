@@ -158,7 +158,7 @@ export default class Activity6 extends Component {
 
     this.setState({question: ''});
     this.setState({current_ans: '_____'});
-    this.setState({correct_ans: ''});
+    
 
   };
 update2 = () =>{

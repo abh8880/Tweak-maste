@@ -65,6 +65,7 @@ export default class Activity4 extends Component {
         console.log("rand="+rand)
         var row = results.rows.item(rand);
         this.setState({question: row.question});
+        this.setState({correct_ans: row.correct});
         console.log(this.state.question);
         words = row.question.split(" ");
         console.log(this.state.words);
@@ -274,8 +275,8 @@ if (topic == -1)
               animationIn="slideInLeft"
               animationOut="slideOutRight">
              <View style={styles.modalContent}>
-              <ModalView score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
-              <TouchableOpacity style={{width:'100%'}} onPress={() => this._handleNextPress()}>
+             <ModalView correct={this.state.correct_ans} score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
+             <TouchableOpacity style={{width:'100%'}} onPress={() => this._handleNextPress()}>
               <View style={{alignItems: 'center',justifyContent: 'center',backgroundColor: '#1c313a',borderBottomLeftRadius:10,borderBottomRightRadius:10}}>
                    
                       <View style={styles.buttonM}>
