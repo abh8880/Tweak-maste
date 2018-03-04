@@ -40,7 +40,7 @@ import { StackNavigator } from 'react-navigation';
 
 const TabIcon =({selected, title})=> {
   return(
-    <Text style={{ fontSize: 18, color: '#88bfff'}}
+    <Text style={{ fontSize: 18,fontFamily:'Museo 700', color: '#ffffff'}}
     >{title}</Text>
     );
 };
@@ -152,7 +152,7 @@ export default class Routes extends Component {
 
             <Scene key="home"
               tabs
-              activeBackgroundColor="#224351"
+              activeBackgroundColor="#2b5060"
               showLabel={false}
               tabBarStyle={{
                 backgroundColor: '#1c313a',
