@@ -24,7 +24,7 @@ var len = 0;
 var correct_ans = new Array();
 var time;
 var SQLite = require('react-native-sqlite-storage');
-var db = SQLite.openDatabase({name:'activity.db', createFromLocation:'~activity.db'})
+var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'})
 var timer = null;
 var timeout;
 
@@ -61,7 +61,7 @@ export default class Activity7 extends Component {
     chapter = this.props.chapter;
     
     db.transaction((tx) => {
-      tx.executeSql('SELECT * FROM act8 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
+      tx.executeSql('SELECT * FROM act7 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
 
        var length = results.rows.length;
 
@@ -130,7 +130,7 @@ export default class Activity7 extends Component {
       this.setState({repeat: 0});
  
       db.transaction((tx) => {
-        tx.executeSql('UPDATE act8 SET status=1 WHERE id=?', [this.state.id], (tx, results) => {
+        tx.executeSql('UPDATE act7 SET status=1 WHERE id=?', [this.state.id], (tx, results) => {
           console.log("correct update");
         });
       
@@ -142,7 +142,7 @@ export default class Activity7 extends Component {
       this.setState({repeat: 7});
 
       db.transaction((tx) => {
-        tx.executeSql('UPDATE act8 SET status=2 WHERE id=?', [this.state.id], (tx, results) => {
+        tx.executeSql('UPDATE act7 SET status=2 WHERE id=?', [this.state.id], (tx, results) => {
           console.log("wrong update");
         });
       
@@ -162,7 +162,7 @@ export default class Activity7 extends Component {
 
   update2 = () =>{
     db.transaction((tx) => {
-    tx.executeSql('UPDATE act8 SET status=2 WHERE id=?', [this.state.id], (tx, results) => {
+    tx.executeSql('UPDATE act7 SET status=2 WHERE id=?', [this.state.id], (tx, results) => {
     
     });
   

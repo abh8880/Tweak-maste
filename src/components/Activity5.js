@@ -20,7 +20,8 @@ var bar = null;
 
 var correct_ans = new Array();
 
-var pressed = new Array();
+var pressed_comp = new Array();
+var pressed_supp = new Array();
 var status;
 var time;
 var timeout;
@@ -34,7 +35,10 @@ export default class Activity5 extends Component {
     time = new Array();
 
     for (var i = comp_words.length - 1; i >= 0; i--) {
-      pressed[i] = false;
+      pressed_comp[i] = false;
+    }
+    for (var i = supp_words.length - 1; i >= 0; i--) {
+      pressed_supp[i] = false;
     }
     answer = '';
     this.state = {
@@ -95,8 +99,8 @@ export default class Activity5 extends Component {
   }
 
   _handleButtonPress = index => {
-    if (!pressed[index]){
-      pressed[index] = true;
+    if (!pressed_comp[index]){
+      pressed_comp[index] = true;
       if (answer=='') {
           answer = answer + comp_words[index];
       }
@@ -109,6 +113,8 @@ export default class Activity5 extends Component {
   };
 
   _handleButtonPressS = index => {
+    if (!pressed_supp[index]){
+      pressed_supp[index] = true;
       if (answer=='') {
         answer = answer + supp_words[index];
       }
@@ -117,11 +123,15 @@ export default class Activity5 extends Component {
         answer = answer + ' ' + supp_words[index];
       }
       this.setState({ answer: answer });
+    }
   };
   
   _clear = () => {
     for (var i = comp_words.length - 1; i >= 0; i--) {
-      pressed[i] = false;
+      pressed_comp[i] = false;
+    }
+    for (var i = supp_words.length - 1; i >= 0; i--) {
+      pressed_supp[i] = false;
     }
     answer = '';
     this.setState({ answer: answer });
