@@ -171,14 +171,16 @@ update2 = () =>{
 
     if (topic == -1) 
     {
-          timer = <View >
-            <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+          timer = <View style={{margin:'5%',alignItems:'center'}}>
+            <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width-50} height={8}
+             unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'}/>
           </View>;
     }
 
     else{
-      bar = <View >
-        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+      bar = <View style={{margin:'5%',alignItems:'center'}} >
+        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width-50} 
+        height={8} unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'} animated={false}/>
     </View>
     }
 
@@ -306,7 +308,7 @@ const styles = StyleSheet.create({
   
   ansBox: {
     backgroundColor: '#ffffff',
-    flex:0.2,
+    flex:0.3,
     alignSelf: 'stretch',
     alignItems:'center',
     flexWrap: 'wrap'
@@ -367,7 +369,7 @@ titleQuestion:{
      padding:10,
      marginLeft:9,
      color:'#000000',
-     margin:20,
+     margin:10,
      fontFamily: 'Museo 500',
  },
     buttonM:{
