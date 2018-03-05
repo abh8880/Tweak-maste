@@ -169,7 +169,7 @@ export default class Routes extends Component {
               
             <Scene username={this.state.username} key="first" component={First} title="Chapters" navBar={() => this.createNavBar('Chapters', 'courses')}/>
             <Scene username={this.state.username} key="lesson" component={Lesson} title="Lessons" navBar={() => this.createNavBar('Lessons', 'first')}/>
-            <Scene key="select" component={Select} title="Activities"/>
+            <Scene key="select" component={Select} title="Activities" hideNavBar/>
 
           {/*  VocabModule pages start  */}
             <Scene key="vocabHome"

@@ -178,14 +178,16 @@ update2 = () =>{
 
     if (topic == -1) 
     {
-          timer = <View >
-            <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+          timer = <View style={{margin:'5%',alignItems:'center'}}>
+            <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width-50} height={8} 
+            unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'}/>
           </View>;
     }
 
     else{
-      bar = <View >
-        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+      bar = <View style={{margin:'5%',alignItems:'center'}}>
+        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width-50} 
+        height={8} unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'} animated={false}/>
     </View>
     }
 
@@ -261,7 +263,7 @@ update2 = () =>{
               <View style={{alignItems: 'center',justifyContent: 'center',backgroundColor: '#1c313a',borderBottomLeftRadius:10,borderBottomRightRadius:10}}>
                    
                       <View style={styles.buttonM}>
-                        <Text style={{fontSize:20,  color:'#ffffff',fontFamily:'Museo 500'}}>NEXT</Text>
+                        <Text style={{fontSize:18,  color:'#ffffff',fontFamily:'Museo 500'}}>NEXT</Text>
                       </View>
 
                 </View>
@@ -365,9 +367,9 @@ const styles = StyleSheet.create({
   },
   
   buttonText: {
-    padding: 20,
+    padding: 15,
     color: 'white',
-    fontSize: 20,
+    fontSize: 18,
     fontFamily: 'Museo 500',
   },
      

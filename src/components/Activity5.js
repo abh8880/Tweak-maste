@@ -217,15 +217,17 @@ export default class Activity5 extends Component {
 
     if (topic == -1) 
     {
-      timer = <View >
-              <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+      timer = <View style={{margin:'5%',alignItems:'center'}}>
+              <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width-50} height={8} 
+              unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'}/>
 
           </View>;
     }
 
     else{
-      bar = <View >
-        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+      bar = <View style={{margin:'5%',alignItems:'center'}}>
+        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width-50} 
+        height={8} unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'} animated={false}/>
     </View>
     }
 

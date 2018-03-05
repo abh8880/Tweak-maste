@@ -251,8 +251,7 @@ export default class Speaking extends Component {
 const pstyles = StyleSheet.create({
     grammarView: {
 		margin: 20,
-    padding: 40,
-    backgroundColor:'#e5e5e5',
+    backgroundColor:'#ffffff',
     borderRadius:5,
     flexGrow:0.5,
     margin:'5%',
