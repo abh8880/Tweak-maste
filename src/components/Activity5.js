@@ -59,7 +59,42 @@ export default class Activity5 extends Component {
     topic = this.props.topic;
   chapter = this.props.chapter;
   
-    db.transaction((tx) => {
+  if (topic==-1) 
+  {
+      db.transaction((tx) => {
+      tx.executeSql('SELECT * FROM tact2 WHERE chapter=? AND status=?', [chapter,0], (tx, results) => {
+
+       var len = results.rows.length;
+
+       console.log("DB :"+len);
+
+       if(len > 0){
+        var rand = Math.floor(Math.random()*(len-1))+0;
+        console.log("rand="+rand)
+        var row = results.rows.item(rand);
+        console.log(row)
+        comp_words = row.comp_words.split(' ');
+        supp_words = row.supp_words.split(' ');
+        correct_ans = row.correct;
+        console.log("correct ans " + correct_ans);
+        this.setState({id:row.id});
+
+        this.setState({supp_words: row.supp_words,comp_words: row.comp_words,correct_ans:correct_ans});
+        this.setState({id:row.id});
+        if(len==1 && this.props.wrong == 0)
+          this.setState({last:5});
+
+        else if(len==1 && this.props.wrong == 2)
+          this.setState({rem_rep:5})
+        
+       }
+          
+        });
+    });
+  }
+  else
+  {
+      db.transaction((tx) => {
       tx.executeSql('SELECT * FROM act5 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
 
        var len = results.rows.length;
@@ -88,6 +123,8 @@ export default class Activity5 extends Component {
           
         });
     });
+  }
+
 
   }
 

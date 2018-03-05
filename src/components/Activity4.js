@@ -52,9 +52,45 @@ export default class Activity4 extends Component {
 
   topic = this.props.topic;
     chapter = this.props.chapter;
-  
-  db.transaction((tx) => {
-    tx.executeSql('SELECT * FROM act4 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
+
+    if (topic==-1) 
+    {
+        db.transaction((tx) => {
+        tx.executeSql('SELECT * FROM tact3 WHERE chapter=? AND status=?', [chapter,0], (tx, results) => {
+
+           var length = results.rows.length;
+
+           console.log("DB:"+length);
+
+           if(length > 0){
+            var rand = Math.floor(Math.random()*(length-1))+0;
+            console.log("rand="+rand)
+            var row = results.rows.item(rand);
+            console.log(row)
+            this.setState({question: row.question});
+            this.setState({correct_ans: row.correct});
+            console.log(this.state.question);
+            words = row.question.split(" ");
+            console.log(this.state.words);
+            this.setState({words:words});
+            len = words.length;
+            this.setState({len:len});
+            console.log("in con 4="+len);
+
+            if(len==1 && this.props.wrong == 0)
+              this.setState({last:4});
+
+            else if(len==1 && this.props.wrong == 2)
+              this.setState({rem_rep:4})
+           }
+              
+            });
+        });
+    }
+    else
+    {
+      db.transaction((tx) => {
+       tx.executeSql('SELECT * FROM act4 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
 
        var length = results.rows.length;
 
@@ -83,6 +119,9 @@ export default class Activity4 extends Component {
           
         });
     });
+    }
+  
+  
 }
 
 componentWillMount(){

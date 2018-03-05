@@ -31,13 +31,17 @@ export default class Select extends Component {
 		correct = 0;
 	}
 
-
 	count++;
 	console.log("\n\ncount="+count+"\n\n");
 
 	};
 	
 	load_activity = (i,chapter,topic,mode) =>{
+		if (topic==-1) 
+		{
+			i = Math.floor(Math.random() * 3) + 3
+			console.log("|||||||||||||||||||||||||||||||||||||||test"+i)
+		}
 		if(i==1){
 			return(
 				<View style={styles.container}>
@@ -45,7 +49,6 @@ export default class Select extends Component {
 				</View>
 			);
 		}
-
 
 		else if(i==2){
 			return(
@@ -175,8 +178,9 @@ export default class Select extends Component {
 		var l = repeat.length;
 		console.log("array_len="+l);
 		console.log("\n\ntopic"+topic+"\n\n");
+		console.log("\n\count"+count+"\n\n");
 		
-		if (count == 13 && topic == -1) 
+		if (count == 12 && topic == -1) 
 		{
 			count=0;
 			console.log("\n\nfirst\n\n")

@@ -115,7 +115,7 @@ static navigationOptions = {
   }
 
   _handleButtonPress = () =>{
-
+    console.log("\n\nTEST BUTTON PRESSED\n\n")
     if(test_status == 0){
       Alert.alert(
         'Hey There !',
@@ -133,10 +133,33 @@ static navigationOptions = {
     }
 
     else
-    this.setState({status:-1});
+    {
+      // this.setState({status:-1});
+      status = -1;
+      this.reset_test_db(chapter);
+      // alert("starting test!");
+      Actions.select({topic:status, chapter:chapter, count:0}); 
+    }
+  }
+  
+  reset_test_db = (chapter) =>{
+    db.transaction((tx) => {
+      tx.executeSql('UPDATE tact1 SET status=0 WHERE chapter=?', [chapter], (tx, results) => {
+       console.log("tact1 updated");
+       });  
+     });
+    db.transaction((tx) => {
+      tx.executeSql('UPDATE tact2 SET status=0 WHERE chapter=?', [chapter], (tx, results) => {
+       console.log("tact2 updated");
+       });  
+     });
+    db.transaction((tx) => {
+      tx.executeSql('UPDATE tact3 SET status=0 WHERE chapter=?', [chapter], (tx, results) => {
+       console.log("tact3 updated");
+       });  
+     });
   }
 
-  
   reset_db = (chapter,topic) =>{
     db.transaction((tx) => {
       tx.executeSql('UPDATE act1 SET status=0 WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
@@ -199,29 +222,28 @@ static navigationOptions = {
               index={0}
               horizontal={true}
               loop={false} />
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => this._handleButtonPress()}>
               <View style={styles.testBtn}>
               <Text style={styles.testTxt}>TEST</Text>
               </View>
               </TouchableOpacity>
           </View>
         );
-    //}
-
+    // }
     // else if(this.state.status == -1){
     //   Actions.select({topic:this.state.status, chapter:chapter})
-    //   // return(
-    //   //   <Select topic={this.state.status} chapter={chapter} />
-    //   // );
+    //   return(
+    //     <Select topic={this.state.status} chapter={chapter} />
+    //   );
     // }
     // else
     // {
     //   console.log("passing: "+this.state.topic+chapter)
     //   this.reset_db(chapter,this.state.topic);
     //   Actions.select({topic:this.state.status, chapter:chapter})
-    //     // return(
-    //     //     <Select topic={this.state.topic} chapter={chapter} />
-    //     // );
+    //     return(
+    //         <Select topic={this.state.topic} chapter={chapter} />
+    //     );
     // }
     
   }

@@ -56,38 +56,78 @@ export default class Activity3 extends Component {
     topic = this.props.topic;
     chapter = this.props.chapter;
     
+    if (topic==-1)
+    {
+        db.transaction((tx) => {
+          tx.executeSql('SELECT * FROM tact1 WHERE chapter=? AND status=?', [chapter,0], (tx, results) => {
 
-    db.transaction((tx) => {
-      tx.executeSql('SELECT * FROM act3 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
+           var len = results.rows.length;
 
-       var len = results.rows.length;
+           console.log("len="+len);
 
-       console.log("len="+len);
+           if(len > 0){
+            var rand = Math.floor(Math.random()*(len-1))+0;
+            console.log("rand="+rand)
+            var row = results.rows.item(rand);
+            console.log(row)
+            this.setState({question: row.question});
+            this.setState({correct_ans: row.correct});
+            ans = row.words.split(' ');
+            this.setState({ans:ans});
+            length = ans.length;
+            this.setState({length:length});
+            this.setState({id:row.id});
 
-       if(len > 0){
-        var rand = Math.floor(Math.random()*(len-1))+0;
-        console.log("rand="+rand)
-        var row = results.rows.item(rand);
-        this.setState({question: row.question});
-        this.setState({correct_ans: row.correct});
-        ans = row.words.split(' ');
-        this.setState({ans:ans});
-        length = ans.length;
-        this.setState({length:length});
-        this.setState({id:row.id});
+            if(len==1 && this.props.wrong == 0)
+              this.setState({last:3});
 
-        if(len==1 && this.props.wrong == 0)
-          this.setState({last:3});
+            else if(len==1 && this.props.wrong == 2)
+              this.setState({rem_rep:3})
+          }
 
-        else if(len==1 && this.props.wrong == 2)
-          this.setState({rem_rep:3})
-      }
+          
+          console.log("id="+this.state.id);
+        });
 
-      
-      console.log("id="+this.state.id);
-    });
+        });
+    }
+    else
+    {
 
-    });
+      db.transaction((tx) => {
+        tx.executeSql('SELECT * FROM act3 WHERE chapter=? AND topic=? AND status=?', [chapter,topic,this.props.wrong], (tx, results) => {
+
+         var len = results.rows.length;
+
+         console.log("len="+len);
+
+         if(len > 0){
+          var rand = Math.floor(Math.random()*(len-1))+0;
+          console.log("rand="+rand)
+          var row = results.rows.item(rand);
+          this.setState({question: row.question});
+          this.setState({correct_ans: row.correct});
+          ans = row.words.split(' ');
+          this.setState({ans:ans});
+          length = ans.length;
+          this.setState({length:length});
+          this.setState({id:row.id});
+
+          if(len==1 && this.props.wrong == 0)
+            this.setState({last:3});
+
+          else if(len==1 && this.props.wrong == 2)
+            this.setState({rem_rep:3})
+        }
+
+        
+        console.log("id="+this.state.id);
+      });
+
+      });
+
+    }
+
   }
 
 
