@@ -11,7 +11,7 @@ import * as Progress from 'react-native-progress';
 
 var sentence = new Array();
 
-sentence = 'We is students.';
+sentence = '';
 
 var words = new Array();
 var pressed = new Array();
@@ -122,8 +122,16 @@ export default class Activity7 extends Component {
     console.log("my answer "+this.state.answer);
     console.log("correct answer "+this.state.correct_ans);
 
+    var answer = this.state.answer;
+    
+    if(answer.charAt(answer.length-1).toUpperCase().toLowerCase() == answer.charAt(answer.length-1).toUpperCase()){
+      console.log("last letter="+answer.charAt(answer.length-1));
+      answer = answer.substring(0,answer.length-1);
+    }
 
-    if(this.state.answer === this.state.correct_ans){
+    console.log("final answer="+answer);
+
+    if(answer === this.state.correct_ans){
       console.log("entered");
         
       this.setState({check_ans: 1});

@@ -101,7 +101,8 @@ _handleSubmitPress = (len) => {
   var answer = '';
   var k = 0;
 
-  for(i=0;i<len;i++){
+  for(var i in words){
+
     if(words[i] == '_'){
       k++;
 
@@ -114,18 +115,20 @@ _handleSubmitPress = (len) => {
       }
     }
 
-    else{
+    else if(words[i].charAt(0)!="("){
       answer = answer +' '+words[i];
     }
   }
 
+  answer = answer.trim();
+
+  if(answer.charAt(answer.length-1)!='.'){
+    answer=answer+".";
+  }
+
   console.log("answer="+answer);
 
-  this.setState({current_ans:answer});
-
-  console.log("curr ans="+this.state.current_ans);
-
-  if(this.state.current_ans === this.state.correct_ans){
+  if(answer === this.state.correct_ans){
     console.log("entered");        
 
     this.setState({check_ans: 1});
@@ -150,8 +153,6 @@ _handleSubmitPress = (len) => {
       
       });        
   }
-
-  console.log(this.state.check_ans);
   this.setState({isModalVisible: true});
         
 };
