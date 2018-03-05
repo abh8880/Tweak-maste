@@ -239,15 +239,17 @@ export default class Activity3 extends Component {
 
     if (topic == -1) 
     {
-      timer = <View >
-              <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+      timer = <View style={{margin:'5%',alignItems:'center'}} >
+              <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width-50} height={8} 
+             unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'}/>
 
           </View>;
     }
 
     else{
-      bar = <View >
-        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+      bar = <View style={{margin:'5%',alignItems:'center'}}>
+        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width-50} 
+        height={8} unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'} animated={false}/>
     </View>
     }
 
@@ -288,21 +290,21 @@ export default class Activity3 extends Component {
         </View>
         
             <View style={styles.questBox}>
-          <Text style={{ fontSize: 20,fontFamily: 'Museo 500' }}>
-            Q: {this.state.question}
+          <Text style={{ fontSize: 20,fontFamily: 'Museo 500',marginLeft:'5%' }}>
+            {this.state.question}
           </Text>
         </View>
         <View style={styles.ansBox}>
           <Text style={styles.answer}>
-            A: {this.state.answer}
+           {this.state.answer}
           </Text>
         </View>
        
             <View style={styles.opsBox}>
              <ScrollView style={styles.scroll}  showsVerticalScrollIndicator={true}>     
-               
+               <View style={{alignItems:'center'}}>
                 { buttons }
-                        
+               </View>         
              </ScrollView>
             </View>
       <View style={{flex: 2, flexDirection: 'row'}}>
@@ -371,20 +373,24 @@ container: {
 
   },
   questBox: {
-    flex: 1,
+    flex: 2,
     alignItems:'center',
     alignSelf:'stretch',
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+    
   },
   answer:{
     fontSize:20,
-     fontFamily: 'Museo 500', color:'#1c313a'
+     fontFamily: 'Museo 500',
+      color:'#1c313a',
+       marginLeft:'5%'
   },
   ansBox: {
-    flex: 1,
+    flex: 2,
     alignItems:'center',
     alignSelf: 'stretch',
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
+   
   },
 
   
@@ -483,6 +489,7 @@ container: {
    },
    scroll:{
     width:Dimensions.get('window').width-20,
+    elevation:10
     
    },
    buttonM:{

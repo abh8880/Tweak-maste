@@ -140,7 +140,8 @@ _handleSubmitPress = (len) => {
   var answer = '';
   var k = 0;
 
-  for(i=0;i<len;i++){
+  for(var i in words){
+
     if(words[i] == '_'){
       k++;
 
@@ -153,18 +154,20 @@ _handleSubmitPress = (len) => {
       }
     }
 
-    else{
+    else if(words[i].charAt(0)!="("){
       answer = answer +' '+words[i];
     }
   }
 
+  answer = answer.trim();
+
+  if(answer.charAt(answer.length-1)!='.'){
+    answer=answer+".";
+  }
+
   console.log("answer="+answer);
 
-  this.setState({current_ans:answer});
-
-  console.log("curr ans="+this.state.current_ans);
-
-  if(this.state.current_ans === this.state.correct_ans){
+  if(answer === this.state.correct_ans){
     console.log("entered");        
 
     this.setState({check_ans: 1});
@@ -189,8 +192,6 @@ _handleSubmitPress = (len) => {
       
       });        
   }
-
-  console.log(this.state.check_ans);
   this.setState({isModalVisible: true});
         
 };
@@ -232,15 +233,17 @@ update2 = () =>{
 
 if (topic == -1) 
     {
-      timer = <View >
-              <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+      timer = <View style={{margin:'5%',alignItems:'center'}}>
+              <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width-50} height={8} 
+              unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'}/>
 
           </View>;
     }
 
     else{
-      bar = <View >
-        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+      bar = <View style={{margin:'5%',alignItems:'center'}}>
+        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width-50} 
+        height={8} unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'} animated={false}/>
     </View>
     }
 
@@ -381,7 +384,7 @@ const styles = StyleSheet.create({
      width:Dimensions.get('window').width/2.5,
     height:Dimensions.get('window').height/10,  
     alignItems: 'center',
-    backgroundColor: '#1c313a',
+    backgroundColor: 'green',
     justifyContent:'center',
     borderWidth:2,
      borderRadius:10,

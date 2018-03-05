@@ -11,7 +11,7 @@ import * as Progress from 'react-native-progress';
 
 var sentence = new Array();
 
-sentence = 'We is students.';
+sentence = '';
 
 var words = new Array();
 var pressed = new Array();
@@ -122,8 +122,16 @@ export default class Activity7 extends Component {
     console.log("my answer "+this.state.answer);
     console.log("correct answer "+this.state.correct_ans);
 
+    var answer = this.state.answer;
+    
+    if(answer.charAt(answer.length-1).toUpperCase().toLowerCase() == answer.charAt(answer.length-1).toUpperCase()){
+      console.log("last letter="+answer.charAt(answer.length-1));
+      answer = answer.substring(0,answer.length-1);
+    }
 
-    if(this.state.answer === this.state.correct_ans){
+    console.log("final answer="+answer);
+
+    if(answer === this.state.correct_ans){
       console.log("entered");
         
       this.setState({check_ans: 1});
@@ -198,14 +206,15 @@ export default class Activity7 extends Component {
 
     if (topic == -1) 
     {
-          timer = <View >
-            <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'}/>
+          timer = <View style={{margin:'5%',alignItems:'center'}}>
+            <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width-50} height={8} 
+            unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'}/>
           </View>;
     }
 
     else{
-      bar = <View >
-        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width} height={8} color={'rgba(255, 255, 255, 1)'} animated={false}/>
+      bar = <View style={{margin:'5%',alignItems:'center'}}>
+        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width-50} height={8} unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'} animated={false}/>
     </View>
     }
 
@@ -401,7 +410,7 @@ const styles = StyleSheet.create({
      width:Dimensions.get('window').width/2.5,
     height:Dimensions.get('window').height/10,  
     alignItems: 'center',
-    backgroundColor: '#1c313a',
+    backgroundColor: 'orange',
     justifyContent:'center',
     borderWidth:2,
      borderRadius:10,
