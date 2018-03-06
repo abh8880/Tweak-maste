@@ -1,6 +1,6 @@
  
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet,Dimensions,ScrollView, Alert } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet,Dimensions,ScrollView, Alert,BackHandler } from 'react-native';
 
 import Result from './Result';
 import Time_up from './Time_up';
@@ -212,6 +212,18 @@ export default class Activity3 extends Component {
   this.setState({bar:this.props.count});
   console.log("recieved "+topic+chapter);
   console.log("bar state "+this.state.bar);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
   }
 
   _handleNextPress(){

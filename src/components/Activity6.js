@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Dimensions, Alert } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Dimensions, Alert,BackHandler } from 'react-native';
 
 import Result from './Result';
 import Time_up from './Time_up';
@@ -164,6 +164,18 @@ update2 = () =>{
   this.setState({bar:this.props.count});
   console.log("recieved "+topic+chapter);
   console.log("bar state "+this.state.bar);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
   }
 
   _handleNextPress(){

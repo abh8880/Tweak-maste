@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity,TouchableHighlight, StyleSheet,Dimensions, Alert } from 'react-native';
+import { Text, View, TouchableOpacity,TouchableHighlight, StyleSheet,Dimensions, Alert, BackHandler } from 'react-native';
 import Result from './Result';
 import Select from './Select';
 import Time_up from './Time_up';
@@ -102,6 +102,18 @@ export default class Activity7 extends Component {
   this.setState({bar:this.props.count});
   console.log("recieved "+topic+chapter);
   console.log("bar state "+this.state.bar);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
   }
 
   _handleButtonPress = index => {
