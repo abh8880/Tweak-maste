@@ -33,9 +33,10 @@ export default class ModalView extends Component {
                 <View style={styles.container}>
     
                     <View style={styles.resultBox}>
-                    { temp ? <View style={styles.correctContainer}><Text style={{color:'#1c313a', fontSize: 20}}>Correct Answer</Text></View> :
-                    <View style={styles.incorrectContainer}><Text style={{color:'red', fontSize: 20}}>  Incorrect Answer</Text></View> }
-                    <Text style={{color:'#1c313a', fontSize: 20}}>Correct answer:{"\n"+this.props.correct}</Text>
+                    { temp ? <View style={styles.correctContainer}><Text style={styles.correctText}>Correct Answer</Text></View> :
+                    <View style={styles.incorrectContainer}><Text style={styles.incorrectText}>  Incorrect Answer</Text></View> }
+                    
+                     <View style={styles.Resultstatus}><Text style={styles.ResultText}>Correct answer:{"\n"+this.props.correct}</Text></View>
                     </View>
 
                 </View>
@@ -47,7 +48,7 @@ export default class ModalView extends Component {
 const styles = StyleSheet.create({
     container: {
       width:300,
-      height:200,
+      height:150,
       alignItems: 'center',
       backgroundColor: 'white',
     },
@@ -59,14 +60,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
       },
       correctContainer:{
-        width:300,
+        
          borderRadius:5,
         marginTop:'10%',
         backgroundColor:'#dff0d8',
         alignItems:'center'
       },
       incorrectContainer:{
-        width:300,
+     
         borderRadius:5,
         marginTop:'10%',
         backgroundColor:'#f2dede',
@@ -74,11 +75,26 @@ const styles = StyleSheet.create({
       },
       correctText:{
         color:'#6e936c',
-         fontSize: 20
+         fontSize: 20,
+         fontFamily:'Museo 500'
       },
       incorrectText:{
         color:'#a83a38', 
-        fontSize: 20
+        fontSize: 20,
+        fontFamily:'Museo 500'
+      },
+      Resultstatus:{
+        width:300,
+        backgroundColor:'#d9edf7',
+          borderRadius:5,
+        marginTop:'5%',
+        alignItems:'center'
+
+      },
+      ResultText:{
+        color:'#5c8ca5',
+         fontSize: 20,
+         fontFamily:'Museo 500'
       }
 });
 
