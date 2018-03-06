@@ -198,7 +198,7 @@ _sclear(){
     return (
       <View style={styles.container}>
 	  
-      <View style={{position: 'absolute',  top: 0, marginTop:'5%',height: '5%',width:'50%', backgroundColor: '#6cba00', justifyContent: 'center'}}>
+      <View style={{position: 'absolute',  top: 0, marginTop:'5%',height: '5%',width:'50%', backgroundColor: '#003955',borderRadius:10, justifyContent: 'center'}}>
 
 	
       <View >
