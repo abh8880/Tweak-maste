@@ -1,5 +1,6 @@
  import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, TextInput,Alert, Dimensions } from 'react-native';
+
+import { View, StyleSheet, TouchableOpacity, Text, TextInput, Dimensions, Alert,BackHandler } from 'react-native';
 
 import Result from './Result';
 // import Time_up from './Time_up';
@@ -9,6 +10,8 @@ import Modal from "react-native-modal";
 import { Card } from 'react-native-elements';
 import * as Progress from 'react-native-progress';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {Actions} from 'react-native-router-flux';
+
 var words = [];
 var len = 0;
 var i;
@@ -48,7 +51,6 @@ export default class Activity4 extends Component {
     correct_ans:'',
     bar:0,
     isModalVisible:false,
-    isModalVisibleClose:false
   };
 
   topic = this.props.topic;
@@ -131,8 +133,30 @@ this.setState({bar:this.props.count});
 // console.log("recieved "+topic+chapter);
 // console.log("bar state "+this.state.bar);
 }
-_toggleModal = () =>
-    this.setState({ isModalVisibleClose: !this.state.isModalVisibleClose });
+
+componentDidMount() {
+  BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+}
+
+componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+}
+
+handleBackButton() {
+  return true;
+}
+
+    _show_alert(){
+      Alert.alert(
+        'Hello !',
+        'Do you really want to exit?',
+        [
+          {text: 'Yes', onPress: () => Actions.lesson({Chapter:chapter})},
+          {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        ],
+        { cancelable: true }
+      )
+    }
 
 _handleSubmitPress = (len) => {
   //console.log(this.state.current_ans);
@@ -264,33 +288,11 @@ if (topic == -1)
       timer = <View style={{flexDirection:'row'}}>
        <View style={{flex:0.3,margin:'2%'}}>
         <View >
-        <TouchableOpacity onPress={this._toggleModal}>
+        <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
               <Icon name="close" size={30} color="#000000" />
           </View>
         </TouchableOpacity>
-        <Modal isVisible={this.state.isModalVisibleClose}
-         animationIn="slideInLeft"
-          animationOut="slideOutRight">
-          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
-           
-           
-                <View style={{flexDirection:'row'}}>
-                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                  <Text style={styles.InstText}>Instructions</Text>
-                </TouchableOpacity>
-                </View>
-
-                <View style={{flex:0.5,alignItems:'center'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                 <Icon name="close" size={25} color="#900" />
-                </TouchableOpacity>
-                </View>
-
-            </View>
-          </View>
-        </Modal>
       </View>
        </View>
 
@@ -305,33 +307,11 @@ if (topic == -1)
       bar =  <View style={{flexDirection:'row'}}>
        <View style={{flex:0.3,margin:'2%'}}>
         <View >
-        <TouchableOpacity onPress={this._toggleModal}>
+        <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
               <Icon name="close" size={30} color="#000000" />
           </View>
         </TouchableOpacity>
-        <Modal isVisible={this.state.isModalVisibleClose}
-         animationIn="slideInLeft"
-          animationOut="slideOutRight">
-          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
-           
-           
-                <View style={{flexDirection:'row'}}>
-                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                  <Text style={styles.InstText}>Instructions</Text>
-                </TouchableOpacity>
-                </View>
-
-                <View style={{flex:0.5,alignItems:'center'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                 <Icon name="close" size={25} color="#900" />
-                </TouchableOpacity>
-                </View>
-
-            </View>
-          </View>
-        </Modal>
       </View>
        </View>
 
@@ -355,19 +335,23 @@ if (topic == -1)
 
             if(k==1){
               element.push(
+               <View style={{borderBottomWidth:1,borderBottomColor:'black'}}>
                 <TextInput
                 style={{textAlign: 'center', fontSize:20, fontFamily: 'Museo 500',color:'#1c313a'}}                  
                   onChangeText={(text) => this.setState({blank1:text})}
                 />
+                </View>
               );
             }
 
             if(k==2){
               element.push(
+                <View style={{borderBottomWidth:1,borderBottomColor:'black'}}>
                 <TextInput
                 style={{textAlign: 'center', fontSize:20, fontFamily: 'Museo 500',color:'#1c313a'}}                
                   onChangeText={(text) => this.setState({blank2:text})}
                 />
+                </View>
               );
             }
         }

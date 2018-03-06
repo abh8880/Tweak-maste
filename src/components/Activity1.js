@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Dimensions, Alert } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Dimensions, Alert, BackHandler } from 'react-native';
 
 import Result from './Result';
 import Time_up from './Time_up';
@@ -93,7 +93,7 @@ export default class Activity1 extends Component {
   _show_alert(){
     Alert.alert(
       'Hello !',
-      'Do you really want to exit the lesson?',
+      'Do you really want to exit?',
       [
         {text: 'Yes', onPress: () => Actions.lesson({Chapter:chapter})},
         {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
@@ -166,6 +166,18 @@ update2 = () =>{
   this.setState({bar:this.props.count});
   // console.log("recieved "+topic+chapter);
   // console.log("bar state "+this.state.bar);
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
   }
 
   _handleNextPress = () => {

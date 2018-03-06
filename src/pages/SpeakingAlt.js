@@ -204,13 +204,13 @@ _sclear(){
       <View >
         <TouchableOpacity onPress={this._toggleModal}>
            <View style={ styles.instructionBox}>
-          <Text>Show Modal</Text>
+          <Text style={styles.showtext}>INSTRUCTIONS</Text>
           </View>
         </TouchableOpacity>
         <Modal isVisible={this.state.isModalVisible}
          animationIn="slideInLeft"
           animationOut="slideOutRight">
-          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
+          <View style={styles.modalStyles}>
            
            
                 <View style={{flexDirection:'row'}}>
@@ -227,6 +227,19 @@ _sclear(){
                 </View>
 
             </View>
+             <View style={{
+                            width:Dimensions.get('window').width/1.5,
+                            borderBottomColor: '#D3D3D3',
+                            borderBottomWidth: 1,
+                          }}
+                        />
+          
+                        <View style={styles.innerModal}>
+                         <Text> Step 1: </Text>
+                         <Text> Step 1: </Text>
+                         <Text> Step 1: </Text>
+                         <Text> Step 1: </Text>
+                        </View>
           </View>
         </Modal>
       </View>
@@ -281,9 +294,9 @@ _sclear(){
         </View>
 		 </ScrollView>
 		
-    <TouchableOpacity  onPress={()=>this._sclear()}>
+    <TouchableOpacity onPress={()=>this._sclear()}>
 	   <View style={styles.clearButton}>
-     <Text>Clear</Text>
+     <Text style={styles.clearText}>CLEAR</Text>
      </View>
 		</TouchableOpacity>
 		<View style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '10%', backgroundColor: '#840f06', justifyContent: 'center'}}><Text style={styles.innerkek}>{`Corrected Grammar: ${this.state.grammar}`}</Text></View>
@@ -388,13 +401,40 @@ const styles = StyleSheet.create({
       },
 
   clearButton:{
-    backgroundColor:'pink'
+    backgroundColor:'white',
+    borderWidth:2,
+    borderColor:'#000000',
+    width:Dimensions.get('window').width/4,
+    height:Dimensions.get('window').height/16,
+    alignItems:'center',
+    justifyContent:'center',
+    borderRadius:5
   },
   InstText:{
     fontSize:20,
     color:'#1c313a',
     fontFamily:'Museo 700'
+  },
+  showtext:{
+    fontSize:15,
+    fontFamily:'Museo 500',
+    color:'#ffffff'
+  },
+
+   modalStyles:{
+            width:Dimensions.get('window').width/1.5,
+            height:Dimensions.get('window').height/2.5, 
+            alignItems:'center',
+            backgroundColor:'white',
+            alignSelf:'center'
+        },
+
+  clearText:{
+    fontFamily:'Museo 500',
+    fontSize:20,
+    color:'black'
   }
+
 });
 
 //AppRegistry.registerComponent('VoiceTest', () => VoiceTest);

@@ -1,5 +1,5 @@
  import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Dimensions,ScrollView,Alert} from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Dimensions,ScrollView,Alert,BackHandler} from 'react-native';
 
 import Result from './Result';
 import Time_up from './Time_up';
@@ -9,6 +9,7 @@ import Modal from "react-native-modal";
 import * as Progress from 'react-native-progress';
 import { Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {Actions} from 'react-native-router-flux';
 
 var question = 'How are you ?';
 var current_ans = 'What would be your reply?';
@@ -150,10 +151,22 @@ update2 = () =>{
   // console.log("bar state "+this.state.bar);
   }
 
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return true;
+  }
+
   _show_alert(){
     Alert.alert(
       'Hello !',
-      'Do you really want to exit the lesson?',
+      'Do you really want to exit?',
       [
         {text: 'Yes', onPress: () => Actions.lesson({Chapter:chapter})},
         {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
