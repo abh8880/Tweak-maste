@@ -48,7 +48,7 @@ export default class VerticalStackLayout extends Component {
     return (
 
         <View style={styles.Layout}>
-     <View style={[styles.box, styles.box1]}>
+     <View style={styles.box1}>
 
 
          <TouchableOpacity onPress={() => Actions.first({username:username})} >
@@ -72,7 +72,7 @@ export default class VerticalStackLayout extends Component {
            <View style={styles.innerBox1}>
               <Image
                   source={require('../../icons/12.png')}
-                  style={{width: '70%', height: '70%', top:'5%'}}
+                  style={{width: '50%', height: '50%', top:'5%',}}
                 />
 
             </View>
@@ -103,7 +103,7 @@ export default class VerticalStackLayout extends Component {
 
               { /*box 1 ends here*/ }
 
-         <View style={[styles.box, styles.box2]}>
+         <View style={styles.box2}>
 
          <TouchableOpacity  onPress={() => Actions.vocabHome()}>
 
@@ -126,7 +126,7 @@ export default class VerticalStackLayout extends Component {
             <View style={styles.innerBox1}>
               <Image
                   source={require('../../icons/24.png')}
-                  style={{width: '70%', height: '70%', top:'5%'}}
+                  style={{width: '50%', height: '50%', top:'5%'}}
                 />
 
             </View>
@@ -182,7 +182,6 @@ const styles = StyleSheet.create({
     backgroundColor:'#ffffff',
    alignItems: 'center',
     justifyContent: 'center',
-    height: 80,
     width:width,
 
   },
@@ -192,7 +191,6 @@ const styles = StyleSheet.create({
     backgroundColor:'#ffffff',
    alignItems: 'center',
     justifyContent: 'center',
-    height: 80,
     width:width,
 
   },
@@ -217,13 +215,13 @@ const styles = StyleSheet.create({
   innerBox1: {
    alignItems:'center',
    left:'5%',
-    backgroundColor:'white',
-    flex:2
+    backgroundColor:'pink',
+    width:'35%'
   },
  innerBox2: {
        alignItems:'center',
-        backgroundColor:'white',
-       flex:4
+        backgroundColor:'green',
+       width:'65%'
   },
   caption: {
     margin:10,

@@ -7,13 +7,24 @@ import {
   AppRegistry,
   TouchableHighlight,
   Dimensions,
-  ScrollView
+  ScrollView,
+  TouchableOpacity,
+  ToastAndroid
 } from 'react-native';
-
+import Modal from "react-native-modal";
 import Voice from 'react-native-voice';
 //import Ginger from 'ginger-correct';
 
 export default class Speaking extends Component {
+
+     state = {
+    isModalVisible: false
+  };
+
+_toggleModal = () =>
+    this.setState({ isModalVisible: !this.state.isModalVisible });
+
+  
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +36,8 @@ export default class Speaking extends Component {
       results: [],
       partialResults: [],
 	  grammar: '',
-	  sentences: []
+	  sentences: [],
+    isModalVisible: false
     };
     Voice.onSpeechStart = this.onSpeechStart.bind(this);
     Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
@@ -68,6 +80,8 @@ export default class Speaking extends Component {
   }
 
   onSpeechResults(e) {
+
+    ToastAndroid.show('Recording has Ended', ToastAndroid.SHORT);
     this.setState({
       results: e.value,
 	  grammar: 'Loading...'
@@ -125,6 +139,7 @@ export default class Speaking extends Component {
     });
     try {
       await Voice.start('en-US');
+      ToastAndroid.show('Rcording has Started', ToastAndroid.SHORT);
     } catch (e) {
       console.error(e);
     }
@@ -146,6 +161,9 @@ export default class Speaking extends Component {
     }
   }
 
+_sclear(){
+  this.setState({sentences:[]});
+}
   async _destroyRecognizer(e) {
     try {
       await Voice.destroy();
@@ -179,10 +197,30 @@ export default class Speaking extends Component {
     return (
       <View style={styles.container}>
 	  
-	  <View style={{position: 'absolute', left: 0, right: 0, top: 0, height: '10%', backgroundColor: '#840f06', justifyContent: 'center'}}><Text style={styles.innerkek}>Tweak _module voice_recog_grammar</Text></View>
+      <View style={{position: 'absolute',  top: 0, marginTop:'5%',height: '5%',width:'50%', backgroundColor: '#6cba00', justifyContent: 'center'}}>
 
-	  
-	  
+	
+      <View >
+        <TouchableOpacity onPress={this._toggleModal}>
+           <View style={ styles.instructionBox}>
+          <Text>Show Modal</Text>
+          </View>
+        </TouchableOpacity>
+        <Modal isVisible={this.state.isModalVisible}
+         animationIn="slideInLeft"
+          animationOut="slideOutRight">
+          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
+           
+            <Text>Hello!</Text>
+
+            <TouchableOpacity onPress={this._toggleModal}>
+              <Text>Hide me!</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
+      </View>
+      </View>
+
        <View>
         <Text style={styles.instructions}>
           Press the button and start speaking.
@@ -201,10 +239,7 @@ export default class Speaking extends Component {
         </Text>
         
 		
-        <Text
-          style={styles.stat}>
-          {this.state.results[0]}
-        </Text>
+      
         {this.state.partialResults.map((result, index) => {
           return (
             <Text
@@ -220,7 +255,7 @@ export default class Speaking extends Component {
         <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
           <Image
             style={styles.button}
-            source={require('../images/mic3.png')}
+            source={require('../images/mic2.png')}
           />
         </TouchableHighlight>
         
@@ -235,8 +270,11 @@ export default class Speaking extends Component {
         </View>
 		 </ScrollView>
 		
-	
-		
+    <TouchableOpacity  onPress={()=>this._sclear()}>
+	   <View style={styles.clearButton}>
+     <Text>Clear</Text>
+     </View>
+		</TouchableOpacity>
 		<View style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '10%', backgroundColor: '#840f06', justifyContent: 'center'}}><Text style={styles.innerkek}>{`Corrected Grammar: ${this.state.grammar}`}</Text></View>
 
 
@@ -250,7 +288,6 @@ export default class Speaking extends Component {
 
 const pstyles = StyleSheet.create({
     grammarView: {
-		margin: 20,
     backgroundColor:'#ffffff',
     borderRadius:5,
     flexGrow:0.5,
@@ -274,6 +311,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    padding:0,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
@@ -325,6 +363,21 @@ const styles = StyleSheet.create({
     fontSize:15,
     fontFamily:'Museo 500',
     color:'black',
+  },
+  modalContent:{
+     backgroundColor: "white",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 10,
+   
+
+  },
+  instructionBox:{
+    alignItems:'center',
+      },
+
+  clearButton:{
+    backgroundColor:'pink'
   }
 });
 
