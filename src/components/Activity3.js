@@ -132,10 +132,6 @@ export default class Activity3 extends Component {
 
   }
 
-
-_toggleModal = () =>
-    this.setState({ isModalVisibleClose: !this.state.isModalVisibleClose });
-
   _handleButtonPress = index => {
     if (!pressed[index]){
       pressed[index] = true;
@@ -219,6 +215,18 @@ _toggleModal = () =>
   _handleNextPress(){
     this.setState({status:1});
   }
+
+  _show_alert(){
+    Alert.alert(
+      'Hello !',
+      'Do you really want to exit the lesson?',
+      [
+        {text: 'Yes', onPress: () => Actions.lesson({Chapter:chapter})},
+        {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      ],
+      { cancelable: true }
+    )
+  }
   
   render() {
 
@@ -247,33 +255,11 @@ _toggleModal = () =>
       timer = <View style={{flexDirection:'row'}}>
        <View style={{flex:0.3,margin:'2%'}}>
         <View >
-        <TouchableOpacity onPress={this._toggleModal}>
+        <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
               <Icon name="close" size={30} color="#000000" />
           </View>
         </TouchableOpacity>
-        <Modal isVisible={this.state.isModalVisibleClose}
-         animationIn="slideInLeft"
-          animationOut="slideOutRight">
-          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
-           
-           
-                <View style={{flexDirection:'row'}}>
-                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                  <Text style={styles.InstText}>Instructions</Text>
-                </TouchableOpacity>
-                </View>
-
-                <View style={{flex:0.5,alignItems:'center'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                 <Icon name="close" size={25} color="#900" />
-                </TouchableOpacity>
-                </View>
-
-            </View>
-          </View>
-        </Modal>
       </View>
        </View>
 
@@ -288,33 +274,11 @@ _toggleModal = () =>
       bar = <View style={{flexDirection:'row'}}>
        <View style={{flex:0.3,margin:'2%'}}>
         <View>
-        <TouchableOpacity onPress={this._toggleModal}>
+        <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
               <Icon name="close" size={30} color="#000000" />
           </View>
         </TouchableOpacity>
-        <Modal isVisible={this.state.isModalVisibleClose}
-         animationIn="slideInLeft"
-          animationOut="slideOutRight">
-          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
-           
-           
-                <View style={{flexDirection:'row'}}>
-                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                  <Text style={styles.InstText}>Instructions</Text>
-                </TouchableOpacity>
-                </View>
-
-                <View style={{flex:0.5,alignItems:'center'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                 <Icon name="close" size={25} color="#900" />
-                </TouchableOpacity>
-                </View>
-
-            </View>
-          </View>
-        </Modal>
       </View>
        </View>
 
