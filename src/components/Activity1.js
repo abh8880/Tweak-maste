@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, Dimensions } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, Dimensions, Alert } from 'react-native';
 
 import Result from './Result';
 import Time_up from './Time_up';
@@ -9,6 +9,9 @@ import Modal from "react-native-modal";
 import ModalView from './ModalView';
 import { Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+
+import {Actions} from 'react-native-router-flux';
+
 var current_ans = '_____';
 var ops = [];
 var anspart = [];
@@ -44,14 +47,7 @@ export default class Activity1 extends Component {
     progress:1,
     bar:0,
     isModalVisible: false,
-    isModalVisibleClose: false
   };
-
-
-_toggleModal = () =>
-    this.setState({ isModalVisible: !this.state.isModalVisible });
-
-  
 
   topic = this.props.topic;
   chapter = this.props.chapter;
@@ -93,11 +89,19 @@ _toggleModal = () =>
 
     });    
 }
+
+  _show_alert(){
+    Alert.alert(
+      'Hello !',
+      'Do you really want to exit the lesson?',
+      [
+        {text: 'Yes', onPress: () => Actions.lesson({Chapter:chapter})},
+        {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      ],
+      { cancelable: true }
+    )
+  }
  
-
-
- _toggleModal = () =>
-    this.setState({ isModalVisibleClose: !this.state.isModalVisibleClose });
  
   _handleButtonPress = (ans) => {
     this.setState({ current_ans:ans });
@@ -193,33 +197,11 @@ update2 = () =>{
           timer = <View style={{flexDirection:'row'}}>
        <View style={{flex:0.3,margin:'2%'}}>
        <View >
-        <TouchableOpacity onPress={this._toggleModal}>
+        <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
               <Icon name="close" size={30} color="#000000" />
           </View>
         </TouchableOpacity>
-        <Modal isVisible={this.state.isModalVisibleClose}
-         animationIn="slideInLeft"
-          animationOut="slideOutRight">
-          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
-           
-           
-                <View style={{flexDirection:'row'}}>
-                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                  <Text style={styles.InstText}>Instructions</Text>
-                </TouchableOpacity>
-                </View>
-
-                <View style={{flex:0.5,alignItems:'center'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                 <Icon name="close" size={25} color="#900" />
-                </TouchableOpacity>
-                </View>
-
-            </View>
-          </View>
-        </Modal>
       </View>
         
        </View>
@@ -236,33 +218,11 @@ update2 = () =>{
 
        <View style={{flex:0.3,margin:'2%'}}>
         <View >
-        <TouchableOpacity onPress={this._toggleModal}>
+        <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
               <Icon name="close" size={30} color="#000000" />
           </View>
         </TouchableOpacity>
-        <Modal isVisible={this.state.isModalVisibleClose}
-         animationIn="slideInLeft"
-          animationOut="slideOutRight">
-          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
-           
-           
-                <View style={{flexDirection:'row'}}>
-                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                  <Text style={styles.InstText}>Instructions</Text>
-                </TouchableOpacity>
-                </View>
-
-                <View style={{flex:0.5,alignItems:'center'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                 <Icon name="close" size={25} color="#900" />
-                </TouchableOpacity>
-                </View>
-
-            </View>
-          </View>
-        </Modal>
       </View>
        </View>
 

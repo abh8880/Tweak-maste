@@ -1,8 +1,8 @@
  import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text, TextInput, Dimensions } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text, TextInput,Alert, Dimensions } from 'react-native';
 
 import Result from './Result';
-import Time_up from './Time_up';
+// import Time_up from './Time_up';
 import Select from './Select';
 import ModalView from './ModalView';
 import Modal from "react-native-modal";
@@ -21,7 +21,7 @@ var timeout;
 var timer = null;
 var bar = null;
 var element = [];
-
+var timer_on = 1;
 var SQLite = require('react-native-sqlite-storage');
 var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'})
 export default class Activity4 extends Component {
@@ -139,7 +139,8 @@ _handleSubmitPress = (len) => {
   // console.log("submit len"+len);
   // console.log("blank1="+this.state.blank1);
   // console.log("blank2="+this.state.blank2);
-
+clearTimeout(timeout);
+timer_on = 0;
   var answer = '';
   var k = 0;
 
@@ -212,24 +213,48 @@ update2 = () =>{
   });
 };
 
+
   render() {
 
     if(topic == -1){
       clearTimeout(timeout);
-
-      timeout = setTimeout((function() {
-        this.setState({ progress: this.state.progress - 0.1});
-      }).bind(this), 1000);
+      if (timer_on==1) 
+      {
+        timeout = setTimeout((function() {
+          this.setState({ progress: this.state.progress - 0.1});
+        }).bind(this), 1000);
+      }
   
       // console.log("progress="+this.state.progress);
   
-      if(this.state.progress<0){
+      if(this.state.progress<0&&this.state.progress>-2){
         // console.log("less");
         clearTimeout(timeout);
         this.update2();
-        return(
-          <Time_up topic={topic} chapter={chapter} end={this.state.last}/> 
-        );
+        // return(
+
+    Alert.alert(
+        'Time up!!',
+        'Please proceed to the next question',
+        [
+          {text: 'Next question', onPress: () => this._handleNextPress()},
+        ],
+        { cancelable: false }
+      )
+    this.setState({progress:-3})
+
+
+          //  Alert.alert(
+          //   'Time up!!',
+          //   [
+          //     {text: 'Next Question', onPress: () => this._next_question()},
+          //   ],
+          //   { cancelable: false }
+          // )
+
+
+          // <Time_up topic={topic} chapter={chapter} end={this.state.last}/> 
+        // );
       }
   
     }

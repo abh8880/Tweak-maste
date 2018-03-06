@@ -165,7 +165,7 @@ export default class Select extends Component {
 
 		var len = over.length;
 		// console.log("array_len="+len);
-		// var i = Math.floor(Math.random()*(len));
+		var i = Math.floor(Math.random()*(len));
 		// console.log("i="+i);
 
 		// console.log("over[i]="+over[i]);
@@ -188,7 +188,7 @@ export default class Select extends Component {
 				<Test_result correct={correct} chapter={this.props.chapter}/>
 			);
 		}
-		if(count<= 2){
+		if(count<= 12){
 			// console.log("\n\nsecond\n\n")
 			// console.log("over[i]="+over[i]);
 			var element = this.load_activity(over[i], chapter, topic, 0);	

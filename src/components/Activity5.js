@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet,Dimensions,ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet,Dimensions,Alert,ScrollView } from 'react-native';
 import Result from './Result';
-import Time_up from './Time_up';
+// import Time_up from './Time_up';
 import Select from './Select';
 import ModalView from './ModalView';
 import Modal from "react-native-modal";
@@ -26,7 +26,7 @@ var pressed_supp = new Array();
 var status;
 var time;
 var timeout;
-
+var timer_on = 1;
 var topic;
 var chapter;
 export default class Activity5 extends Component {
@@ -183,7 +183,8 @@ _toggleModal = () =>
     _handleSubmitPress = () => {
     console.log("my answer "+this.state.answer);
     console.log("correct answer "+this.state.correct_ans);
-
+clearTimeout(timeout);
+timer_on = 0;
     var final_answer = this.state.answer.trim();
     final_answer = final_answer+".";
     final_answer = final_answer.charAt(0).toUpperCase() + final_answer.slice(1);
@@ -236,24 +237,47 @@ _toggleModal = () =>
   
   });
   };
+
+
   render() {
 
     if(topic == -1){
       clearTimeout(timeout);
-
-      timeout = setTimeout((function() {
-        this.setState({ progress: this.state.progress - 0.1});
-      }).bind(this), 1000);
+      if (timer_on ==1) 
+      {
+        timeout = setTimeout((function() {
+          this.setState({ progress: this.state.progress - 0.1});
+        }).bind(this), 1000);
+      }
   
       console.log("progress="+this.state.progress);
   
-      if(this.state.progress<0){
+      if(this.state.progress<0&&this.state.progress>-2){
         console.log("less");
         clearTimeout(timeout);
         this.update2();
-        return(
-          <Time_up topic={topic} chapter={chapter} end={this.state.last}/> 
-        );
+        // return(
+      Alert.alert(
+        'Time up!!',
+        'Please proceed to the next question',
+        [
+          {text: 'Next question', onPress: () => this._handleNextPress()},
+        ],
+        { cancelable: false }
+      )
+      this.setState({progress:-3})
+
+          //  Alert.alert(
+          //   'Time up!!',
+          //   [
+          //     {text: 'Next Question', onPress: () => this._next_question()},
+          //   ],
+          //   { cancelable: false }
+          // )
+
+
+          // <Time_up topic={topic} chapter={chapter} end={this.state.last}/> 
+        // );
       }
   
     }
