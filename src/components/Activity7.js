@@ -250,7 +250,7 @@ export default class Activity7 extends Component {
         </View>        
        <View style={styles.compBox}>
       			<Text style={{fontSize:15,color:'black', fontFamily: 'Museo 500',}}>Wrong Sentence:</Text>
-                           <View style={{flexDirection:'row'}}>
+                           <View style={{flexDirection:'row',flexWrap:'wrap'}}>
                         { buttons1 }
                         </View>
       		</View>
