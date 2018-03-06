@@ -160,14 +160,14 @@ export default class Routes extends Component {
                 alignContent: 'center'
               }}
             >
-              <Scene key="coursestab" title="Courses" icon={TabIcon}>
-                <Scene key="courses" component={Courses} hideNavBar/>
+              <Scene key="coursestab" title="Courses" icon={TabIcon} navBar={() => this.createNavBar('Courses', 'nope')}>
+                <Scene key="courses" title="Courses" icon={TabIcon} component={Courses} hideNavBar/>
               </Scene>
-              <Scene key="speakingtab" title="Speaking" icon={TabIcon} >
-                <Scene key="speaking" component={Speaking} hideNavBar/>
+              <Scene key="speakingtab" title="Speaking" icon={TabIcon} navBar={() => this.createNavBar('Speaking', 'nope')} >
+                <Scene key="speaking" title="Speaking" icon={TabIcon} component={Speaking} hideNavBar/>
               </Scene>
             </Scene>
-              
+
             <Scene username={this.state.username} key="first" component={First} title="Chapters" navBar={() => this.createNavBar('Chapters', 'courses')}/>
             <Scene username={this.state.username} key="lesson" component={Lesson} title="Lessons" navBar={() => this.createNavBar('Lessons', 'first')}/>
             <Scene username={this.state.username} key="summary" component={Summary} title="Summary" navBar={() => this.createNavBar('Summary', 'lesson')}/>
