@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text, TextInput, Dimensions } from 'react-native';
 
 import Result from './Result';
@@ -47,7 +47,8 @@ export default class Activity4 extends Component {
     current_ans:'',
     correct_ans:'',
     bar:0,
-    isModalVisible:false
+    isModalVisible:false,
+    isModalVisibleClose:false
   };
 
   topic = this.props.topic;
@@ -130,6 +131,8 @@ this.setState({bar:this.props.count});
 console.log("recieved "+topic+chapter);
 console.log("bar state "+this.state.bar);
 }
+_toggleModal = () =>
+    this.setState({ isModalVisibleClose: !this.state.isModalVisibleClose });
 
 _handleSubmitPress = (len) => {
   //console.log(this.state.current_ans);
@@ -235,9 +238,35 @@ if (topic == -1)
     {
       timer = <View style={{flexDirection:'row'}}>
        <View style={{flex:0.3,margin:'2%'}}>
-        <TouchableOpacity>
-         <Icon name="close" size={30} color="#000000" />
-         </TouchableOpacity>
+        <View >
+        <TouchableOpacity onPress={this._toggleModal}>
+           <View style={ styles.instructionBox}>
+              <Icon name="close" size={30} color="#000000" />
+          </View>
+        </TouchableOpacity>
+        <Modal isVisible={this.state.isModalVisibleClose}
+         animationIn="slideInLeft"
+          animationOut="slideOutRight">
+          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
+           
+           
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
+                <TouchableOpacity onPress={this._toggleModal}>
+                  <Text style={styles.InstText}>Instructions</Text>
+                </TouchableOpacity>
+                </View>
+
+                <View style={{flex:0.5,alignItems:'center'}}>
+                <TouchableOpacity onPress={this._toggleModal}>
+                 <Icon name="close" size={25} color="#900" />
+                </TouchableOpacity>
+                </View>
+
+            </View>
+          </View>
+        </Modal>
+      </View>
        </View>
 
           <View style={{flex:3,margin:'5%',alignItems:'center',}}>
@@ -250,9 +279,35 @@ if (topic == -1)
     else{
       bar =  <View style={{flexDirection:'row'}}>
        <View style={{flex:0.3,margin:'2%'}}>
-        <TouchableOpacity>
-         <Icon name="close" size={30} color="#000000" />
-         </TouchableOpacity>
+        <View >
+        <TouchableOpacity onPress={this._toggleModal}>
+           <View style={ styles.instructionBox}>
+              <Icon name="close" size={30} color="#000000" />
+          </View>
+        </TouchableOpacity>
+        <Modal isVisible={this.state.isModalVisibleClose}
+         animationIn="slideInLeft"
+          animationOut="slideOutRight">
+          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
+           
+           
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
+                <TouchableOpacity onPress={this._toggleModal}>
+                  <Text style={styles.InstText}>Instructions</Text>
+                </TouchableOpacity>
+                </View>
+
+                <View style={{flex:0.5,alignItems:'center'}}>
+                <TouchableOpacity onPress={this._toggleModal}>
+                 <Icon name="close" size={25} color="#900" />
+                </TouchableOpacity>
+                </View>
+
+            </View>
+          </View>
+        </Modal>
+      </View>
        </View>
 
           <View style={{flex:3,margin:'5%',alignItems:'center',}}>
