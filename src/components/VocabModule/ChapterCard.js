@@ -82,7 +82,11 @@ export default class ChapterCard extends Component {
         <View style={styles.box1}>
           <View style={styles.insideBox}>
                <Image
+<<<<<<< Updated upstream
                   source={require('../../../icons/1.png')}
+=======
+                  source={require('../../../icons/20.png')}
+>>>>>>> Stashed changes
                   style={{width: 100, height: 100}}
                 />
           </View>
@@ -97,7 +101,11 @@ export default class ChapterCard extends Component {
         <View style={styles.box2}>
            <View style={styles.insideBox}>
             <Image
+<<<<<<< Updated upstream
                   source={require('../../../icons/2.png')}
+=======
+                  source={require('../../../icons/34.png')}
+>>>>>>> Stashed changes
                   style={{width: 105, height: 110}}
                 />
           </View>
