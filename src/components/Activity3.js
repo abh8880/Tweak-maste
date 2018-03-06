@@ -1,6 +1,6 @@
  
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet,Dimensions,ScrollView } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet,Dimensions,ScrollView, Alert } from 'react-native';
 
 import Result from './Result';
 import Time_up from './Time_up';
@@ -10,6 +10,8 @@ import Modal from "react-native-modal";
 import * as Progress from 'react-native-progress';
 import { Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import {Actions} from 'react-native-router-flux';
+
 var answer;
 var ans;
 var length=0;
@@ -219,7 +221,7 @@ export default class Activity3 extends Component {
   _show_alert(){
     Alert.alert(
       'Hello !',
-      'Do you really want to exit the lesson?',
+      'Do you really want to exit?',
       [
         {text: 'Yes', onPress: () => Actions.lesson({Chapter:chapter})},
         {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},

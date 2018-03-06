@@ -93,7 +93,7 @@ export default class Activity1 extends Component {
   _show_alert(){
     Alert.alert(
       'Hello !',
-      'Do you really want to exit the lesson?',
+      'Do you really want to exit?',
       [
         {text: 'Yes', onPress: () => Actions.lesson({Chapter:chapter})},
         {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},

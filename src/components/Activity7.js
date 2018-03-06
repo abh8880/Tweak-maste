@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity,TouchableHighlight, StyleSheet,Dimensions } from 'react-native';
+import { Text, View, TouchableOpacity,TouchableHighlight, StyleSheet,Dimensions, Alert } from 'react-native';
 import Result from './Result';
 import Select from './Select';
 import Time_up from './Time_up';
@@ -8,6 +8,7 @@ import Modal from "react-native-modal";
 import { Card } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Progress from 'react-native-progress';
+import {Actions} from 'react-native-router-flux';
 
 var sentence = new Array();
 
@@ -54,7 +55,6 @@ export default class Activity7 extends Component {
       progress:1,
       bar:0,
       isModalVisible:false,
-      isModalVisibleClose:false
     };
 
 
@@ -104,9 +104,6 @@ export default class Activity7 extends Component {
   console.log("bar state "+this.state.bar);
   }
 
-_toggleModal = () =>
-    this.setState({ isModalVisibleClose: !this.state.isModalVisibleClose });
-
   _handleButtonPress = index => {
   	if (!pressed[index]){
   		pressed[index] = true;
@@ -114,6 +111,18 @@ _toggleModal = () =>
     	this.setState({ answer: answer});
 	}
   };
+
+  _show_alert(){
+    Alert.alert(
+      'Hello !',
+      'Do you really want to exit?',
+      [
+        {text: 'Yes', onPress: () => Actions.lesson({Chapter:chapter})},
+        {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+      ],
+      { cancelable: true }
+    )
+  }
 
   
   _clear = () => {
@@ -212,33 +221,11 @@ _toggleModal = () =>
           timer =<View style={{flexDirection:'row'}}>
        <View style={{flex:0.3,margin:'2%'}}>
         <View >
-        <TouchableOpacity onPress={this._toggleModal}>
+        <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
               <Icon name="close" size={30} color="#000000" />
           </View>
         </TouchableOpacity>
-        <Modal isVisible={this.state.isModalVisibleClose}
-         animationIn="slideInLeft"
-          animationOut="slideOutRight">
-          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
-           
-           
-                <View style={{flexDirection:'row'}}>
-                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                  <Text style={styles.InstText}>Instructions</Text>
-                </TouchableOpacity>
-                </View>
-
-                <View style={{flex:0.5,alignItems:'center'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                 <Icon name="close" size={25} color="#900" />
-                </TouchableOpacity>
-                </View>
-
-            </View>
-          </View>
-        </Modal>
       </View>
        </View>
 
@@ -253,33 +240,11 @@ _toggleModal = () =>
       bar = <View style={{flexDirection:'row'}}>
        <View style={{flex:0.3,margin:'2%'}}>
         <View >
-        <TouchableOpacity onPress={this._toggleModal}>
+        <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
               <Icon name="close" size={30} color="#000000" />
           </View>
         </TouchableOpacity>
-        <Modal isVisible={this.state.isModalVisibleClose}
-         animationIn="slideInLeft"
-          animationOut="slideOutRight">
-          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
-           
-           
-                <View style={{flexDirection:'row'}}>
-                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                  <Text style={styles.InstText}>Instructions</Text>
-                </TouchableOpacity>
-                </View>
-
-                <View style={{flex:0.5,alignItems:'center'}}>
-                <TouchableOpacity onPress={this._toggleModal}>
-                 <Icon name="close" size={25} color="#900" />
-                </TouchableOpacity>
-                </View>
-
-            </View>
-          </View>
-        </Modal>
       </View>
        </View>
 
