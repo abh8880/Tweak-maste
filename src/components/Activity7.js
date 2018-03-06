@@ -53,7 +53,8 @@ export default class Activity7 extends Component {
       rem_rep:0,
       progress:1,
       bar:0,
-      isModalVisible:false
+      isModalVisible:false,
+      isModalVisibleClose:false
     };
 
 
@@ -103,6 +104,8 @@ export default class Activity7 extends Component {
   console.log("bar state "+this.state.bar);
   }
 
+_toggleModal = () =>
+    this.setState({ isModalVisibleClose: !this.state.isModalVisibleClose });
 
   _handleButtonPress = index => {
   	if (!pressed[index]){
@@ -208,9 +211,35 @@ export default class Activity7 extends Component {
     {
           timer =<View style={{flexDirection:'row'}}>
        <View style={{flex:0.3,margin:'2%'}}>
-        <TouchableOpacity>
-         <Icon name="close" size={30} color="#000000" />
-         </TouchableOpacity>
+        <View >
+        <TouchableOpacity onPress={this._toggleModal}>
+           <View style={ styles.instructionBox}>
+              <Icon name="close" size={30} color="#000000" />
+          </View>
+        </TouchableOpacity>
+        <Modal isVisible={this.state.isModalVisibleClose}
+         animationIn="slideInLeft"
+          animationOut="slideOutRight">
+          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
+           
+           
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
+                <TouchableOpacity onPress={this._toggleModal}>
+                  <Text style={styles.InstText}>Instructions</Text>
+                </TouchableOpacity>
+                </View>
+
+                <View style={{flex:0.5,alignItems:'center'}}>
+                <TouchableOpacity onPress={this._toggleModal}>
+                 <Icon name="close" size={25} color="#900" />
+                </TouchableOpacity>
+                </View>
+
+            </View>
+          </View>
+        </Modal>
+      </View>
        </View>
 
           <View style={{flex:3,margin:'5%',alignItems:'center',}}>
@@ -223,9 +252,35 @@ export default class Activity7 extends Component {
     else{
       bar = <View style={{flexDirection:'row'}}>
        <View style={{flex:0.3,margin:'2%'}}>
-        <TouchableOpacity>
-         <Icon name="close" size={30} color="#000000" />
-         </TouchableOpacity>
+        <View >
+        <TouchableOpacity onPress={this._toggleModal}>
+           <View style={ styles.instructionBox}>
+              <Icon name="close" size={30} color="#000000" />
+          </View>
+        </TouchableOpacity>
+        <Modal isVisible={this.state.isModalVisibleClose}
+         animationIn="slideInLeft"
+          animationOut="slideOutRight">
+          <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
+           
+           
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
+                <TouchableOpacity onPress={this._toggleModal}>
+                  <Text style={styles.InstText}>Instructions</Text>
+                </TouchableOpacity>
+                </View>
+
+                <View style={{flex:0.5,alignItems:'center'}}>
+                <TouchableOpacity onPress={this._toggleModal}>
+                 <Icon name="close" size={25} color="#900" />
+                </TouchableOpacity>
+                </View>
+
+            </View>
+          </View>
+        </Modal>
+      </View>
        </View>
 
           <View style={{flex:3,margin:'5%',alignItems:'center',}}>
