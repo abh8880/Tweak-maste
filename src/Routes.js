@@ -201,6 +201,7 @@ export default class Routes extends Component {
               navigationBarStyle={{
                 backgroundColor: '#00232d',           //navbar color
               }}
+              hideNavBar
             />
 
             <Scene key="deckComplete"
