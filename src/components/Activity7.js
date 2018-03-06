@@ -306,7 +306,7 @@ export default class Activity7 extends Component {
         
         <View style={styles.opsBox} >
         <Text style={{fontSize:15,color:'black', fontFamily: 'Museo 500',}}>Wrong Word:</Text>
-       <Text style={{fontSize:20}}>
+       <Text style={{fontSize:20,fontFamily:'Museo 500',color:'#1c313a'}}>
             {answer}
           </Text>
         </View>
