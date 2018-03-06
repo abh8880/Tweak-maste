@@ -6,7 +6,7 @@ import Time_up from './Time_up';
 import ModalView from './ModalView';
 import Modal from "react-native-modal";
 import { Card } from 'react-native-elements';
-
+import Icon from 'react-native-vector-icons/FontAwesome';
 import * as Progress from 'react-native-progress';
 
 var sentence = new Array();
@@ -206,15 +206,31 @@ export default class Activity7 extends Component {
 
     if (topic == -1) 
     {
-          timer = <View style={{margin:'5%',alignItems:'center'}}>
-            <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width-50} height={8} 
+          timer =<View style={{flexDirection:'row'}}>
+       <View style={{flex:0.3,margin:'2%'}}>
+        <TouchableOpacity>
+         <Icon name="close" size={30} color="#000000" />
+         </TouchableOpacity>
+       </View>
+
+          <View style={{flex:3,margin:'5%',alignItems:'center',}}>
+            <Progress.Bar progress={this.state.progress} width={Dimensions.get('window').width-80} height={8} 
             unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'}/>
-          </View>;
+          </View>
+        </View>;
     }
 
     else{
-      bar = <View style={{margin:'5%',alignItems:'center'}}>
-        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width-50} height={8} unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'} animated={false}/>
+      bar = <View style={{flexDirection:'row'}}>
+       <View style={{flex:0.3,margin:'2%'}}>
+        <TouchableOpacity>
+         <Icon name="close" size={30} color="#000000" />
+         </TouchableOpacity>
+       </View>
+
+          <View style={{flex:3,margin:'5%',alignItems:'center',}}>
+        <Progress.Bar progress={this.state.bar/12} width={Dimensions.get('window').width-80} height={8} unfilledColor={'rgba(223,220,220,1)'} color={'rgba(133,6,63,0.8)'} animated={false}/>
+         </View>
     </View>
     }
 

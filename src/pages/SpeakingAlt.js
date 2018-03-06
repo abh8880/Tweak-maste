@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import Modal from "react-native-modal";
 import Voice from 'react-native-voice';
+import Icon from 'react-native-vector-icons/FontAwesome';
 //import Ginger from 'ginger-correct';
 
 export default class Speaking extends Component {
@@ -211,11 +212,21 @@ _sclear(){
           animationOut="slideOutRight">
           <View style={{ flex: 0.5,alignItems:'center',backgroundColor:'#ffffff',borderRadius:10}}>
            
-            <Text>Hello!</Text>
+           
+                <View style={{flexDirection:'row'}}>
+                <View style={{flex:3,alignItems:'center',marginTop:'2%'}}>
+                <TouchableOpacity onPress={this._toggleModal}>
+                  <Text style={styles.InstText}>Instructions</Text>
+                </TouchableOpacity>
+                </View>
 
-            <TouchableOpacity onPress={this._toggleModal}>
-              <Text>Hide me!</Text>
-            </TouchableOpacity>
+                <View style={{flex:0.5,alignItems:'center'}}>
+                <TouchableOpacity onPress={this._toggleModal}>
+                 <Icon name="close" size={25} color="#900" />
+                </TouchableOpacity>
+                </View>
+
+            </View>
           </View>
         </Modal>
       </View>
@@ -378,6 +389,11 @@ const styles = StyleSheet.create({
 
   clearButton:{
     backgroundColor:'pink'
+  },
+  InstText:{
+    fontSize:20,
+    color:'#1c313a',
+    fontFamily:'Museo 700'
   }
 });
 

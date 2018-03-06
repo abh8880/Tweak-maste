@@ -78,8 +78,8 @@ export default class VerticalStackLayout extends Component {
             </View>
             <View style={styles.innerBox2}>
               <View  style={styles.caption}>
-               <Text style={styles.captionText}>Improve your Vocabulary </Text>
-                 <Text style={styles.captionText}>knowing the origin of words</Text>
+               <Text style={styles.captionText}>Master the art of perfect </Text>
+                 <Text style={styles.captionText}>Sentence Formation</Text>
               </View>
             <View style={styles.progress}>
               <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
@@ -259,6 +259,6 @@ captionText:{
     fontFamily: 'Museo 700'
 },
 progress:{
-  right:'14%'
+  
 }
 });
