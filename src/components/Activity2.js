@@ -56,11 +56,11 @@ export default class Activity2 extends Component {
 
        var len = results.rows.length;
 
-       console.log("len="+len);
+       // console.log("len="+len);
 
        if(len > 0){
         var rand = Math.floor(Math.random()*(len-1))+0;
-        console.log("rand="+rand)
+        // console.log("rand="+rand)
         var row = results.rows.item(rand);
         this.setState({question: row.question});
         this.setState({correct_ans: row.correct});
@@ -80,7 +80,7 @@ export default class Activity2 extends Component {
       
     });
     
-    console.log("id="+id);
+    // console.log("id="+id);
 
     });
 
@@ -95,11 +95,11 @@ export default class Activity2 extends Component {
   };
 
   _handleSubmitPress = () => {
-    console.log("current_ans " + this.state.current_ans);
-    console.log(this.state.correct_ans);
+    // console.log("current_ans " + this.state.current_ans);
+    // console.log(this.state.correct_ans);
 
     if(this.state.current_ans === this.state.correct_ans){
-      console.log("entered");
+      // console.log("entered");
 
       this.setState({check_ans: 1});
       this.setState({repeat: 0});
@@ -125,7 +125,7 @@ export default class Activity2 extends Component {
      
     }
 
-    console.log("check_ans " + this.state.check_ans);
+    // console.log("check_ans " + this.state.check_ans);
     this.setState({isModalVisible: true});
 
     this.setState({question: ''});
@@ -149,10 +149,10 @@ update2 = () =>{
   }
 
   componentWillMount(){
-    console.log("prop count:"+this.props.count);
+    // console.log("prop count:"+this.props.count);
   this.setState({bar:this.props.count});
-  console.log("recieved "+topic+chapter);
-  console.log("bar state "+this.state.bar);
+  // console.log("recieved "+topic+chapter);
+  // console.log("bar state "+this.state.bar);
   }
 
   render() {
@@ -163,10 +163,10 @@ update2 = () =>{
       this.setState({ progress: this.state.progress - 0.1});
     }).bind(this), 1000);
 
-    console.log("progress="+this.state.progress);
+    // console.log("progress="+this.state.progress);
 
     if(this.state.progress<0){
-      console.log("less");
+      // console.log("less");
       clearTimeout(timeout);
       this.update2();
       return(
@@ -350,8 +350,8 @@ update2 = () =>{
 
     else if(this.state.status == 1){
       clearTimeout(timeout);
-      console.log("rep_state="+this.state.repeat);
-      console.log("rem_rep_state="+this.state.rem_rep);
+      // console.log("rep_state="+this.state.repeat);
+      // console.log("rem_rep_state="+this.state.rem_rep);
       return(
         <Select score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
       );

@@ -61,7 +61,7 @@ export default class Routes extends Component {
   async get(){
     username = await AsyncStorage.getItem('username');
     console.log("in routes.js , name: "+username)
-    alert(username);
+    // alert(username);
     this.setState({username:username});
     console.log("state: "+this.state.username)
   }

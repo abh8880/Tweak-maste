@@ -65,13 +65,13 @@ export default class Activity3 extends Component {
 
            var len = results.rows.length;
 
-           console.log("len="+len);
+           // console.log("len="+len);
 
            if(len > 0){
             var rand = Math.floor(Math.random()*(len-1))+0;
-            console.log("rand="+rand)
+            // console.log("rand="+rand)
             var row = results.rows.item(rand);
-            console.log(row)
+            // console.log(row)
             this.setState({question: row.question});
             this.setState({correct_ans: row.correct});
             ans = row.words.split(' ');
@@ -88,7 +88,7 @@ export default class Activity3 extends Component {
           }
 
           
-          console.log("id="+this.state.id);
+          // console.log("id="+this.state.id);
         });
 
         });
@@ -101,11 +101,11 @@ export default class Activity3 extends Component {
 
          var len = results.rows.length;
 
-         console.log("len="+len);
+         // console.log("len="+len);
 
          if(len > 0){
           var rand = Math.floor(Math.random()*(len-1))+0;
-          console.log("rand="+rand)
+          // console.log("rand="+rand)
           var row = results.rows.item(rand);
           this.setState({question: row.question});
           this.setState({correct_ans: row.correct});
@@ -123,7 +123,7 @@ export default class Activity3 extends Component {
         }
 
         
-        console.log("id="+this.state.id);
+        // console.log("id="+this.state.id);
       });
 
       });
@@ -146,16 +146,16 @@ _toggleModal = () =>
 
   _handleSubmitPress = () => {
 
-    console.log(this.state.answer);
-    console.log(this.state.correct_ans);
+    // console.log(this.state.answer);
+    // console.log(this.state.correct_ans);
 
     var final_answer = this.state.answer.trim();
     final_answer = final_answer+".";
     final_answer = final_answer.charAt(0).toUpperCase() + final_answer.slice(1);
-    console.log("Final answer="+final_answer);
+    // console.log("Final answer="+final_answer);
 
     if(final_answer == this.state.correct_ans){
-      console.log("entered");
+      // console.log("entered");
 
       this.setState({check_ans: 1});
       this.setState({repeat: 0});
@@ -180,7 +180,7 @@ _toggleModal = () =>
       });
     }
 
-    console.log(this.state.check_ans);
+    // console.log(this.state.check_ans);
     this.setState({isModalVisible: true});
 
     this.setState({question: ''});
@@ -210,10 +210,10 @@ _toggleModal = () =>
   };
 
   componentWillMount(){
-    console.log("prop count:"+this.props.count);
+    // console.log("prop count:"+this.props.count);
   this.setState({bar:this.props.count});
-  console.log("recieved "+topic+chapter);
-  console.log("bar state "+this.state.bar);
+  // console.log("recieved "+topic+chapter);
+  // console.log("bar state "+this.state.bar);
   }
 
   _handleNextPress(){
@@ -229,10 +229,10 @@ _toggleModal = () =>
         this.setState({ progress: this.state.progress - 0.1});
       }).bind(this), 1000);
   
-      console.log("progress="+this.state.progress);
+      // console.log("progress="+this.state.progress);
   
       if(this.state.progress<0){
-        console.log("less");
+        // console.log("less");
         clearTimeout(timeout);
         this.update2();
         return(
@@ -325,7 +325,7 @@ _toggleModal = () =>
        </View>
     }
 
-    console.log(length);
+    // console.log(length);
     
   var buttons = [];
 
@@ -422,8 +422,8 @@ _toggleModal = () =>
 
    else if(this.state.status == 1){
     clearTimeout(timeout);
-    console.log("rep_state="+this.state.repeat);
-      console.log("rem_rep_state="+this.state.rem_rep);
+    // console.log("rep_state="+this.state.repeat);
+      // console.log("rem_rep_state="+this.state.rem_rep);
       return(
         <Select score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
       );

@@ -66,22 +66,22 @@ export default class Activity7 extends Component {
 
        var length = results.rows.length;
 
-       console.log("DB:"+length);
+       // console.log("DB:"+length);
 
        if(length > 0){
         var rand = Math.floor(Math.random()*(length-1))+0;
-        console.log("rand="+rand)
+        // console.log("rand="+rand)
         var row = results.rows.item(rand);
         this.setState({sentence: row.sentence});
-        console.log(this.state.sentence);
+        // console.log(this.state.sentence);
         words = row.sentence.split(" ");
-        console.log(this.state.words);
+        // console.log(this.state.words);
         this.setState({words:words});
         len = words.length;
         this.setState({len:len});
 
         correct_ans = row.correct;
-        console.log("correct ans " + correct_ans);
+        // console.log("correct ans " + correct_ans);
         this.setState({correct_ans:correct_ans});
         this.setState({id:row.id});
         if(len==1 && this.props.wrong == 0)
@@ -98,10 +98,10 @@ export default class Activity7 extends Component {
   }
 
   componentWillMount(){
-    console.log("prop count:"+this.props.count);
+    // console.log("prop count:"+this.props.count);
   this.setState({bar:this.props.count});
-  console.log("recieved "+topic+chapter);
-  console.log("bar state "+this.state.bar);
+  // console.log("recieved "+topic+chapter);
+  // console.log("bar state "+this.state.bar);
   }
 
 _toggleModal = () =>
@@ -122,20 +122,20 @@ _toggleModal = () =>
   };
   
    _handleSubmitPress = () => {
-    console.log("my answer "+this.state.answer);
-    console.log("correct answer "+this.state.correct_ans);
+    // console.log("my answer "+this.state.answer);
+    // console.log("correct answer "+this.state.correct_ans);
 
     var answer = this.state.answer;
     
     if(answer.charAt(answer.length-1).toUpperCase().toLowerCase() == answer.charAt(answer.length-1).toUpperCase()){
-      console.log("last letter="+answer.charAt(answer.length-1));
+      // console.log("last letter="+answer.charAt(answer.length-1));
       answer = answer.substring(0,answer.length-1);
     }
 
-    console.log("final answer="+answer);
+    // console.log("final answer="+answer);
 
     if(answer === this.state.correct_ans){
-      console.log("entered");
+      // console.log("entered");
         
       this.setState({check_ans: 1});
       this.setState({repeat: 0});
@@ -161,7 +161,7 @@ _toggleModal = () =>
         
     }
 
-    console.log(this.state.check_ans);
+    // console.log(this.state.check_ans);
     this.setState({isModalVisible: true});        
 
     this.setState({question: ''});
@@ -193,10 +193,10 @@ _toggleModal = () =>
         this.setState({ progress: this.state.progress - 0.1});
       }).bind(this), 1000);
   
-      console.log("progress="+this.state.progress);
+      // console.log("progress="+this.state.progress);
   
       if(this.state.progress<0){
-        console.log("less");
+        // console.log("less");
         clearTimeout(timeout);
         this.update2();
         return(
@@ -375,8 +375,8 @@ _toggleModal = () =>
     }
       else if(this.state.status == 1){
         clearTimeout(timeout);
-        console.log("rep_state="+this.state.repeat);
-          console.log("rem_rep_state="+this.state.rem_rep);
+        // console.log("rep_state="+this.state.repeat);
+          // console.log("rem_rep_state="+this.state.rem_rep);
           return(
             <Select score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
           );

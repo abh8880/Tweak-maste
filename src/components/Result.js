@@ -17,7 +17,7 @@ export default class Result extends Component {
 
     render(){
 
-        console.log(this.props.score);
+        // console.log(this.props.score);
         var temp = this.props.score; //1
         var repeat = this.props.repeat; //0
         // if (this.props.topic!=-1) // for testing. everything correct while learning
