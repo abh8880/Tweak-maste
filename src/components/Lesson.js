@@ -151,8 +151,9 @@ static navigationOptions = {
       BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
-  handleBackButton() {
+  handleBackButton = () =>{
     Actions.first();
+    return true;
   }
   
   reset_test_db = (chapter) =>{

@@ -6,7 +6,9 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  BackHandler,
+  Alert
 } from 'react-native';
 
 import { StatusBar} from 'react-native';
@@ -41,6 +43,28 @@ export default class VerticalStackLayout extends Component {
         this.get();
 
       };
+
+    componentDidMount() {
+      this.get();
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+  
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+  
+    handleBackButton = () =>{
+      Alert.alert(
+        'Hello !',
+        'Do you really want to exit the app?',
+        [
+          {text: 'Yes', onPress: () => BackHandler.exitApp()},
+          {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        ],
+        { cancelable: true }
+      )
+      return true;
+    }
 
 
 

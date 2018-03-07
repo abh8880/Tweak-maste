@@ -169,6 +169,7 @@ update2 = () =>{
   }
 
   componentDidMount() {
+
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
   }
 
@@ -176,7 +177,7 @@ update2 = () =>{
       BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
-  handleBackButton() {
+  handleBackButton = () =>{
     return true;
   }
 

@@ -51,10 +51,13 @@ export default class First extends Component {
 //     }
 //   };
 
-  // async get(){
-  //   name = await AsyncStorage.getItem('username'); 
-  //   alert(name);
-  // }
+async get(){
+  username = await AsyncStorage.getItem('username');
+  console.log("in courses.js , name: "+username)
+  alert(username);
+  this.setState({username:username});
+  console.log("state: "+this.state.username)
+}
 
   constructor(props) {
         super(props);
@@ -62,62 +65,16 @@ export default class First extends Component {
           status: 0,
           progress_val: progress_val,
           prev_chap:'',
-          username:this.props.username
-          // this.get();
+          username:''
       };
       // this.setState({username:})
       // username = this.props.username;
       // console.log("in first.js , name: "+this.state.username)
-      // alert(this.state.username)
-      
-      axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
-            params: {
-              name: this.state.username
-            },
-            dataType: 'json'
-          })
-          .then(function (response) {
-            // console.log("\n\n SUCCESS \n\n");
-            // console.log(response.data);
-            // console.log(response.data[0].chapter);
-            
-            for(var i=0;i<response.data.length;i++){
-              obj = {
-                chapter:response.data[i].chapter,
-                test:response.data[i].test
-              }
-
-              chap_info.push(obj);
-            }
-
-            var index;
-            var sum = 0;
-            var sum1 = 0;
-            for (var i = 0; i < 12; i++) {
-              sum = sum + progress_val[i];
-            }
-            // console.log("Response length: " + response.data.length);
-            for (var i = 0; i < response.data.length; i++) {
-              index = response.data[i].chapter-1;
-              // console.log("index:" + index);
-              // console.log(response.data[i].topic.length/4);
-              progress_val[index] = response.data[i].topic.length/4;
-              sum1 = sum1 + progress_val[index];
-            }
-            // console.log(progress_val);
-            // console.log("sum "+sum);
-            // console.log("sum1 "+sum1);
-            if (sum!=sum1) 
-            {
-              this.setState({progress_val:progress_val});
-            }
-          }.bind(this))
-          .catch(function (error) {
-            console.log(error);
-        });
+      //alert(this.state.username)
   };
 
   componentDidMount() {
+    this.get();
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
   }
 
@@ -125,8 +82,9 @@ export default class First extends Component {
       BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
-  handleBackButton() {
-    return false;
+  handleBackButton = () =>{
+    Actions.courses();
+    return true;
   }
 
   open_chapter = (i) =>{
@@ -171,6 +129,53 @@ export default class First extends Component {
   }
 
   render() {
+
+    axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
+            params: {
+              name: this.state.username
+            },
+            dataType: 'json'
+          })
+          .then(function (response) {
+            // console.log("\n\n SUCCESS \n\n");
+            // console.log(response.data);
+            // console.log(response.data[0].chapter);
+            
+            for(var i=0;i<response.data.length;i++){
+              obj = {
+                chapter:response.data[i].chapter,
+                test:response.data[i].test
+              }
+
+              chap_info.push(obj);
+            }
+
+            var index;
+            var sum = 0;
+            var sum1 = 0;
+            for (var i = 0; i < 12; i++) {
+              sum = sum + progress_val[i];
+            }
+            // console.log("Response length: " + response.data.length);
+            for (var i = 0; i < response.data.length; i++) {
+              index = response.data[i].chapter-1;
+              // console.log("index:" + index);
+              // console.log(response.data[i].topic.length/4);
+              progress_val[index] = response.data[i].topic.length/4;
+              sum1 = sum1 + progress_val[index];
+            }
+            // console.log(progress_val);
+            // console.log("sum "+sum);
+            // console.log("sum1 "+sum1);
+            if (sum!=sum1) 
+            {
+              this.setState({progress_val:progress_val});
+            }
+          }.bind(this))
+          .catch(function (error) {
+            console.log(error);
+        });
+
     console.log("rendered");
 
     var chapters = [];

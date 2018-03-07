@@ -142,7 +142,7 @@ componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
 }
 
-handleBackButton() {
+handleBackButton = () =>{
   return true;
 }
 
