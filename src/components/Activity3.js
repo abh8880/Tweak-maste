@@ -334,18 +334,27 @@ timer_on = 0;
 
     // console.log(length);
     
-  var buttons = [];
+   var buttons = [];
 
-  for(let i = 0; i < this.state.length; i++){
-
+  for(let i = 0; i < this.state.length; i=i+2){
+          var j=i+1;
           buttons.push(
-         
+         <View style={{flexDirection:'row'}}>
+         <View>
           <TouchableOpacity onPress={() => this._handleButtonPress(i)}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>{ans[i]}</Text>
               </View>
           </TouchableOpacity>
-        
+          </View>
+           <View>
+          <TouchableOpacity onPress={() => this._handleButtonPress(i)}>
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>{ans[j]}</Text>
+              </View>
+          </TouchableOpacity>
+          </View>
+          </View>
         )
 
   }
@@ -517,7 +526,7 @@ container: {
   },
   
   button: {
-     width: Dimensions.get('window').width/1.5,
+     width: Dimensions.get('window').width/3,
     alignItems: 'center',
     margin:5,
     backgroundColor: '#1c313a',
