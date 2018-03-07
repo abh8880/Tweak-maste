@@ -1,8 +1,9 @@
  import React, { Component } from 'react';
+
 import { View, StyleSheet, TouchableOpacity, Text, TextInput, Dimensions, Alert,BackHandler } from 'react-native';
 
 import Result from './Result';
-import Time_up from './Time_up';
+// import Time_up from './Time_up';
 import Select from './Select';
 import ModalView from './ModalView';
 import Modal from "react-native-modal";
@@ -23,7 +24,7 @@ var timeout;
 var timer = null;
 var bar = null;
 var element = [];
-
+var timer_on = 1;
 var SQLite = require('react-native-sqlite-storage');
 var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'})
 export default class Activity4 extends Component {
@@ -62,22 +63,22 @@ export default class Activity4 extends Component {
 
            var length = results.rows.length;
 
-           console.log("DB:"+length);
+           // console.log("DB:"+length);
 
            if(length > 0){
             var rand = Math.floor(Math.random()*(length-1))+0;
-            console.log("rand="+rand)
+            // console.log("rand="+rand)
             var row = results.rows.item(rand);
-            console.log(row)
+            // console.log(row)
             this.setState({question: row.question});
             this.setState({correct_ans: row.correct});
-            console.log(this.state.question);
+            // console.log(this.state.question);
             words = row.question.split(" ");
-            console.log(this.state.words);
+            // console.log(this.state.words);
             this.setState({words:words});
             len = words.length;
             this.setState({len:len});
-            console.log("in con 4="+len);
+            // console.log("in con 4="+len);
 
             if(len==1 && this.props.wrong == 0)
               this.setState({last:4});
@@ -96,21 +97,21 @@ export default class Activity4 extends Component {
 
        var length = results.rows.length;
 
-       console.log("DB:"+length);
+       // console.log("DB:"+length);
 
        if(length > 0){
         var rand = Math.floor(Math.random()*(length-1))+0;
-        console.log("rand="+rand)
+        // console.log("rand="+rand)
         var row = results.rows.item(rand);
         this.setState({question: row.question});
         this.setState({correct_ans: row.correct});
-        console.log(this.state.question);
+        // console.log(this.state.question);
         words = row.question.split(" ");
-        console.log(this.state.words);
+        // console.log(this.state.words);
         this.setState({words:words});
         len = words.length;
         this.setState({len:len});
-        console.log("in con 4="+len);
+        // console.log("in con 4="+len);
 
         if(len==1 && this.props.wrong == 0)
           this.setState({last:4});
@@ -127,10 +128,10 @@ export default class Activity4 extends Component {
 }
 
 componentWillMount(){
-  console.log("prop count:"+this.props.count);
+  // console.log("prop count:"+this.props.count);
 this.setState({bar:this.props.count});
-console.log("recieved "+topic+chapter);
-console.log("bar state "+this.state.bar);
+// console.log("recieved "+topic+chapter);
+// console.log("bar state "+this.state.bar);
 }
 
 componentDidMount() {
@@ -159,10 +160,11 @@ handleBackButton() {
 
 _handleSubmitPress = (len) => {
   //console.log(this.state.current_ans);
-  console.log("submit len"+len);
-  console.log("blank1="+this.state.blank1);
-  console.log("blank2="+this.state.blank2);
-
+  // console.log("submit len"+len);
+  // console.log("blank1="+this.state.blank1);
+  // console.log("blank2="+this.state.blank2);
+clearTimeout(timeout);
+timer_on = 0;
   var answer = '';
   var k = 0;
 
@@ -191,10 +193,10 @@ _handleSubmitPress = (len) => {
     answer=answer+".";
   }
 
-  console.log("answer="+answer);
+  // console.log("answer="+answer);
 
   if(answer === this.state.correct_ans){
-    console.log("entered");        
+    // console.log("entered");        
 
     this.setState({check_ans: 1});
     this.setState({repeat: 0});
@@ -235,24 +237,48 @@ update2 = () =>{
   });
 };
 
+
   render() {
 
     if(topic == -1){
       clearTimeout(timeout);
-
-      timeout = setTimeout((function() {
-        this.setState({ progress: this.state.progress - 0.1});
-      }).bind(this), 1000);
+      if (timer_on==1) 
+      {
+        timeout = setTimeout((function() {
+          this.setState({ progress: this.state.progress - 0.1});
+        }).bind(this), 1000);
+      }
   
-      console.log("progress="+this.state.progress);
+      // console.log("progress="+this.state.progress);
   
-      if(this.state.progress<0){
-        console.log("less");
+      if(this.state.progress<0&&this.state.progress>-2){
+        // console.log("less");
         clearTimeout(timeout);
         this.update2();
-        return(
-          <Time_up topic={topic} chapter={chapter} end={this.state.last}/> 
-        );
+        // return(
+
+    Alert.alert(
+        'Time up!!',
+        'Please proceed to the next question',
+        [
+          {text: 'Next question', onPress: () => this._handleNextPress()},
+        ],
+        { cancelable: false }
+      )
+    this.setState({progress:-3})
+
+
+          //  Alert.alert(
+          //   'Time up!!',
+          //   [
+          //     {text: 'Next Question', onPress: () => this._next_question()},
+          //   ],
+          //   { cancelable: false }
+          // )
+
+
+          // <Time_up topic={topic} chapter={chapter} end={this.state.last}/> 
+        // );
       }
   
     }
@@ -296,32 +322,36 @@ if (topic == -1)
        </View>
     }
 
-    console.log(this.state.words);
+    // console.log(this.state.words);
     element = [];
     var k = 0;
-    console.log("render len="+len);
+    // console.log("render len="+len);
     for( i=0 ; i<len; i++){
 
-        console.log(i);      
+        // console.log(i);      
         if(words[i]=='_'){
 
             k++;
 
             if(k==1){
               element.push(
+               <View>
                 <TextInput
                 style={{textAlign: 'center', fontSize:20, fontFamily: 'Museo 500',color:'#1c313a'}}                  
                   onChangeText={(text) => this.setState({blank1:text})}
                 />
+                </View>
               );
             }
 
             if(k==2){
               element.push(
+                <View>
                 <TextInput
                 style={{textAlign: 'center', fontSize:20, fontFamily: 'Museo 500',color:'#1c313a'}}                
                   onChangeText={(text) => this.setState({blank2:text})}
                 />
+                </View>
               );
             }
         }
@@ -386,8 +416,8 @@ if (topic == -1)
 
     else if(this.state.status == 1){
       clearTimeout(timeout);
-      console.log("rep_state="+this.state.repeat);
-        console.log("rem_rep_state="+this.state.rem_rep);
+      // console.log("rep_state="+this.state.repeat);
+        // console.log("rem_rep_state="+this.state.rem_rep);
         return(
           <Select score={this.state.check_ans} topic={topic} chapter={chapter} end={this.state.last} repeat={this.state.repeat} rem_rep={this.state.rem_rep}/>
         );

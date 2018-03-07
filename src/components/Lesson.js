@@ -31,7 +31,7 @@ export default class Lesson extends Component {
 
   async get(){
     name = await AsyncStorage.getItem('username'); 
-    alert(name);
+    // alert(name);
   }
 
 static navigationOptions = {
@@ -49,7 +49,7 @@ static navigationOptions = {
     super(props)
     this.state = { noOfCards: ['', '', '', ''],topic:1,status:0 }
     chapter = this.props.navigation.state.params.Chapter;
-    console.log(chapter);
+    // console.log(chapter);
 
     //this.setState({topic:1});
 
@@ -63,8 +63,8 @@ static navigationOptions = {
             dataType: 'json'
           })
           .then(function (response) {
-            console.log("\n\n SUCCESS \n\n");
-            console.log("response.data[0].test: "+ response.data[0].test);
+            // console.log("\n\n SUCCESS \n\n");
+            // console.log("response.data[0].test: "+ response.data[0].test);
             test_status = response.data[0].test;
           }.bind(this))
           .catch(function (error) {
@@ -101,7 +101,7 @@ static navigationOptions = {
   }
 
   _onPressDeckButton = () => {
-    console.log("current deck ="+currentDeck);
+    // console.log("current deck ="+currentDeck);
     this.setState({topic:currentDeck});
     this.reset_db(chapter,this.state.topic);
     this.setState({status:1});
@@ -109,14 +109,14 @@ static navigationOptions = {
   }
 
   onDidChange = (obj, index) => {
-    console.log('onDidChange=>obj:' + obj + ' ,index:' + index);
+    // console.log('onDidChange=>obj:' + obj + ' ,index:' + index);
 
     currentDeck = index+1;
-    console.log("current deck ="+currentDeck);
+    // console.log("current deck ="+currentDeck);
   }
 
   _handleButtonPress = () =>{
-    console.log("\n\nTEST BUTTON PRESSED\n\n")
+    // console.log("\n\nTEST BUTTON PRESSED\n\n")
     if(test_status == 0){
       Alert.alert(
         'Hey There !',

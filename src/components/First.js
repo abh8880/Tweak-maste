@@ -67,8 +67,8 @@ export default class First extends Component {
       };
       // this.setState({username:})
       // username = this.props.username;
-      console.log("in first.js , name: "+this.state.username)
-      alert(this.state.username)
+      // console.log("in first.js , name: "+this.state.username)
+      // alert(this.state.username)
       
       axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
             params: {
@@ -77,9 +77,9 @@ export default class First extends Component {
             dataType: 'json'
           })
           .then(function (response) {
-            console.log("\n\n SUCCESS \n\n");
-            console.log(response.data);
-            console.log(response.data[0].chapter);
+            // console.log("\n\n SUCCESS \n\n");
+            // console.log(response.data);
+            // console.log(response.data[0].chapter);
             
             for(var i=0;i<response.data.length;i++){
               obj = {
@@ -96,17 +96,17 @@ export default class First extends Component {
             for (var i = 0; i < 12; i++) {
               sum = sum + progress_val[i];
             }
-            console.log("Response length: " + response.data.length);
+            // console.log("Response length: " + response.data.length);
             for (var i = 0; i < response.data.length; i++) {
               index = response.data[i].chapter-1;
-              console.log("index:" + index);
-              console.log(response.data[i].topic.length/4);
+              // console.log("index:" + index);
+              // console.log(response.data[i].topic.length/4);
               progress_val[index] = response.data[i].topic.length/4;
               sum1 = sum1 + progress_val[index];
             }
-            console.log(progress_val);
-            console.log("sum "+sum);
-            console.log("sum1 "+sum1);
+            // console.log(progress_val);
+            // console.log("sum "+sum);
+            // console.log("sum1 "+sum1);
             if (sum!=sum1) 
             {
               this.setState({progress_val:progress_val});
@@ -131,8 +131,8 @@ export default class First extends Component {
 
   open_chapter = (i) =>{
 
-    console.log(this.state.prev_chap);
-    console.log(i);
+    // console.log(this.state.prev_chap);
+    // console.log(i);
 
     // if(i<=this.state.prev_chap){
     //   Actions.lesson({Chapter:i});

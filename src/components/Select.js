@@ -157,45 +157,45 @@ export default class Select extends Component {
 		if(this.props.repeat != 0){
 
 			var found = repeat.indexOf(this.props.repeat);
-			console.log("found="+found);
+			// console.log("found="+found);
 
 			if(found == -1)
 			repeat.push(this.props.repeat);
 		}
 
 		var len = over.length;
-		console.log("array_len="+len);
+		// console.log("array_len="+len);
 		var i = Math.floor(Math.random()*(len));
-		console.log("i="+i);
+		// console.log("i="+i);
 
-		console.log("over[i]="+over[i]);
+		// console.log("over[i]="+over[i]);
 		
 		var topic = this.props.topic;
 		var chapter = this.props.chapter;
 
-		console.log("over="+over);
-		console.log("repeat="+repeat);
+		// console.log("over="+over);
+		// console.log("repeat="+repeat);
 		var l = repeat.length;
-		console.log("array_len="+l);
-		console.log("\n\ntopic"+topic+"\n\n");
-		console.log("\n\count"+count+"\n\n");
+		// console.log("array_len="+l);
+		// console.log("\n\ntopic"+topic+"\n\n");
+		// console.log("\n\count"+count+"\n\n");
 		
 		if (count == 12 && topic == -1) 
 		{
 			count=0;
-			console.log("\n\nfirst\n\n")
+			// console.log("\n\nfirst\n\n")
 			return(
 				<Test_result correct={correct} chapter={this.props.chapter}/>
 			);
 		}
 		if(count<= 12){
-			console.log("\n\nsecond\n\n")
-			console.log("over[i]="+over[i]);
+			// console.log("\n\nsecond\n\n")
+			// console.log("over[i]="+over[i]);
 			var element = this.load_activity(over[i], chapter, topic, 0);	
 			return element;		
 		}
 		else if(repeat.length > 0){
-			console.log("\n\nthird\n\n")
+			// console.log("\n\nthird\n\n")
 
 			var j = Math.floor(Math.random()*(l));
 
@@ -203,7 +203,7 @@ export default class Select extends Component {
 			return el;			
 		}
 		else{
-			console.log("\n\nfourth\n\n")
+			// console.log("\n\nfourth\n\n")
 			count=0;
 
 			return(
