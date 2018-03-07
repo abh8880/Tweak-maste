@@ -180,7 +180,7 @@ export default class Select extends Component {
 		// console.log("\n\ntopic"+topic+"\n\n");
 		// console.log("\n\count"+count+"\n\n");
 		
-		if (count == 12 && topic == -1) 
+		if (count == 2 && topic == -1) 
 		{
 			count=0;
 			// console.log("\n\nfirst\n\n")
@@ -188,7 +188,7 @@ export default class Select extends Component {
 				<Test_result correct={correct} chapter={this.props.chapter}/>
 			);
 		}
-		if(count<= 12){
+		if(count<= 2){
 			// console.log("\n\nsecond\n\n")
 			// console.log("over[i]="+over[i]);
 			var element = this.load_activity(over[i], chapter, topic, 0);	

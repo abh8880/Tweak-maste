@@ -25,6 +25,8 @@ var box_count = 3;
 var box_height = height / box_count;
 var progress_val = [0,0,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
 var chap_info = [];
+var chap_name = ['Basic I','Regular Mistakes 1','Crux Linker','Regular Mistakes 2','Self Mode','Master Helper','Crackerjack','Quantity Label'];
+var chap_status = [0,0,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
 // var username = null;
 
 export default class First extends Component {
@@ -55,7 +57,7 @@ export default class First extends Component {
 async get(){
   username = await AsyncStorage.getItem('username');
   console.log("in courses.js , name: "+username)
-  alert(username);
+  // alert(username);
   this.setState({username:username});
   console.log("state: "+this.state.username)
 }
@@ -66,7 +68,7 @@ async get(){
           status: 0,
           progress_val: progress_val,
           prev_chap:'',
-          username:''
+          username:'',
       };
       // this.setState({username:})
       // username = this.props.username;
@@ -181,7 +183,7 @@ async get(){
 
     var chapters = [];
 
-    for(let i=1;i<=12;i++){
+    for(let i=1;i<=8;i++){
       chapters.push(
         <View key={i} style={styles.card}>
       
@@ -198,7 +200,7 @@ async get(){
             <View style={[styles.innerBox, styles.innerBox2]}>
             <View>
             <Text style={styles.welcome}>
-              {"Chapter "+i}
+              {chap_name[i-1]}
             </Text>
            </View>
            <View style={{margin:15}}>
@@ -207,6 +209,7 @@ async get(){
             
            
             </View>
+
             <View>
              <Icon name="checkbox" size={30} color="#F0C71B" />
             </View>
@@ -292,7 +295,6 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     color:'#002266',
     fontFamily: 'Museo 700',
-   
   },
    card: {
    
