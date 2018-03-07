@@ -28,7 +28,7 @@ export default class VerticalStackLayout extends Component {
   async get(){
     username = await AsyncStorage.getItem('username');
     console.log("in courses.js , name: "+username)
-    alert(username);
+    // alert(username);
     this.setState({username:username});
     console.log("state: "+this.state.username)
   }
