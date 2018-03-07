@@ -136,6 +136,7 @@ export default class Activity3 extends Component {
 
   _handleButtonPress = index => {
     if (!pressed[index]){
+      console.log("Pressed="+index);
       pressed[index] = true;
       answer = answer + ' ' + ans[index];
       this.setState({ answer: answer });
@@ -223,12 +224,18 @@ timer_on = 0;
       BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
-  handleBackButton() {
+  handleBackButton = () =>{
     return true;
   }
 
   _handleNextPress(){
     this.setState({status:1});
+  }
+
+
+  back_func(){
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    Actions.lesson({Chapter:chapter});
   }
 
   _show_alert(){
@@ -336,29 +343,67 @@ timer_on = 0;
     
    var buttons = [];
 
-  for(let i = 0; i < this.state.length; i=i+2){
-          var j=i+1;
-          buttons.push(
-         <View style={{flexDirection:'row'}}>
-         <View>
-          <TouchableOpacity onPress={() => this._handleButtonPress(i)}>
-              <View style={styles.button}>
-                <Text style={styles.buttonText}>{ans[i]}</Text>
-              </View>
-          </TouchableOpacity>
-          </View>
-           <View>
-          <TouchableOpacity onPress={() => this._handleButtonPress(i)}>
-              <View style={styles.button}>
-                <Text style={styles.buttonText}>{ans[j]}</Text>
-              </View>
-          </TouchableOpacity>
-          </View>
-          </View>
-        )
+   if(this.state.length%2==0){
+      for(let k=0;k<this.state.length;k+=2){
 
-  }
+        buttons.push(
       
+        <View style={styles.buttonLine}>
+          <TouchableOpacity onPress={() => this._handleButtonPress(k)}>
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>{ans[k]}</Text>
+              </View>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => this._handleButtonPress(k+1)}>
+              <View style={styles.button}>
+                <Text style={styles.buttonText}>{ans[k+1]}</Text>
+              </View>
+          </TouchableOpacity>
+        </View>
+      
+      )
+    
+    }
+  }
+
+   else{
+      for(let k=0;k<this.state.length;k+=2){
+
+        if(k==this.state.length-1){
+          buttons.push(
+      
+            <View style={styles.buttonLine}>
+              <TouchableOpacity onPress={() => this._handleButtonPress(k)}>
+                  <View style={styles.button}>
+                    <Text style={styles.buttonText}>{ans[k]}</Text>
+                  </View>
+              </TouchableOpacity>
+            </View>
+          
+          )
+        }
+
+        else{
+          buttons.push(
+      
+            <View style={styles.buttonLine}>
+              <TouchableOpacity onPress={() => this._handleButtonPress(k)}>
+                  <View style={styles.button}>
+                    <Text style={styles.buttonText}>{ans[k]}</Text>
+                  </View>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => this._handleButtonPress(k+1)}>
+                  <View style={styles.button}>
+                    <Text style={styles.buttonText}>{ans[k+1]}</Text>
+                  </View>
+              </TouchableOpacity>
+            </View>
+          
+          )
+        }
+    
+    }
+  }    
     
    if(this.state.status == 0){
     return (

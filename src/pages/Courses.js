@@ -6,7 +6,9 @@ import {
   Text,
   TouchableOpacity,
   Image,
-  AsyncStorage
+  AsyncStorage,
+  BackHandler,
+  Alert
 } from 'react-native';
 
 import { StatusBar} from 'react-native';
@@ -28,7 +30,7 @@ export default class VerticalStackLayout extends Component {
   async get(){
     username = await AsyncStorage.getItem('username');
     console.log("in courses.js , name: "+username)
-    alert(username);
+    // alert(username);
     this.setState({username:username});
     console.log("state: "+this.state.username)
   }
@@ -41,6 +43,28 @@ export default class VerticalStackLayout extends Component {
         this.get();
 
       };
+
+    componentDidMount() {
+      this.get();
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+  
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+  
+    handleBackButton = () =>{
+      Alert.alert(
+        'Hello !',
+        'Do you really want to exit the app?',
+        [
+          {text: 'Yes', onPress: () => BackHandler.exitApp()},
+          {text: 'No', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        ],
+        { cancelable: true }
+      )
+      return true;
+    }
 
 
 
@@ -125,7 +149,7 @@ export default class VerticalStackLayout extends Component {
 
             <View style={styles.innerBox1}>
               <Image
-                  source={require('../../icons/3.png')}
+                  source={require('../../icons/6.png')}
                   style={{width: '50%', height: '50%', top:'5%'}}
                 />
 

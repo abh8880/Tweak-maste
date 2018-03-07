@@ -27,6 +27,7 @@ var element = [];
 var timer_on = 1;
 var SQLite = require('react-native-sqlite-storage');
 var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'})
+
 export default class Activity4 extends Component {
 
   constructor(props) {
@@ -142,7 +143,7 @@ componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
 }
 
-handleBackButton() {
+handleBackButton = () =>{
   return true;
 }
 
@@ -174,6 +175,7 @@ timer_on = 0;
       k++;
 
       if(k==1){
+
         answer = answer +' '+ this.state.blank1;
       }
 
@@ -192,10 +194,10 @@ timer_on = 0;
   if(answer.charAt(answer.length-1)!='.'){
     answer=answer+".";
   }
+  console.log("answer="+answer);
+  console.log("this.state.correct_ans="+this.state.correct_ans);
 
-  // console.log("answer="+answer);
-
-  if(answer === this.state.correct_ans){
+  if(answer.toLowerCase() === this.state.correct_ans.toLowerCase()){
     // console.log("entered");        
 
     this.setState({check_ans: 1});
@@ -330,12 +332,12 @@ if (topic == -1)
 
         // console.log(i);      
         if(words[i]=='_'){
-
+          // console.log("position: "+i)
             k++;
 
             if(k==1){
               element.push(
-               <View>
+               <View style={{borderBottomWidth:1,borderBottomColor:'black'}}>
                 <TextInput
                 style={{textAlign: 'center', fontSize:20, fontFamily: 'Museo 500',color:'#1c313a'}}                  
                   onChangeText={(text) => this.setState({blank1:text})}
@@ -346,7 +348,7 @@ if (topic == -1)
 
             if(k==2){
               element.push(
-                <View>
+                <View style={{borderBottomWidth:1,borderBottomColor:'black'}}>
                 <TextInput
                 style={{textAlign: 'center', fontSize:20, fontFamily: 'Museo 500',color:'#1c313a'}}                
                   onChangeText={(text) => this.setState({blank2:text})}

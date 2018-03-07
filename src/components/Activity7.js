@@ -105,6 +105,7 @@ export default class Activity7 extends Component {
   }
 
   componentDidMount() {
+
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
   }
 
@@ -112,7 +113,7 @@ export default class Activity7 extends Component {
       BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
-  handleBackButton() {
+  handleBackButton = () =>{
     return true;
   }
 
@@ -306,7 +307,7 @@ export default class Activity7 extends Component {
         
         <View style={styles.opsBox} >
         <Text style={{fontSize:15,color:'black', fontFamily: 'Museo 500',}}>Wrong Word:</Text>
-       <Text style={{fontSize:20,fontFamily:'Museo 500',color:'#1c313a'}}>
+       <Text style={{fontSize:20}}>
             {answer}
           </Text>
         </View>
