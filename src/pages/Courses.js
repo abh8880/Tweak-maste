@@ -17,14 +17,14 @@ import * as  Progress from 'react-native-progress'; // 3.4.0
 
 import { Card } from 'react-native-elements'; // 0.18.5
 
-
+import axios from 'axios';
 import { TabNavigator,StackNavigator,DrawerNavigator } from 'react-navigation'; //
 
 var { height } = Dimensions.get('window').height;
 var {width}=Dimensions.get('window').width;
 var box_count = 3;
 var box_height = height / box_count;
-
+var progress_val = 0;
 export default class VerticalStackLayout extends Component {
   
   async get(){
@@ -38,7 +38,8 @@ export default class VerticalStackLayout extends Component {
    constructor(props) {
         super(props);
         this.state = {
-          username: ''
+          username: '',
+          overall_progress:0
         };
         this.get();
 
@@ -69,6 +70,32 @@ export default class VerticalStackLayout extends Component {
 
 
   render() {
+
+    if (progress_val==0) 
+    {
+      console.log("before axios: "+this.state.username)
+      axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_grammer_progress.php', {
+              params: {
+                name: this.state.username
+              },
+              dataType: 'json'
+            })
+            .then(function (response) {
+              console.log(response.data)
+              progress_val = 0
+              for(var i=0;i<response.data.length;i++){
+                progress_val = progress_val + response.data[i].topic.length
+              }
+              console.log("progress_val: "+ progress_val)
+              this.setState({overall_progress:progress_val})
+              console.log("this.state.overall_progress: "+ this.state.overall_progress)
+            }.bind(this))
+            .catch(function (error) {
+              console.log(error);
+          });
+    }
+
+
     return (
 
         <View style={styles.Layout}>
@@ -106,7 +133,7 @@ export default class VerticalStackLayout extends Component {
                  <Text style={styles.captionText}>Sentence Formation</Text>
               </View>
             <View style={styles.progress}>
-              <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
+              <Progress.Bar progress={this.state.overall_progress/32} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
             </View>
             </View>
 
