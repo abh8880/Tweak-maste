@@ -224,12 +224,18 @@ timer_on = 0;
       BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
-  handleBackButton() {
+  handleBackButton = () =>{
     return true;
   }
 
   _handleNextPress(){
     this.setState({status:1});
+  }
+
+
+  back_func(){
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    Actions.lesson({Chapter:chapter});
   }
 
   _show_alert(){

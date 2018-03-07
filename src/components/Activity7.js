@@ -105,6 +105,7 @@ export default class Activity7 extends Component {
   }
 
   componentDidMount() {
+
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
   }
 
@@ -112,7 +113,7 @@ export default class Activity7 extends Component {
       BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
-  handleBackButton() {
+  handleBackButton = () =>{
     return true;
   }
 
