@@ -125,7 +125,7 @@ export default class VerticalStackLayout extends Component {
 
             <View style={styles.innerBox1}>
               <Image
-                  source={require('../../icons/3.png')}
+                  source={require('../../icons/6.png')}
                   style={{width: '50%', height: '50%', top:'5%'}}
                 />
 

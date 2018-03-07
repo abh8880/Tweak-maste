@@ -335,7 +335,7 @@ if (topic == -1)
 
             if(k==1){
               element.push(
-               <View>
+               <View style={{borderBottomWidth:1,borderBottomColor:'black'}}>
                 <TextInput
                 style={{textAlign: 'center', fontSize:20, fontFamily: 'Museo 500',color:'#1c313a'}}                  
                   onChangeText={(text) => this.setState({blank1:text})}
@@ -346,7 +346,7 @@ if (topic == -1)
 
             if(k==2){
               element.push(
-                <View>
+                <View style={{borderBottomWidth:1,borderBottomColor:'black'}}>
                 <TextInput
                 style={{textAlign: 'center', fontSize:20, fontFamily: 'Museo 500',color:'#1c313a'}}                
                   onChangeText={(text) => this.setState({blank2:text})}
