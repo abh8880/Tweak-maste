@@ -30,7 +30,7 @@ export default class Activity6 extends Component {
   constructor(props) {
   time = new Array();
   super(props);
-  
+    
   this.state = {
     question : '',
     answer : '',

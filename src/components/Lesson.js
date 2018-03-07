@@ -7,7 +7,8 @@ import {
   Dimensions,
   TouchableOpacity,
   Alert,
-  AsyncStorage
+  AsyncStorage,
+  BackHandler
 } from 'react-native';
 
 import EZSwiper from 'react-native-ezswiper';
@@ -140,6 +141,18 @@ static navigationOptions = {
       // alert("starting test!");
       Actions.select({topic:status, chapter:chapter, count:0}); 
     }
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    Actions.first();
   }
   
   reset_test_db = (chapter) =>{

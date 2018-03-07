@@ -7,7 +7,8 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  AsyncStorage
+  AsyncStorage,
+  BackHandler
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { Card } from 'react-native-elements'; // 0.18.5
@@ -115,6 +116,18 @@ export default class First extends Component {
             console.log(error);
         });
   };
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  componentWillUnmount() {
+      BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+  }
+
+  handleBackButton() {
+    return false;
+  }
 
   open_chapter = (i) =>{
 

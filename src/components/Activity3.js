@@ -29,11 +29,10 @@ var bar = null;
 export default class Activity3 extends Component {
 
   constructor(props) {
-
     time = new Array();
     answer = '';
     ans = [];
-
+    
     super(props);
     for (var i = ans.length - 1; i >= 0; i--) {
       pressed[i] = false;

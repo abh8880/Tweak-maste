@@ -34,6 +34,7 @@ export default class Activity5 extends Component {
     
   constructor(props) {
     super(props);
+
     time = new Array();
 
     for (var i = comp_words.length - 1; i >= 0; i--) {
