@@ -48,7 +48,7 @@ static navigationOptions = {
   };
   constructor(props) {
     super(props)
-    this.state = { noOfCards: ['', '', '', ''],topic:1,status:0 }
+    this.state = { noOfCards: ['', '', '', ''],topic:1,status:0,test_button_text:'TEST'}
     chapter = this.props.navigation.state.params.Chapter;
     // console.log(chapter);
 
@@ -67,6 +67,10 @@ static navigationOptions = {
             // console.log("\n\n SUCCESS \n\n");
             // console.log("response.data[0].test: "+ response.data[0].test);
             test_status = response.data[0].test;
+            if (test_status==1) 
+            {
+              this.setState({test_button_text:"Redo"})  
+            }
           }.bind(this))
           .catch(function (error) {
             console.log(error);
@@ -242,7 +246,7 @@ static navigationOptions = {
               loop={false} />
               <TouchableOpacity onPress={() => this._handleButtonPress()}>
               <View style={styles.testBtn}>
-              <Text style={styles.testTxt}>TEST</Text>
+              <Text style={styles.testTxt}>{this.state.test_button_text}</Text>
               </View>
               </TouchableOpacity>
           </View>
