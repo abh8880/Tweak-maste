@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import * as Progress from 'react-native-progress';
 import { Card } from 'react-native-elements'; // 0.18.5
+import Icon from 'react-native-vector-icons/Foundation';
 
 import {Actions} from 'react-native-router-flux';
 
@@ -206,7 +207,10 @@ async get(){
             
            
             </View>
-            
+            <View>
+             <Icon name="checkbox" size={30} color="#F0C71B" />
+            </View>
+        
             
         </View>
         
