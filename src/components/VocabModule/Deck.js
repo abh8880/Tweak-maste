@@ -169,7 +169,7 @@ export default class Deck extends Component {
         </View>
         <View style={styles.deckButtonView}>
         <TouchableOpacity style={styles.deckButton} onPress={this.onPressDeckButton}>
-            <Text style={styles.deckButtonText}>PRACTISE 📝</Text>
+            <Text style={styles.deckButtonText}>PRACTISE</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -248,12 +248,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2a8fe7'
+    backgroundColor: '#034569'
   },
   swiper: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2a8fe7',
+    backgroundColor: '#034569',
   },
   deckCard: {
     flex: 1,
@@ -262,22 +262,22 @@ const styles = StyleSheet.create({
     borderBottomWidth: 3,
   },
   deckTitle:{
-    fontFamily: 'Museo 700',
+    fontFamily: 'Museo Sans_700',
     fontSize: 35,
     margin: 25,
     color: '#00336c'
   },
   deckSubTitle:{
-    fontFamily: 'Museo Sans_500',
+    fontFamily: 'Museo Sans_700',
     fontSize: 25,
     color: '#00336c',
     marginBottom: 5,
   },
   originList:{
-    fontFamily: 'Museo Sans Rounded_500',
-    fontSize: 20,
+    fontFamily: 'Museo 500',
+    fontSize: 22,
     margin: 3,
-    color: '#000000',
+    color: 'orange',
     alignSelf: 'center'
   },
   deckButtonView: {
@@ -292,7 +292,7 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
     marginBottom: 25,
-    backgroundColor: '#2a8fe7',
+    backgroundColor: '#103970',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,

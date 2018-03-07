@@ -65,14 +65,14 @@ export default class DerivedWordCardBack extends Component {
           onPress={() => { this.props.changeStatusAndFetchNext('Mastered');}}        //changeStatus to Mastered
         >
           <View style={styles.masterButton}>
-              <Text style={styles.masterButtonText}>😎 Mastered </Text>
+              <Text style={styles.masterButtonText}> Mastered </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => { this.props.changeStatusAndFetchNext('Need Review');}}       //changeStatus to Need Review
         >
           <View style={styles.reviewButton}>
-              <Text style={styles.reviewButtonText}>🤔 Need Review</Text>
+              <Text style={styles.reviewButtonText}>Need Review</Text>
           </View>
         </TouchableOpacity>
       </View>

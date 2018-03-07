@@ -269,6 +269,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#034569'
   },
+  
   swiper: {
     alignItems: 'center',
     justifyContent: 'center',

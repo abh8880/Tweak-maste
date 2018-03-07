@@ -732,6 +732,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#2a8fe7'
+    backgroundColor: '#103970'
   },
 });

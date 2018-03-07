@@ -205,7 +205,7 @@ export default class First extends Component {
             
         </View>
         
-            <Text style={{fontSize:15,  fontFamily: 'Museo 500',}}>TAP TO START</Text>
+            <Text style={{fontSize:18,color:'#1c313a',  fontFamily: 'Museo 700',}}>TAP TO START</Text>
    
             </View>
              </TouchableOpacity>
@@ -278,11 +278,11 @@ const styles = StyleSheet.create({
     width: 280,
   },
   welcome: {
-    fontSize: 22,
+    fontSize: 24,
     textAlign: 'center',
     justifyContent:'center',
     color:'#002266',
-    fontFamily: 'Museo 500',
+    fontFamily: 'Museo 700',
    
   },
    card: {

@@ -16,7 +16,7 @@ import Menu, {
   MenuOption,
   MenuTrigger
 } from 'react-native-popup-menu';
-
+ import Icon from 'react-native-vector-icons/FontAwesome';
 const height = Dimensions.get('window').height;
 
 import Login from './pages/Login';
@@ -114,10 +114,10 @@ export default class Routes extends Component {
     return (
 
       <Text style={{
-        color: '#88bfff',                // title color
+        color: '#ffffff',                // title color
         fontSize: 20,
-        fontWeight: '500',
-        paddingLeft: 20,
+        fontFamily:'Museo 700',
+        paddingLeft: 10,
         paddingRight: 150
       }}>
         {source}
@@ -130,7 +130,7 @@ export default class Routes extends Component {
       <View style={{
         height: height / 12,
         flexDirection: 'row',
-        backgroundColor: '#00232d',       // navbar color
+        backgroundColor: '#1c313a',       // navbar color
         alignItems: 'center',
         elevation: 3,
       }}
