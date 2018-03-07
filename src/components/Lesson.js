@@ -15,6 +15,7 @@ import EZSwiper from 'react-native-ezswiper';
 import Select from './Select';
 import axios from 'axios';
 import {Actions} from 'react-native-router-flux';
+import Icon from 'react-native-vector-icons/Foundation';
 
 var SQLite = require('react-native-sqlite-storage');
 var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'});
@@ -80,6 +81,9 @@ static navigationOptions = {
 
       finalcomp =
         <View key={index} style={[styles.deckCard, { backgroundColor: "#ffffff", borderRadius: 15, position: 'relative' }]}>
+           <View style={styles.checkBox}>
+             <Icon name="checkbox" size={32} color="#F0C71B" />
+           </View>
           <Text style={styles.deckTitle}>Lesson {index+1}</Text>
           <Text style={styles.deckSubTitle}>Content:</Text>
           <View>
@@ -339,5 +343,9 @@ testTxt:{
   fontFamily:'Museo 500',
   fontSize:20,
   justifyContent:'center'
+},
+checkBox:{
+  margin:'5%',
+  alignSelf: 'flex-end',  
 }
 });
