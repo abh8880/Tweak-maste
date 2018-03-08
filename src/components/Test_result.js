@@ -68,6 +68,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         alignSelf: 'stretch',
         justifyContent: 'center',
-        backgroundColor: '#9FA8DA',
+        backgroundColor: '#2b1660',
       },
 });
