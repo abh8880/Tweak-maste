@@ -2,12 +2,17 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  StatusBar 
+  StatusBar,
+  Text
 } from 'react-native';
 
 import Routes from './src/Routes';
 
 export default class App extends Component<{}> {
+  constructor(){
+    super();
+    Text.defaultProps.allowFontScaling=false;
+  }
   render() {
     return (
       <View style={styles.container}>

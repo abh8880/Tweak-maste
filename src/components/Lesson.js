@@ -292,7 +292,6 @@ const styles = StyleSheet.create({
   deckTitle:{
     fontFamily: 'Museo 700',
     fontSize: 35,
-    margin: 25,
     color: '#000000'
   },
   deckSubTitle:{

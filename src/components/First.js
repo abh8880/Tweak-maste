@@ -172,31 +172,16 @@ async get(){
         });
 
 
-
-          // for (var i = 0; i <8; i++) {
-          //   var found = 0;
-          //     for(var j in chap_info){
-              
-          //       if(chap_info[j].chapter == i-1){
-          //         found = 1;
-          //         if(chap_info[j].test == 0 || chap_info[j].test == 2){
-          //           chap_status[j] = 0 //locked
-          //         }
-          //         else if (chap_info[j].test == 1 ) 
-          //         {
-          //           chap_status[j] = 2 // tick
-          //         }
-          //         else{
-          //           Actions.lesson({Chapter:i});
-          //           chap_status[j] = 1 // unlocked
-          //         }
-          //       }
-          //     }
-          //     console.log("chap status: "+chap_status)
-          //     if(found==0){
-          //       chap_status[j] = 0 //locked
-          //     }
-          // }
+  var Images = [
+      require('../../icons/1.png'),
+      require('../../icons/2.png'),
+      require('../../icons/3.png'),
+      require('../../icons/4.png'),
+      require('../../icons/5.png'),
+      require('../../icons/6.png'),
+      require('../../icons/7.png'),
+      require('../../icons/8.png'),
+  ];
 
     console.log("rendered");
 
@@ -211,7 +196,11 @@ async get(){
              <View style={styles.innerContainer}>
             <View style={[styles.innerBox, styles.innerBox1]}>
              <Image
+<<<<<<< HEAD
                   source={require('../../icons/1.png')}
+=======
+                  source={Images[i-1]}  
+>>>>>>> 201d465d1b09c97c1975b0b7779a8e56840036bd
                   style={{width: 70, height: 70}}
                 />
             </View>
