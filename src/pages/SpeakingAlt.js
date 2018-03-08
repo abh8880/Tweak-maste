@@ -29,6 +29,7 @@ _toggleModal = () =>
   constructor(props) {
     super(props);
     this.state = {
+      buttonStatus: 1,
       recognized: '',
       pitch: '',
       error: '',
@@ -69,6 +70,7 @@ _toggleModal = () =>
 
   onSpeechEnd(e) {
     this.setState({
+       buttonStatus: 1,
       end: '√',
     });
 	
@@ -76,14 +78,17 @@ _toggleModal = () =>
 
   onSpeechError(e) {
     this.setState({
+       buttonStatus: 1,
       error: JSON.stringify(e.error),
     });
   }
 
   onSpeechResults(e) {
-
+    
+   
     ToastAndroid.show('Recording has Ended', ToastAndroid.SHORT);
     this.setState({
+       buttonStatus: 1,
       results: e.value,
 	  grammar: 'Loading...'
     });
@@ -129,6 +134,7 @@ _toggleModal = () =>
 
   async _startRecognizing(e) {
     this.setState({
+      buttonStatus: 0,
       recognized: '',
       pitch: '',
       error: '',
@@ -185,6 +191,19 @@ _sclear(){
   }
 
   render() {
+    
+    var pitchStart = "", pitchEnd = "", pitchString = " Listening ";
+    if(typeof this.state.pitch !== 'undefined') {
+      var p = this.state.pitch;
+      for(var i = 0; i < this.state.pitch; i++) {
+          pitchStart += "|";
+          pitchEnd += "|";
+      }
+    }
+    
+
+    pitchString = pitchStart + " Listening " + pitchEnd;
+
 	  var sentences = this.state.sentences;
 		var sentenceListRendered = sentences.map(function(name){
 			return <Text style={pstyles.sentenceTextView} key={name+Math.random()}>{name}.</Text>;
@@ -247,7 +266,8 @@ _sclear(){
 
        <View>
         <Text style={styles.instructions}>
-          Press the button and start speaking.
+          
+          { this.state.buttonStatus ? "Press the button and start speaking." : (pitchString)  }
         </Text>
         </View>
 
@@ -263,7 +283,7 @@ _sclear(){
         </Text>
         
 		
-      
+      <ScrollView showsVerticalScrollIndicator={true} style={{flexGrow:0.01, height:40, marginBottom: 15,}}>
         {this.state.partialResults.map((result, index) => {
           return (
             <Text
@@ -273,19 +293,22 @@ _sclear(){
             </Text>
           )
         })}
-		
+		</ScrollView>
 		
 	
         <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
           <Image
-            style={styles.button}
+            style={this.state.buttonStatus ? styles.button : styles.button2}
             source={require('../images/mic2.png')}
           />
         </TouchableHighlight>
-        
+        <Image
+            style={!this.state.buttonStatus ? styles.button : styles.button2}
+            source={require('../images/mic3.png')}
+          />
 		
 		
-		 <ScrollView style={pstyles.grammarView}
+		 <ScrollView style={pstyles.scrollViewGR}
      showsVerticalScrollIndicator={true}>
     <View>
    
@@ -299,7 +322,7 @@ _sclear(){
      <Text style={styles.clearText}>CLEAR</Text>
      </View>
 		</TouchableOpacity>
-		<View style={{position: 'absolute', left: 0, right: 0, bottom: 0, height: '10%', backgroundColor: '#840f06', justifyContent: 'center'}}><Text style={styles.innerkek}>{`Corrected Grammar: ${this.state.grammar}`}</Text></View>
+		<View style={{display:'none', position: 'absolute', left: 0, right: 0, bottom: 0, height: '10%', backgroundColor: '#840f06', justifyContent: 'center'}}><Text style={styles.innerkek}>{`Corrected Grammar: ${this.state.grammar}`}</Text></View>
 
 
 		
@@ -311,6 +334,13 @@ _sclear(){
 }
 
 const pstyles = StyleSheet.create({
+  scrollViewGR: {
+    backgroundColor:'#ffffff',
+    borderRadius:5,
+    height: 15,
+    margin:'5%',
+   flexGrow:0.5
+    },
     grammarView: {
     backgroundColor:'#ffffff',
     borderRadius:5,
@@ -332,6 +362,8 @@ const styles = StyleSheet.create({
     width:Dimensions.get('window').width/3,
     height:Dimensions.get('window').height/5,
     backgroundColor:'#F5FCFF'
+  },button2: {
+    display:'none'
   },
   container: {
     flex: 1,
@@ -360,6 +392,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
+    marginTop: 35
   },
   stat: {
      fontSize: 18,
