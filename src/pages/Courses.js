@@ -29,10 +29,10 @@ export default class VerticalStackLayout extends Component {
   
   async get(){
     username = await AsyncStorage.getItem('username');
-    console.log("in courses.js , name: "+username)
+    // console.log("in courses.js , name: "+username)
     // alert(username);
     this.setState({username:username});
-    console.log("state: "+this.state.username)
+    // console.log("state: "+this.state.username)
   }
 
    constructor(props) {
@@ -73,7 +73,7 @@ export default class VerticalStackLayout extends Component {
 
     if (progress_val==0) 
     {
-      console.log("before axios: "+this.state.username)
+      // console.log("before axios: "+this.state.username)
       axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_grammer_progress.php', {
               params: {
                 name: this.state.username
@@ -81,14 +81,14 @@ export default class VerticalStackLayout extends Component {
               dataType: 'json'
             })
             .then(function (response) {
-              console.log(response.data)
+              // console.log(response.data)
               progress_val = 0
               for(var i=0;i<response.data.length;i++){
                 progress_val = progress_val + response.data[i].topic.length
               }
-              console.log("progress_val: "+ progress_val)
+              // console.log("progress_val: "+ progress_val)
               this.setState({overall_progress:progress_val})
-              console.log("this.state.overall_progress: "+ this.state.overall_progress)
+              // console.log("this.state.overall_progress: "+ this.state.overall_progress)
             }.bind(this))
             .catch(function (error) {
               console.log(error);

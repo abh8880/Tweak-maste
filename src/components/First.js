@@ -25,7 +25,7 @@ var box_count = 3;
 var box_height = height / box_count;
 var progress_val = [0,0,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
 var chap_info = [];
-var chap_name = ['Basic I','Regular Mistakes 1','Crux Linker','Regular Mistakes 2','Self Mode','Master Helper','Crackerjack','Quantity Label'];
+var chap_name = ['Basic I','Classic I','Crux Link','Classic II','Self Mode','Ace Ally','Crackerjack','Sum Poll'];
 var chap_status = [0,0,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
 // var username = null;
 
@@ -105,7 +105,7 @@ async get(){
 
     var found = 0;
 
-    if(i==1){
+    if(i==1||i==2){
       Actions.lesson({Chapter:i});
     }
 
@@ -153,6 +153,32 @@ async get(){
               chap_info.push(obj);
             }
 
+            for(var i=0;i<response.data.length;i++){
+            if (response.data[i].test == 1) 
+            {
+              chap_status[i] = 2
+            }
+            else
+            {
+              if (i==0||i==1) 
+              {
+                chap_status[i] = 1
+              }
+              else
+              {
+                if (response.data[i-1].test==1) 
+                {
+                  chap_status[i] = 1
+                }
+                else
+                {
+                  chap_status[i] = 0
+                }
+              }
+            }
+          }
+          // console.log("chap status: "+chap_status)
+
             var index;
             var sum = 0;
             var sum1 = 0;
@@ -179,21 +205,48 @@ async get(){
             console.log(error);
         });
 
+
+
+          // for (var i = 0; i <8; i++) {
+          //   var found = 0;
+          //     for(var j in chap_info){
+              
+          //       if(chap_info[j].chapter == i-1){
+          //         found = 1;
+          //         if(chap_info[j].test == 0 || chap_info[j].test == 2){
+          //           chap_status[j] = 0 //locked
+          //         }
+          //         else if (chap_info[j].test == 1 ) 
+          //         {
+          //           chap_status[j] = 2 // tick
+          //         }
+          //         else{
+          //           Actions.lesson({Chapter:i});
+          //           chap_status[j] = 1 // unlocked
+          //         }
+          //       }
+          //     }
+          //     console.log("chap status: "+chap_status)
+          //     if(found==0){
+          //       chap_status[j] = 0 //locked
+          //     }
+          // }
+
     console.log("rendered");
 
     var chapters = [];
 
+    var string = '../../icons/1.png'
     for(let i=1;i<=8;i++){
       chapters.push(
         <View key={i} style={styles.card}>
-      
         <Card>
           <TouchableOpacity  onPress={() => this.open_chapter(i) }>
          <View style={[styles.box,styles.box1]}>
              <View style={styles.innerContainer}>
             <View style={[styles.innerBox, styles.innerBox1]}>
              <Image
-                  source={require('../../assets/2.png')}  
+                  source={require(string)}  
                   style={{width: 70, height: 70}}
                 />
             </View>
@@ -209,12 +262,10 @@ async get(){
             
            
             </View>
-
             <View>
              <Icon name="checkbox" size={30} color="#F0C71B" />
             </View>
         
-            
         </View>
         
             <Text style={{fontSize:18,color:'#1c313a',  fontFamily: 'Museo 700',}}>TAP TO START</Text>
