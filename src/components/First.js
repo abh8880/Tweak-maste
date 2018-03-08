@@ -13,6 +13,7 @@ import {
 import * as Progress from 'react-native-progress';
 import { Card } from 'react-native-elements'; // 0.18.5
 import Icon from 'react-native-vector-icons/Foundation';
+import IconEn from 'react-native-vector-icons/Entypo';
 
 import {Actions} from 'react-native-router-flux';
 
@@ -26,33 +27,12 @@ var box_height = height / box_count;
 var progress_val = [0,0,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
 var chap_info = [];
 var chap_name = ['Basic I','Classic I','Crux Link','Classic II','Self Mode','Ace Ally','Crackerjack','Sum Poll'];
-var chap_status = [0,0,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
+var chap_image = ['../../icons/1.png','../../icons/2.png','../../icons/3.png','../../icons/4.png','../../icons/5.png','../../icons/6.png','../../icons/7.png','../../icons/8.png'];
+var chap_status = [1,1,0,0,0,0,0,0,0,0,0,0]; //To be retrieved from database
 // var username = null;
 
 export default class First extends Component {
 
-  // async local_store(){
-  //   try {
-  //     const value = await AsyncStorage.getItem('username');
-  //     if (value !== null){
-  //       console.log(value);
-  //     }
-  //   } catch (error) {
-  //     console.log("Error getting data");
-  //   }
-  // }
-  
-//  static navigationOptions = {
-//     title: '⌘  Chapters',
-//     headerStyle: {
-//       backgroundColor: '#00232d',
-//     },
-//     headerTitleStyle: {
-//       color: '#88bfff',
-//       fontSize: 20,
-//       fontWeight: '300'
-//     }
-//   };
 
 async get(){
   username = await AsyncStorage.getItem('username');
@@ -70,10 +50,6 @@ async get(){
           prev_chap:'',
           username:'',
       };
-      // this.setState({username:})
-      // username = this.props.username;
-      // console.log("in first.js , name: "+this.state.username)
-      //alert(this.state.username)
   };
 
   componentDidMount() {
@@ -91,17 +67,6 @@ async get(){
   }
 
   open_chapter = (i) =>{
-
-    // console.log(this.state.prev_chap);
-    // console.log(i);
-
-    // if(i<=this.state.prev_chap){
-    //   Actions.lesson({Chapter:i});
-    // }
-
-    // else{
-    //   alert("Please complete previous chapter(s)");
-    // }
 
     var found = 0;
 
@@ -156,7 +121,8 @@ async get(){
             for(var i=0;i<response.data.length;i++){
             if (response.data[i].test == 1) 
             {
-              chap_status[i] = 2
+              chap_status[i] = 2;
+              chap_status[i+1] = 1;
             }
             else
             {
@@ -177,7 +143,7 @@ async get(){
               }
             }
           }
-          // console.log("chap status: "+chap_status)
+          console.log("chap status: "+chap_status);
 
             var index;
             var sum = 0;
@@ -236,7 +202,6 @@ async get(){
 
     var chapters = [];
 
-    var string = '../../icons/1.png'
     for(let i=1;i<=8;i++){
       chapters.push(
         <View key={i} style={styles.card}>
@@ -246,7 +211,7 @@ async get(){
              <View style={styles.innerContainer}>
             <View style={[styles.innerBox, styles.innerBox1]}>
              <Image
-                  source={require(string)}  
+                  source={require('../../icons/1.png')}
                   style={{width: 70, height: 70}}
                 />
             </View>
@@ -262,9 +227,17 @@ async get(){
             
            
             </View>
-            <View>
+            {chap_status[i-1]==2 && <View>
              <Icon name="checkbox" size={30} color="#F0C71B" />
-            </View>
+            </View>}
+
+            {chap_status[i-1]==1 && <View>
+             <IconEn name="lock-open" size={22} color="#17b046" />
+            </View>}
+
+            {chap_status[i-1]==0 && <View>
+             <IconEn name="lock" size={22} color="#85063f" />
+            </View>}
         
         </View>
         
