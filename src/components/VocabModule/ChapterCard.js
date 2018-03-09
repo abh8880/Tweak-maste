@@ -10,8 +10,12 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
-  Image
+  Image,
+  BackHandler,
+  Alert
 } from 'react-native';
+
+import Icon from 'react-native-vector-icons/Foundation';
 
 import { Actions } from 'react-native-router-flux';
 
@@ -29,13 +33,32 @@ export default class ChapterCard extends Component {
     });
   }
 
+   componentDidMount() {
+      
+      BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
+    }
+  
+    componentWillUnmount() {
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    }
+  
+    handleBackButton = () =>{
+       Actions.courses();
+      return true;
+    }
+
+
+
   render() {
     return (
       <View style={styles.cardBody}>
         <View style={styles.ChapterRow1}>
          <TouchableOpacity  onPress={() => {this.navigateToDeckPage(1)}}>
         <View style={styles.box1}>
-       
+               <View style={{ alignSelf: 'flex-end', marginTop:'5%',marginRight:'5%'}}>  
+                <Icon name="checkbox" size={30} color="#F0C71B" />
+                </View>
+
             <View style={styles.insideBox}>
                <Image
                   source={require('../../../icons/9.png')}
@@ -54,6 +77,9 @@ export default class ChapterCard extends Component {
 
           <TouchableOpacity onPress={() => {this.navigateToDeckPage(2)}}>
         <View style={styles.box2}>
+            <View style={{ alignSelf: 'flex-end', marginTop:'5%',marginRight:'5%'}}>  
+                <Icon name="checkbox" size={30} color="#F0C71B" />
+                </View>
 
             <View style={styles.insideBox}>
                <Image
@@ -80,11 +106,19 @@ export default class ChapterCard extends Component {
          <View style={styles.ChapterRow2}>
         <TouchableOpacity  onPress={() => {this.navigateToDeckPage(3)}}>
         <View style={styles.box1}>
+               <View style={{ alignSelf: 'flex-end', marginTop:'5%',marginRight:'5%'}}>  
+                <Icon name="checkbox" size={30} color="#F0C71B" />
+                </View>
+
           <View style={styles.insideBox}>
-               <Image
-                  source={require('../../../icons/8.png')}
-                  style={{width: 100, height: 100}}
-                />
+                <View>
+                     <Image
+                        source={require('../../../icons/8.png')}
+                        style={{width: 100, height: 100}}
+                      />
+                </View>
+
+               
           </View>
 
            <View style={styles.insideTextBox}>
@@ -95,6 +129,9 @@ export default class ChapterCard extends Component {
 
           <TouchableOpacity  onPress={() => {this.navigateToDeckPage(3)}}>
         <View style={styles.box2}>
+                <View style={{ alignSelf: 'flex-end', marginTop:'5%',marginRight:'5%'}}>  
+                <Icon name="checkbox" size={30} color="#F0C71B" />
+                </View>
            <View style={styles.insideBox}>
             <Image
                   source={require('../../../icons/8.png')}
@@ -156,8 +193,8 @@ const styles = StyleSheet.create({
     height: 110,
     borderRadius: 100,
     backgroundColor:'white',
-    marginTop:'10%',
-    alignItems:'center'
+    alignItems:'center',
+    flexDirection:'row'
   },
   insideTextBox:{
     marginTop:'10%'

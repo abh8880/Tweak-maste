@@ -16,7 +16,7 @@ import Menu, {
   MenuOption,
   MenuTrigger
 } from 'react-native-popup-menu';
- import Icon from 'react-native-vector-icons/FontAwesome';
+ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 const height = Dimensions.get('window').height;
 
 import Login from './pages/Login';
@@ -46,14 +46,16 @@ const TabIcon =({selected, title})=> {
     );
 };
 
-const NavigatorMenu = () => (
+{/*const NavigatorMenu = () => (
   <Menu>
-    <MenuTrigger text='...' customStyles={triggerStyles}/>
+    <MenuTrigger text='...' customStyles={triggerStyles}>
+    <Icon name="close" size={30} color="#000000" />
+    </MenuTrigger>
     <MenuOptions>
       <MenuOption customStyles={optionsStyles} onSelect={() => Actions.login()} text='Logout' />
     </MenuOptions>
   </Menu>
-);
+);*/}
 
 export default class Routes extends Component {
 
@@ -83,12 +85,16 @@ export default class Routes extends Component {
 
     NavigatorMenu = () => {
       return(
+      <View style={{marginLeft: 'auto'}}>
         <Menu>
-          <MenuTrigger text='. . .' customStyles={triggerStyles}/>
+          <MenuTrigger style={triggerStyles.triggerMenu} >
+           <Icon style={triggerStyles.triggerText} name="options-vertical" size={25} color="#000000" />
+    </MenuTrigger>
           <MenuOptions>
             <MenuOption customStyles={optionsStyles} onSelect={() => this.logout_func()} text='Logout' />
           </MenuOptions>
         </Menu>
+        </View>
       );
     }
 
@@ -137,7 +143,11 @@ export default class Routes extends Component {
       >
         {this.showBackArrow(dest)}
         {this.renderTitle(source)}
-        {this.NavigatorMenu()}
+        {source == 'Courses'? this.NavigatorMenu() : null }
+         {source == 'Speaking'? this.NavigatorMenu() : null }
+         
+          
+        
       </View>
     )
   }
@@ -220,8 +230,12 @@ export default class Routes extends Component {
 }
 
 const triggerStyles = {
+  triggerMenu: {
+  },
   triggerText: {
     color: 'white',
+  
+    
   },
 };
 
