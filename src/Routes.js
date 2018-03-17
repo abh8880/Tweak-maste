@@ -26,7 +26,8 @@ import Lesson from './components/Lesson';
 import Select from './components/Select';
 import Summary from './components/Complete';
 import Courses from './pages/Courses';
-import Speaking from './pages/SpeakingAlt';
+import Speaking from './pages/SpeakingAlt2';
+import SpeakingInstruction from './components/SpeakingInstruction';
 
 // VocabModule pages start
 import VocabHome from './components/VocabModule/VocabHome';
@@ -174,7 +175,7 @@ export default class Routes extends Component {
                 <Scene key="courses" title="Courses" icon={TabIcon} component={Courses} hideNavBar/>
               </Scene>
               <Scene key="speakingtab" title="Speaking" icon={TabIcon} navBar={() => this.createNavBar('Speaking', 'nope')} >
-                <Scene key="speaking" title="Speaking" icon={TabIcon} component={Speaking} hideNavBar/>
+                <Scene key="speakingInstruction" title="Speaking" icon={TabIcon} component={SpeakingInstruction} hideNavBar/>
               </Scene>
             </Scene>
 
@@ -182,6 +183,14 @@ export default class Routes extends Component {
             <Scene username={this.state.username} key="lesson" component={Lesson} title="Lessons" navBar={() => this.createNavBar('Lessons', 'first')}/>
             <Scene username={this.state.username} key="summary" component={Summary} title="Summary" navBar={() => this.createNavBar('Summary', 'lesson')}/>
             <Scene key="select" component={Select} title="Activities" hideNavBar/>
+
+              <Scene key="speakingtabtwo" title="Speaking" icon={TabIcon} navBar={() => this.createNavBar('Speaking', 'nope')} >
+                <Scene key="speaking" title="Speaking" component={Speaking}
+            navBar={() => this.createNavBar('Speaking', 'nope')}
+             />  
+            </Scene>
+
+            
 
           {/*  VocabModule pages start  */}
             <Scene key="vocabHome"
