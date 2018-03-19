@@ -27,6 +27,7 @@ const height = Dimensions.get('window').height;
 var chapter;
 var test_status = 0;
 var name = null;
+var less_status = [0,0,0,0];
 
 export default class Lesson extends Component {
 
@@ -57,24 +58,33 @@ static navigationOptions = {
     this.get();
 
     axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_test_status.php', {
-            params: {
-              name: name,
-              chapter: chapter
-            },
-            dataType: 'json'
-          })
-          .then(function (response) {
-            // console.log("\n\n SUCCESS \n\n");
-            // console.log("response.data[0].test: "+ response.data[0].test);
-            test_status = response.data[0].test;
-            if (test_status==1) 
-            {
-              this.setState({test_button_text:"Redo"})  
-            }
-          }.bind(this))
-          .catch(function (error) {
-            console.log(error);
-        });
+        params: {
+          name: name,
+          chapter: chapter
+        },
+        dataType: 'json'
+      })
+      .then(function (response) {
+        // console.log("\n\n SUCCESS \n\n");
+        // console.log("response.data[0].test: "+ response.data[0].test);
+
+        var topicNo = response.data[0].topic;
+
+        while(topicNo>0){
+          less_status[(topicNo%10)-1] = 1;
+          topicNo/=10;
+        }
+
+        test_status = response.data[0].test;
+        if (test_status==1) 
+        {
+          this.setState({test_button_text:"Redo"})  
+        }
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error);
+    });
+
   }
         
 
@@ -85,9 +95,9 @@ static navigationOptions = {
 
       finalcomp =
         <View key={index} style={[styles.deckCard, { backgroundColor: "#ffffff", borderRadius: 15, position: 'relative' }]}>
-           <View style={styles.checkBox}>
+           { less_status[index]==1 && <View style={styles.checkBox}>
              <Icon name="checkbox" size={32} color="#F0C71B" />
-           </View>
+           </View>}
           <Text style={styles.deckTitle}>Lesson {index+1}</Text>
           <Text style={styles.deckSubTitle}>Content:</Text>
           <View>
@@ -232,6 +242,8 @@ static navigationOptions = {
     
     // if (this.state.status==0) 
     // {
+      console.log(less_status);
+
         return (
           <View style={styles.container}>
             <EZSwiper style={[styles.swiper, { width: width, height: height/2,}]}
