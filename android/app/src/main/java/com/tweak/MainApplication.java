@@ -3,6 +3,8 @@ package com.tweak;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import co.apptailor.googlesignin.RNGoogleSigninPackage;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.wenkesj.voice.VoicePackage;
 import net.no_mad.tts.TextToSpeechPackage;
 import com.reactlibrary.RNBluemixPackage;
@@ -30,6 +32,8 @@ public class MainApplication extends Application implements ReactApplication {
           new VectorIconsPackage(),
           new SQLitePluginPackage(),
           new MainReactPackage(),
+            new RNGoogleSigninPackage(),
+            new SplashScreenReactPackage(),
             new VoicePackage(),
           new TextToSpeechPackage(),
           new RNBluemixPackage()

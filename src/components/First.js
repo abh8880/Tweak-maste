@@ -196,11 +196,7 @@ async get(){
              <View style={styles.innerContainer}>
             <View style={[styles.innerBox, styles.innerBox1]}>
              <Image
-<<<<<<< HEAD
-                  source={require('../../icons/1.png')}
-=======
-                  source={Images[i-1]}  
->>>>>>> 201d465d1b09c97c1975b0b7779a8e56840036bd
+            source={Images[i-1]} 
                   style={{width: 70, height: 70}}
                 />
             </View>

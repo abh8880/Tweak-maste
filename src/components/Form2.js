@@ -24,9 +24,12 @@ export default class Logo extends Component<{}> {
   onPress(){
     let uname = this.state.username;
     let pass = this.state.password;
-    AsyncStorage.setItem('username', uname).done();
-    AsyncStorage.setItem('password', pass).done();
-    
+              
+
+              AsyncStorage.setItem('username', uname).done();
+              AsyncStorage.setItem('password', pass).done();
+             
+
        axios.post('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/Login.php', 
         {
            
@@ -44,6 +47,7 @@ export default class Logo extends Component<{}> {
               Actions.home();
               
               this.setState({username: uname,password: pass});
+              
             
              }
             
@@ -53,7 +57,8 @@ export default class Logo extends Component<{}> {
           })
           
           .catch(function (error) {
-            console.log('login dead');
+            console.log(error);
+            alert('Network Error. Please try again.');
         });
 
 

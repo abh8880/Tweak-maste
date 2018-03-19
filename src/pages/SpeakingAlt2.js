@@ -39,7 +39,9 @@ _toggleModal = () =>
       partialResults: [],
 	  grammar: '',
 	  sentences: [],
-    isModalVisible: false
+    isModalVisible: false,
+    currentQuestionIndex: 0,
+    question: ['apple','horse','house','school']
     };
     Voice.onSpeechStart = this.onSpeechStart.bind(this);
     Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
@@ -191,6 +193,10 @@ _sclear(){
   }
 
   render() {
+
+    var sentencetemparray = this.state.sentences;
+    sentencetemparray.push(this.state.question[this.state.currentQuestionIndex]);
+    this.setState({sentences: sentencetemparray});
     
     var pitchStart = "", pitchEnd = "", pitchString = " Listening ";
     if(typeof this.state.pitch !== 'undefined') {
@@ -267,9 +273,17 @@ _sclear(){
        <View>
         <Text style={styles.instructions}>
           
-          { this.state.buttonStatus ? "Press the button and start speaking." : (pitchString)  }
+          Score: 0
         </Text>
         </View>
+
+
+       {/*<View>
+        <Text style={styles.instructions}>
+          
+          { this.state.buttonStatus ? "Press the button and start speaking." : (pitchString)  }
+        </Text>
+        </View>*/}
 
         <Text
           style={styles.stat}>
@@ -283,7 +297,7 @@ _sclear(){
         </Text>
         
 		
-      <ScrollView showsVerticalScrollIndicator={true} style={{flexGrow:0.01, height:40, marginBottom: 15,}}>
+      <ScrollView showsVerticalScrollIndicator={true} style={{flexGrow:0.01, height:100, marginBottom: 15,}}>
         {this.state.partialResults.map((result, index) => {
           return (
             <Text
@@ -296,16 +310,6 @@ _sclear(){
 		</ScrollView>
 		
 	
-        <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
-          <Image
-            style={this.state.buttonStatus ? styles.button : styles.button2}
-            source={require('../images/mic2.png')}
-          />
-        </TouchableHighlight>
-        <Image
-            style={!this.state.buttonStatus ? styles.button : styles.button2}
-            source={require('../images/mic3.png')}
-          />
 		
 		
 		 <ScrollView style={pstyles.scrollViewGR}
@@ -317,6 +321,18 @@ _sclear(){
         </View>
 		 </ScrollView>
 		
+
+        <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
+          <Image
+            style={this.state.buttonStatus ? styles.button : styles.button2}
+            source={require('../images/mic2.png')}
+          />
+        </TouchableHighlight>
+        <Image
+            style={!this.state.buttonStatus ? styles.button : styles.button2}
+            source={require('../images/mic3.png')}
+          />
+
     <TouchableOpacity onPress={()=>this._sclear()}>
 	   <View style={styles.clearButton}>
      <Text style={styles.clearText}>CLEAR</Text>
@@ -337,7 +353,7 @@ const pstyles = StyleSheet.create({
   scrollViewGR: {
     backgroundColor:'#ffffff',
     borderRadius:5,
-    height: 15,
+    height: 100,
     margin:'5%',
    flexGrow:0.5
     },

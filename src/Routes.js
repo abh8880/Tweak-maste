@@ -16,7 +16,7 @@ import Menu, {
   MenuOption,
   MenuTrigger
 } from 'react-native-popup-menu';
- import Icon from 'react-native-vector-icons/FontAwesome';
+ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 const height = Dimensions.get('window').height;
 
 import Login from './pages/Login';
@@ -26,7 +26,8 @@ import Lesson from './components/Lesson';
 import Select from './components/Select';
 import Summary from './components/Complete';
 import Courses from './pages/Courses';
-import Speaking from './pages/SpeakingAlt';
+import Speaking from './pages/SpeakingAlt2';
+import SpeakingInstruction from './components/SpeakingInstruction';
 
 // VocabModule pages start
 import VocabHome from './components/VocabModule/VocabHome';
@@ -46,14 +47,16 @@ const TabIcon =({selected, title})=> {
     );
 };
 
-const NavigatorMenu = () => (
+{/*const NavigatorMenu = () => (
   <Menu>
-    <MenuTrigger text='...' customStyles={triggerStyles}/>
+    <MenuTrigger text='...' customStyles={triggerStyles}>
+    <Icon name="close" size={30} color="#000000" />
+    </MenuTrigger>
     <MenuOptions>
       <MenuOption customStyles={optionsStyles} onSelect={() => Actions.login()} text='Logout' />
     </MenuOptions>
   </Menu>
-);
+);*/}
 
 export default class Routes extends Component {
 
@@ -83,12 +86,16 @@ export default class Routes extends Component {
 
     NavigatorMenu = () => {
       return(
+      <View style={{marginLeft: 'auto'}}>
         <Menu>
-          <MenuTrigger text='. . .' customStyles={triggerStyles}/>
+          <MenuTrigger style={triggerStyles.triggerMenu} >
+           <Icon style={triggerStyles.triggerText} name="options-vertical" size={25} color="#000000" />
+    </MenuTrigger>
           <MenuOptions>
             <MenuOption customStyles={optionsStyles} onSelect={() => this.logout_func()} text='Logout' />
           </MenuOptions>
         </Menu>
+        </View>
       );
     }
 
@@ -137,7 +144,11 @@ export default class Routes extends Component {
       >
         {this.showBackArrow(dest)}
         {this.renderTitle(source)}
-        {this.NavigatorMenu()}
+        {source == 'Courses'? this.NavigatorMenu() : null }
+         {source == 'Speaking'? this.NavigatorMenu() : null }
+         
+          
+        
       </View>
     )
   }
@@ -164,7 +175,7 @@ export default class Routes extends Component {
                 <Scene key="courses" title="Courses" icon={TabIcon} component={Courses} hideNavBar/>
               </Scene>
               <Scene key="speakingtab" title="Speaking" icon={TabIcon} navBar={() => this.createNavBar('Speaking', 'nope')} >
-                <Scene key="speaking" title="Speaking" icon={TabIcon} component={Speaking} hideNavBar/>
+                <Scene key="speakingInstruction" title="Speaking" icon={TabIcon} component={SpeakingInstruction} hideNavBar/>
               </Scene>
             </Scene>
 
@@ -172,6 +183,14 @@ export default class Routes extends Component {
             <Scene username={this.state.username} key="lesson" component={Lesson} title="Lessons" navBar={() => this.createNavBar('Lessons', 'first')}/>
             <Scene username={this.state.username} key="summary" component={Summary} title="Summary" navBar={() => this.createNavBar('Summary', 'lesson')}/>
             <Scene key="select" component={Select} title="Activities" hideNavBar/>
+
+              <Scene key="speakingtabtwo" title="Speaking" icon={TabIcon} navBar={() => this.createNavBar('Speaking', 'nope')} >
+                <Scene key="speaking" title="Speaking" component={Speaking}
+            navBar={() => this.createNavBar('Speaking', 'nope')}
+             />  
+            </Scene>
+
+            
 
           {/*  VocabModule pages start  */}
             <Scene key="vocabHome"
@@ -220,8 +239,12 @@ export default class Routes extends Component {
 }
 
 const triggerStyles = {
+  triggerMenu: {
+  },
   triggerText: {
     color: 'white',
+  
+    
   },
 };
 
