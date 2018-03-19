@@ -33,7 +33,41 @@ export default class Lesson extends Component {
 
   async get(){
     name = await AsyncStorage.getItem('username'); 
-    // alert(name);
+    alert(name);
+    axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_test_status.php', {
+        params: {
+          name: name,
+          chapter: chapter
+        },
+        dataType: 'json'
+      })
+      .then(function (response) {
+        // console.log("\n\n SUCCESS \n\n");
+         console.log("response.data[0].test: "+ response.data[0].test);
+
+        console.log(response.data);
+
+        var topicNo = response.data[0].topic;
+        console.log("Topic="+topicNo);
+
+        while(topicNo>0){
+          less_status[(topicNo%10)-1] = 1;
+          topicNo = Math.floor(topicNo/10);
+        }
+
+        console.log(less_status);
+
+        this.setState({refresh:1});
+
+        test_status = response.data[0].test;
+        if (test_status==1) 
+        {
+          this.setState({test_button_text:"Redo"})  
+        }
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error);
+    });
   }
 
 static navigationOptions = {
@@ -49,41 +83,13 @@ static navigationOptions = {
   };
   constructor(props) {
     super(props)
-    this.state = { noOfCards: ['', '', '', ''],topic:1,status:0,test_button_text:'TEST'}
+    this.state = { noOfCards: ['', '', '', ''],topic:1,status:0,test_button_text:'TEST',refresh:0}
     chapter = this.props.navigation.state.params.Chapter;
     // console.log(chapter);
 
     //this.setState({topic:1});
 
     this.get();
-
-    axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_test_status.php', {
-        params: {
-          name: name,
-          chapter: chapter
-        },
-        dataType: 'json'
-      })
-      .then(function (response) {
-        // console.log("\n\n SUCCESS \n\n");
-        // console.log("response.data[0].test: "+ response.data[0].test);
-
-        var topicNo = response.data[0].topic;
-
-        while(topicNo>0){
-          less_status[(topicNo%10)-1] = 1;
-          topicNo/=10;
-        }
-
-        test_status = response.data[0].test;
-        if (test_status==1) 
-        {
-          this.setState({test_button_text:"Redo"})  
-        }
-      }.bind(this))
-      .catch(function (error) {
-        console.log(error);
-    });
 
   }
         
