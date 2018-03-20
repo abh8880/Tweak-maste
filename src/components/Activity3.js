@@ -307,7 +307,7 @@ timer_on = 0;
         <View >
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={30} color="#000000" />
+              <Icon name="close" size={25} color="#000000" />
           </View>
         </TouchableOpacity>
       </View>
@@ -326,7 +326,7 @@ timer_on = 0;
         <View>
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={30} color="#000000" />
+              <Icon name="close" size={25} color="#000000" />
           </View>
         </TouchableOpacity>
       </View>
@@ -637,5 +637,8 @@ container: {
     borderRadius: 10,
    
 
+  },
+   instructionBox:{
+    left:'20%'
   }
 });

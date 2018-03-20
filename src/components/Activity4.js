@@ -292,7 +292,7 @@ if (topic == -1)
         <View >
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={30} color="#000000" />
+              <Icon name="close" size={25} color="#000000" />
           </View>
         </TouchableOpacity>
       </View>
@@ -311,7 +311,7 @@ if (topic == -1)
         <View >
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={30} color="#000000" />
+              <Icon name="close" size={25} color="#000000" />
           </View>
         </TouchableOpacity>
       </View>
@@ -465,7 +465,7 @@ const styles = StyleSheet.create({
      width:Dimensions.get('window').width/2.5,
     height:Dimensions.get('window').height/10,  
     alignItems: 'center',
-    backgroundColor: 'green',
+    backgroundColor: '#1c313a',
     justifyContent:'center',
     borderWidth:2,
      borderRadius:10,
@@ -493,5 +493,8 @@ titleQuestion:{
     borderRadius: 10,
    
 
+  },
+   instructionBox:{
+    left:'20%'
   }
 });

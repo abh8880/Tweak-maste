@@ -210,7 +210,7 @@ update2 = () =>{
         <View >
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={30} color="#000000" />
+              <Icon name="close" size={25} color="#000000" />
           </View>
         </TouchableOpacity>
       </View>
@@ -230,7 +230,7 @@ update2 = () =>{
          <View >
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={30} color="#000000" />
+              <Icon name="close" size={25} color="#000000" />
           </View>
         </TouchableOpacity>
       </View>
@@ -445,5 +445,8 @@ const styles = StyleSheet.create({
     borderRadius: 10,
    
 
+  },
+   instructionBox:{
+    left:'20%'
   }
 });

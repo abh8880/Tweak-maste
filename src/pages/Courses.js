@@ -122,18 +122,18 @@ export default class VerticalStackLayout extends Component {
 
            <View style={styles.innerBox1}>
               <Image
-                  //source={require('../../icons/12.png')}
-                  style={{width: '50%', height: '50%', top:'5%',}}
+                  source={require('../../icons/12.png')}
+                  style={{width: 80, height:80, top:'5%',}}
                 />
 
             </View>
             <View style={styles.innerBox2}>
               <View  style={styles.caption}>
-               <Text style={styles.captionText}>Master the art of perfect </Text>
-                 <Text style={styles.captionText}>Sentence Formation</Text>
+               <Text style={styles.captionText}>Master the art of perfect Sentence Formation </Text>
+               
               </View>
             <View style={styles.progress}>
-              <Progress.Bar progress={this.state.overall_progress/32} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
+              <Progress.Bar progress={this.state.overall_progress/32} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={180} borderWidth={0} borderRadius={0} />
             </View>
             </View>
 
@@ -176,18 +176,18 @@ export default class VerticalStackLayout extends Component {
 
             <View style={styles.innerBox1}>
               <Image
-                  source={require('../../icons/6.png')}
-                  style={{width: '50%', height: '50%', top:'5%'}}
+                  source={require('../../icons/42.png')}
+                  style={{width: 80, height:80, top:'5%'}}
                 />
 
             </View>
             <View style={styles.innerBox2}>
               <View  style={styles.caption}>
-               <Text style={styles.captionText}>Improve your Vocabulary</Text>
-                 <Text style={styles.captionText}>knowing the origin of words</Text>
+               <Text style={styles.captionText}>Improve your Vocabulary knowing the origin of words</Text>
+               
               </View>
             <View style={styles.progress}>
-              <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={150} borderWidth={0} borderRadius={0} />
+              <Progress.Bar progress={0.6} height={8}  color={'rgba(28, 49, 58, 1)'} unfilledColor={'rgba(154,154,154,1)'}width={180} borderWidth={0} borderRadius={0} />
             </View>
             </View>
 
@@ -266,13 +266,14 @@ const styles = StyleSheet.create({
   innerBox1: {
    alignItems:'center',
    left:'5%',
-    backgroundColor:'pink',
+    backgroundColor:'white',
     width:'35%'
   },
  innerBox2: {
        alignItems:'center',
-        backgroundColor:'green',
-       width:'65%'
+        backgroundColor:'white',
+       width:'65%',
+
   },
   caption: {
     margin:10,
@@ -310,6 +311,6 @@ captionText:{
     fontFamily: 'Museo 700'
 },
 progress:{
-  
+    right:'7%',
 }
 });

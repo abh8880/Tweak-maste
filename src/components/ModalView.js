@@ -48,7 +48,7 @@ export default class ModalView extends Component {
 const styles = StyleSheet.create({
     container: {
       width:300,
-      height:150,
+      height:170,
       alignItems: 'center',
       backgroundColor: 'white',
     },
