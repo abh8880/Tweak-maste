@@ -28,6 +28,8 @@ var chapter;
 var test_status = 0;
 var name = null;
 var less_status = [0,0,0,0];
+var names = ['','','',''];
+var content = ['','','',''];
 
 export default class Lesson extends Component {
 
@@ -83,16 +85,34 @@ static navigationOptions = {
   };
   constructor(props) {
     super(props)
-    this.state = { noOfCards: ['', '', '', ''],topic:1,status:0,test_button_text:'TEST',refresh:0}
+    this.state = { noOfCards: ['', '', '', ''],topic:1,status:0,test_button_text:'TEST',refresh:0,names:names,content:content}
     chapter = this.props.navigation.state.params.Chapter;
     // console.log(chapter);
 
     //this.setState({topic:1});
 
     this.get();
+     db.transaction((tx) => {
+         tx.executeSql('SELECT * FROM names WHERE chapter=?', [chapter], (tx, results) => {
+            for (var i = 0; i <4 ; i++) {
+              var row = results.rows.item(i);
+              console.log(row)
+              names[i] = row.name;
+              content[i] = row.content;
+            }
+            console.log("\n\nBEFORE")
+            console.log("names: "+names)
+            console.log("content: "+content)
+            this.setState({names:names,content:content});
+            console.log("\n\nAFTER")
+            console.log("names: "+names)
+            console.log("content: "+content)
+         });
+    });
 
   }
-        
+
+   
 
     renderRow = (obj, index) => {
 
@@ -104,13 +124,8 @@ static navigationOptions = {
            { less_status[index]==1 && <View style={styles.checkBox}>
              <Icon name="checkbox" size={32} color="#F0C71B" />
            </View>}
-          <Text style={styles.deckTitle}>Lesson {index+1}</Text>
-          <Text style={styles.deckSubTitle}>Content:</Text>
-          <View>
-            <Text style={styles.deckInfo}>
-              Something here...
-            </Text>
-          </View>
+          <Text style={styles.deckTitle}>{this.state.names[index]}</Text>
+          <Text style={styles.deckSubTitle}>{this.state.content[index]}</Text>
           <View style={styles.deckButtonView}>
             <TouchableOpacity style={styles.deckButton} onPress={() => this._onPressDeckButton()}>
               <Text style={styles.deckButtonText}>Start </Text>
@@ -244,6 +259,7 @@ static navigationOptions = {
   };
 
   render() {
+
     console.log("topic="+this.state.topic);
     
     // if (this.state.status==0) 
