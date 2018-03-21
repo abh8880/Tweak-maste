@@ -9,7 +9,8 @@ import IconF from 'react-native-vector-icons/Foundation';
 var name = null;
 var correct = 0;
 var chapter = 1;
-
+var chap_name = ['Basic I','Classic I','Crux Link','Classic II','Self Mode','Ace Ally','Crackerjack','Sum Poll'];
+import {Actions} from 'react-native-router-flux';
 export default class Activity8 extends Component {
 
     async get(){
@@ -38,34 +39,40 @@ export default class Activity8 extends Component {
             console.log(error);
         });
     };
+
+
+  back_to_decks = () =>{
+    Actions.lesson({Chapter:this.props.chapter});
+  }
+
     render(){
-        if (correct>=9) 
+        if (correct>=7) 
         {
-            var remark = "You Passed !!";
+            var remark = "Test Cleared";
         }
         else
         {
-            var remark = "You Failed !!";
+            var remark = "Test not Cleared";
         }
         return(
             <View style={styles.container}>
                 <View style={styles.compBox}>
-                    <Text style={styles.Title}>Test Cleared</Text>
-
+                    <Text style={styles.Title}>{remark}</Text>
                     <View style={styles.name}>
                     <View>
-                    <Text style={styles.chapterText}>Chaptername</Text>
+                    <Text style={styles.chapterText}>{chap_name[chapter-1]}</Text>
                     </View>
                     <View>
                       <IconM name="checkbox-marked-circle" size={32} color="#ffd700" />
                     </View>
                     </View>
-                    <Text style={{fontSize:15, fontWeight:'bold', color:'#ffffff',marginTop:10}}>Score: {correct}</Text>
+                    <Text style={{fontSize:15, fontWeight:'bold', color:'#ffffff',marginTop:10}}>Your Score: {correct}/10</Text>
+                    <Text style={{fontSize:15, fontWeight:'bold', color:'#ffffff',marginTop:10}}>Passing: 7/10</Text>
 
 
 
-                      <TouchableOpacity>
-                <View style={styles.completeBtn}>
+                      <TouchableOpacity onPress={() => Actions.first({username:username})}>
+                        <View style={styles.completeBtn}>
                         <View style={{alignItems:'center'}}>
                         <Text style={styles.continueText}>NEXT CHAPTER</Text>
                         </View>
@@ -77,7 +84,7 @@ export default class Activity8 extends Component {
                 </View>
                 </TouchableOpacity>
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => this.back_to_decks() }>
                 <View style={styles.CurrentBtn}>
                         <View style={{ flexWrap:'wrap',}}>
                         <Text style={styles.continueText}>PRACTICE CURRENT </Text>
