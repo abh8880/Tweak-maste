@@ -14,56 +14,37 @@ import {Actions} from 'react-native-router-flux';
 
 export default class Logo extends Component<{}> {
 
-   constructor(props){
+  constructor(props){
     super(props);
     this.state = { username: '', password: ''};
-    this.onPress = this.onPress.bind(this);
-   
+    this.onPress = this.onPress.bind(this);   
   }
 
   onPress(){
     let uname = this.state.username;
-    let pass = this.state.password;
-              
+    let pass = this.state.password;          
+    AsyncStorage.setItem('username', uname).done();
+    AsyncStorage.setItem('password', pass).done();
+    axios.post('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/Login.php',{
+      username: uname,
+      password: pass
+    })
 
-              AsyncStorage.setItem('username', uname).done();
-              AsyncStorage.setItem('password', pass).done();
-             
-
-       axios.post('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/Login.php', 
-        {
-           
+      .then(function (response) {
+        console.log(response.data);
+          if(response.data=='success')
+          {      
+          Actions.home();          
+          this.setState({username: uname,password: pass}); 
+          }
+        else
+        alert('Login failed');
+      })
           
-            username: uname,
-            password: pass
-          })
-
-          .then(function (response) {
-            console.log(response.data);
-
-             if(response.data=='success')
-             {
-             
-              Actions.home();
-              
-              this.setState({username: uname,password: pass});
-              
-            
-             }
-            
-            else
-            alert('Login failed');
-
-          })
-          
-          .catch(function (error) {
-            console.log(error);
-            alert('Network Error. Please try again.');
-        });
-
-
-
-      
+      .catch(function (error) {
+        console.log(error);
+        alert('Network Error. Please try again.');
+    });
   }
 
   check(){
