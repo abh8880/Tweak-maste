@@ -9,7 +9,7 @@ import ModalView from './ModalView';
 import Modal from "react-native-modal";
 import * as Progress from 'react-native-progress';
 import { Card } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
 
 var comp_words = new Array();
@@ -313,7 +313,7 @@ timer_on = 0;
         <View >
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={25} color="#000000" />
+              <Icon name="md-close" size={30} color="#850631" />
           </View>
         </TouchableOpacity>
       </View>
@@ -332,7 +332,7 @@ timer_on = 0;
          <View >
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={25} color="#000000" />
+              <Icon name="md-close" size={30} color="#850631" />
           </View>
         </TouchableOpacity>
       </View>
@@ -418,7 +418,7 @@ timer_on = 0;
            
             
             </View>
-         <View style={{flex: 2, flexDirection: 'row',margin:'5%'}}>
+         <View style={{flex: 2, flexDirection: 'row',marginTop:'5%'}}>
               <View style={styles.subBox1}>
               <TouchableOpacity onPress={() => this._clear()}>
                   <View style={styles.button1}>
@@ -564,25 +564,25 @@ titleQuestion:{
  },
     button1: {
      padding:10,
-     width:Dimensions.get('window').width/2.5,
+     width:Dimensions.get('window').width/2.2,
     height:Dimensions.get('window').height/10,
     alignItems: 'center',
     backgroundColor: '#ffffff',
     justifyContent:'center',
     borderWidth:2,
-     borderRadius:10,
+     borderRadius:25,
      borderColor:'#1c313a',
     
   },
    button2:{
      padding:10,
-     width:Dimensions.get('window').width/2.5,
+     width:Dimensions.get('window').width/2.2,
     height:Dimensions.get('window').height/10,  
     alignItems: 'center',
     backgroundColor: '#1c313a',
     justifyContent:'center',
     borderWidth:2,
-     borderRadius:10,
+     borderRadius:25,
      borderColor:'#1c313a',
    
    },

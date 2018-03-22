@@ -7,6 +7,7 @@ var name = null;
 
 var SQLite = require('react-native-sqlite-storage');
 var db = SQLite.openDatabase({name:'final.db', createFromLocation:'~final.db'});
+import {Actions} from 'react-native-router-flux';
 
 export default class Complete extends Component {
 
@@ -18,7 +19,7 @@ export default class Complete extends Component {
     constructor(props){
         super(props);
 
-        this.state = {sheet:''};
+        this.state = {sheet:'',name:name};
 
         this.get();
 
@@ -46,8 +47,18 @@ export default class Complete extends Component {
              });
 
         });
+
+        db.transaction((tx) => {
+         tx.executeSql('SELECT name FROM names WHERE chapter=? AND topic=?', [chapter,topic], (tx, results) => {
+            var row = results.rows.item(0);
+            this.setState({name:row.name});
+         });
+    });
     }
 
+	back_to_decks = () =>{
+	    Actions.lesson({Chapter:this.props.chapter});
+	}
     render(){
         return(
             <View style={styles.container}>
@@ -59,13 +70,13 @@ export default class Complete extends Component {
                     <Progress.Circle progress={0.6} size={90} animated={true}
                   unfilledColor={'rgba(245,245,245,0.8)'} color={'rgba(240,199,27,1)'} borderWidth={0} thickness={6} showsText={true}/>
                    </View>
-                  <Text style={{fontSize:22,color:'#f0c71b',fontFamily:'Museo 500'}}>You have finished "Topic Name" </Text>
+                  <Text style={{fontSize:22,color:'#f0c71b',fontFamily:'Museo 500'}}>You have finished {this.state.name} </Text>
 
 
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => this.back_to_decks() }>
                 <View style={styles.completeBtn}>
                         <View>
-                        <Text style={styles.continueText}>CONTINUE</Text>
+                        <Text style={styles.continueText}>NEXT</Text>
                         </View>
 
                          <View style={{marginLeft:'5%',backgroundColor:''}}>

@@ -10,7 +10,7 @@ import ModalView from './ModalView';
 import Modal from "react-native-modal";
 import * as Progress from 'react-native-progress';
 import { Card } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
 
 var answer;
@@ -307,7 +307,7 @@ timer_on = 0;
         <View >
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={25} color="#000000" />
+              <Icon name="md-close" size={30} color="#850631" />
           </View>
         </TouchableOpacity>
       </View>
@@ -326,7 +326,7 @@ timer_on = 0;
         <View>
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={25} color="#000000" />
+              <Icon name="md-close" size={30} color="#850631" />
           </View>
         </TouchableOpacity>
       </View>
@@ -575,7 +575,7 @@ container: {
     alignItems: 'center',
     margin:5,
     backgroundColor: '#1c313a',
-    borderRadius: 10,
+    borderRadius: 30,
     height:Dimensions.get('window').height/15,
     justifyContent:'center'
   },

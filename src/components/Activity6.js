@@ -8,7 +8,7 @@ import ModalView from './ModalView';
 import * as Progress from 'react-native-progress';
 import Modal from "react-native-modal";
 import { Card } from 'react-native-elements';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/Ionicons';
 import {Actions} from 'react-native-router-flux';
 
 var current_ans = '_____';
@@ -210,7 +210,7 @@ update2 = () =>{
         <View >
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={25} color="#000000" />
+              <Icon name="md-close" size={30} color="#850631" />
           </View>
         </TouchableOpacity>
       </View>
@@ -230,7 +230,7 @@ update2 = () =>{
          <View >
         <TouchableOpacity onPress={this._show_alert}>
            <View style={ styles.instructionBox}>
-              <Icon name="close" size={25} color="#000000" />
+              <Icon name="md-close" size={30} color="#850631" />
           </View>
         </TouchableOpacity>
       </View>
@@ -392,13 +392,13 @@ const styles = StyleSheet.create({
   },
   button2:{
      padding:10,
-     width:Dimensions.get('window').width/2.5,
+     width:Dimensions.get('window').width/2.2,
     height:Dimensions.get('window').height/10,  
     alignItems: 'center',
     backgroundColor: '#1c313a',
     justifyContent:'center',
     borderWidth:2,
-     borderRadius:10,
+     borderRadius:25,
      borderColor:'#1c313a',
    
    },
