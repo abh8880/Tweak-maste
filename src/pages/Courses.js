@@ -276,7 +276,10 @@ const styles = StyleSheet.create({
 
   },
   caption: {
-    margin:10,
+     marginTop:Dimensions.get('window').height / 100,
+      marginBottom:Dimensions.get('window').height / 100,
+      marginLeft:Dimensions.get('window').width / 100,
+      marginRight:Dimensions.get('window').width / 100,
      right:'2%',
      flexWrap: 'wrap',
     backgroundColor:'white'
