@@ -40,6 +40,104 @@ async get(){
   // alert(username);
   this.setState({username:username});
   console.log("state: "+this.state.username)
+
+  axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
+        params: {
+          name: this.state.username
+        },
+        dataType: 'json'
+      })
+      .then(function (response) {
+        // console.log("\n\n SUCCESS \n\n");
+        // console.log(response.data);
+        // console.log(response.data[0].chapter);
+        
+        for(var i=0;i<response.data.length;i++){
+          obj = {
+            chapter:response.data[i].chapter,
+            test:response.data[i].test
+          }
+
+          chap_info.push(obj);
+        }
+
+      //   for(var i=0;i<response.data.length;i++){
+      //   if (response.data[i].test == 1) 
+      //   {
+      //     chap_status[i] = 2;
+      //     chap_status[i+1] = 1;
+      //   }
+      //   else
+      //   {
+      //     if (i==0||i==1) 
+      //     {
+      //       chap_status[i] = 1
+      //     }
+      //     else
+      //     {
+      //       if (response.data[i-1].test==1) 
+      //       {
+      //         chap_status[i] = 1
+      //       }
+      //       else
+      //       {
+      //         chap_status[i] = 0
+      //       }
+      //     }
+      //   }
+      // }
+      console.log("chap status: "+chap_status);
+
+        var index;
+        var sum = 0;
+        var sum1 = 0;
+        for (var i = 0; i < 12; i++) {
+          sum = sum + progress_val[i];
+        }
+        // console.log("Response length: " + response.data.length);
+        for (var i = 0; i < response.data.length; i++) {
+          console.log(response.data[i].chapter);
+          index = response.data[i].chapter-1;
+          console.log("index:" + index);
+          console.log(response.data[i].topic.length/4);
+          progress_val[index] = response.data[i].topic.length/4;
+          sum1 = sum1 + progress_val[index];
+
+          if (response.data[i].test == 1) 
+          {
+            chap_status[index] = 2;
+            chap_status[index+1] = 1;
+          }
+          else
+          {
+            if (i==0||i==1) 
+            {
+              chap_status[index] = 1
+            }
+            else
+            {
+              if (response.data[i-1].test==1) 
+              {
+                chap_status[index] = 1
+              }
+              else
+              {
+                chap_status[index] = 0
+              }
+            }
+          }
+        }
+        // console.log(progress_val);
+        // console.log("sum "+sum);
+        // console.log("sum1 "+sum1);
+        if (sum!=sum1) 
+        {
+          this.setState({progress_val:progress_val});
+        }
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error);
+    });
 }
 
   constructor(props) {
@@ -97,80 +195,6 @@ async get(){
   }
 
   render() {
-
-    axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
-            params: {
-              name: this.state.username
-            },
-            dataType: 'json'
-          })
-          .then(function (response) {
-            // console.log("\n\n SUCCESS \n\n");
-            // console.log(response.data);
-            // console.log(response.data[0].chapter);
-            
-            for(var i=0;i<response.data.length;i++){
-              obj = {
-                chapter:response.data[i].chapter,
-                test:response.data[i].test
-              }
-
-              chap_info.push(obj);
-            }
-
-            for(var i=0;i<response.data.length;i++){
-            if (response.data[i].test == 1) 
-            {
-              chap_status[i] = 2;
-              chap_status[i+1] = 1;
-            }
-            else
-            {
-              if (i==0||i==1) 
-              {
-                chap_status[i] = 1
-              }
-              else
-              {
-                if (response.data[i-1].test==1) 
-                {
-                  chap_status[i] = 1
-                }
-                else
-                {
-                  chap_status[i] = 0
-                }
-              }
-            }
-          }
-          console.log("chap status: "+chap_status);
-
-            var index;
-            var sum = 0;
-            var sum1 = 0;
-            for (var i = 0; i < 12; i++) {
-              sum = sum + progress_val[i];
-            }
-            // console.log("Response length: " + response.data.length);
-            for (var i = 0; i < response.data.length; i++) {
-              index = response.data[i].chapter-1;
-              // console.log("index:" + index);
-              // console.log(response.data[i].topic.length/4);
-              progress_val[index] = response.data[i].topic.length/4;
-              sum1 = sum1 + progress_val[index];
-            }
-            // console.log(progress_val);
-            // console.log("sum "+sum);
-            // console.log("sum1 "+sum1);
-            if (sum!=sum1) 
-            {
-              this.setState({progress_val:progress_val});
-            }
-          }.bind(this))
-          .catch(function (error) {
-            console.log(error);
-        });
-
 
   var Images = [
       require('../../icons/1.png'),

@@ -36,6 +36,7 @@ export default class Lesson extends Component {
   async get(){
     name = await AsyncStorage.getItem('username'); 
     alert(name);
+    less_status = [0,0,0,0];
     axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_test_status.php', {
         params: {
           name: name,
@@ -90,7 +91,6 @@ static navigationOptions = {
     // console.log(chapter);
 
     //this.setState({topic:1});
-
     this.get();
      db.transaction((tx) => {
          tx.executeSql('SELECT * FROM names WHERE chapter=?', [chapter], (tx, results) => {
