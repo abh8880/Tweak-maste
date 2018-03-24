@@ -35,7 +35,7 @@ export default class Lesson extends Component {
 
   async get(){
     name = await AsyncStorage.getItem('username'); 
-    alert(name);
+    // alert(name);
     less_status = [0,0,0,0];
     axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_test_status.php', {
         params: {
@@ -86,6 +86,8 @@ static navigationOptions = {
   };
   constructor(props) {
     super(props)
+  	var username = this.props.navigation.state.params.username
+  	// alert("in lesson "+username)
     this.state = { noOfCards: ['', '', '', ''],topic:1,status:0,test_button_text:'TEST',refresh:0,names:names,content:content}
     chapter = this.props.navigation.state.params.Chapter;
     // console.log(chapter);
@@ -144,7 +146,7 @@ static navigationOptions = {
     this.setState({topic:currentDeck});
     this.reset_db(chapter,this.state.topic);
     this.setState({status:1});
-    Actions.select({topic:currentDeck, chapter:chapter, count:0});
+    Actions.select({username:username,topic:currentDeck, chapter:chapter, count:0});
   }
 
   onDidChange = (obj, index) => {

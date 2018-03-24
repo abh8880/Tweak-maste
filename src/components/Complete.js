@@ -11,31 +11,53 @@ import {Actions} from 'react-native-router-flux';
 
 export default class Complete extends Component {
 
-    async get(){
-        name = await AsyncStorage.getItem('username'); 
-        alert(name);
-    }
+    // async get(){
+    //     name = await AsyncStorage.getItem('username'); 
+    //     alert(name);
+    // }
 
     constructor(props){
         super(props);
 
-        this.state = {sheet:'',name:name};
+        var username = this.props.username;
+        // var username = this.props.navigation.state.params.username
+        // console.log("")
+        alert("in complete "+username)
+        this.state = {sheet:'',name:name,progress_val:0};
 
-        this.get();
+        // this.get();
 
         var chapter = this.props.chapter;
         var topic = this.props.topic;
 
-        console.log(name);
+        // console.log(name);
 
         axios.post('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/update_progress.php', {
-            name: name,
+            name: username,
             chapter: chapter,
             topic: topic
           })
           .then(function (response) {
             console.log(response);
-          })
+
+             axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
+                  params: {
+                    name: username
+                  },
+                  dataType: 'json'
+                }).then(function (response) {
+                  console.log("\n\n\n\n");
+                  console.log(response.data[0].topic);
+                  var temp = response.data[0].topic.length/4;
+                  console.log(temp)
+                  this.setState({progress_val:temp});
+                  console.log("after setState")
+                  // console.log(response.data.topic);
+                  console.log("\n\n\n\n");
+                }.bind(this)).catch(function (error) {
+                    console.log(error);
+                });
+           }.bind(this)) 
           .catch(function (error) {
             console.log(error);
         });
@@ -45,7 +67,6 @@ export default class Complete extends Component {
                 var row = results.rows.item(0);
                 this.setState({sheet:row.sheet});
              });
-
         });
 
         db.transaction((tx) => {
@@ -67,7 +88,7 @@ export default class Complete extends Component {
                     <Text style={{fontSize:20, fontWeight:'bold', color:'#ffffff'}}>{this.state.sheet}</Text>
 
                     <View style={styles.Progress}>
-                    <Progress.Circle progress={0.6} size={90} animated={true}
+                    <Progress.Circle progress={this.state.progress_val} size={90} animated={true}
                   unfilledColor={'rgba(245,245,245,0.8)'} color={'rgba(240,199,27,1)'} borderWidth={0} thickness={6} showsText={true}/>
                    </View>
                   <Text style={{fontSize:22,color:'#f0c71b',fontFamily:'Museo 500'}}>You have finished {this.state.name} </Text>

@@ -36,10 +36,10 @@ export default class First extends Component {
 
 async get(){
   username = await AsyncStorage.getItem('username');
-  console.log("in courses.js , name: "+username)
+  // console.log("in courses.js , name: "+username)
   // alert(username);
   this.setState({username:username});
-  console.log("state: "+this.state.username)
+  // console.log("state: "+this.state.username)
 
   axios.get('http://ec2-13-127-75-64.ap-south-1.compute.amazonaws.com/get_progress.php', {
         params: {
@@ -86,7 +86,7 @@ async get(){
       //     }
       //   }
       // }
-      console.log("chap status: "+chap_status);
+      // console.log("chap status: "+chap_status);
 
         var index;
         var sum = 0;
@@ -96,10 +96,10 @@ async get(){
         }
         // console.log("Response length: " + response.data.length);
         for (var i = 0; i < response.data.length; i++) {
-          console.log(response.data[i].chapter);
+          // console.log(response.data[i].chapter);
           index = response.data[i].chapter-1;
-          console.log("index:" + index);
-          console.log(response.data[i].topic.length/4);
+          // console.log("index:" + index);
+          // console.log(response.data[i].topic.length/4);
           progress_val[index] = response.data[i].topic.length/4;
           sum1 = sum1 + progress_val[index];
 
@@ -169,7 +169,7 @@ async get(){
     var found = 0;
 
     if(i==1||i==2){
-      Actions.lesson({Chapter:i});
+      Actions.lesson({Chapter:i,username:username});
     }
 
     else{
@@ -207,7 +207,7 @@ async get(){
       require('../../icons/8.png'),
   ];
 
-    console.log("rendered");
+    // console.log("rendered");
 
     var chapters = [];
 

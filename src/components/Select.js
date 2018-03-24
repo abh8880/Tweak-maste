@@ -12,6 +12,7 @@ import Complete from './Complete';
 //import Activity8 from './Activity8';
 //import Activity10 from './Activity10';
 import Test_result from './Test_result';
+import {Actions} from 'react-native-router-flux';
 
 var count;
 var over = [];
@@ -23,6 +24,8 @@ export default class Select extends Component {
 	constructor(props) {
 
 	super(props);
+  	var username = this.props.username
+  	// alert("in select "+username)
 
 	if(this.props.count == 0){
 		count=0;
@@ -32,7 +35,7 @@ export default class Select extends Component {
 	}
 
 	count++;
-	console.log("\n\ncount="+count+"\n\n");
+	// console.log("\n\ncount="+count+"\n\n");
 
 	};
 	
@@ -40,7 +43,7 @@ export default class Select extends Component {
 		if (topic==-1) 
 		{
 			i = Math.floor(Math.random() * 3) + 3
-			console.log("|||||||||||||||||||||||||||||||||||||||test"+i)
+			// console.log("|||||||||||||||||||||||||||||||||||||||test"+i)
 		}
 		if(i==1){
 			return(
@@ -126,7 +129,7 @@ export default class Select extends Component {
 			correct = correct + this.props.score;
 		}
 		
-		console.log("..............................correct: "+correct);
+		// console.log("..............................correct: "+correct);
 
 		if(this.props.end != 0){
 			var rem = this.props.end;
@@ -188,7 +191,7 @@ export default class Select extends Component {
 				<Test_result correct={correct} chapter={this.props.chapter}/>
 			);
 		}
-		if(count<=12){
+		if(count<=1){
 			// console.log("\n\nsecond\n\n")
 			// console.log("over[i]="+over[i]);
 			var element = this.load_activity(over[i], chapter, topic, 0);	
@@ -207,7 +210,7 @@ export default class Select extends Component {
 			count=0;
 
 			return(
-				<Complete topic={this.props.topic} chapter={this.props.chapter}/>
+				<Complete username ={username} topic={this.props.topic} chapter={this.props.chapter}/>
 			);
 		}
 	}
