@@ -135,7 +135,7 @@ export default class Activity3 extends Component {
   }
 
   _handleButtonPress = index => {
-    if (!pressed[index]){
+    if (!{pressed}[index]){
       console.log("Pressed="+index);
       pressed[index] = true;
       answer = answer + ' ' + ans[index];
@@ -349,16 +349,18 @@ timer_on = 0;
         buttons.push(
       
         <View style={styles.buttonLine}>
-          <TouchableOpacity onPress={() => this._handleButtonPress(k)}>
+        {pressed[k] ?null
+          :<TouchableOpacity onPress={() => this._handleButtonPress(k)}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>{ans[k]}</Text>
               </View>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => this._handleButtonPress(k+1)}>
+          </TouchableOpacity>}
+        {pressed[k+1] ?null
+         :<TouchableOpacity onPress={() => this._handleButtonPress(k+1)}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>{ans[k+1]}</Text>
               </View>
-          </TouchableOpacity>
+          </TouchableOpacity>}
         </View>
       
       )
@@ -371,34 +373,33 @@ timer_on = 0;
 
         if(k==this.state.length-1){
           buttons.push(
-      
             <View style={styles.buttonLine}>
-              <TouchableOpacity onPress={() => this._handleButtonPress(k)}>
+            {pressed[k] ? null
+            : <TouchableOpacity onPress={() => this._handleButtonPress(k)}>
                   <View style={styles.button}>
                     <Text style={styles.buttonText}>{ans[k]}</Text>
                   </View>
-              </TouchableOpacity>
+              </TouchableOpacity>}
             </View>
-          
           )
         }
 
         else{
           buttons.push(
-      
             <View style={styles.buttonLine}>
-              <TouchableOpacity onPress={() => this._handleButtonPress(k)}>
+            {pressed[k] ? null
+            :<TouchableOpacity onPress={() => this._handleButtonPress(k)}>
                   <View style={styles.button}>
                     <Text style={styles.buttonText}>{ans[k]}</Text>
                   </View>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => this._handleButtonPress(k+1)}>
+              </TouchableOpacity>}
+            {pressed[k+1] ? null
+            :<TouchableOpacity onPress={() => this._handleButtonPress(k+1)}>
                   <View style={styles.button}>
                     <Text style={styles.buttonText}>{ans[k+1]}</Text>
                   </View>
-              </TouchableOpacity>
+              </TouchableOpacity>}
             </View>
-          
           )
         }
     

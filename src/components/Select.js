@@ -191,7 +191,7 @@ export default class Select extends Component {
 				<Test_result correct={correct} chapter={this.props.chapter}/>
 			);
 		}
-		if(count<=1){
+		if(count<=10){
 			// console.log("\n\nsecond\n\n")
 			// console.log("over[i]="+over[i]);
 			var element = this.load_activity(over[i], chapter, topic, 0);	

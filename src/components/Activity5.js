@@ -351,11 +351,15 @@ timer_on = 0;
 	for(let i = 0; i < len1; i++){
 
       		buttons1.push(
-	        <TouchableOpacity onPress={() => this._handleButtonPress(i)}>
+          <View>
+          {pressed_comp[i]?null
+          :<TouchableOpacity onPress={() => this._handleButtonPress(i)}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>{comp_words[i]}</Text>
               </View>
-          </TouchableOpacity>
+          </TouchableOpacity>}
+          </View>
+	        
 		    )
 
 	}
@@ -366,11 +370,15 @@ timer_on = 0;
 	for(let i = 0; i < len2; i++){
 
       		buttons2.push(
-	        <TouchableOpacity onPress={() => this._handleButtonPressS(i)}>
+          <View>
+          {pressed_supp[i]?null
+          :<TouchableOpacity onPress={() => this._handleButtonPressS(i)}>
               <View style={styles.button}>
                 <Text style={styles.buttonText}>{supp_words[i]}</Text>
               </View>
-          </TouchableOpacity>
+          </TouchableOpacity>}
+          </View>
+	        
 		    )
 
 	}
