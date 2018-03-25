@@ -31,7 +31,7 @@ export default class Login extends Component<{}> {
     GoogleSignin.configure({
       scopes: ["https://www.googleapis.com/auth/drive.readonly"], // what API you want to access on behalf of the user, default is email and profile
       // iosClientId: <FROM DEVELOPER CONSOLE>, // only for iOS
-      webClientId: "409329322623-oin35terk5nvnvkf1f8mlqe3vc7q8c36.apps.googleusercontent.com", // client ID of type WEB for your server (needed to verify user ID and offline access)
+      webClientId: "134640259677-j5bu1nefp7o1hbaccabrscf5olq8g6dq.apps.googleusercontent.com", // client ID of type WEB for your server (needed to verify user ID and offline access)
       // offlineAccess: true // if you want to access Google API on behalf of the user FROM YOUR SERVER
       // hostedDomain: '' // specifies a hosted domain restriction
       // forceConsentPrompt: true // [Android] if you want to show the authorization prompt at each login

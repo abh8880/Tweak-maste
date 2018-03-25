@@ -12,11 +12,11 @@ import Routes from './src/Routes';
 
 export default class App extends Component<{}> {
 
-   /*componentDidMount() {
+   componentDidMount() {
       // do stuff while splash screen is shown
         // After having done stuff (such as async tasks) hide the splash screen
-        SplashScreen.hide();
-    }*/
+      //  SplashScreen.hide();
+    }
   constructor(){
     super();
     Text.defaultProps.allowFontScaling=false;
