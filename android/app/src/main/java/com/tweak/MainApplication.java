@@ -32,6 +32,7 @@ public class MainApplication extends Application implements ReactApplication {
           new VectorIconsPackage(),
           new SQLitePluginPackage(),
           new MainReactPackage(),
+            
             new RNGoogleSigninPackage(),
             new SplashScreenReactPackage(),
             new VoicePackage(),

@@ -185,8 +185,7 @@ export default class Routes extends Component {
             <Scene key="select" component={Select} title="Activities" hideNavBar/>
 
               <Scene key="speakingtabtwo" title="Speaking" icon={TabIcon} navBar={() => this.createNavBar('Speaking', 'nope')} >
-                <Scene key="speaking" title="Speaking" component={Speaking}
-            navBar={() => this.createNavBar('Speaking', 'nope')}
+                <Scene key="speaking" title="Speaking" component={Speaking} hideNavBar
              />  
             </Scene>
 
