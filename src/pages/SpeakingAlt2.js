@@ -9,12 +9,14 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
-  ToastAndroid
+  ToastAndroid,
+  ProgressBar
 } from 'react-native';
 import Modal from "react-native-modal";
 import Voice from 'react-native-voice';
 import Icon from 'react-native-vector-icons/FontAwesome';
 //import Ginger from 'ginger-correct';
+import ProgressBarClassic from 'react-native-progress-bar-classic';
 
 export default class Speaking extends Component {
 
@@ -37,11 +39,13 @@ _toggleModal = () =>
       started: '',
       results: [],
       partialResults: [],
-	  grammar: '',
-	  sentences: [],
-    isModalVisible: false,
-    currentQuestionIndex: 0,
-    question: ['apple','horse','house','school']
+      score: 0,
+      grammar: '',
+      sentences: [],
+      isModalVisible: false,
+      currentQuestionIndex: 0,
+      timeLeft: 30.0,
+      question: ['apple','horse','house','school']
     };
     Voice.onSpeechStart = this.onSpeechStart.bind(this);
     Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
@@ -56,7 +60,21 @@ _toggleModal = () =>
 
   componentWillUnmount() {
     Voice.destroy().then(Voice.removeAllListeners);
+    clearImmediate(this._interval);
   }
+
+  componentDidMount() {
+  this._interval = setInterval(() => {
+    console.log("happen")
+    this.setState({ timeLeft: this.state.timeLeft - 0.050 });
+    if(this.state.timeLeft <= 0) {
+      this.setState({ timeLeft: 0 });
+      clearImmediate(this._interval);
+    } 
+    
+  }, 50);
+}
+
 
   onSpeechStart(e) {
     this.setState({
@@ -96,6 +114,11 @@ _toggleModal = () =>
     });
 	
 	var ref = this;
+  var currentQuestion = this.state.question[this.state.currentQuestionIndex];
+  if(!(e.value[0].toLowerCase().indexOf(currentQuestion.toLowerCase()) >= 0)) {
+    this.setState({ partialResults: ["The word '" + currentQuestion + "' wasn't found in your sentence! Please try again!"]})
+    return;
+  }
 	
 	fetch('https://8xzzaark26.execute-api.ap-south-1.amazonaws.com/final?text=' + e.value[0], {
 	  method: 'GET',
@@ -108,6 +131,26 @@ _toggleModal = () =>
 		  grammar: response._bodyText
 		});
 		var correctedSentence = response._bodyText.substr(1, response._bodyText.length - 2 );
+
+
+    if(correctedSentence.toLowerCase().localeCompare(e.value[0].toLowerCase()) == 0) {
+      ref.setState({timeLeft: ref.state.timeLeft + 5});
+      ref.setState({score: ref.state.score + 1});
+       ref.setState({ partialResults: ["Correct answer! +1 points and +5 seconds!"]});
+
+       
+
+    } else {
+      ref.setState({timeLeft: ref.state.timeLeft - 5});
+       
+       
+       ref.setState({ partialResults: ["Wrong answer! -5 seconds!"]})
+    }
+
+    var next = Math.floor(Math.random() * ref.state.question.length);
+      ref.setState({currentQuestionIndex: next });
+      console.log(next);
+
 		var sentenceTempArray = ref.state.sentences;
               sentenceTempArray.push(correctedSentence);
               ref.setState({sentences: sentenceTempArray});
@@ -194,9 +237,12 @@ _sclear(){
 
   render() {
 
-    var sentencetemparray = this.state.sentences;
-    sentencetemparray.push(this.state.question[this.state.currentQuestionIndex]);
-    this.setState({sentences: sentencetemparray});
+
+
+
+    //var sentencetemparray = this.state.sentences;
+    //sentencetemparray.push(this.state.question[this.state.currentQuestionIndex]);
+    //this.setState({sentences: sentencetemparray});
     
     var pitchStart = "", pitchEnd = "", pitchString = " Listening ";
     if(typeof this.state.pitch !== 'undefined') {
@@ -209,6 +255,7 @@ _sclear(){
     
 
     pitchString = pitchStart + " Listening " + pitchEnd;
+
 
 	  var sentences = this.state.sentences;
 		var sentenceListRendered = sentences.map(function(name){
@@ -223,14 +270,21 @@ _sclear(){
     return (
       <View style={styles.container}>
 	  
-      <View style={{position: 'absolute',  top: 0, marginTop:'5%',height: '5%',width:'50%', backgroundColor: '#003955',borderRadius:10, justifyContent: 'center'}}>
+      
+         <View style={{position: 'absolute', top: 5, width:'90%', justifyContent: 'center'}}>
+           
+          <ProgressBarClassic progress={(this.state.timeLeft/30)*100}  valueStyle={'none'} />
+           </View>
+      <View style={{position: 'absolute',  top: 0, marginTop:'8%',height: '5%',width:'50%', backgroundColor: '#003955',borderRadius:10, justifyContent: 'center'}}>
 
 	
       <View >
+    
         <TouchableOpacity onPress={this._toggleModal}>
            <View style={ styles.instructionBox}>
           <Text style={styles.showtext}>INSTRUCTIONS</Text>
           </View>
+          
         </TouchableOpacity>
         <Modal isVisible={this.state.isModalVisible}
          animationIn="slideInLeft"
@@ -271,10 +325,13 @@ _sclear(){
       </View>
 
        <View>
+         
         <Text style={styles.instructions}>
-          
-          Score: 0
+          {"\n"}{"\n"}
+          Score: {this.state.score}{"\n"} Time Left: {this.state.timeLeft.toFixed(0)}{"\n"}
+          Current Question: {this.state.question[this.state.currentQuestionIndex]}
         </Text>
+          
         </View>
 
 
