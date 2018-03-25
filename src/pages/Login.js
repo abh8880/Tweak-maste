@@ -21,12 +21,12 @@ export default class Login extends Component<{}> {
   }
 
   componentDidMount() {
-    GoogleSignin.hasPlayServices({ autoResolve: true }).then(() => {
+    //GoogleSignin.hasPlayServices({ autoResolve: true }).then(() => {
       // play services are available. can now configure library
-    })
-      .catch((err) => {
-        console.log("Play services error", err.code, err.message);
-      })
+    //})
+      //.catch((err) => {
+        //console.log("Play services error", err.code, err.message);
+     // })
 
     GoogleSignin.configure({
       scopes: ["https://www.googleapis.com/auth/drive.readonly"], // what API you want to access on behalf of the user, default is email and profile

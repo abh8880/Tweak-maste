@@ -9,7 +9,8 @@ import {
   Dimensions,
   ScrollView,
   TouchableOpacity,
-  ToastAndroid
+  ToastAndroid,
+  BackHandler
 } from 'react-native';
 import Modal from "react-native-modal";
 import Voice from 'react-native-voice';
@@ -23,6 +24,7 @@ export default class SpeakingInstruction extends Component {
     isModalVisible: false
   };
 
+    
 _toggleModal = () =>
     this.setState({ isModalVisible: !this.state.isModalVisible });
 

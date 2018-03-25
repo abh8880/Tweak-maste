@@ -123,11 +123,21 @@ static navigationOptions = {
 
       finalcomp =
         <View key={index} style={[styles.deckCard, { backgroundColor: "#ffffff", borderRadius: 15, position: 'relative' }]}>
-           { less_status[index]==1 && <View style={styles.checkBox}>
+          
+           <View style={{flexDirection:'row'}}>
+           <View>
+          <Text style={styles.deckTitle}>{this.state.names[index]}</Text>
+          </View>
+
+          <View style={styles.checkBox}>
+           { less_status[index]==1 && <View>
              <Icon name="checkbox" size={32} color="#F0C71B" />
            </View>}
-          <Text style={styles.deckTitle}>{this.state.names[index]}</Text>
+          </View>
+          </View>
+          <View>
           <Text style={styles.deckSubTitle}>{this.state.content[index]}</Text>
+          </View>
           <View style={styles.deckButtonView}>
             <TouchableOpacity style={styles.deckButton} onPress={() => this._onPressDeckButton()}>
               <Text style={styles.deckButtonText}>Start </Text>
@@ -326,14 +336,19 @@ const styles = StyleSheet.create({
    
   },
   deckTitle:{
+    alignItems:'center',
+    marginTop:'15%',
     fontFamily: 'Museo 700',
-    fontSize: 35,
-    color: '#000000'
+    fontSize: 25,
+    color: '#000000',
+    
   },
   deckSubTitle:{
+    marginTop:'10%',
     fontFamily: 'Museo Sans_500',
-    fontSize: 25,
-    color: '#1c313a'
+    fontSize: 20,
+    color:'#7C0A02',
+    paddingLeft:30
   },
   originList:{
     fontFamily: 'Museo Sans Rounded_500',
@@ -343,7 +358,7 @@ const styles = StyleSheet.create({
   },
   deckButtonView: {
     flex: 1,
-    flexDirection: 'row',
+    marginTop:'10%',
     alignItems: 'flex-start',
     elevation: 50
   },
@@ -384,7 +399,9 @@ testTxt:{
   justifyContent:'center'
 },
 checkBox:{
-  margin:'5%',
-  alignSelf: 'flex-end',  
+ 
+  alignSelf:'flex-end',
+  marginBottom:'10%'
+
 }
 });
