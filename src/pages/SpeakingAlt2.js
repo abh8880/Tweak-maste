@@ -44,7 +44,7 @@ _toggleModal = () =>
       sentences: [],
       isModalVisible: false,
       currentQuestionIndex: 0,
-      timeLeft: 22.0,
+      timeLeft: 30.0,
       question: ['apple','horse','house','school']
     };
     Voice.onSpeechStart = this.onSpeechStart.bind(this);
@@ -67,7 +67,10 @@ _toggleModal = () =>
   this._interval = setInterval(() => {
     console.log("happen")
     this.setState({ timeLeft: this.state.timeLeft - 0.050 });
-    if(this.state.timeLeft <= 0) clearImmediate(this._interval);
+    if(this.state.timeLeft <= 0) {
+      this.setState({ timeLeft: 0 });
+      clearImmediate(this._interval);
+    } 
     
   }, 50);
 }
@@ -131,15 +134,22 @@ _toggleModal = () =>
 
 
     if(correctedSentence.toLowerCase().localeCompare(e.value[0].toLowerCase()) == 0) {
-      this.setState({timeLeft: this.state.timeLeft + 5});
-      this.setState({score: this.state.score + 1});
-       this.setState({ partialResults: ["Correct answer! +1 points and +5 seconds!"]});
-    } else {
-      this.setState({timeLeft: this.state.timeLeft - 5});
+      ref.setState({timeLeft: ref.state.timeLeft + 5});
+      ref.setState({score: ref.state.score + 1});
+       ref.setState({ partialResults: ["Correct answer! +1 points and +5 seconds!"]});
+
        
-       this.setState({ partialResults: ["Wrong answer! -5 seconds!"]})
+
+    } else {
+      ref.setState({timeLeft: ref.state.timeLeft - 5});
+       
+       
+       ref.setState({ partialResults: ["Wrong answer! -5 seconds!"]})
     }
 
+    var next = Math.floor(Math.random() * ref.state.question.length);
+      ref.setState({currentQuestionIndex: next });
+      console.log(next);
 
 		var sentenceTempArray = ref.state.sentences;
               sentenceTempArray.push(correctedSentence);
@@ -318,7 +328,7 @@ _sclear(){
          
         <Text style={styles.instructions}>
           {"\n"}{"\n"}
-          Score: {this.state.score}{"\n"} TimeLeft: {this.state.timeLeft}{"\n"}
+          Score: {this.state.score}{"\n"} Time Left: {this.state.timeLeft.toFixed(0)}{"\n"}
           Current Question: {this.state.question[this.state.currentQuestionIndex]}
         </Text>
           
