@@ -45,7 +45,8 @@ _toggleModal = () =>
       isModalVisible: false,
       currentQuestionIndex: 0,
       timeLeft: 30.0,
-      question: ['apple','horse','house','school']
+      question: ['apple','horse','house','school', 'young', 'world', 'week'],
+      chatMessages: [{ text: "Hey there!", type: 0 }]
     };
     Voice.onSpeechStart = this.onSpeechStart.bind(this);
     Voice.onSpeechRecognized = this.onSpeechRecognized.bind(this);
@@ -64,6 +65,9 @@ _toggleModal = () =>
   }
 
   componentDidMount() {
+ 
+    
+  this.generateNewBotMessage();   
   this._interval = setInterval(() => {
     console.log("happen")
     this.setState({ timeLeft: this.state.timeLeft - 0.050 });
@@ -75,6 +79,18 @@ _toggleModal = () =>
   }, 50);
 }
 
+  generateNewBotMessage() {
+    var next = Math.floor(Math.random() * this.state.question.length);
+    this.setState({currentQuestionIndex: next });
+    this.makeMessage("Make a sentence with the word '" + this.state.question[next] + "'!", 0);
+  }
+
+  makeMessage(message, mtype) {
+    var chatMessagesArray = this.state.chatMessages;
+    chatMessagesArray.push({ text: message, type: mtype});
+    this.setState({ chatMessages: chatMessagesArray });
+     //this.refs.scrollView.scrollToEnd();
+  }
 
   onSpeechStart(e) {
     this.setState({
@@ -115,8 +131,12 @@ _toggleModal = () =>
 	
 	var ref = this;
   var currentQuestion = this.state.question[this.state.currentQuestionIndex];
+
+  this.makeMessage(e.value[0], 1);
+
   if(!(e.value[0].toLowerCase().indexOf(currentQuestion.toLowerCase()) >= 0)) {
-    this.setState({ partialResults: ["The word '" + currentQuestion + "' wasn't found in your sentence! Please try again!"]})
+    //this.setState({ partialResults: ["The word '" + currentQuestion + "' wasn't found in your sentence! Please try again!"]})
+    this.makeMessage("The word '" + currentQuestion + "' wasn't found in your sentence! Please try again!", 0);
     return;
   }
 	
@@ -136,20 +156,23 @@ _toggleModal = () =>
     if(correctedSentence.toLowerCase().localeCompare(e.value[0].toLowerCase()) == 0) {
       ref.setState({timeLeft: ref.state.timeLeft + 5});
       ref.setState({score: ref.state.score + 1});
-       ref.setState({ partialResults: ["Correct answer! +1 points and +5 seconds!"]});
-
+       //ref.setState({ partialResults: ["Correct answer! +1 points and +5 seconds!"]});
+       ref.makeMessage("Correct answer! +1 points and +5 seconds!", 0);
        
 
     } else {
       ref.setState({timeLeft: ref.state.timeLeft - 5});
        
        
-       ref.setState({ partialResults: ["Wrong answer! -5 seconds!"]})
+       //ref.setState({ partialResults: ["Wrong answer! -5 seconds!"]})
+       ref.makeMessage("Wrong answer! -5 seconds!", 0);
+       ref.makeMessage("The corrected sentence is: " + correctedSentence, 0);
     }
 
-    var next = Math.floor(Math.random() * ref.state.question.length);
-      ref.setState({currentQuestionIndex: next });
-      console.log(next);
+    //var next = Math.floor(Math.random() * ref.state.question.length);
+     // ref.setState({currentQuestionIndex: next });
+      //console.log(next);
+      ref.generateNewBotMessage();
 
 		var sentenceTempArray = ref.state.sentences;
               sentenceTempArray.push(correctedSentence);
@@ -257,6 +280,12 @@ _sclear(){
     pitchString = pitchStart + " Listening " + pitchEnd;
 
 
+    var chatMessages = this.state.chatMessages;
+		var chatListRendered = chatMessages.map(function(name){
+			return <Text style={name.type == 0 ? pstyles.chatBotTextView : pstyles.chatUserTextView} key={name+Math.random()}>{name.text}</Text>;
+        })
+
+
 	  var sentences = this.state.sentences;
 		var sentenceListRendered = sentences.map(function(name){
 			return <Text style={pstyles.sentenceTextView} key={name+Math.random()}>{name}.</Text>;
@@ -327,9 +356,7 @@ _sclear(){
        <View>
          
         <Text style={styles.instructions}>
-          {"\n"}{"\n"}
           Score: {this.state.score}{"\n"} Time Left: {this.state.timeLeft.toFixed(0)}{"\n"}
-          Current Question: {this.state.question[this.state.currentQuestionIndex]}
         </Text>
           
         </View>
@@ -350,11 +377,10 @@ _sclear(){
 		
         <Text
           style={styles.stat}>
-          
         </Text>
         
 		
-      <ScrollView showsVerticalScrollIndicator={true} style={{flexGrow:0.01, height:100, marginBottom: 15,}}>
+      <ScrollView showsVerticalScrollIndicator={true} style={{flexGrow:0.01, height:50, marginBottom: 0,}}>
         {this.state.partialResults.map((result, index) => {
           return (
             <Text
@@ -366,17 +392,15 @@ _sclear(){
         })}
 		</ScrollView>
 		
-	
-		
-		
-		 <ScrollView style={pstyles.scrollViewGR}
+	  <ScrollView ref="scrollView" style={pstyles.scrollViewChat}  onContentSizeChange={(width,height) => this.refs.scrollView.scrollTo({y:height})}
      showsVerticalScrollIndicator={true}>
     <View>
    
-				{sentenceListRendered}
-       
+				{chatListRendered}
+        
         </View>
-		 </ScrollView>
+		 </ScrollView>  
+		
 		
 
         <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
@@ -390,13 +414,7 @@ _sclear(){
             source={require('../images/mic3.png')}
           />
 
-    <TouchableOpacity onPress={()=>this._sclear()}>
-	   <View style={styles.clearButton}>
-     <Text style={styles.clearText}>CLEAR</Text>
-     </View>
-		</TouchableOpacity>
-		<View style={{display:'none', position: 'absolute', left: 0, right: 0, bottom: 0, height: '10%', backgroundColor: '#840f06', justifyContent: 'center'}}><Text style={styles.innerkek}>{`Corrected Grammar: ${this.state.grammar}`}</Text></View>
-
+    
 
 		
       </View>
@@ -406,7 +424,23 @@ _sclear(){
   }
 }
 
+/*
+<TouchableOpacity onPress={()=>this._sclear()}>
+	   <View style={styles.clearButton}>
+     <Text style={styles.clearText}>CLEAR</Text>
+     </View>
+		</TouchableOpacity>
+		<View style={{display:'none', position: 'absolute', left: 0, right: 0, bottom: 0, height: '10%', backgroundColor: '#840f06', justifyContent: 'center'}}><Text style={styles.innerkek}>{`Corrected Grammar: ${this.state.grammar}`}</Text></View>
+
+*/
+
 const pstyles = StyleSheet.create({
+  scrollViewChat: {
+    borderRadius:5,
+    height: 100,
+    width:'90%',
+   flexGrow:0.5
+    },
   scrollViewGR: {
     backgroundColor:'#ffffff',
     borderRadius:5,
@@ -427,6 +461,26 @@ const pstyles = StyleSheet.create({
 		margin: 2,
 		padding: 4,
 		borderRadius:5,
+	},
+  chatBotTextView: {
+		backgroundColor: '#ece5dd',
+		color: 'orange',
+    margin:2,
+		marginRight: '50%',
+		padding: 4,
+		borderTopRightRadius:5,
+    borderBottomRightRadius:5,
+    borderBottomLeftRadius:5,
+	},
+  chatUserTextView: {
+		backgroundColor: '#dcf8c6',
+		color: 'green',
+    margin:2,
+		marginLeft: '50%',
+		padding: 4,
+		borderTopLeftRadius:5,
+    borderBottomLeftRadius:5,
+    borderBottomRightRadius:5,
 	}
 });
 
