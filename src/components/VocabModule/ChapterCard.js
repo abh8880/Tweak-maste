@@ -27,21 +27,21 @@ export default class ChapterCard extends Component {
   }
 
   navigateToDeckPage = (chapter) => {
-    Actions.deck({
-      unit: this.props.data.unit,
-      chapter: chapter
-    });
+    // Actions.deck({
+    //   unit: this.props.data.unit,
+    //   chapter: chapter
+    // });
+    alert(chapter);
   }
 
    componentDidMount() {
-      
       BackHandler.addEventListener('hardwareBackPress', this.handleBackButton);
     }
-  
+
     componentWillUnmount() {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
-  
+
     handleBackButton = () =>{
        Actions.courses();
       return true;
@@ -52,98 +52,25 @@ export default class ChapterCard extends Component {
   render() {
     return (
       <View style={styles.cardBody}>
-        <View style={styles.ChapterRow1}>
-         <TouchableOpacity  onPress={() => {this.navigateToDeckPage(1)}}>
-        <View style={styles.box1}>
-               <View style={{ alignSelf: 'flex-end', marginTop:'5%',marginRight:'5%'}}>  
-                <Icon name="checkbox" size={30} color="#F0C71B" />
-                </View>
-
-            <View style={styles.insideBox}>
-               <Image
-                  source={require('../../../icons/9.png')}
-                  style={{width: 100, height: 100}}
-                />
+        <TouchableOpacity  onPress={() => {this.navigateToDeckPage(this.props.chapterNo)}}>
+          <View style={styles.box}>
+            <View style={{ alignSelf: 'flex-end', marginTop:'5%',marginRight:'5%'}}>
+              <Icon name="checkbox" size={30} color="#F0C71B" />
             </View>
 
-              <View style={styles.insideTextBox}>
-              <Text style={styles.Text}>Chapter 1</Text>
-            </View>
-           
-        </View>
-        </TouchableOpacity>
-
-
-
-          <TouchableOpacity onPress={() => {this.navigateToDeckPage(2)}}>
-        <View style={styles.box2}>
-            <View style={{ alignSelf: 'flex-end', marginTop:'5%',marginRight:'5%'}}>  
-                <Icon name="checkbox" size={30} color="#F0C71B" />
-                </View>
-
             <View style={styles.insideBox}>
-               <Image
-                  source={require('../../../icons/8.png')}
-                  style={{width: 100, height: 100}}
-                />
+              <Image
+                source={this.props.image}
+                style={{width: 100, height: 100}}
+              />
             </View>
 
             <View style={styles.insideTextBox}>
-              <Text style={styles.Text}>Chapter 2</Text>
+              <Text style={styles.Text}>Chapter {this.props.chapterNo}</Text>
             </View>
 
-        </View>
-        </TouchableOpacity>
-        </View>
-           <View
-              style={{
-                borderBottomColor: '#ececec',
-                borderBottomWidth: 10
-              }}
-            />
-
-
-         <View style={styles.ChapterRow2}>
-        <TouchableOpacity  onPress={() => {this.navigateToDeckPage(3)}}>
-        <View style={styles.box1}>
-               <View style={{ alignSelf: 'flex-end', marginTop:'5%',marginRight:'5%'}}>  
-                <Icon name="checkbox" size={30} color="#F0C71B" />
-                </View>
-
-          <View style={styles.insideBox}>
-                <View>
-                     <Image
-                        source={require('../../../icons/8.png')}
-                        style={{width: 100, height: 100}}
-                      />
-                </View>
-
-               
           </View>
-
-           <View style={styles.insideTextBox}>
-             <Text style={styles.Text}>Chapter 3</Text>
-            </View>
-        </View>
         </TouchableOpacity>
-
-          <TouchableOpacity  onPress={() => {this.navigateToDeckPage(3)}}>
-        <View style={styles.box2}>
-                <View style={{ alignSelf: 'flex-end', marginTop:'5%',marginRight:'5%'}}>  
-                <Icon name="checkbox" size={30} color="#F0C71B" />
-                </View>
-           <View style={styles.insideBox}>
-            <Image
-                  source={require('../../../icons/8.png')}
-                  style={{width: 105, height: 110}}
-                />
-          </View>
-           <View style={styles.insideTextBox}>
-              <Text style={styles.Text}>Chapter 4</Text>
-            </View>
-        </View>
-        </TouchableOpacity>
-        </View>
       </View>
     );
   }
@@ -151,50 +78,26 @@ export default class ChapterCard extends Component {
 
 const styles = StyleSheet.create({
   cardBody:{
-    flex: 1,
-    margin:'15%',
-    backgroundColor: '#ffffff',
+    margin:'3%',
+    backgroundColor: '#fafafa',
     borderRadius: 5,
-    alignSelf:'center',
-    elevation:15
+    elevation:7
   },
- 
-  ChapterRow1:{
-    flexDirection:'row',
-     alignItems:'center',
-       backgroundColor:'#ececec'
-  },
-  ChapterRow2:{
-    flexDirection:'row',
-     alignItems:'center',
-     backgroundColor:'#ececec'
-      
-  },
-  box1:{
-    width:width/2 - width/20,
-    backgroundColor:'white',
+  box:{
+    width:width/2.2 - width/20,
+    backgroundColor: '#fafafa',
     height:height/3,
     marginRight:'2%',
     borderRadius:5,
-     alignItems:'center',
-     
-  },
-  box2:{
-   width:width/2 - width/20,
-    backgroundColor:'white',
-    height:height/3,
-    marginLeft:'2%',
-     borderRadius:5,
-      alignItems:'center',
-      
+    alignItems:'center',
   },
   insideBox:{
-     width: 110,
+    width: 110,
     height: 110,
     borderRadius: 100,
-    backgroundColor:'white',
+    backgroundColor: '#fafafa',
     alignItems:'center',
-    flexDirection:'row'
+    flexDirection:'row',
   },
   insideTextBox:{
     marginTop:'10%'
