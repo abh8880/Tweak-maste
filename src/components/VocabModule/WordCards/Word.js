@@ -32,7 +32,7 @@ export default class Word extends Component {
   constructor(props) {
     super(props)
 
-    const { unit, chapter, deck } = this.props;
+    const { chapter, deck } = this.props;
 
     this.state = {
       flip: false,
@@ -59,7 +59,6 @@ export default class Word extends Component {
       masteredProgress: 0,
       currentlyLearningProgress: 0,
       needRevProgress: 0,
-      unit: unit,
       chapter: chapter,
       deck: deck,
       mode: -1,
@@ -76,7 +75,7 @@ export default class Word extends Component {
 
   componentWillMount() {
     console.log('over here');
-    console.log(this.state.unit+" "+this.state.chapter+" "+this.state.deck);
+    console.log(this.state.chapter+" "+this.state.deck);
     this.initialDataFetch();
   }
 
@@ -86,8 +85,7 @@ export default class Word extends Component {
     db.transaction((tx) => {
       console.log("transac start");
       // this.setState({ word : "lol" });
-      tx.executeSql('SELECT * FROM current WHERE unit=? AND chapter=? AND deck=?', [
-          this.state.unit,
+      tx.executeSql('SELECT * FROM current WHERE chapter=? AND deck=?', [
           this.state.chapter,
           this.state.deck,
         ],
@@ -98,7 +96,6 @@ export default class Word extends Component {
               console.log("deck completed");
               //navigate to completed deck page
               Actions.deckComplete({
-                unit: this.state.unit,
                 chapter: this.state.chapter,
                 deck: this.state.deck,
               });
@@ -117,9 +114,8 @@ export default class Word extends Component {
               if(this.state.type == 'origin') {     // if word type is origin get details of the origin word
                 db.transaction((tx) => {
                   console.log("get details of the origin word");
-                  tx.executeSql('SELECT * FROM origin WHERE origin_word=? AND unit=? AND chapter=? AND deck=? LIMIT 1', [
+                  tx.executeSql('SELECT * FROM origin WHERE origin_word=? AND chapter=? AND deck=? LIMIT 1', [
                     this.state.word,
-                    this.state.unit,
                     this.state.chapter,
                     this.state.deck
                   ],
@@ -142,9 +138,8 @@ export default class Word extends Component {
               else{                         // if word type is derived get details of the derived word
                 db.transaction((tx) => {
                   console.log("get details of the derived word");
-                  tx.executeSql('SELECT * FROM derived WHERE derived_word = ? AND unit=? AND chapter=? AND deck=? LIMIT 1', [
+                  tx.executeSql('SELECT * FROM derived WHERE derived_word = ? AND chapter=? AND deck=? LIMIT 1', [
                     this.state.word,
-                    this.state.unit,
                     this.state.chapter,
                     this.state.deck
                   ],
@@ -171,8 +166,7 @@ export default class Word extends Component {
           else{                               //entry doesn't exist so get the first origin word of the deck
             db.transaction((tx) => {
               console.log("entry doesn't exist so get the first origin word of the deck");
-              tx.executeSql('SELECT * FROM origin WHERE unit=? AND chapter=? AND deck =? LIMIT 1',[
-                this.state.unit,
+              tx.executeSql('SELECT * FROM origin WHERE chapter=? AND deck =? LIMIT 1',[
                 this.state.chapter,
                 this.state.deck
               ],
@@ -188,10 +182,9 @@ export default class Word extends Component {
                 })
                 //update current table
                 db.transaction((tx) => {
-                  tx.executeSql('INSERT INTO current (word,type,unit,chapter,deck) VALUES (?,?,?,?,?)', [
+                  tx.executeSql('INSERT INTO current (word,type,chapter,deck) VALUES (?,?,?,?,?)', [
                     selectResult.rows.item(0).origin_word,
                     'origin',
-                    this.state.unit,
                     this.state.chapter,
                     this.state.deck,
                   ],
@@ -237,8 +230,7 @@ export default class Word extends Component {
   seeDerivedWords = () => {
     db.transaction((tx) => {
       //change database value of viewed to 1
-      tx.executeSql('UPDATE origin SET viewed=1 WHERE unit=? AND chapter=? AND deck=? AND origin_word=?', [
-        this.state.unit,
+      tx.executeSql('UPDATE origin SET viewed=1 WHERE chapter=? AND deck=? AND origin_word=?', [
         this.state.chapter,
         this.state.deck,
         this.state.word,
@@ -248,8 +240,7 @@ export default class Word extends Component {
     });
     //get the first derived word
     db.transaction((tx) => {
-      tx.executeSql('SELECT derived_word FROM derived WHERE unit=? AND chapter=? AND deck=? AND origin_w=? LIMIT 1', [
-        this.state.unit,
+      tx.executeSql('SELECT derived_word FROM derived WHERE chapter=? AND deck=? AND origin_w=? LIMIT 1', [
         this.state.chapter,
         this.state.deck,
         this.state.word,
@@ -258,10 +249,9 @@ export default class Word extends Component {
           let word = selectResult.rows.item(0).derived_word;
           //update current table
           db.transaction((tx) => {
-            tx.executeSql('UPDATE current SET word=?,type=? WHERE unit=? AND chapter=? AND deck=?', [
+            tx.executeSql('UPDATE current SET word=?,type=? WHERE chapter=? AND deck=?', [
               word,
               'derived',
-              this.state.unit,
               this.state.chapter,
               this.state.deck,
             ],
@@ -279,8 +269,7 @@ export default class Word extends Component {
     console.log("progress card data fetch function entered");
     db.transaction((tx) => {
       console.log("to get totalwords");
-      tx.executeSql('SELECT COUNT(*) as noOfTotalWords FROM derived WHERE unit=? AND chapter=? AND deck=?', [
-        this.state.unit,
+      tx.executeSql('SELECT COUNT(*) as noOfTotalWords FROM derived WHERE chapter=? AND deck=?', [
         this.state.chapter,
         this.state.deck
       ],
@@ -292,8 +281,7 @@ export default class Word extends Component {
     });
     db.transaction((tx) => {
       console.log("to get viewed words");
-      tx.executeSql('SELECT COUNT(*) as noOfViewed FROM derived WHERE viewed=1 AND unit=? AND chapter=? AND deck=?', [
-        this.state.unit,
+      tx.executeSql('SELECT COUNT(*) as noOfViewed FROM derived WHERE viewed=1 AND chapter=? AND deck=?', [
         this.state.chapter,
         this.state.deck
       ],
@@ -307,8 +295,7 @@ export default class Word extends Component {
     });
     db.transaction((tx) => {
       console.log("to get mastered words");
-      tx.executeSql('SELECT COUNT(*) as noOfMastered FROM derived WHERE status=1 AND unit=? AND chapter=? AND deck=?', [
-        this.state.unit,
+      tx.executeSql('SELECT COUNT(*) as noOfMastered FROM derived WHERE status=1 AND chapter=? AND deck=?', [
         this.state.chapter,
         this.state.deck
       ],
@@ -322,8 +309,7 @@ export default class Word extends Component {
     });
     db.transaction((tx) => {
       console.log("to get currently learning words");
-      tx.executeSql('SELECT COUNT(*) as noOfCurrentlyLearning FROM derived WHERE status=2 AND unit=? AND chapter=? AND deck=?', [
-        this.state.unit,
+      tx.executeSql('SELECT COUNT(*) as noOfCurrentlyLearning FROM derived WHERE status=2 AND chapter=? AND deck=?', [
         this.state.chapter,
         this.state.deck
       ],
@@ -337,8 +323,7 @@ export default class Word extends Component {
     });
     db.transaction((tx) => {
       console.log("to get need review words");
-      tx.executeSql('SELECT COUNT(*) as noOfNeedReview FROM derived WHERE status=3 AND unit=? AND chapter=? AND deck=?', [
-        this.state.unit,
+      tx.executeSql('SELECT COUNT(*) as noOfNeedReview FROM derived WHERE status=3 AND chapter=? AND deck=?', [
         this.state.chapter,
         this.state.deck
       ],
@@ -357,8 +342,7 @@ export default class Word extends Component {
       // update the value of viewed in the table where word = current word
       db.transaction((tx) => {
         //change database value of viewed to 1
-        tx.executeSql('UPDATE derived SET viewed=1 WHERE unit=? AND chapter=? AND deck=? AND derived_word=?', [
-          this.state.unit,
+        tx.executeSql('UPDATE derived SET viewed=1 WHERE chapter=? AND deck=? AND derived_word=?', [
           this.state.chapter,
           this.state.deck,
           this.state.word,
@@ -389,8 +373,7 @@ export default class Word extends Component {
         //update new status to mastered
         db.transaction((tx) => {
           //change database value of status to 1 i.e. mastered
-          tx.executeSql('UPDATE derived SET status=1 WHERE unit=? AND chapter=? AND deck=? AND derived_word=?', [
-            this.state.unit,
+          tx.executeSql('UPDATE derived SET status=1 WHERE chapter=? AND deck=? AND derived_word=?', [
             this.state.chapter,
             this.state.deck,
             this.state.word,
@@ -405,8 +388,7 @@ export default class Word extends Component {
         console.log("update to currrently learning");
         db.transaction((tx) => {
           //change database value of status to 2 i.e. currently learning
-          tx.executeSql('UPDATE derived SET status=2 WHERE unit=? AND chapter=? AND deck=? AND derived_word=?', [
-            this.state.unit,
+          tx.executeSql('UPDATE derived SET status=2 WHERE chapter=? AND deck=? AND derived_word=?', [
             this.state.chapter,
             this.state.deck,
             this.state.word,
@@ -428,8 +410,7 @@ export default class Word extends Component {
         console.log("update to need review ");
         db.transaction((tx) => {
           //change database value of status to 3 i.e. need review
-          tx.executeSql('UPDATE derived SET status=3 WHERE unit=? AND chapter=? AND deck=? AND derived_word=?', [
-            this.state.unit,
+          tx.executeSql('UPDATE derived SET status=3 WHERE chapter=? AND deck=? AND derived_word=?', [
             this.state.chapter,
             this.state.deck,
             this.state.word,
@@ -445,8 +426,7 @@ export default class Word extends Component {
     if(this.state.mode == -1){
       //normal mode
       db.transaction((tx) => {
-        tx.executeSql('SELECT * FROM derived WHERE unit=? AND chapter=? AND deck=? AND origin_w=? AND id>? LIMIT 1', [
-          this.state.unit,
+        tx.executeSql('SELECT * FROM derived WHERE chapter=? AND deck=? AND origin_w=? AND id>? LIMIT 1', [
           this.state.chapter,
           this.state.deck,
           this.state.originWord,
@@ -457,10 +437,9 @@ export default class Word extends Component {
               let word = selectResult.rows.item(0).derived_word;
               //update current table
               db.transaction((tx) => {
-                tx.executeSql('UPDATE current SET word=?,type=? WHERE unit=? AND chapter=? AND deck=?', [
+                tx.executeSql('UPDATE current SET word=?,type=? WHERE chapter=? AND deck=?', [
                   word,
                   'derived',
-                  this.state.unit,
                   this.state.chapter,
                   this.state.deck,
                 ],
@@ -473,8 +452,7 @@ export default class Word extends Component {
             else{
               //check if next word is origin or word from next deck
               db.transaction((tx) => {
-                tx.executeSql('SELECT * FROM derived WHERE unit=? AND chapter=? AND deck=? AND id>? LIMIT 1', [
-                  this.state.unit,
+                tx.executeSql('SELECT * FROM derived WHERE chapter=? AND deck=? AND id>? LIMIT 1', [
                   this.state.chapter,
                   this.state.deck,
                   this.state.wordId
@@ -483,10 +461,9 @@ export default class Word extends Component {
                     if(selectCheckResult.rows.length > 0){
                       //update current table with next origin word
                       db.transaction((tx) => {
-                        tx.executeSql('UPDATE current SET word=?,type=? WHERE unit=? AND chapter=? AND deck=?', [
+                        tx.executeSql('UPDATE current SET word=?,type=? WHERE chapter=? AND deck=?', [
                           selectCheckResult.rows.item(0).origin_w,
                           'origin',
-                          this.state.unit,
                           this.state.chapter,
                           this.state.deck,
                         ],
@@ -499,8 +476,7 @@ export default class Word extends Component {
                     else{
                       //check if all are mastered
                       db.transaction((tx) => {
-                        tx.executeSql('SELECT COUNT(*) as noOfMastered FROM derived WHERE status=1 AND unit=? AND chapter=? AND deck=?', [
-                          this.state.unit,
+                        tx.executeSql('SELECT COUNT(*) as noOfMastered FROM derived WHERE status=1 AND chapter=? AND deck=?', [
                           this.state.chapter,
                           this.state.deck
                         ],
@@ -508,15 +484,13 @@ export default class Word extends Component {
                           if(selectMasteredResult.rows.item(0).noOfMastered == this.state.totalWords){
                             //update current table mode to 1
                             db.transaction((tx) => {
-                              tx.executeSql('UPDATE current SET mode=1 WHERE unit=? AND chapter=? AND deck=?', [
-                                this.state.unit,
+                              tx.executeSql('UPDATE current SET mode=1 WHERE chapter=? AND deck=?', [
                                 this.state.chapter,
                                 this.state.deck,
                               ],
                                 (tx, updateResult) => {
                                   //navigate to completed deck page
                                   Actions.deckComplete({
-                                    unit: this.state.unit,
                                     chapter: this.state.chapter,
                                     deck: this.state.deck,
                                   });
@@ -527,21 +501,18 @@ export default class Word extends Component {
                           else{
                             //select word with max status where status > 1
                             db.transaction((tx) => {
-                              tx.executeSql('SELECT derived_word FROM derived WHERE status=(SELECT MAX(status) FROM derived WHERE unit=? AND chapter=? AND deck=? AND status>1) AND unit=? AND chapter=? AND deck=? LIMIT 1', [
-                                this.state.unit,
+                              tx.executeSql('SELECT derived_word FROM derived WHERE status=(SELECT MAX(status) FROM derived WHERE chapter=? AND deck=? AND status>1) AND chapter=? AND deck=? LIMIT 1', [
                                 this.state.chapter,
                                 this.state.deck,
-                                this.state.unit,
                                 this.state.chapter,
                                 this.state.deck
                               ],
                               (tx, selectReShowResult) => {
                                 //update current table with word to be reshown and update mode to reshow i.e 0
                                 db.transaction((tx) => {
-                                  tx.executeSql('UPDATE current SET word=?,type=?,mode=0 WHERE unit=? AND chapter=? AND deck=?', [
+                                  tx.executeSql('UPDATE current SET word=?,type=?,mode=0 WHERE chapter=? AND deck=?', [
                                     selectReShowResult.rows.item(0).derived_word,
                                     'derived',
-                                    this.state.unit,
                                     this.state.chapter,
                                     this.state.deck
                                   ],
@@ -568,8 +539,7 @@ export default class Word extends Component {
 
       //check if all are mastered
       db.transaction((tx) => {
-        tx.executeSql('SELECT COUNT(*) as noOfMastered FROM derived WHERE status=1 AND unit=? AND chapter=? AND deck=?', [
-          this.state.unit,
+        tx.executeSql('SELECT COUNT(*) as noOfMastered FROM derived WHERE status=1 AND chapter=? AND deck=?', [,
           this.state.chapter,
           this.state.deck
         ],
@@ -578,15 +548,13 @@ export default class Word extends Component {
             //if yes
             //update current table mode to 1
             db.transaction((tx) => {
-              tx.executeSql('UPDATE current SET mode=1 WHERE unit=? AND chapter=? AND deck=?', [
-                this.state.unit,
+              tx.executeSql('UPDATE current SET mode=1 WHERE chapter=? AND deck=?', [
                 this.state.chapter,
                 this.state.deck,
               ],
                 (tx, updateResult) => {
                   //navigate to deck mastered page
                   Actions.deckComplete({
-                    unit: this.state.unit,
                     chapter: this.state.chapter,
                     deck: this.state.deck,
                   });
@@ -597,13 +565,11 @@ export default class Word extends Component {
             //if no
             //select word with max status where status > 1 and id> current id
             db.transaction((tx) => {
-              tx.executeSql('SELECT derived_word FROM derived WHERE id>? AND unit=? AND chapter=? AND deck=? AND status=(SELECT MAX(status) FROM derived WHERE id>? AND unit=? AND chapter=? AND deck=? AND status>1) LIMIT 1', [
+              tx.executeSql('SELECT derived_word FROM derived WHERE id>? AND chapter=? AND deck=? AND status=(SELECT MAX(status) FROM derived WHERE id>? AND chapter=? AND deck=? AND status>1) LIMIT 1', [
                 this.state.wordId,
-                this.state.unit,
                 this.state.chapter,
                 this.state.deck,
                 this.state.wordId,
-                this.state.unit,
                 this.state.chapter,
                 this.state.deck
               ],
@@ -612,10 +578,9 @@ export default class Word extends Component {
                   //if word found
                   //update current table with word to be reshown
                   db.transaction((tx) => {
-                    tx.executeSql('UPDATE current SET word=?,type=? WHERE unit=? AND chapter=? AND deck=?', [
+                    tx.executeSql('UPDATE current SET word=?,type=? WHERE chapter=? AND deck=?', [
                       selectReShowResult.rows.item(0).derived_word,
                       'derived',
-                      this.state.unit,
                       this.state.chapter,
                       this.state.deck
                     ],
@@ -629,21 +594,18 @@ export default class Word extends Component {
                   //if word not found
                   //select word with max status where status > 1
                   db.transaction((tx) => {
-                    tx.executeSql('SELECT derived_word FROM derived WHERE unit=? AND chapter=? AND deck=? AND status=(SELECT MAX(status) FROM derived WHERE unit=? AND chapter=? AND deck=?) LIMIT 1', [
-                      this.state.unit,
+                    tx.executeSql('SELECT derived_word FROM derived WHERE chapter=? AND deck=? AND status=(SELECT MAX(status) FROM derived WHERE chapter=? AND deck=?) LIMIT 1', [
                       this.state.chapter,
                       this.state.deck,
-                      this.state.unit,
                       this.state.chapter,
                       this.state.deck
                     ],
                     (tx, selectReShowNewResult) => {
                       //update current table with word to be reshown and update mode to reshow i.e 0
                       db.transaction((tx) => {
-                        tx.executeSql('UPDATE current SET word=?,type=? WHERE unit=? AND chapter=? AND deck=?', [
+                        tx.executeSql('UPDATE current SET word=?,type=? WHERE chapter=? AND deck=?', [
                           selectReShowNewResult.rows.item(0).derived_word,
                           'derived',
-                          this.state.unit,
                           this.state.chapter,
                           this.state.deck
                         ],

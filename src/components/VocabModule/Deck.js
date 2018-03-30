@@ -32,9 +32,8 @@ export default class Deck extends Component {
 
   constructor(props) {
     super(props)
-    const {unit ,chapter} = this.props;
+    const {chapter} = this.props;
     this.state = {
-      unit: unit,
       chapter: chapter,
       // noOfCards: ['', '', ''],
       noOfDecks: [''],
@@ -45,7 +44,7 @@ export default class Deck extends Component {
         [{ key: 4, word: 'lol' }]
       ]
     }
-    // alert(unit+" "+chapter);
+    // alert(chapter);
 
   }
 
@@ -53,7 +52,7 @@ export default class Deck extends Component {
     //get no of decks from the current chapter
     var noOfDecks;
     db.transaction((tx) => {
-      tx.executeSql('SELECT COUNT(DISTINCT deck) AS noOfDecks FROM origin WHERE unit=? AND chapter=?', [this.state.unit,this.state.chapter], (tx, countResult) => {
+      tx.executeSql('SELECT COUNT(DISTINCT deck) AS noOfDecks FROM origin WHERE chapter=?', [this.state.chapter], (tx, countResult) => {
 
         noOfDecks = countResult.rows.item(0).noOfDecks;
         console.log("no of decks = " + noOfDecks);
@@ -79,7 +78,7 @@ export default class Deck extends Component {
           console.log('over here mate');
           db.transaction((tx) => {
             console.log('inside transac');
-            tx.executeSql('SELECT origin_word FROM origin WHERE unit=? AND chapter=? AND deck=?', [this.state.unit, this.state.chapter, i + 1], (tx,selectResult) => {
+            tx.executeSql('SELECT origin_word FROM origin WHERE chapter=? AND deck=?', [this.state.chapter, i + 1], (tx,selectResult) => {
 
               console.log("inside callback " + i);
               tempArray.push('x');
@@ -182,8 +181,7 @@ export default class Deck extends Component {
     db.transaction((tx) => {
       console.log("inside check for deck complete in deck page");
       // this.setState({ word : "lol" });
-      tx.executeSql('SELECT * FROM current WHERE unit=? AND chapter=? AND deck=?', [
-        this.state.unit,
+      tx.executeSql('SELECT * FROM current WHERE chapter=? AND deck=?', [
         this.state.chapter,
         currentDeck+1,
       ],
@@ -195,14 +193,12 @@ export default class Deck extends Component {
               console.log("deck completed in deck page");
               //navigate to completed deck page
               Actions.deckComplete({
-                unit: this.state.unit,
                 chapter: this.state.chapter,
                 deck: currentDeck + 1,
               });
             }
             else{
               Actions.word({
-                unit: this.state.unit,
                 chapter: this.state.chapter,
                 deck: currentDeck + 1,
               });
@@ -210,7 +206,6 @@ export default class Deck extends Component {
           }
           else{
             Actions.word({
-              unit: this.state.unit,
               chapter: this.state.chapter,
               deck: currentDeck + 1,
             });

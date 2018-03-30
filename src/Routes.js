@@ -146,9 +146,9 @@ export default class Routes extends Component {
         {this.renderTitle(source)}
         {source == 'Courses'? this.NavigatorMenu() : null }
          {source == 'Speaking'? this.NavigatorMenu() : null }
-         
-          
-        
+
+
+
       </View>
     )
   }
@@ -186,17 +186,17 @@ export default class Routes extends Component {
 
               <Scene key="speakingtabtwo" title="Speaking" icon={TabIcon} navBar={() => this.createNavBar('Speaking', 'nope')} >
                 <Scene key="speaking" title="Speaking" component={Speaking} hideNavBar
-             />  
+             />
             </Scene>
 
-            
+
 
           {/*  VocabModule pages start  */}
             <Scene key="vocabHome"
               component={VocabHome}
-              title="Units"
+              title="Chapters"
               //custom navbar ⭝
-              navBar={() => this.createNavBar('Units', 'home')} //params => (sourcePage,destinationPage/nope)
+              navBar={() => this.createNavBar('Chapters', 'home')} //params => (sourcePage,destinationPage/nope)
             />
 
             <Scene key="deck"
@@ -219,7 +219,7 @@ export default class Routes extends Component {
               navigationBarStyle={{
                 backgroundColor: '#00232d',           //navbar color
               }}
-              hideNavBar
+              hideNavBar={false}
             />
 
             <Scene key="deckComplete"
@@ -242,8 +242,8 @@ const triggerStyles = {
   },
   triggerText: {
     color: 'white',
-  
-    
+
+
   },
 };
 

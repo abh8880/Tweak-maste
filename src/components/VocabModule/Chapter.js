@@ -46,7 +46,7 @@ export default class Chapter extends Component {
         var cardsList = []
         for (let i = 0; i < noOfChapters; i++) {
           cardsList.push(
-            <ChapterCard data={{ unit: 1 }} chapterNo={i + 1} image={chapterIconSources[i]} />
+            <ChapterCard  chapterNo={i + 1} image={chapterIconSources[i]} />
           )
         }
         this.setState({cardsListComponent : cardsList});

@@ -20,9 +20,8 @@ export default class DeckComplete extends Component {
 
   constructor(props) {
     super(props)
-    const { unit, chapter, deck } = this.props;
+    const { chapter, deck } = this.props;
     this.state = {
-      unit: unit,
       chapter: chapter,
       deck: deck
      };

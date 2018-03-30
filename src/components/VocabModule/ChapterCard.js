@@ -27,11 +27,10 @@ export default class ChapterCard extends Component {
   }
 
   navigateToDeckPage = (chapter) => {
-    // Actions.deck({
-    //   unit: this.props.data.unit,
-    //   chapter: chapter
-    // });
-    alert(chapter);
+    Actions.deck({
+      chapter: chapter
+    });
+    // alert(chapter);
   }
 
    componentDidMount() {
