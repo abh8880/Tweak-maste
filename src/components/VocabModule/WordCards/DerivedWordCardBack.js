@@ -45,7 +45,7 @@ export default class DerivedWordCardBack extends Component {
         </View>
         <View style={styles.backElements}>
           <Text style={[styles.backMainText,{fontSize : 20}]}>Origin word : </Text>
-          <Text style={[styles.backSubText,{fontSize : 20}]}>{this.props.state.originWord}</Text>
+          <Text style={[styles.backSubText, { fontSize: 20 }]}>{ this.props.filterWord(this.props.state.originWord) }</Text>
         </View>
         <View style={styles.backElements}>
           <Text style={[styles.backMainText,{fontSize : 20}]}>Meaning : </Text>
@@ -65,14 +65,14 @@ export default class DerivedWordCardBack extends Component {
           onPress={() => { this.props.changeStatusAndFetchNext('Mastered');}}        //changeStatus to Mastered
         >
           <View style={styles.masterButton}>
-              <Text style={styles.masterButtonText}> Mastered </Text>
+            <Text style={styles.masterButtonText}> 😎 Mastered </Text>
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => { this.props.changeStatusAndFetchNext('Need Review');}}       //changeStatus to Need Review
         >
           <View style={styles.reviewButton}>
-              <Text style={styles.reviewButtonText}>Need Review</Text>
+            <Text style={styles.reviewButtonText}> 🤔 Need Review </Text>
           </View>
         </TouchableOpacity>
       </View>

@@ -73,11 +73,22 @@ export default class Word extends Component {
     this.setState({ flip: !this.state.flip });
   }
 
+  filterWord = (word) => {
+    var indx = word.indexOf('(');
+    if (indx == -1) {
+      return (word);
+    }
+    else {
+      return (word.substring(0, indx - 1));
+    }
+  }
+
   componentWillMount() {
     console.log('over here');
     console.log(this.state.chapter+" "+this.state.deck);
     this.initialDataFetch();
   }
+
 
   initialDataFetch() {
     //check if current table has entry of a word from the current deck
@@ -182,7 +193,7 @@ export default class Word extends Component {
                 })
                 //update current table
                 db.transaction((tx) => {
-                  tx.executeSql('INSERT INTO current (word,type,chapter,deck) VALUES (?,?,?,?,?)', [
+                  tx.executeSql('INSERT INTO current (word,type,chapter,deck) VALUES (?,?,?,?)', [
                     selectResult.rows.item(0).origin_word,
                     'origin',
                     this.state.chapter,
@@ -228,6 +239,7 @@ export default class Word extends Component {
 
 
   seeDerivedWords = () => {
+    console.log('in seeDerivedWords function');
     db.transaction((tx) => {
       //change database value of viewed to 1
       tx.executeSql('UPDATE origin SET viewed=1 WHERE chapter=? AND deck=? AND origin_word=?', [
@@ -633,7 +645,7 @@ export default class Word extends Component {
 
   renderFront = () => {
     return(
-      <OriginDerivedWordCardFront state={this.state} flipCard={this.flipCard} seeMeaningForDerivedWord={this.seeMeaningForDerivedWord}/>
+      <OriginDerivedWordCardFront state={this.state} filterWord={this.filterWord} flipCard={this.flipCard} seeMeaningForDerivedWord={this.seeMeaningForDerivedWord}/>
     )
   }
 
@@ -651,12 +663,12 @@ export default class Word extends Component {
   renderBack = () => {
     if(this.state.type == 'origin'){
       return(
-        <OriginWordCardBack state={this.state} seeDerivedWords={this.seeDerivedWords}/>
+        <OriginWordCardBack state={this.state} filterWord={this.filterWord} seeDerivedWords={this.seeDerivedWords}/>
       );
     }
     else{
       return(
-        <DerivedWordCardBack state={this.state} changeStatusAndFetchNext={this.changeStatusAndFetchNext}/>
+        <DerivedWordCardBack state={this.state} filterWord={this.filterWord} changeStatusAndFetchNext={this.changeStatusAndFetchNext}/>
       );
     }
   }

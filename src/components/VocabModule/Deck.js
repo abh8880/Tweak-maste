@@ -163,11 +163,11 @@ export default class Deck extends Component {
       <View style={[styles.deckCard, { backgroundColor: "#ffffff", borderRadius: 15, position: 'relative' }]}>
         <Text style={styles.deckTitle}>Deck {index+1}</Text>
         <Text style={styles.deckSubTitle}>Origin Words:</Text>
-        <View>
+        <View style={styles.originWordsContainer}>
           {originWordsList}
         </View>
         <View style={styles.deckButtonView}>
-        <TouchableOpacity style={styles.deckButton} onPress={this.onPressDeckButton}>
+          <TouchableOpacity style={styles.deckButton} onPress={this.onPressDeckButton}>
             <Text style={styles.deckButtonText}>PRACTISE</Text>
           </TouchableOpacity>
         </View>
@@ -275,23 +275,29 @@ const styles = StyleSheet.create({
     color: 'orange',
     alignSelf: 'center'
   },
+  originWordsContainer:{
+    flex:2,
+    justifyContent: 'center',
+    paddingBottom: '15%',
+    // backgroundColor: '#00ff00'
+  },
   deckButtonView: {
     flex: 1,
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-end',
-    elevation: 20
+    // backgroundColor: '#ff0000',
   },
   deckButton:{
     padding: 10,
     paddingLeft: 20,
     paddingRight: 20,
-    marginBottom: 25,
+    marginBottom: '7%',
     backgroundColor: '#103970',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 20,
-    elevation: 3,
+    elevation: 5,
   },
   deckButtonText:{
     fontFamily: 'Museo Sans Rounded_500',
