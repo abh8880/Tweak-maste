@@ -67,16 +67,7 @@ _toggleModal = () =>
   componentDidMount() {
  
     
-  this.generateNewBotMessage();   
-  this._interval = setInterval(() => {
-    console.log("happen")
-    this.setState({ timeLeft: this.state.timeLeft - 0.050 });
-    if(this.state.timeLeft <= 0) {
-      this.setState({ timeLeft: 0 });
-      clearImmediate(this._interval);
-    } 
-    
-  }, 50);
+  this.tryagain();
 }
 
   generateNewBotMessage() {
@@ -90,6 +81,23 @@ _toggleModal = () =>
     chatMessagesArray.push({ text: message, type: mtype});
     this.setState({ chatMessages: chatMessagesArray });
      //this.refs.scrollView.scrollToEnd();
+  }
+
+  tryagain() {
+
+    this.generateNewBotMessage();   
+    this.setState({ timeLeft: 30 });
+    this.setState({ score: 0 });
+    this._interval = setInterval(() => {
+      //console.log("happen")
+      this.setState({ timeLeft: this.state.timeLeft - 0.050 });
+      if(this.state.timeLeft <= 0) {
+        this.setState({ timeLeft: 0 });
+        clearImmediate(this._interval);
+        this.makeMessage("Game Over! Score: " + this.state.score, 0);
+      } 
+    
+    }, 50);
   }
 
   onSpeechStart(e) {
@@ -155,9 +163,11 @@ _toggleModal = () =>
 
     if(correctedSentence.toLowerCase().localeCompare(e.value[0].toLowerCase()) == 0) {
       ref.setState({timeLeft: ref.state.timeLeft + 5});
-      ref.setState({score: ref.state.score + 1});
+      var sentenceLength = correctedSentence.split(' ').length;
+      var scoreToGive = ref.state.score + 1 + (sentenceLength > 4 ? 3 : 0);
+      ref.setState({score: scoreToGive });
        //ref.setState({ partialResults: ["Correct answer! +1 points and +5 seconds!"]});
-       ref.makeMessage("Correct answer! +1 points and +5 seconds!", 0);
+       ref.makeMessage("Correct answer! " + scoreToGive + " points and +5 seconds!", 0);
        
 
     } else {
@@ -356,7 +366,7 @@ _sclear(){
        <View>
          
         <Text style={styles.instructions}>
-          Score: {this.state.score}{"\n"} Time Left: {this.state.timeLeft.toFixed(0)}{"\n"}
+          Score: {this.state.score}{"\n"} Time Left: {this.state.timeLeft.toFixed(0)} seconds{"\n"}
         </Text>
           
         </View>
@@ -400,9 +410,19 @@ _sclear(){
         
         </View>
 		 </ScrollView>  
-		
-		
 
+     { this.state.timeLeft <= 0 && 
+     
+      <TouchableOpacity onPress={()=>this.tryagain()}>
+        <View style={styles.clearButton}>
+        <Text style={styles.clearText}>Try again</Text>
+        </View>
+        </TouchableOpacity>
+        }
+
+
+    { this.state.timeLeft > 0 && 
+      <View >
         <TouchableHighlight onPress={this._startRecognizing.bind(this)}>
           <Image
             style={this.state.buttonStatus ? styles.button : styles.button2}
@@ -413,8 +433,8 @@ _sclear(){
             style={!this.state.buttonStatus ? styles.button : styles.button2}
             source={require('../images/mic3.png')}
           />
-
-    
+          </View>
+    }
 
 		
       </View>
