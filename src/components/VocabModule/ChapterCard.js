@@ -53,6 +53,7 @@ export default class ChapterCard extends Component {
       <View style={styles.cardBody}>
         <TouchableOpacity  onPress={() => {this.navigateToDeckPage(this.props.chapterNo)}}>
           <View style={styles.box}>
+
             <View style={{ alignSelf: 'flex-end', marginTop:'5%',marginRight:'5%'}}>
               <Icon name="checkbox" size={30} color="#F0C71B" />
             </View>
@@ -80,6 +81,8 @@ const styles = StyleSheet.create({
     margin:'3%',
     backgroundColor: '#fafafa',
     borderRadius: 5,
+    borderWidth: 2,
+    borderColor: '#f0f0f0',
     elevation:7
   },
   box:{
