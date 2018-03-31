@@ -27,8 +27,8 @@ export default class OriginWordCardBack extends Component {
     return (
       <View style={styles.back}>
         <View style={styles.backMainWordStyle}>
-          <Text style={styles.backMainWordText}>{this.props.state.word}</Text>
-          <TouchableOpacity onPress={() => { Tts.speak(this.props.state.word); }}>
+          <Text style={styles.backMainWordText}>{ this.props.filterWord(this.props.state.word) }</Text>
+          <TouchableOpacity onPress={() => { Tts.speak(this.props.filterWord(this.props.state.word)); }}>
             <Text style={styles.backMainWordSpeechIcon}>🔊</Text>
           </TouchableOpacity>
         </View>

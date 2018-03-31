@@ -35,12 +35,12 @@ export default class OriginDerivedWordCardFront extends Component {
     return (
       <View style={styles.front}>
         <View>
-          <Text style={styles.frontWord}>{this.props.state.word}</Text>
+          <Text style={styles.frontWord}>{ this.props.filterWord(this.props.state.word) }</Text>
           <Text style={styles.type}>({this.props.state.type})</Text>
         </View>
       <TouchableOpacity onPress={() => { this.decideNextState() }}>
         <View style={styles.frontButton}>
-            <Text style={styles.frontButtonText}>Click to see meaning  ➜</Text>
+          <Text style={styles.frontButtonText}>Click to see meaning  ➜</Text>
         </View>
       </TouchableOpacity>
       </View>
