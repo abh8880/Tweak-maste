@@ -55,7 +55,7 @@ export default class ChapterCard extends Component {
           <View style={styles.box}>
 
             <View style={{ alignSelf: 'flex-end', marginTop:'5%',marginRight:'5%'}}>
-              <Icon name="checkbox" size={30} color="#F0C71B" />
+              <Icon name="checkbox" size={30} color="#fafafa" />
             </View>
 
             <View style={styles.insideBox}>
